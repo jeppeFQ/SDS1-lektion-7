@@ -2,9 +2,9 @@
   {
     "objectID": "index.html#dagens-program",
     "href": "index.html#dagens-program",
-    "title": "Scraping og API-kald i Python",
+    "title": "Lektion 6",
     "section": "Dagens program",
-    "text": "Dagens program\n\nScrapers og crawlers\n\nHerunder kort om internettet og HTML\nrequests\nBeautifulSoup\nscrapy\n\nAPI’er\nFælleskodning\nHvis tid, øvelser"
+    "text": "Dagens program\n\nTekst som data: hvad computeren egentlig ser\nKorpus: det vi selv har bygget, uden at tænke over det\nLandskabet: hvad kan man med computationel tekstanalyse?\nOrdbogsmodeller: vi bygger én selv\nSprogmodeller: spaCy\nPortfolio øvelser\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har en meningsfuld modsvarighed der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R, med andre værktøjer."
   },
   {
     "objectID": "index.html#web-scraping",
@@ -103,5 +103,278 @@
     "title": "Scraping og API-kald i Python",
     "section": "ØVELSE: API-kald med DAWA",
     "text": "ØVELSE: API-kald med DAWA\n\nBrug DAWA til at finde ud af, hvor mange kommuner der har en vej med navn “Østergade”."
+  },
+  {
+    "objectID": "index.html#dagens-data",
+    "href": "index.html#dagens-data",
+    "title": "Lektion 6",
+    "section": "Dagens data",
+    "text": "Dagens data\nIndlæg og nyheder fra seks danske højrefløjsmedier og -foreninger, indsamlet i 2022-2023.\n\nDansk Samling · Frihedens Stemme · Nordfront · SIAD · Trykkefrihed · Uriasposten\nNogle af siderne findes ikke længere.\nHvert datasæt er lavet med sin egen scraper. Formater og kolonner varierer.\n\n\nVi arbejder med materialet som forskningsmateriale. Vi analyserer det, vi videreformidler det ikke. Hvis noget af det, I læser i dag, er ubehageligt, så sig til."
+  },
+  {
+    "objectID": "index.html#korpusset",
+    "href": "index.html#korpusset",
+    "title": "Lektion 6",
+    "section": "Korpusset",
+    "text": "Korpusset\n\n\n\n\n\n\n\n\n\nEt udsnit på 15 % af det fulde materiale. Det fulde korpus er på 6.939 dokumenter og cirka 2,4 millioner ord."
+  },
+  {
+    "objectID": "index.html#tekst",
+    "href": "index.html#tekst",
+    "title": "Lektion 6",
+    "section": "Tekst?!",
+    "text": "Tekst?!\nHvad er tekst egentlig, når vi tænker det i abstrakte termer?\n\n\"Hej med dig!\"\nVi forstår øjeblikkeligt: det er en hilsen, det er på dansk, det er venligt."
+  },
+  {
+    "objectID": "index.html#hvad-computeren-ser",
+    "href": "index.html#hvad-computeren-ser",
+    "title": "Lektion 6",
+    "section": "Hvad computeren ser",
+    "text": "Hvad computeren ser\n\"Hej med dig!\"\n        ↓\n01001000 01100101 01101010 ...\n        ↓\n[72, 101, 106, 32, 109, 101, 100, ...]\n        ↓\n['H', 'e', 'j', ' ', 'm', 'e', 'd', ...]\n\nComputeren ser tal og symboler. Den “forstår” ingen betydning.\nAlt, hvad vi laver i dag, handler om at bygge en bro fra det nederste niveau til det øverste — og om at være ærlige om, hvor meget der går tabt undervejs."
+  },
+  {
+    "objectID": "index.html#det-i-allerede-kan",
+    "href": "index.html#det-i-allerede-kan",
+    "title": "Lektion 6",
+    "section": "Det I allerede kan",
+    "text": "Det I allerede kan\nI lektion 2 og 3 byggede I en lille tekstanalyse:\n\nGør teksten til små bogstaver\nFjern tegnsætning\nDel op i ord\nTæl ordene i en dictionary\nFind de hyppigste\n\n\nDet er en bag-of-words-model. Rækkefølgen smides væk, og tilbage står en optælling.\nDet er ikke en primitiv forløber for rigtig tekstanalyse. Det er rigtig tekstanalyse, og det er fundamentet under det meste af i dag."
+  },
+  {
+    "objectID": "index.html#og-hvad-den-ikke-kan",
+    "href": "index.html#og-hvad-den-ikke-kan",
+    "title": "Lektion 6",
+    "section": "… og hvad den ikke kan",
+    "text": "… og hvad den ikke kan\n\n\n\n\n\n\n\n\n\nTo sætninger med modsat betydning. Som poser af ord adskiller de sig med ét ord.\nDet er ikke en fejl i koden. Det er en egenskab ved modellen, og den skal man kende, før man vælger den."
+  },
+  {
+    "objectID": "index.html#seks-scrapere-seks-formater",
+    "href": "index.html#seks-scrapere-seks-formater",
+    "title": "Lektion 6",
+    "section": "Seks scrapere, seks formater",
+    "text": "Seks scrapere, seks formater\n\n\n\nKilde\nDokumenter\nOverskrift\nDato\nFormat\n\n\n\n\nUriasposten\n3.024\nja\nnej\nCSV\n\n\nFrihedens Stemme\n1.554\nja\nja\nJSON\n\n\nNordfront\n1.216\nja\nja\nJSON\n\n\nSIAD\n485\nnej\nja\nJSON\n\n\nDansk Samling\n366\nja\nja\nJSON\n\n\nTrykkefrihed\n294\nja\nnej\nJSON\n\n\n\n\nIngen af dem er forkerte. De er bare lavet af forskellige mennesker til forskellige formål."
+  },
+  {
+    "objectID": "index.html#fire-datoformater",
+    "href": "index.html#fire-datoformater",
+    "title": "Lektion 6",
+    "section": "Fire datoformater",
+    "text": "Fire datoformater\nDansk Samling       31. december 2019\nFrihedens Stemme    23. januar 2019\nSIAD                januar 1, 2019\nNordfront           2 februar, 2023\nTrykkefrihed        —\nUriasposten         —\n\nDag først, måned først, med og uden punktum, med og uden komma. Og to kilder uden dato overhovedet.\n3.345 af 6.939 dokumenter har ingen dato. Det er 48 %.\nEnhver analyse over tid kan altså kun bruge halvdelen af materialet — og det er ikke en tilfældig halvdel."
+  },
+  {
+    "objectID": "index.html#hvem-fylder-mest",
+    "href": "index.html#hvem-fylder-mest",
+    "title": "Lektion 6",
+    "section": "Hvem fylder mest?",
+    "text": "Hvem fylder mest?\n\n\n\n\n\n\n\n\n\nUriasposten er 43 % af korpusset. Trykkefrihed er 4 %.\nTæller I et ord på tværs af hele materialet, måler I i praksis Uriasposten."
+  },
+  {
+    "objectID": "index.html#og-dokumenterne-er-ikke-lige-lange",
+    "href": "index.html#og-dokumenterne-er-ikke-lige-lange",
+    "title": "Lektion 6",
+    "section": "Og dokumenterne er ikke lige lange",
+    "text": "Og dokumenterne er ikke lige lange\n\n\n\n\n\n\n\n\n\nTrykkefrihed skriver typisk 715 ord per indlæg. Dansk Samling 184.\nAlt, hvad I tæller per dokument, er dermed forvekslet med, hvem der har skrevet det."
+  },
+  {
+    "objectID": "index.html#hunston-2002-korpusset-er-bygget",
+    "href": "index.html#hunston-2002-korpusset-er-bygget",
+    "title": "Lektion 6",
+    "section": "Hunston (2002): korpusset er bygget",
+    "text": "Hunston (2002): korpusset er bygget\n\nEt korpus er et konstrueret objekt, ikke en objektiv repræsentation af sprog.\n\n\nDesignbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen — de er en del af analysen.\n\n\nI dag er 1 million ord et lille korpus.\n\nVores fulde materiale er 2,4 millioner ord. Det er stadig lille."
+  },
+  {
+    "objectID": "index.html#fire-spørgsmål-til-ethvert-korpus",
+    "href": "index.html#fire-spørgsmål-til-ethvert-korpus",
+    "title": "Lektion 6",
+    "section": "Fire spørgsmål til ethvert korpus",
+    "text": "Fire spørgsmål til ethvert korpus\n\nHvor kommer teksterne fra? Ét medie eller flere? Hvem har valgt netop dem?\nHvem har skrevet dem? Redigeret eller spontant? Én forfatter eller mange?\nHvilke teksttyper er med — og hvilke er ikke?\nHvad skete der under indsamlingen? Hvad blev der af formatering, billedtekster, kommentarer?\n\n\nKan I ikke svare på alle fire om jeres eget korpus, er det ikke færdigt."
+  },
+  {
+    "objectID": "index.html#diskussion",
+    "href": "index.html#diskussion",
+    "title": "Lektion 6",
+    "section": "Diskussion",
+    "text": "Diskussion\n\n\nTo af siderne findes ikke længere. Hvad betyder det for, om nogen kan efterprøve jeres analyse?\nMaterialet er indsamlet på fire forskellige tidspunkter i 2022 og 2023. Hvad gør det ved en sammenligning mellem kilderne?\nHvilket spørgsmål kan dette korpus ikke svare på, uanset hvor god metoden er?"
+  },
+  {
+    "objectID": "index.html#etik",
+    "href": "index.html#etik",
+    "title": "Lektion 6",
+    "section": "Etik",
+    "text": "Etik\nAt studere materiale, man er uenig i, er helt almindelig samfundsvidenskab. Men det stiller nogle krav.\n\nAnalysér, videreformidl ikke. Citater skal tjene argumentet, ikke gentage budskabet.\nPersoner i materialet er ikke offentlige personer, blot fordi de skriver offentligt. Overvej anonymisering.\nJeres egne kategorier er et valg. Hvad I kalder “hadefuldt”, “kritisk” eller “neutralt”, er en del af resultatet."
+  },
+  {
+    "objectID": "index.html#annotering",
+    "href": "index.html#annotering",
+    "title": "Lektion 6",
+    "section": "Annotering",
+    "text": "Annotering\nRå tekst kan man tælle ord i. Alt andet kræver, at nogen har tilføjet information.\n\nManuel kodning: mennesker læser og mærker. Dyrt, men stadig målestokken.\nAutomatisk annotering: en model tilføjer ordklasser, navne, sentiment. Hurtigt, men modellen har selv lært det et sted fra.\n\n\nSpørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er systematiske — for så flytter de resultatet i én bestemt retning."
+  },
+  {
+    "objectID": "index.html#fem-metodefamilier",
+    "href": "index.html#fem-metodefamilier",
+    "title": "Lektion 6",
+    "section": "Fem metodefamilier",
+    "text": "Fem metodefamilier\nMacanovic (2022) inddeler feltet i fem:\n\nOrdbogsmodeller — tæl foruddefinerede ord i kategorier\nSemantisk og netværksanalyse — hvem gør hvad ved hvem\nSprogrepræsentationer — tekst som tal: DTM, n-gram, word embeddings\nUovervåget klyngedannelse — find temaer, ingen har defineret på forhånd\nOvervåget klassifikation — udvid manuel kodning til millioner af tekster\n\n\nI dag rører vi ved nummer 1 og lidt af nummer 3. Resten er der næste semester."
+  },
+  {
+    "objectID": "index.html#induktivt-og-deduktivt",
+    "href": "index.html#induktivt-og-deduktivt",
+    "title": "Lektion 6",
+    "section": "Induktivt og deduktivt",
+    "text": "Induktivt og deduktivt\nDeduktivt: I ved, hvad I leder efter. Ordbøger og overvågede klassifikatorer. Kategorierne er bestemt på forhånd.\nInduktivt: I ved det ikke. Topic models og word embeddings “opdager” struktur, som I derefter skal fortolke.\n\nValget er ikke teknisk. Det afgør, om jeres kategorier er noget, I har medbragt eller fundet — og dermed hvad et resultat betyder."
+  },
+  {
+    "objectID": "index.html#tre-eksempler",
+    "href": "index.html#tre-eksempler",
+    "title": "Lektion 6",
+    "section": "Tre eksempler",
+    "text": "Tre eksempler\nSpörlein & Schlueter (2021): en tilpasset tysk hadtale-ordbog på 5.152 YouTube-kommentarer. Tidligere hadefulde kommentarer øger sandsynligheden for nye.\nTörnberg & Törnberg (2016): topic models på 50 millioner svenske forumindlæg. Muslimer blev oftere forbundet med konflikt og vold online end i traditionelle medier.\nKozlowski et al. (2019): word embeddings på millioner af bøger over et århundrede. Sporede hvordan uddannelse gik fra at være forbundet med velstand gennem sofistikation til at være forbundet direkte.\n\n\n\nDe to første ligger tæt på vores materiale. Læg mærke til korpusstørrelserne: 5.152 og 50.000.000."
+  },
+  {
+    "objectID": "index.html#theory-in-theory-out",
+    "href": "index.html#theory-in-theory-out",
+    "title": "Lektion 6",
+    "section": "Theory in, theory out",
+    "text": "Theory in, theory out\nBonikowski & Nelson (2022): større datamængder kræver mere teori, ikke mindre.\n\nEn metodes værdi måles på de teoretiske indsigter, den frembringer — ikke på hvor stort datasættet var.\nComputationel tekstanalyse kan ikke bare bruge teori, men også hjælpe med at bygge den.\n\n\n\nEt topic model finder altid emner. Også i støj. Det er jer, der afgør, om de betyder noget."
+  },
+  {
+    "objectID": "index.html#validering",
+    "href": "index.html#validering",
+    "title": "Lektion 6",
+    "section": "Validering",
+    "text": "Validering\n\nKorpusvalidering: repræsenterer materialet det, I tror?\nMetodisk validering: måler modellen det, I tror?\n\n\nStrukturel tilgang: antag en sand underliggende proces, og få modellen til at passe.\nAgnostisk tilgang: prioritér fortolkelighed og substantiel viden over matematisk fit.\n\nNår statistisk fit og fortolkelighed trækker i hver sin retning, skal der træffes et valg. Det valg hører i metodeafsnittet."
+  },
+  {
+    "objectID": "index.html#udfordringer",
+    "href": "index.html#udfordringer",
+    "title": "Lektion 6",
+    "section": "Udfordringer",
+    "text": "Udfordringer\n\nSampling bias: hvem skriver, og hvem bliver samlet ind?\nOverfitting: flere variable end observationer er let at ende med i tekstdata\nReproducerbarhed: forskellige valg i forbehandlingen giver forskellige resultater\n\n\nDet sidste er det mest undervurderede. To af vores kilder findes ikke længere — ingen kan gentage indsamlingen."
+  },
+  {
+    "objectID": "index.html#den-ontologiske-debat",
+    "href": "index.html#den-ontologiske-debat",
+    "title": "Lektion 6",
+    "section": "Den ontologiske debat",
+    "text": "Den ontologiske debat\n\nIndeholder tekster overhovedet målbare sociale fænomener?\n\n\nEller måler vi bare, hvordan folk skriver?\nDet er ikke et spørgsmål, der bliver løst af et større datasæt."
+  },
+  {
+    "objectID": "index.html#hvad-er-en-ordbogsmodel",
+    "href": "index.html#hvad-er-en-ordbogsmodel",
+    "title": "Lektion 6",
+    "section": "Hvad er en ordbogsmodel?",
+    "text": "Hvad er en ordbogsmodel?\nEn liste af ord, hver med en værdi. Man slår hvert ord op og lægger sammen.\n\nLIWC: 82 psykologiske kategorier\nAFINN: cirka 3.500 danske ord med en score fra −5 til +5\nJeres egen: en liste, I selv definerer til ét bestemt spørgsmål\n\n\nDet er den mest gennemsigtige metodefamilie: I kan altid slå op, hvorfor en tekst fik sin score.\nDet er også den mest stive: modellen ved kun det, listen siger."
+  },
+  {
+    "objectID": "index.html#vi-bygger-én",
+    "href": "index.html#vi-bygger-én",
+    "title": "Lektion 6",
+    "section": "Vi bygger én",
+    "text": "Vi bygger én\n\n\n\n\n\n\n\n\n\n22 ord. Det er hele modellen. Ikke en forenkling af en rigtig ordbogsmodel — det er en ordbogsmodel."
+  },
+  {
+    "objectID": "index.html#hvordan-den-scorer",
+    "href": "index.html#hvordan-den-scorer",
+    "title": "Lektion 6",
+    "section": "Hvordan den scorer",
+    "text": "Hvordan den scorer\n\n\n\n\n\n\n\n\n\nordbog.get(o, 0) er .get()-mønstret fra lektion 3: findes ordet ikke, bidrager det med nul."
+  },
+  {
+    "objectID": "index.html#kør-den-på-korpusset",
+    "href": "index.html#kør-den-på-korpusset",
+    "title": "Lektion 6",
+    "section": "Kør den på korpusset",
+    "text": "Kør den på korpusset\n\n\n\n\n\n\n\n\n\nKig på det sidste tal, før I kigger på noget andet."
+  },
+  {
+    "objectID": "index.html#dækning",
+    "href": "index.html#dækning",
+    "title": "Lektion 6",
+    "section": "Dækning",
+    "text": "Dækning\nOver halvdelen af dokumenterne rammer ingen af de 22 ord.\nFor dem er scoren ikke “neutral”. Den er fraværende — og de to ting ligner hinanden i en tabel.\n\nDet er ordbogsmodellers første og største problem, og det er usynligt, hvis man kun kigger på gennemsnittet.\n\nHvor mange ord skulle der til, før I ville stole på tallet?"
+  },
+  {
+    "objectID": "index.html#negation",
+    "href": "index.html#negation",
+    "title": "Lektion 6",
+    "section": "Negation",
+    "text": "Negation\n\n\n\n\n\n\n\n\n\nDen anden får samme score som den første. Den tredje bliver stærkt positiv.\nEn ordbogsmodel lægger tal sammen. Den læser ikke."
+  },
+  {
+    "objectID": "index.html#afinn",
+    "href": "index.html#afinn",
+    "title": "Lektion 6",
+    "section": "AFINN",
+    "text": "AFINN\nDen samme idé, professionelt lavet. afinn er et Python-bibliotek med en dansk ordliste på cirka 3.500 ord, udviklet af Finn Årup Nielsen.\nfrom afinn import Afinn\n\nafinn = Afinn(language=\"da\")\n\nkorpus[\"afinn\"] = korpus[\"tekst\"].apply(afinn.score)\n\nAfinn(language=\"da\") indlæser den danske ordliste. .score() gør præcis det samme som vores egen funktion: slår hvert ord op og lægger sammen.\n\n\nKan ikke installeres i browseren. Kør den i UCloud eller lokalt — og find selv ud af, hvad der sker med dækningen og med negationerne."
+  },
+  {
+    "objectID": "index.html#hvad-måler-vi-egentlig",
+    "href": "index.html#hvad-måler-vi-egentlig",
+    "title": "Lektion 6",
+    "section": "Hvad måler vi egentlig?",
+    "text": "Hvad måler vi egentlig?\nHvis Nordfront scorer mere negativt end Dansk Samling, hvad har vi så vist?\n\nAt de skriver om andre emner?\nAt de skriver længere tekster?\nAt ordlisten passer bedre til den enes ordforråd end den andens?\nEller noget om holdninger?\n\n\nEt tal fra en ordbogsmodel er ikke et resultat. Det er et udgangspunkt for en diskussion, som skal føres i metodeafsnittet."
+  },
+  {
+    "objectID": "index.html#fra-ordliste-til-sprogmodel",
+    "href": "index.html#fra-ordliste-til-sprogmodel",
+    "title": "Lektion 6",
+    "section": "Fra ordliste til sprogmodel",
+    "text": "Fra ordliste til sprogmodel\nEn ordbog kender kun de ord, den har på listen. En sprogmodel er trænet på store mængder tekst og kan generalisere til ord, den ikke har set før.\nspaCy er et bibliotek til natural language processing — krydsfeltet mellem datalogi og korpuslingvistik.\nDet giver tokenisering, lemmatisering, ordklasser, navngivne entiteter og grammatiske relationer. Også på dansk.\n\n\n\nspaCy indeholder kompileret kode og kan ikke køre i browseren. Koden på de næste slides skal køres i UCloud eller lokalt."
+  },
+  {
+    "objectID": "index.html#en-pipeline",
+    "href": "index.html#en-pipeline",
+    "title": "Lektion 6",
+    "section": "En pipeline",
+    "text": "En pipeline\nimport spacy\n\nnlp = spacy.load(\"da_core_news_sm\")\ndoc = nlp(\"Regeringen fremlagde et nyt udspil om indvandring i København.\")\n\nspacy.load() henter en model, ikke bare en funktion. da_core_news_sm er trænet på dansk nyhedstekst.\nTeksten løber gennem en række trin, som hver tilføjer information:\ntekst → tokenizer → tagger → lemmatizer → parser → ner → doc\nResultatet er ikke en liste af strenge, men et objekt, hvor hvert ord kender sin egen ordklasse, grundform og rolle i sætningen."
+  },
+  {
+    "objectID": "index.html#hvad-man-får-ud",
+    "href": "index.html#hvad-man-får-ud",
+    "title": "Lektion 6",
+    "section": "Hvad man får ud",
+    "text": "Hvad man får ud\nfor tok in doc:\n    print(tok.text, tok.lemma_, tok.pos_, tok.is_stop)\n\nFire ting per ord:\n\n.text — ordet, som det står\n.lemma_ — grundformen. fremlagde bliver til fremlægge\n.pos_ — ordklassen. NOUN, VERB, ADJ, PROPN og så videre\n.is_stop — er det et stopord?\n\n\nStopordslisten skrev I selv i lektion 2. Her følger den med."
+  },
+  {
+    "objectID": "index.html#navngivne-entiteter",
+    "href": "index.html#navngivne-entiteter",
+    "title": "Lektion 6",
+    "section": "Navngivne entiteter",
+    "text": "Navngivne entiteter\nfor ent in doc.ents:\n    print(ent.text, ent.label_)\n\ndoc.ents er de navngivne entiteter: personer (PER), steder (LOC), organisationer (ORG).\nDet åbner en anden slags spørgsmål end ordoptælling: hvem bliver nævnt, hvor ofte, og sammen med hvad.\nDet er indgangen til Macanovics familie nummer 2 — semantisk og netværksanalyse."
+  },
+  {
+    "objectID": "index.html#tokenisering-er-ikke-split",
+    "href": "index.html#tokenisering-er-ikke-split",
+    "title": "Lektion 6",
+    "section": "Tokenisering er ikke split()",
+    "text": "Tokenisering er ikke split()\ntekst = \"Regeringens plan — den såkaldte 'løsning' — virker ikke!\"\n\nprint(tekst.lower().split())\n\ndoc = nlp(tekst)\nprint([tok.text for tok in doc])\n\nKør de to linjer og sammenlign. Hvad sker der med tankestregerne, anførselstegnene og udråbstegnet i hver af dem?\nI lektion 2 blev everyone! til ét ord. Det var aldrig meningen — det var bare det, .split() gjorde."
+  },
+  {
+    "objectID": "index.html#hvorfor-det-betyder-noget-for-tallene",
+    "href": "index.html#hvorfor-det-betyder-noget-for-tallene",
+    "title": "Lektion 6",
+    "section": "Hvorfor det betyder noget for tallene",
+    "text": "Hvorfor det betyder noget for tallene\nnaive = [o for t in korpus[\"tekst\"] for o in str(t).lower().split()]\nlemmaer = [tok.lemma_.lower() for doc in nlp.pipe(korpus[\"tekst\"].astype(str))\n           for tok in doc if not tok.is_punct]\n\nprint(len(set(naive)) / len(naive))\nprint(len(set(lemmaer)) / len(lemmaer))\n\nBegge linjer beregner leksikalsk diversitet: antal unikke ord divideret med antal ord i alt. Samme mål, samme korpus, to forbehandlinger.\nDen naive version tæller god, God, god! og gode som fire forskellige ord.\nKør det. Hvor stor bliver forskellen — og hvilket af de to tal ville I skrive i en opgave?"
+  },
+  {
+    "objectID": "index.html#hvad-man-kan-bruge-det-til",
+    "href": "index.html#hvad-man-kan-bruge-det-til",
+    "title": "Lektion 6",
+    "section": "Hvad man kan bruge det til",
+    "text": "Hvad man kan bruge det til\n\nOrdklasser: analysér kun navneord, eller kun adjektiver. Retorik ligger ofte i tillægsordene.\nLemmatisering: bøjningsformer bliver til ét ord, før I tæller.\nEntiteter: hvilke personer, steder og organisationer optræder — og hos hvilke kilder?\nAfhængighedsrelationer: hvem gør hvad ved hvem.\n\n\nOg husk asent, hvis I vil lave sentimentanalyse med en pipeline under. Den kan forklare sin score ord for ord — forskellen på et tal og et resultat, I kan forsvare."
+  },
+  {
+    "objectID": "index.html#øvelser",
+    "href": "index.html#øvelser",
+    "title": "Lektion 6",
+    "section": "Øvelser",
+    "text": "Øvelser\n\nI får de seks rå datasæt, ikke det samlede korpus. At bygge det er første opgave.\n\nByg korpusset. Seks filer, seks formater. Saml dem til én tabel med de samme kolonner.\nDatoerne. Få så mange som muligt konverteret til rigtige datoer. Hvor mange lykkes det med?\nKør ordbogsmodellen. Udvid listen, og se hvad der sker med dækningen.\nPrøv spaCy. Kør koden fra slidesene, og skriv ned, hvad I faktisk får.\nPortfolio. Svar på Hunstons fire spørgsmål om det korpus, I vil bruge."
+  },
+  {
+    "objectID": "index.html#litteratur",
+    "href": "index.html#litteratur",
+    "title": "Lektion 6",
+    "section": "Litteratur",
+    "text": "Litteratur\nBonikowski, B. & Nelson, L. K. (2022). From Ends to Means: The Promise of Computational Text Analysis for Theoretically Driven Sociological Research. Sociological Methods & Research, 51(4), 1469-1483.\nMacanovic, A. (2022). Text mining for social science — The state and the future of computational text analysis in sociology. Social Science Research, 108, 102784.\nHunston, S. (2002). The corpus as object: Design and purpose. I: Corpora in Applied Linguistics, s. 25-37. Cambridge University Press.\n\nSupplerende: Thelwall, M. (2023). Sentiment Analysis. I: The SAGE Handbook of Social Media Research Methods.\nDokumentation: spaCy 101 · asent"
   }
 ]
