@@ -65,7 +65,7 @@ Indlæg og nyheder fra seks danske højrefløjsmedier og -foreninger, indsamlet 
 #| autorun: true
 import pandas as pd
 
-url = "https://raw.githubusercontent.com/jeppeFQ/SDS1-lektion-6/refs/heads/main/resources/korpus_udsnit.csv"
+url = "https://raw.githubusercontent.com/jeppeFQ/SDS1-lektion-7/refs/heads/main/resources/korpus_udsnit.csv"
 korpus = pd.read_csv(url)
 
 print(korpus.shape)
@@ -74,7 +74,7 @@ print(korpus["kilde"].value_counts())
 
 <br>
 
-Et udsnit på 15 % af det fulde materiale. Det fulde korpus er på **6.939 dokumenter** og cirka **2,4 millioner ord**.
+Et udsnit på ca. 10% af det fulde materiale. Det fulde korpus er på **6.939 dokumenter** og cirka **2,4 millioner ord**.
 
 # Del 1: Tekst som data
 
@@ -106,15 +106,13 @@ Vi forstår øjeblikkeligt: det er en hilsen, det er på dansk, det er venligt.
 
 <br>
 
-Computeren ser tal og symboler. Den "forstår" ingen betydning.
+- Computeren ser tal og symboler. Den "forstår" ingen betydning.
 
-Alt, hvad vi laver i dag, handler om at bygge en bro fra det nederste niveau til det øverste — og om at være ærlige om, hvor meget der går tabt undervejs.
+- Alt, hvad vi laver i dag, handler om at bygge en bro fra det nederste niveau til det øverste ... og få et kritisk blik for, hvor meget der går tabt undervejs.
 
 ## Det I allerede kan
 
 I lektion 2 og 3 byggede I en lille tekstanalyse:
-
-::: {.incremental}
 
 1. Gør teksten til små bogstaver
 2. Fjern tegnsætning
@@ -122,38 +120,11 @@ I lektion 2 og 3 byggede I en lille tekstanalyse:
 4. Tæl ordene i en dictionary
 5. Find de hyppigste
 
-:::
-
 <br>
-
-::: {.incremental}
 
 Det er en **bag-of-words**-model. Rækkefølgen smides væk, og tilbage står en optælling.
 
-Det er ikke en primitiv forløber for rigtig tekstanalyse. Det **er** rigtig tekstanalyse, og det er fundamentet under det meste af i dag.
-
-:::
-
-## ... og hvad den ikke kan
-
-```{pyodide}
-#| autorun: false
-a = "regeringens plan er god for Danmark"
-b = "regeringens plan er ikke god for Danmark"
-
-print(sorted(a.lower().split()))
-print(sorted(b.lower().split()))
-```
-
-<br>
-
-::: {.incremental}
-
-To sætninger med modsat betydning. Som poser af ord adskiller de sig med ét ord.
-
-Det er ikke en fejl i koden. Det er en **egenskab** ved modellen, og den skal man kende, før man vælger den.
-
-:::
+Det er fundamentet under det meste af i dag.
 
 # Del 2: Korpus
 
@@ -191,11 +162,11 @@ Uriasposten         —
 
 ::: {.incremental}
 
-Dag først, måned først, med og uden punktum, med og uden komma. Og to kilder uden dato overhovedet.
+- Dag først, måned først, med og uden punktum, med og uden komma. Og to kilder uden dato overhovedet.
 
-**3.345 af 6.939 dokumenter** har ingen dato. Det er 48 %.
+- **3.345 af 6.939 dokumenter** har ingen dato. Det er 48 %.
 
-Enhver analyse over tid kan altså kun bruge halvdelen af materialet — og det er ikke en tilfældig halvdel.
+- Enhver analyse over tid kan altså kun bruge halvdelen af materialet ... og det er ikke en tilfældig halvdel.
 
 :::
 
@@ -209,13 +180,9 @@ print(andel.round(1))
 
 <br>
 
-::: {.incremental}
+- Uriasposten er **43 %** af korpusset. Trykkefrihed er **4 %**.
 
-Uriasposten er **43 %** af korpusset. Trykkefrihed er **4 %**.
-
-Tæller I et ord på tværs af hele materialet, måler I i praksis Uriasposten.
-
-:::
+- Tæller I et ord på tværs af hele materialet, måler I i praksis Uriasposten.
 
 ## Og dokumenterne er ikke lige lange
 
@@ -230,9 +197,9 @@ print(korpus.groupby("kilde")["antal_ord"].median().round(0))
 
 ::: {.incremental}
 
-Trykkefrihed skriver typisk **715 ord** per indlæg. Dansk Samling **184**.
+- Trykkefrihed skriver i gennemsnit **715 ord** per indlæg. Dansk Samling **184**.
 
-Alt, hvad I tæller per dokument, er dermed forvekslet med, hvem der har skrevet det.
+- Alt, hvad I tæller per dokument, er dermed et udtryk for, hvem der har skrevet det.
 
 :::
 
@@ -244,7 +211,7 @@ Alt, hvad I tæller per dokument, er dermed forvekslet med, hvem der har skrevet
 
 ::: {.incremental}
 
-Designbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen — de **er** en del af analysen.
+Designbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen, de **er** en del af analysen.
 
 :::
 
@@ -254,13 +221,11 @@ Designbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De
 
 > I dag er 1 million ord et **lille** korpus.
 
-Vores fulde materiale er 2,4 millioner ord. Det er stadig lille.
+Vores fulde materiale er 2,4 millioner ord... Det er stadig lille.
 
 :::
 
 ## Fire spørgsmål til ethvert korpus
-
-::: {.incremental}
 
 1. **Hvor kommer teksterne fra?** Ét medie eller flere? Hvem har valgt netop dem?
 
@@ -270,62 +235,27 @@ Vores fulde materiale er 2,4 millioner ord. Det er stadig lille.
 
 4. **Hvad skete der under indsamlingen?** Hvad blev der af formatering, billedtekster, kommentarer?
 
-:::
-
-<br>
-
-::: {.incremental}
-
-Kan I ikke svare på alle fire om jeres eget korpus, er det ikke færdigt.
-
-:::
-
 ## Diskussion
 
 <span class="timer" data-time="420"></span>
 
-::: {.incremental}
-
-- To af siderne findes ikke længere. Hvad betyder det for, om nogen kan efterprøve jeres analyse?
+- Kan folk efterprøve jeres analyse?
 
 - Materialet er indsamlet på **fire forskellige tidspunkter** i 2022 og 2023. Hvad gør det ved en sammenligning mellem kilderne?
 
 - Hvilket spørgsmål kan dette korpus **ikke** svare på, uanset hvor god metoden er?
 
-:::
-
-## Etik
-
-At studere materiale, man er uenig i, er helt almindelig samfundsvidenskab. Men det stiller nogle krav.
-
-::: {.incremental}
-
-- **Analysér, videreformidl ikke.** Citater skal tjene argumentet, ikke gentage budskabet.
-
-- **Personer i materialet** er ikke offentlige personer, blot fordi de skriver offentligt. Overvej anonymisering.
-
-- **Jeres egne kategorier** er et valg. Hvad I kalder "hadefuldt", "kritisk" eller "neutralt", er en del af resultatet.
-
-:::
-
 ## Annotering
 
 Rå tekst kan man tælle ord i. Alt andet kræver, at nogen har **tilføjet information**.
 
-::: {.incremental}
+- **Manuel kodning**: mennesker læser og "mærker"/"tagger". Dyrt, men stadig målestokken.
 
-- **Manuel kodning**: mennesker læser og mærker. Dyrt, men stadig målestokken.
 - **Automatisk annotering**: en model tilføjer ordklasser, navne, sentiment. Hurtigt, men modellen har selv lært det et sted fra.
-
-:::
 
 <br>
 
-::: {.incremental}
-
-Spørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er **systematiske** — for så flytter de resultatet i én bestemt retning.
-
-:::
+Spørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er **systematiske**, for det flytter resultatet i én bestemt retning.
 
 # Del 3: Hvad kan man?
 
@@ -333,21 +263,17 @@ Spørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er **sys
 
 Macanovic (2022) inddeler feltet i fem:
 
-::: {.incremental}
-
-1. **Ordbogsmodeller** — tæl foruddefinerede ord i kategorier
-2. **Semantisk og netværksanalyse** — hvem gør hvad ved hvem
-3. **Sprogrepræsentationer** — tekst som tal: DTM, n-gram, word embeddings
-4. **Uovervåget klyngedannelse** — find temaer, ingen har defineret på forhånd
-5. **Overvåget klassifikation** — udvid manuel kodning til millioner af tekster
-
-:::
+1. **Ordbogsmodeller**: tæl foruddefinerede ord i kategorier
+2. **Semantisk og netværksanalyse**: hvem gør hvad ved hvem (sprogligt, grammatisk)
+3. **Sprogrepræsentationer**: tekst som tal (DTM, n-gram, word embeddings)
+4. **Usuperviseret klyngedannelse**: find temaer, ingen har defineret på forhånd
+5. **Superviseret klassifikation**: udvid manuel kodning til millioner af tekster
 
 <br>
 
 ::: {.incremental}
 
-I dag rører vi ved nummer 1 og lidt af nummer 3. Resten er der næste semester.
+I dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i fokus på SDS.
 
 :::
 
@@ -355,31 +281,19 @@ I dag rører vi ved nummer 1 og lidt af nummer 3. Resten er der næste semester.
 
 ::: {.incremental}
 
-**Deduktivt**: I ved, hvad I leder efter. Ordbøger og overvågede klassifikatorer. Kategorierne er bestemt på forhånd.
+**Deduktivt**: I ved, hvad I leder efter. **Ordbøger** og **superviseret** klassifikatorer. Kategorierne er bestemt på forhånd.
 
 **Induktivt**: I ved det ikke. Topic models og word embeddings "opdager" struktur, som I derefter skal fortolke.
 
 :::
 
-<br>
-
-::: {.incremental}
-
-Valget er ikke teknisk. Det afgør, om jeres kategorier er noget, I har **medbragt** eller **fundet** — og dermed hvad et resultat betyder.
-
-:::
-
 ## Tre eksempler
-
-::: {.incremental}
 
 **Spörlein & Schlueter (2021)**: en tilpasset tysk hadtale-ordbog på 5.152 YouTube-kommentarer. Tidligere hadefulde kommentarer øger sandsynligheden for nye.
 
 **Törnberg & Törnberg (2016)**: topic models på 50 millioner svenske forumindlæg. Muslimer blev oftere forbundet med konflikt og vold online end i traditionelle medier.
 
 **Kozlowski et al. (2019)**: word embeddings på millioner af bøger over et århundrede. Sporede hvordan uddannelse gik fra at være forbundet med velstand *gennem* sofistikation til at være forbundet direkte.
-
-:::
 
 <br>
 
@@ -391,40 +305,19 @@ De to første ligger tæt på vores materiale. Læg mærke til korpusstørrelser
 
 Bonikowski & Nelson (2022): større datamængder kræver **mere** teori, ikke mindre.
 
-::: {.incremental}
-
-- En metodes værdi måles på de teoretiske indsigter, den frembringer — ikke på hvor stort datasættet var.
+- En metodes værdi måles på de teoretiske indsigter, den frembringer ... ikke på hvor stort datasættet var.
 
 - Computationel tekstanalyse kan ikke bare *bruge* teori, men også hjælpe med at *bygge* den.
 
-:::
-
 <br>
-
-::: {.incremental}
 
 > Et topic model finder altid emner. Også i støj. Det er jer, der afgør, om de betyder noget.
 
-:::
-
 ## Validering
 
-::: {.incremental}
-
 - **Korpusvalidering**: repræsenterer materialet det, I tror?
+
 - **Metodisk validering**: måler modellen det, I tror?
-
-:::
-
-<br>
-
-::: {.incremental}
-
-**Strukturel tilgang**: antag en sand underliggende proces, og få modellen til at passe.
-
-**Agnostisk tilgang**: prioritér fortolkelighed og substantiel viden over matematisk fit.
-
-:::
 
 <br>
 
@@ -436,19 +329,15 @@ Når statistisk fit og fortolkelighed trækker i hver sin retning, skal der træ
 
 ## Udfordringer
 
-::: {.incremental}
-
-- **Sampling bias**: hvem skriver, og hvem bliver samlet ind?
-- **Overfitting**: flere variable end observationer er let at ende med i tekstdata
-- **Reproducerbarhed**: forskellige valg i forbehandlingen giver forskellige resultater
-
-:::
+- **Sampling bias**: hvem skriver, og hvem bliver selekteret ind?
+- **Overfitting**: flere variable end observationer er let at ende med 
+- **Reproducerbarhed**: forskellige valg i preprocessing giver forskellige resultater
 
 <br>
 
 ::: {.incremental}
 
-Det sidste er det mest undervurderede. To af vores kilder findes ikke længere — ingen kan gentage indsamlingen.
+Det sidste er det mest undervurderede. To af vores kilder findes ikke længere ... ingen kan gentage indsamlingen.
 
 :::
 
@@ -458,13 +347,9 @@ Det sidste er det mest undervurderede. To af vores kilder findes ikke længere �
 
 <br>
 
-::: {.incremental}
+- Eller måler vi bare, hvordan folk **skriver**?
 
-Eller måler vi bare, hvordan folk **skriver**?
-
-Det er ikke et spørgsmål, der bliver løst af et større datasæt.
-
-:::
+- Det er ikke et spørgsmål, der bliver løst af et større datasæt.
 
 # Del 4: Ordbogsmodeller
 
@@ -472,23 +357,15 @@ Det er ikke et spørgsmål, der bliver løst af et større datasæt.
 
 En liste af ord, hver med en værdi. Man slår hvert ord op og lægger sammen.
 
-::: {.incremental}
-
 - **LIWC**: 82 psykologiske kategorier
 - **AFINN**: cirka 3.500 danske ord med en score fra −5 til +5
 - **Jeres egen**: en liste, I selv definerer til ét bestemt spørgsmål
 
-:::
-
 <br>
-
-::: {.incremental}
 
 Det er den mest **gennemsigtige** metodefamilie: I kan altid slå op, hvorfor en tekst fik sin score.
 
-Det er også den mest **stive**: modellen ved kun det, listen siger.
-
-:::
+Det er også den mest **restriktive**: modellen ved kun det, listen siger.
 
 ## Vi bygger én
 
@@ -507,7 +384,7 @@ print(len(ordbog), "ord")
 
 <br>
 
-22 ord. Det er hele modellen. Ikke en forenkling af en rigtig ordbogsmodel — det **er** en ordbogsmodel.
+22 ord. Det er hele modellen. 
 
 ## Hvordan den scorer
 
@@ -527,7 +404,7 @@ print(score("Det er en god beslutning for vores frihed"))
 
 <br>
 
-`ordbog.get(o, 0)` er `.get()`-mønstret fra lektion 3: findes ordet ikke, bidrager det med nul.
+`ordbog.get(o, 0)` er `.get()`-mønstret fra lektion 3. Findes ordet ikke, bidrager det med **nul**.
 
 ## Kør den på korpusset
 
@@ -535,28 +412,18 @@ print(score("Det er en god beslutning for vores frihed"))
 #| autorun: false
 korpus["score"] = korpus["tekst"].apply(score)
 
-print(korpus.groupby("kilde")["score"].median())
+print(korpus.groupby("kilde")["score"].mean())
 print()
 print("Dokumenter med score præcis 0:", (korpus["score"] == 0).sum(), "af", len(korpus))
 ```
 
 <br>
 
-::: {.incremental}
-
-Kig på det sidste tal, før I kigger på noget andet.
-
-:::
-
 ## Dækning
 
-::: {.incremental}
+- Over halvdelen af dokumenterne rammer **ingen** af de 22 ord.
 
-Over halvdelen af dokumenterne rammer **ingen** af de 22 ord.
-
-For dem er scoren ikke "neutral". Den er **fraværende** — og de to ting ligner hinanden i en tabel.
-
-:::
+- For dem er scoren ikke "neutral". Den er **fraværende** ... og de to ting ligner hinanden i en tabel.
 
 <br>
 
@@ -580,13 +447,9 @@ for s in ["Det er en god beslutning",
 
 <br>
 
-::: {.incremental}
+- Den anden får samme score som den første. Den tredje bliver **stærkt positiv**.
 
-Den anden får samme score som den første. Den tredje bliver **stærkt positiv**.
-
-En ordbogsmodel lægger tal sammen. Den læser ikke.
-
-:::
+- En ordbogsmodel lægger tal sammen. Den læser ikke.
 
 ## AFINN
 
@@ -602,15 +465,13 @@ korpus["afinn"] = korpus["tekst"].apply(afinn.score)
 
 <br>
 
-`Afinn(language="da")` indlæser den danske ordliste. `.score()` gør præcis det samme som vores egen funktion: slår hvert ord op og lægger sammen.
+`Afinn(language="da")` indlæser den danske ordliste. `.score()` gør præcis det samme som vores egen funktion: slår hvert ord op og lægger værdierne for ordrene sammen.
 
 ::: {.aside}
-Kan ikke installeres i browseren. Kør den i UCloud eller lokalt — og find selv ud af, hvad der sker med dækningen og med negationerne.
+Kan ikke installeres i browseren. Kør den i UCloud eller lokalt.
 :::
 
 ## Hvad måler vi egentlig?
-
-::: {.incremental}
 
 Hvis Nordfront scorer mere negativt end Dansk Samling, hvad har vi så vist?
 
@@ -618,8 +479,6 @@ Hvis Nordfront scorer mere negativt end Dansk Samling, hvad har vi så vist?
 - At de skriver længere tekster?
 - At ordlisten passer bedre til den enes ordforråd end den andens?
 - Eller noget om holdninger?
-
-:::
 
 <br>
 
@@ -629,24 +488,24 @@ Et tal fra en ordbogsmodel er ikke et resultat. Det er et **udgangspunkt for en 
 
 :::
 
+## Analyser med ordbøger
+
+[ET EKSEMPEL PÅ EN "FULD" ANALYSE MED ORDBØGER]
+
 # Del 5: Sprogmodeller
 
 ## Fra ordliste til sprogmodel
 
 En ordbog kender kun de ord, den har på listen. En sprogmodel er trænet på store mængder tekst og kan **generalisere** til ord, den ikke har set før.
 
-::: {.incremental}
+- `spaCy` er et bibliotek til *natural language processing* — krydsfeltet mellem datalogi og korpuslingvistik.
 
-`spaCy` er et bibliotek til *natural language processing* — krydsfeltet mellem datalogi og korpuslingvistik.
-
-Det giver tokenisering, lemmatisering, ordklasser, navngivne entiteter og grammatiske relationer. Også på dansk.
-
-:::
+- Det giver tokenisering, lemmatisering, ordklasser, navngivne entiteter og grammatiske relationer. Også på dansk.
 
 <br>
 
 ::: {.aside}
-spaCy indeholder kompileret kode og kan ikke køre i browseren. Koden på de næste slides skal køres i UCloud eller lokalt.
+spaCy kan ikke køre i browseren. Koden på de næste slides skal køres i UCloud eller lokalt.
 :::
 
 ## En pipeline
@@ -658,17 +517,11 @@ nlp = spacy.load("da_core_news_sm")
 doc = nlp("Regeringen fremlagde et nyt udspil om indvandring i København.")
 ```
 
-<br>
-
 `spacy.load()` henter en **model**, ikke bare en funktion. `da_core_news_sm` er trænet på dansk nyhedstekst.
 
 Teksten løber gennem en række trin, som hver tilføjer information:
 
-```
-tekst → tokenizer → tagger → lemmatizer → parser → ner → doc
-```
-
-Resultatet er ikke en liste af strenge, men et objekt, hvor hvert ord kender sin egen ordklasse, grundform og rolle i sætningen.
+![](resources/pipeline-design.svg){fig-align="center"}
 
 ## Hvad man får ud
 
@@ -679,16 +532,12 @@ for tok in doc:
 
 <br>
 
-Fire ting per ord:
+Information per ord:
 
-- **`.text`** — ordet, som det står
-- **`.lemma_`** — grundformen. `fremlagde` bliver til `fremlægge`
-- **`.pos_`** — ordklassen. `NOUN`, `VERB`, `ADJ`, `PROPN` og så videre
-- **`.is_stop`** — er det et stopord?
-
-<br>
-
-Stopordslisten skrev I selv i lektion 2. Her følger den med.
+- **`.text`**: ordet, som det står
+- **`.lemma_`**: grundformen. `fremlagde` bliver til `fremlægge`
+- **`.pos_`**: ordklassen. `NOUN`, `VERB`, `ADJ`, `PROPN` og så videre
+- **`.is_stop`**: er det et stopord?
 
 ## Navngivne entiteter
 
@@ -699,15 +548,11 @@ for ent in doc.ents:
 
 <br>
 
-`doc.ents` er de **navngivne entiteter**: personer (`PER`), steder (`LOC`), organisationer (`ORG`).
+- **`.ents`** er de **navngivne entiteter**: personer (`PER`), steder (`LOC`), organisationer (`ORG`).
 
-Det åbner en anden slags spørgsmål end ordoptælling: *hvem* bliver nævnt, hvor ofte, og sammen med hvad.
+- Det åbner en anden slags spørgsmål end ordoptælling: *hvem* bliver nævnt, hvor ofte, og sammen med hvad.
 
-::: {.incremental}
-
-Det er indgangen til Macanovics familie nummer 2 — semantisk og netværksanalyse.
-
-:::
+- Det er indgangen til semantisk og netværksanalyse.
 
 ## Tokenisering er ikke `split()`
 
@@ -724,12 +569,6 @@ print([tok.text for tok in doc])
 
 Kør de to linjer og sammenlign. Hvad sker der med tankestregerne, anførselstegnene og udråbstegnet i hver af dem?
 
-::: {.incremental}
-
-I lektion 2 blev `everyone!` til ét ord. Det var aldrig meningen — det var bare det, `.split()` gjorde.
-
-:::
-
 ## Hvorfor det betyder noget for tallene
 
 ```python
@@ -745,42 +584,28 @@ print(len(set(lemmaer)) / len(lemmaer))
 
 Begge linjer beregner **leksikalsk diversitet**: antal unikke ord divideret med antal ord i alt. Samme mål, samme korpus, to forbehandlinger.
 
-::: {.incremental}
+- Den naive version tæller `god`, `God`, `god!` og `gode` som fire forskellige ord.
 
-Den naive version tæller `god`, `God`, `god!` og `gode` som fire forskellige ord.
-
-Kør det. Hvor stor bliver forskellen — og hvilket af de to tal ville I skrive i en opgave?
-
-:::
+- Kør det. Hvor stor bliver forskellen ... og hvilket af de to tal ville I skrive i en opgave?
 
 ## Hvad man kan bruge det til
-
-::: {.incremental}
 
 - **Ordklasser**: analysér kun navneord, eller kun adjektiver. Retorik ligger ofte i tillægsordene.
 - **Lemmatisering**: bøjningsformer bliver til ét ord, før I tæller.
 - **Entiteter**: hvilke personer, steder og organisationer optræder — og hos hvilke kilder?
 - **Afhængighedsrelationer**: hvem gør hvad ved hvem.
 
-:::
-
 <br>
 
-::: {.incremental}
+## `asent`: sentimentanalyse
 
-Og husk `asent`, hvis I vil lave sentimentanalyse med en pipeline under. Den kan forklare sin score ord for ord — forskellen på et tal og et resultat, I kan forsvare.
-
-:::
+[ET EKSEMPEL PÅ EN "FULD" AF SENTIMENTANALYSE]
 
 # Del 6: Øvelser
 
 ## Øvelser
 
-<span class="timer" data-time="1200"></span>
-
-I får de seks rå datasæt, ikke det samlede korpus. At bygge det er første opgave.
-
-::: {.incremental}
+I får de seks rå datasæt, ikke det samlede korpus.
 
 1. **Byg korpusset.** Seks filer, seks formater. Saml dem til én tabel med de samme kolonner.
 
@@ -790,20 +615,6 @@ I får de seks rå datasæt, ikke det samlede korpus. At bygge det er første op
 
 4. **Prøv spaCy.** Kør koden fra slidesene, og skriv ned, hvad I faktisk får.
 
-5. **Portfolio.** Svar på Hunstons fire spørgsmål om det korpus, I vil bruge.
+5. **Lav en simpel sentimentanalyse med ascent**.
 
-:::
-
-## Litteratur
-
-**Bonikowski, B. & Nelson, L. K.** (2022). From Ends to Means: The Promise of Computational Text Analysis for Theoretically Driven Sociological Research. *Sociological Methods & Research*, 51(4), 1469-1483.
-
-**Macanovic, A.** (2022). Text mining for social science — The state and the future of computational text analysis in sociology. *Social Science Research*, 108, 102784.
-
-**Hunston, S.** (2002). The corpus as object: Design and purpose. I: *Corpora in Applied Linguistics*, s. 25-37. Cambridge University Press.
-
-<br>
-
-**Supplerende:** Thelwall, M. (2023). Sentiment Analysis. I: *The SAGE Handbook of Social Media Research Methods*.
-
-**Dokumentation:** [spaCy 101](https://spacy.io/usage/spacy-101) · [asent](https://kennethenevoldsen.github.io/asent/index.html)
+**Dokumentation:** [spaCy 101](https://spacy.io/usage/spacy-101) | [asent](https://kennethenevoldsen.github.io/asent/index.html)
