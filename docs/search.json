@@ -2,9 +2,9 @@
   {
     "objectID": "index.html#dagens-program",
     "href": "index.html#dagens-program",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Dagens program",
-    "text": "Dagens program\n\nTekst som data: hvad computeren egentlig ser\nKorpus: det vi allerede selv har prøvet at bygge, uden at tænke over det\nLandskabet: hvad kan man med computationel tekstanalyse?\nOrdbogsmodeller: vi bygger én selv\nSprogmodeller: spaCy\nØvelser/Portfolio\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har en meningsfuld modsvarighed der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R, med andre værktøjer."
+    "text": "Dagens program\n\nTekst som data\nKorpus\nLandskabet (hvad kan man med computationel tekstanalyse?)\nOrdbogsmodeller\nSprogmodeller\nKlyngemodeller: PCA og k-means\nØvelser/Portfolio\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativt i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer."
   },
   {
     "objectID": "index.html#web-scraping",
@@ -107,37 +107,37 @@
   {
     "objectID": "index.html#dagens-data",
     "href": "index.html#dagens-data",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Dagens data",
     "text": "Dagens data\nIndlæg og nyheder fra seks danske højrefløjsmedier og -foreninger, indsamlet i 2022-2023.\n\nDansk Samling, Frihedens Stemme, Nordfront, SIAD, Trykkefrihed, Uriasposten\nNogle af siderne findes ikke længere.\nHvert datasæt er lavet med sin egen scraper. Formater og kolonner varierer."
   },
   {
     "objectID": "index.html#korpusset",
     "href": "index.html#korpusset",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Korpusset",
     "text": "Korpusset\n\n\n\n\n\n\n\n\n\nEt udsnit på ca. 10% af det fulde materiale. Det fulde korpus er på 6.939 dokumenter og cirka 2,4 millioner ord."
   },
   {
     "objectID": "index.html#tekst",
     "href": "index.html#tekst",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Tekst?!",
     "text": "Tekst?!\nHvad er tekst egentlig, når vi tænker det i abstrakte termer?\n\n\"Hej med dig!\"\nVi forstår øjeblikkeligt: det er en hilsen, det er på dansk, det er venligt."
   },
   {
     "objectID": "index.html#hvad-computeren-ser",
     "href": "index.html#hvad-computeren-ser",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hvad computeren ser",
     "text": "Hvad computeren ser\n\"Hej med dig!\"\n        ↓\n01001000 01100101 01101010 ...\n        ↓\n[72, 101, 106, 32, 109, 101, 100, ...]\n        ↓\n['H', 'e', 'j', ' ', 'm', 'e', 'd', ...]\n\n\nComputeren ser tal og symboler. Den “forstår” ingen betydning.\nAlt, hvad vi laver i dag, handler om at bygge en bro fra det nederste niveau til det øverste … og få et kritisk blik for, hvor meget der går tabt undervejs."
   },
   {
     "objectID": "index.html#det-i-allerede-kan",
     "href": "index.html#det-i-allerede-kan",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Det I allerede kan",
-    "text": "Det I allerede kan\nI lektion 2 og 3 byggede I en lille tekstanalyse:\n\nGør teksten til små bogstaver\nFjern tegnsætning\nDel op i ord\nTæl ordene i en dictionary\nFind de hyppigste\n\n\nDet er en bag-of-words-model. Rækkefølgen smides væk, og tilbage står en optælling.\nDet er fundamentet under det meste af i dag."
+    "text": "Det I allerede kan\nI lektion 2, 3 og 6 byggede I små tekstanalyse:\n\nGør teksten til små bogstaver\nFjern tegnsætning\nDel op i ord\nTæl ordene i en dictionary\nFind de hyppigste\n\n\nDet er en bag-of-words-model. Rækkefølgen smides væk, og tilbage står en optælling.\nDet er fundamentet under det meste af i dag."
   },
   {
     "objectID": "index.html#og-hvad-den-ikke-kan",
@@ -149,49 +149,49 @@
   {
     "objectID": "index.html#seks-scrapere-seks-formater",
     "href": "index.html#seks-scrapere-seks-formater",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Seks scrapere, seks formater",
     "text": "Seks scrapere, seks formater\n\n\n\nKilde\nDokumenter\nOverskrift\nDato\nFormat\n\n\n\n\nUriasposten\n3.024\nja\nnej\nCSV\n\n\nFrihedens Stemme\n1.554\nja\nja\nJSON\n\n\nNordfront\n1.216\nja\nja\nJSON\n\n\nSIAD\n485\nnej\nja\nJSON\n\n\nDansk Samling\n366\nja\nja\nJSON\n\n\nTrykkefrihed\n294\nja\nnej\nJSON\n\n\n\n\nIngen af dem er forkerte. De er bare lavet af forskellige mennesker til forskellige formål."
   },
   {
     "objectID": "index.html#fire-datoformater",
     "href": "index.html#fire-datoformater",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Fire datoformater",
     "text": "Fire datoformater\nDansk Samling       31. december 2019\nFrihedens Stemme    23. januar 2019\nSIAD                januar 1, 2019\nNordfront           2 februar, 2023\nTrykkefrihed        —\nUriasposten         —\n\n\nDag først, måned først, med og uden punktum, med og uden komma. Og to kilder uden dato overhovedet.\n3.345 af 6.939 dokumenter har ingen dato. Det er 48 %.\nEnhver analyse over tid kan altså kun bruge halvdelen af materialet … og det er ikke en tilfældig halvdel."
   },
   {
     "objectID": "index.html#hvem-fylder-mest",
     "href": "index.html#hvem-fylder-mest",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hvem fylder mest?",
     "text": "Hvem fylder mest?\n\n\n\n\n\n\n\n\n\n\nUriasposten er 43 % af korpusset. Trykkefrihed er 4 %.\nTæller I et ord på tværs af hele materialet, måler I i praksis Uriasposten."
   },
   {
     "objectID": "index.html#og-dokumenterne-er-ikke-lige-lange",
     "href": "index.html#og-dokumenterne-er-ikke-lige-lange",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Og dokumenterne er ikke lige lange",
     "text": "Og dokumenterne er ikke lige lange\n\n\n\n\n\n\n\n\n\n\nTrykkefrihed skriver i gennemsnit 715 ord per indlæg. Dansk Samling 184.\nAlt, hvad I tæller per dokument, er dermed et udtryk for, hvem der har skrevet det."
   },
   {
     "objectID": "index.html#hunston-2002-korpusset-er-bygget",
     "href": "index.html#hunston-2002-korpusset-er-bygget",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hunston (2002): korpusset er bygget",
-    "text": "Hunston (2002): korpusset er bygget\n\nEt korpus er et konstrueret objekt, ikke en objektiv repræsentation af sprog.\n\n\nDesignbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen, de er en del af analysen.\n\n\nI dag er 1 million ord et lille korpus.\n\nVores fulde materiale er 2,4 millioner ord… Det er stadig lille."
+    "text": "Hunston (2002): korpusset er bygget\n\nEt korpus er et konstrueret objekt, ikke en objektiv repræsentation af sprog.\n\n\nDesignbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen, de er en del af analysen.\n\n\nI dag er 1 million ord et lille korpus.\n\nVores fulde materiale er 2,4 millioner ord … Det er stadig lille."
   },
   {
     "objectID": "index.html#fire-spørgsmål-til-ethvert-korpus",
     "href": "index.html#fire-spørgsmål-til-ethvert-korpus",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Fire spørgsmål til ethvert korpus",
     "text": "Fire spørgsmål til ethvert korpus\n\nHvor kommer teksterne fra? Ét medie eller flere? Hvem har valgt netop dem?\nHvem har skrevet dem? Redigeret eller spontant? Én forfatter eller mange?\nHvilke teksttyper er med — og hvilke er ikke?\nHvad skete der under indsamlingen? Hvad blev der af formatering, billedtekster, kommentarer?"
   },
   {
     "objectID": "index.html#diskussion",
     "href": "index.html#diskussion",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Diskussion",
     "text": "Diskussion\n\n\nKan folk efterprøve jeres analyse?\nMaterialet er indsamlet på fire forskellige tidspunkter i 2022 og 2023. Hvad gør det ved en sammenligning mellem kilderne?\nHvilket spørgsmål kan dette korpus ikke svare på, uanset hvor god metoden er?"
   },
@@ -205,170 +205,170 @@
   {
     "objectID": "index.html#annotering",
     "href": "index.html#annotering",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Annotering",
     "text": "Annotering\nRå tekst kan man tælle ord i. Alt andet kræver, at nogen har tilføjet information.\n\nManuel kodning: mennesker læser og “mærker”/“tagger”. Dyrt, men stadig målestokken.\nAutomatisk annotering: en model tilføjer ordklasser, navne, sentiment. Hurtigt, men modellen har selv lært det et sted fra.\n\n\nSpørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er systematiske, for det flytter resultatet i én bestemt retning."
   },
   {
     "objectID": "index.html#fem-metodefamilier",
     "href": "index.html#fem-metodefamilier",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Fem metodefamilier",
-    "text": "Fem metodefamilier\nMacanovic (2022) inddeler feltet i fem:\n\nOrdbogsmodeller: tæl foruddefinerede ord i kategorier\nSemantisk og netværksanalyse: hvem gør hvad ved hvem (sprogligt, grammatisk)\nSprogrepræsentationer: tekst som tal (DTM, n-gram, word embeddings)\nUsuperviseret klyngedannelse: find temaer, ingen har defineret på forhånd\nSuperviseret klassifikation: udvid manuel kodning til millioner af tekster\n\n\nI dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i fokus på SDS."
+    "text": "Fem metodefamilier\nMacanovic (2022) inddeler feltet i fem:\n\nOrdbogsmodeller: tæl foruddefinerede ord i kategorier\nSemantisk og netværksanalyse: hvem gør hvad ved hvem (sprogligt, grammatisk)\nSprogrepræsentationer: tekst som tal (DTM, n-gram, word embeddings)\nUsuperviseret klyngedannelse: find temaer, ingen har defineret på forhånd\nSuperviseret klassifikation: udvid manuel kodning til millioner af tekster\n\n\nI dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i fokus på SDS2."
   },
   {
     "objectID": "index.html#induktivt-og-deduktivt",
     "href": "index.html#induktivt-og-deduktivt",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Induktivt og deduktivt",
     "text": "Induktivt og deduktivt\nDeduktivt: I ved, hvad I leder efter. Ordbøger og superviseret klassifikatorer. Kategorierne er bestemt på forhånd.\nInduktivt: I ved det ikke. Topic models og word embeddings “opdager” struktur, som I derefter skal fortolke."
   },
   {
     "objectID": "index.html#tre-eksempler",
     "href": "index.html#tre-eksempler",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Tre eksempler",
     "text": "Tre eksempler\nSpörlein & Schlueter (2021): en tilpasset tysk hadtale-ordbog på 5.152 YouTube-kommentarer. Tidligere hadefulde kommentarer øger sandsynligheden for nye.\nTörnberg & Törnberg (2016): topic models på 50 millioner svenske forumindlæg. Muslimer blev oftere forbundet med konflikt og vold online end i traditionelle medier.\nKozlowski et al. (2019): word embeddings på millioner af bøger over et århundrede. Sporede hvordan uddannelse gik fra at være forbundet med velstand gennem sofistikation til at være forbundet direkte.\n\n\n\nDe to første ligger tæt på vores materiale. Læg mærke til korpusstørrelserne: 5.152 og 50.000.000."
   },
   {
     "objectID": "index.html#theory-in-theory-out",
     "href": "index.html#theory-in-theory-out",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Theory in, theory out",
     "text": "Theory in, theory out\nBonikowski & Nelson (2022): større datamængder kræver mere teori, ikke mindre.\n\nEn metodes værdi måles på de teoretiske indsigter, den frembringer … ikke på hvor stort datasættet var.\nComputationel tekstanalyse kan ikke bare bruge teori, men også hjælpe med at bygge den.\n\n\n\nEt topic model finder altid emner. Også i støj. Det er jer, der afgør, om de betyder noget."
   },
   {
     "objectID": "index.html#validering",
     "href": "index.html#validering",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Validering",
     "text": "Validering\n\nKorpusvalidering: repræsenterer materialet det, I tror?\nMetodisk validering: måler modellen det, I tror?\n\n\nNår statistisk fit og fortolkelighed trækker i hver sin retning, skal der træffes et valg. Det valg hører i metodeafsnittet."
   },
   {
     "objectID": "index.html#udfordringer",
     "href": "index.html#udfordringer",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Udfordringer",
     "text": "Udfordringer\n\nSampling bias: hvem skriver, og hvem bliver selekteret ind?\nOverfitting: flere variable end observationer er let at ende med\nReproducerbarhed: forskellige valg i preprocessing giver forskellige resultater\n\n\nDet sidste er det mest undervurderede. To af vores kilder findes ikke længere … ingen kan gentage indsamlingen."
   },
   {
     "objectID": "index.html#den-ontologiske-debat",
     "href": "index.html#den-ontologiske-debat",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Den ontologiske debat",
     "text": "Den ontologiske debat\n\nIndeholder tekster overhovedet målbare sociale fænomener?\n\n\n\nEller måler vi bare, hvordan folk skriver?\nDet er ikke et spørgsmål, der bliver løst af et større datasæt."
   },
   {
     "objectID": "index.html#hvad-er-en-ordbogsmodel",
     "href": "index.html#hvad-er-en-ordbogsmodel",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hvad er en ordbogsmodel?",
-    "text": "Hvad er en ordbogsmodel?\nEn liste af ord, hver med en værdi. Man slår hvert ord op og lægger sammen.\n\nLIWC: 82 psykologiske kategorier\nAFINN: cirka 3.500 danske ord med en score fra −5 til +5\nJeres egen: en liste, I selv definerer til ét bestemt spørgsmål\n\n\nDet er den mest gennemsigtige metodefamilie: I kan altid slå op, hvorfor en tekst fik sin score.\nDet er også den mest restriktive: modellen ved kun det, listen siger."
+    "text": "Hvad er en ordbogsmodel?\nEn liste af ord, hver med en værdi. Man slår hvert ord op og lægger sammen.\n\nLIWC: 82 psykologiske kategorier\nAFINN: cirka 3.500 danske ord med en score fra −5 til +5\nJeres egen: en liste, I selv definerer til ét bestemt spørgsmål\n\n\nDet er den mest gennemsigtige metodefamilie. I kan altid slå op, hvorfor en tekst fik sin score.\nDet er også den mest restriktive. Modellen ved kun det, listen siger."
   },
   {
     "objectID": "index.html#vi-bygger-én",
     "href": "index.html#vi-bygger-én",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Vi bygger én",
     "text": "Vi bygger én\n\n\n\n\n\n\n\n\n\n22 ord. Det er hele modellen."
   },
   {
     "objectID": "index.html#hvordan-den-scorer",
     "href": "index.html#hvordan-den-scorer",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hvordan den scorer",
     "text": "Hvordan den scorer\n\n\n\n\n\n\n\n\n\nordbog.get(o, 0) er .get()-mønstret fra lektion 3. Findes ordet ikke, bidrager det med nul."
   },
   {
     "objectID": "index.html#kør-den-på-korpusset",
     "href": "index.html#kør-den-på-korpusset",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Kør den på korpusset",
     "text": "Kør den på korpusset"
   },
   {
     "objectID": "index.html#dækning",
     "href": "index.html#dækning",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Dækning",
     "text": "Dækning\n\nOver halvdelen af dokumenterne rammer ingen af de 22 ord.\nFor dem er scoren ikke “neutral”. Den er fraværende … og de to ting ligner hinanden i en tabel.\n\n\nDet er ordbogsmodellers første og største problem, og det er usynligt, hvis man kun kigger på gennemsnittet.\n\nHvor mange ord skulle der til, før I ville stole på tallet?"
   },
   {
     "objectID": "index.html#negation",
     "href": "index.html#negation",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Negation",
     "text": "Negation\n\n\n\n\n\n\n\n\n\n\nDen anden får samme score som den første. Den tredje bliver stærkt positiv.\nEn ordbogsmodel lægger tal sammen. Den læser ikke."
   },
   {
     "objectID": "index.html#afinn",
     "href": "index.html#afinn",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "AFINN",
-    "text": "AFINN\nDen samme idé, professionelt lavet. afinn er et Python-bibliotek med en dansk ordliste på cirka 3.500 ord, udviklet af Finn Årup Nielsen.\nfrom afinn import Afinn\n\nafinn = Afinn(language=\"da\")\n\nkorpus[\"afinn\"] = korpus[\"tekst\"].apply(afinn.score)\n\nAfinn(language=\"da\") indlæser den danske ordliste. .score() gør præcis det samme som vores egen funktion: slår hvert ord op og lægger værdierne for ordrene sammen.\n\n\nKan ikke installeres i browseren. Kør den i UCloud eller lokalt."
+    "text": "AFINN\nDen samme idé, professionelt lavet. afinn er et Python-bibliotek med en dansk ordliste på cirka 3.500 ord, udviklet af Finn Årup Nielsen.\nfrom afinn import Afinn\n\nafinn = Afinn(language=\"da\")\n\nkorpus[\"afinn\"] = korpus[\"tekst\"].map(afinn.score)\n\nAfinn(language=\"da\") indlæser den danske ordliste. .score() gør præcis det samme som vores egen funktion: slår hvert ord op og lægger værdierne for ordrene sammen.\n\n\nKan ikke installeres i browseren. Kør den i UCloud eller lokalt."
   },
   {
     "objectID": "index.html#hvad-måler-vi-egentlig",
     "href": "index.html#hvad-måler-vi-egentlig",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hvad måler vi egentlig?",
     "text": "Hvad måler vi egentlig?\nHvis Nordfront scorer mere negativt end Dansk Samling, hvad har vi så vist?\n\nAt de skriver om andre emner?\nAt de skriver længere tekster?\nAt ordlisten passer bedre til den enes ordforråd end den andens?\nEller noget om holdninger?\n\n\nEt tal fra en ordbogsmodel er ikke et resultat. Det er et udgangspunkt for en diskussion, som skal føres i metodeafsnittet."
   },
   {
     "objectID": "index.html#fra-ordliste-til-sprogmodel",
     "href": "index.html#fra-ordliste-til-sprogmodel",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Fra ordliste til sprogmodel",
     "text": "Fra ordliste til sprogmodel\nEn ordbog kender kun de ord, den har på listen. En sprogmodel er trænet på store mængder tekst og kan generalisere til ord, den ikke har set før.\n\nspaCy er et bibliotek til natural language processing — krydsfeltet mellem datalogi og korpuslingvistik.\nDet giver tokenisering, lemmatisering, ordklasser, navngivne entiteter og grammatiske relationer. Også på dansk.\n\n\n\n\nspaCy kan ikke køre i browseren. Koden på de næste slides skal køres i UCloud eller lokalt."
   },
   {
     "objectID": "index.html#en-pipeline",
     "href": "index.html#en-pipeline",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "En pipeline",
     "text": "En pipeline\nimport spacy\n\nnlp = spacy.load(\"da_core_news_sm\")\ndoc = nlp(\"Regeringen fremlagde et nyt udspil om indvandring i København.\")\nspacy.load() henter en model, ikke bare en funktion. da_core_news_sm er trænet på dansk nyhedstekst.\nTeksten løber gennem en række trin, som hver tilføjer information:"
   },
   {
     "objectID": "index.html#hvad-man-får-ud",
     "href": "index.html#hvad-man-får-ud",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hvad man får ud",
     "text": "Hvad man får ud\nfor tok in doc:\n    print(tok.text, tok.lemma_, tok.pos_, tok.is_stop)\n\nInformation per ord:\n\n.text: ordet, som det står\n.lemma_: grundformen. fremlagde bliver til fremlægge\n.pos_: ordklassen. NOUN, VERB, ADJ, PROPN og så videre\n.is_stop: er det et stopord?"
   },
   {
     "objectID": "index.html#navngivne-entiteter",
     "href": "index.html#navngivne-entiteter",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Navngivne entiteter",
     "text": "Navngivne entiteter\nfor ent in doc.ents:\n    print(ent.text, ent.label_)\n\n\n.ents er de navngivne entiteter: personer (PER), steder (LOC), organisationer (ORG).\nDet åbner en anden slags spørgsmål end ordoptælling: hvem bliver nævnt, hvor ofte, og sammen med hvad.\nDet er indgangen til semantisk og netværksanalyse."
   },
   {
     "objectID": "index.html#tokenisering-er-ikke-split",
     "href": "index.html#tokenisering-er-ikke-split",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Tokenisering er ikke split()",
     "text": "Tokenisering er ikke split()\ntekst = \"Regeringens plan — den såkaldte 'løsning' — virker ikke!\"\n\nprint(tekst.lower().split())\n\ndoc = nlp(tekst)\nprint([tok.text for tok in doc])\n\nKør de to linjer og sammenlign. Hvad sker der med tankestregerne, anførselstegnene og udråbstegnet i hver af dem?"
   },
   {
     "objectID": "index.html#hvorfor-det-betyder-noget-for-tallene",
     "href": "index.html#hvorfor-det-betyder-noget-for-tallene",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hvorfor det betyder noget for tallene",
     "text": "Hvorfor det betyder noget for tallene\nnaive = [o for t in korpus[\"tekst\"] for o in str(t).lower().split()]\nlemmaer = [tok.lemma_.lower() for doc in nlp.pipe(korpus[\"tekst\"].astype(str))\n           for tok in doc if not tok.is_punct]\n\nprint(len(set(naive)) / len(naive))\nprint(len(set(lemmaer)) / len(lemmaer))\n\nBegge linjer beregner leksikalsk diversitet: antal unikke ord divideret med antal ord i alt. Samme mål, samme korpus, to forbehandlinger.\n\nDen naive version tæller god, God, god! og gode som fire forskellige ord.\nKør det. Hvor stor bliver forskellen … og hvilket af de to tal ville I skrive i en opgave?"
   },
   {
     "objectID": "index.html#hvad-man-kan-bruge-det-til",
     "href": "index.html#hvad-man-kan-bruge-det-til",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Hvad man kan bruge det til",
     "text": "Hvad man kan bruge det til\n\nOrdklasser: analysér kun navneord, eller kun adjektiver. Retorik ligger ofte i tillægsordene.\nLemmatisering: bøjningsformer bliver til ét ord, før I tæller.\nEntiteter: hvilke personer, steder og organisationer optræder — og hos hvilke kilder?\nAfhængighedsrelationer: hvem gør hvad ved hvem."
   },
   {
     "objectID": "index.html#øvelser",
     "href": "index.html#øvelser",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Øvelser",
-    "text": "Øvelser\nI får de seks rå datasæt, ikke det samlede korpus.\n\nByg korpusset. Seks filer, seks formater. Saml dem til én tabel med de samme kolonner.\nDatoerne. Få så mange som muligt konverteret til rigtige datoer. Hvor mange lykkes det med?\nKør ordbogsmodellen. Udvid listen, og se hvad der sker med dækningen.\nPrøv spaCy. Kør koden fra slidesene, og skriv ned, hvad I faktisk får.\nLav en simpel sentimentanalyse med ascent.\n\nDokumentation: spaCy 101 | asent"
+    "text": "Øvelser\nDokumentation: spaCy 101 | asent"
   },
   {
     "objectID": "index.html#litteratur",
@@ -380,15 +380,127 @@
   {
     "objectID": "index.html#asent-sentimentanalyse",
     "href": "index.html#asent-sentimentanalyse",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "asent: sentimentanalyse",
-    "text": "asent: sentimentanalyse\n[ET EKSEMPEL PÅ EN “FULD” AF SENTIMENTANALYSE]"
+    "text": "asent: sentimentanalyse\nSamme idé som vores egen ordbog, men med en pipeline under sig. asent er udviklet af Kenneth Enevoldsen og findes på dansk.\nimport spacy, asent\n\nnlp = spacy.load(\"da_core_news_sm\")\nnlp.add_pipe(\"sentencizer\")\nnlp.add_pipe(\"asent_da_v1\")\n\ndoc = nlp(\"Det er en god beslutning for vores frihed.\")\nprint(doc._.polarity)\n\nadd_pipe() lægger et nyt trin til i pipelinen. Scoren ligger derefter i doc._.polarity.\n\n\nsentencizer er ikke pynt. asent regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I ValueError: Sentence boundaries unset."
   },
   {
     "objectID": "index.html#analyser-med-ordbøger",
     "href": "index.html#analyser-med-ordbøger",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Analyser med ordbøger",
-    "text": "Analyser med ordbøger\n[ET EKSEMPEL PÅ EN “FULD” ANALYSE MED ORDBØGER]"
+    "text": "Analyser med ordbøger\nVi har et tal per dokument. Nu skal det blive til en analyse.\nFire skridt, og tre af dem handler om at finde ud af, om tallet betyder noget:\n\nNormalisér for dokumentlængde\nSammenlign kilderne\nTjek dækningen … rammer ordbogen overhovedet?\nLæs teksterne bag de yderste scorer"
+  },
+  {
+    "objectID": "index.html#normalisér",
+    "href": "index.html#normalisér",
+    "title": "Lektion 7",
+    "section": "1. Normalisér",
+    "text": "1. Normalisér\n\n\n\n\n\n\n\n\n\nord.groupby(level=0) grupperer på indekset, altså på dokumentet. Det er samme greb som da vi lagde scoren sammen.\nEn rå sum favoriserer lange tekster: jo flere ord, jo flere chancer for at ramme ordbogen. Trykkefrihed skriver 718 ord per indlæg, Dansk Samling 183."
+  },
+  {
+    "objectID": "index.html#rangordenen-vender",
+    "href": "index.html#rangordenen-vender",
+    "title": "Lektion 7",
+    "section": "2. Rangordenen vender",
+    "text": "2. Rangordenen vender\n\n\n\n\nRå sum\nPer 1000 ord\n\n\n\n\nSIAD\n0,79\n2,26\n\n\nNordfront\n0,64\n1,26\n\n\nUriasposten\n0,47\n2,98\n\n\nDansk Samling\n0,45\n2,50\n\n\nFrihedens Stemme\n−0,36\n−1,06\n\n\nTrykkefrihed\n−0,45\n−1,08\n\n\n\n\nNordfront går fra andenplads til femteplads. Uriasposten går fra en delt tredjeplads til førstepladsen.\nDet er ikke data, der ændrer sig. Det er en beslutning om, hvad vi dividerer med."
+  },
+  {
+    "objectID": "index.html#tegn-det",
+    "href": "index.html#tegn-det",
+    "title": "Lektion 7",
+    "section": "Tegn det",
+    "text": "Tegn det"
+  },
+  {
+    "objectID": "index.html#dækningen-er-ikke-den-samme",
+    "href": "index.html#dækningen-er-ikke-den-samme",
+    "title": "Lektion 7",
+    "section": "3. Dækningen er ikke den samme",
+    "text": "3. Dækningen er ikke den samme\n\n\n\n\n\n\n\n\n\nTrykkefrihed: 84 %. Dansk Samling: 38 %.\nDet er ikke en holdningsforskel. Det er en længdeforskel: Trykkefriheds indlæg er fire gange så lange, så ordbogen har fire gange så mange chancer for at ramme.\nFor de 62 % af Dansk Samlings tekster, hvor ordbogen ikke ramte, er scoren ikke neutral. Den findes ikke."
+  },
+  {
+    "objectID": "index.html#læs-teksterne",
+    "href": "index.html#læs-teksterne",
+    "title": "Lektion 7",
+    "section": "4. Læs teksterne",
+    "text": "4. Læs teksterne\n\n\n\n\n\n\n\n\n\nEr I enige med modellen? Hvor mange af de seks ville I have kodet anderledes?"
+  },
+  {
+    "objectID": "index.html#hvad-kan-vi-så-konkludere",
+    "href": "index.html#hvad-kan-vi-så-konkludere",
+    "title": "Lektion 7",
+    "section": "Hvad kan vi så konkludere?",
+    "text": "Hvad kan vi så konkludere?\n\nAt to kilder scorer negativt og fire positivt … men forskellene er små, og halvdelen af materialet bidrager slet ikke.\nAt rangordenen afhænger af, om vi normaliserer.\nAt dækningen varierer med en faktor to på tværs af kilder, og at den følger dokumentlængden.\n\n\n\nIngen af de tre er et resultat om højrefløjsmedier. De er alle tre resultater om ordbogen."
+  },
+  {
+    "objectID": "index.html#hvad-den-kan-som-vores-egen-ikke-kunne",
+    "href": "index.html#hvad-den-kan-som-vores-egen-ikke-kunne",
+    "title": "Lektion 7",
+    "section": "Hvad den kan, som vores egen ikke kunne",
+    "text": "Hvad den kan, som vores egen ikke kunne\n\n\n\nSætning\nVores ordbog\nasent\n\n\n\n\nDet er en god beslutning for vores frihed\n+5\n+0,79\n\n\nDet er ikke en god beslutning\n+2\n−0,50\n\n\nFantastisk. Bare fantastisk.\n0\n0,00\n\n\n\n\nNegationen virker. Vores egen ordbog gav plus for den anden sætning, fordi den bare lagde tal sammen.\nMen fantastisk står ikke i den danske ordliste. Dækningsproblemet er ikke løst, det er flyttet."
+  },
+  {
+    "objectID": "index.html#hvorfor-fik-den-den-score",
+    "href": "index.html#hvorfor-fik-den-den-score",
+    "title": "Lektion 7",
+    "section": "Hvorfor fik den den score?",
+    "text": "Hvorfor fik den den score?\ndoc = nlp(\"Det er ikke en god beslutning.\")\n\nfor tok in doc:\n    if tok._.polarity.polarity != 0:\n        print(tok._.polarity)\npolarity=-2.22 token=god span=ikke en god\n\nasent fortæller, hvilket ord der drev scoren, og hvilket udsnit af sætningen den læste det i.\ngod er i sig selv positiv. Den bliver negativ, fordi ikke står foran. Det kan man slå efter.\nDet er forskellen på et tal og et resultat, I kan forsvare."
+  },
+  {
+    "objectID": "index.html#kør-den-på-korpusset-1",
+    "href": "index.html#kør-den-på-korpusset-1",
+    "title": "Lektion 7",
+    "section": "Kør den på korpusset",
+    "text": "Kør den på korpusset\nkorpus[\"tekst\"] = korpus[\"tekst\"].fillna(\"\").astype(str)\n\nkorpus[\"asent\"] = [doc._.polarity.compound\n                   for doc in nlp.pipe(korpus[\"tekst\"], batch_size=20)]\n\nprint(korpus.groupby(\"kilde\")[\"asent\"].mean().round(3))\n\nnlp.pipe() kører mange tekster igennem ad gangen. Tomme felter skal fjernes først … pipelinen vil ikke have NaN.\n\n\n240 dokumenter tager cirka 7 sekunder. Hele korpusset tager nogle minutter. Kør det på et udsnit først."
+  },
+  {
+    "objectID": "index.html#to-modeller-samme-korpus",
+    "href": "index.html#to-modeller-samme-korpus",
+    "title": "Lektion 7",
+    "section": "To modeller, samme korpus",
+    "text": "To modeller, samme korpus\n\n\n\n\nEgen ordbog\nasent\n\n\n\n\nOrd i modellen\n22\nflere tusind\n\n\nDokumenter uden score\n109 af 240\n8 af 240\n\n\nHåndterer negation\nnej\nja\n\n\nForskel mellem kilderne\n−1,1 til +3,0\n−0,12 til −0,02\n\n\n\n\nDækningen går fra 55 % til 97 %. Det er den store gevinst.\nMen forskellene mellem kilderne bliver mindre, ikke større. Med den bedre model ligner de seks medier hinanden."
+  },
+  {
+    "objectID": "index.html#og-de-er-uenige",
+    "href": "index.html#og-de-er-uenige",
+    "title": "Lektion 7",
+    "section": "Og de er uenige",
+    "text": "Og de er uenige\nDe to modeller er enige om fortegnet i 66 % af dokumenterne. Korrelationen er 0,31.\nEn tredjedel af materialet får altså modsat fortegn, alt efter hvilken model man vælger.\n\n\nHvilken af dem har ret?\n\nDet kan man ikke afgøre ud fra tallene. Det kræver, at nogen læser et udsnit af teksterne og koder dem i hånden … og at man så måler modellerne op mod den kodning.\nDet er den validering, Bonikowski & Nelson efterlyser. Og den er ikke lavet her."
+  },
+  {
+    "objectID": "index.html#minimumsvalidering",
+    "href": "index.html#minimumsvalidering",
+    "title": "Lektion 7",
+    "section": "Minimumsvalidering",
+    "text": "Minimumsvalidering\nstikproeve = korpus.sample(20, random_state=42)\n\nprint(stikproeve[[\"kilde\", \"asent\"]].to_string())\n\nTyve dokumenter. Læs dem, og skriv for hvert enkelt, om I er enige med modellen.\nEr I uenige i under fem, kan tallet bruges med forbehold. Er I uenige i over ti, måler modellen noget andet, end I tror.\nDet tager tyve minutter, og det er forskellen på en metodesektion, der holder, og en der ikke gør."
+  },
+  {
+    "objectID": "index.html#fremgang",
+    "href": "index.html#fremgang",
+    "title": "Lektion 7",
+    "section": "Fremgang",
+    "text": "Fremgang\nVi har et tal per dokument. Nu skal det blive til en analyse.\nFire skridt, og tre af dem handler om at finde ud af, om tallet betyder noget:\n\nNormalisér for dokumentlængde\nSammenlign kilderne\nTjek dækningen … rammer ordbogen overhovedet?\nLæs teksterne bag de yderste scorer"
+  },
+  {
+    "objectID": "index.html#egen-ordbog-én-kilde",
+    "href": "index.html#egen-ordbog-én-kilde",
+    "title": "Lektion 7",
+    "section": "Egen ordbog, én kilde",
+    "text": "Egen ordbog, én kilde\n[EN ORDENTLIG MANUEL ORDBOG; BEDRE TEKST MATERIALE]"
+  },
+  {
+    "objectID": "index.html#vader-sammenligning-af-to-kilder",
+    "href": "index.html#vader-sammenligning-af-to-kilder",
+    "title": "Lektion 7",
+    "section": "VADER, sammenligning af to kilder",
+    "text": "VADER, sammenligning af to kilder"
+  },
+  {
+    "objectID": "index.html#en-komplet-preprocessing-i-spacy",
+    "href": "index.html#en-komplet-preprocessing-i-spacy",
+    "title": "Lektion 7",
+    "section": "En komplet preprocessing i SpaCy",
+    "text": "En komplet preprocessing i SpaCy\n[TODO]"
   }
 ]

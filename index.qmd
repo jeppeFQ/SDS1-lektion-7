@@ -1,5 +1,5 @@
 ---
-title: "Lektion 6"
+title: "Lektion 7"
 subtitle: "Computationel tekstanalyse"
 author: "Jeppe Fjeldgaard Qvist"
 date: today
@@ -31,29 +31,31 @@ mkdir -p .qmd-pause && mv *.qmd .qmd-pause/ && \
 
 ## Dagens program 
 
-- **Tekst som data**: hvad computeren egentlig ser
+- **Tekst som data**
 
-- **Korpus**: det vi allerede selv har prøvet at bygge, uden at tænke over det
+- **Korpus**
 
-- **Landskabet**: hvad kan man med computationel tekstanalyse?
+- **Landskabet** (hvad kan man med computationel tekstanalyse?)
 
-- **Ordbogsmodeller**: vi bygger én selv
+- **Ordbogsmodeller**
 
-- **Sprogmodeller**: spaCy
+- **Sprogmodeller**
+
+- **Klyngemodeller: PCA og k-means**
 
 - Øvelser/**Portfolio** 
 
 <br>
 
 ::: {.aside}
-Ingen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har en meningsfuld modsvarighed der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R, med andre værktøjer. 
+Ingen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativt i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer. 
 :::
 
 ## Dagens data
 
 Indlæg og nyheder fra seks danske højrefløjsmedier og -foreninger, indsamlet i 2022-2023.
 
-- Dansk Samling, Frihedens Stemme, Nordfront, SIAD, Trykkefrihed, Uriasposten
+- `Dansk Samling`, `Frihedens Stemme`, `Nordfront`, `SIAD`, `Trykkefrihed`, `Uriasposten`
 
 - Nogle af siderne findes ikke længere.
 
@@ -112,7 +114,7 @@ Vi forstår øjeblikkeligt: det er en hilsen, det er på dansk, det er venligt.
 
 ## Det I allerede kan
 
-I lektion 2 og 3 byggede I en lille tekstanalyse:
+I lektion 2, 3 og 6 byggede I små tekstanalyse:
 
 1. Gør teksten til små bogstaver
 2. Fjern tegnsætning
@@ -160,15 +162,11 @@ Uriasposten         —
 
 <br>
 
-::: {.incremental}
-
 - Dag først, måned først, med og uden punktum, med og uden komma. Og to kilder uden dato overhovedet.
 
 - **3.345 af 6.939 dokumenter** har ingen dato. Det er 48 %.
 
 - Enhver analyse over tid kan altså kun bruge halvdelen af materialet ... og det er ikke en tilfældig halvdel.
-
-:::
 
 ## Hvem fylder mest?
 
@@ -195,13 +193,9 @@ print(korpus.groupby("kilde")["antal_ord"].median().round(0))
 
 <br>
 
-::: {.incremental}
-
 - Trykkefrihed skriver i gennemsnit **715 ord** per indlæg. Dansk Samling **184**.
 
 - Alt, hvad I tæller per dokument, er dermed et udtryk for, hvem der har skrevet det.
-
-:::
 
 ## Hunston (2002): korpusset er bygget
 
@@ -221,7 +215,7 @@ Designbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De
 
 > I dag er 1 million ord et **lille** korpus.
 
-Vores fulde materiale er 2,4 millioner ord... Det er stadig lille.
+Vores fulde materiale er 2,4 millioner ord ... Det er stadig lille.
 
 :::
 
@@ -273,7 +267,7 @@ Macanovic (2022) inddeler feltet i fem:
 
 ::: {.incremental}
 
-I dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i fokus på SDS.
+I dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i fokus på SDS2.
 
 :::
 
@@ -327,20 +321,6 @@ Når statistisk fit og fortolkelighed trækker i hver sin retning, skal der træ
 
 :::
 
-## Udfordringer
-
-- **Sampling bias**: hvem skriver, og hvem bliver selekteret ind?
-- **Overfitting**: flere variable end observationer er let at ende med 
-- **Reproducerbarhed**: forskellige valg i preprocessing giver forskellige resultater
-
-<br>
-
-::: {.incremental}
-
-Det sidste er det mest undervurderede. To af vores kilder findes ikke længere ... ingen kan gentage indsamlingen.
-
-:::
-
 ## Den ontologiske debat
 
 > Indeholder tekster overhovedet målbare sociale fænomener?
@@ -363,9 +343,9 @@ En liste af ord, hver med en værdi. Man slår hvert ord op og lægger sammen.
 
 <br>
 
-Det er den mest **gennemsigtige** metodefamilie: I kan altid slå op, hvorfor en tekst fik sin score.
+Det er den mest **gennemsigtige** metodefamilie. I kan altid slå op, hvorfor en tekst fik sin score.
 
-Det er også den mest **restriktive**: modellen ved kun det, listen siger.
+Det er også den mest **restriktive**. Modellen ved kun det, listen siger.
 
 ## Vi bygger én
 
@@ -390,16 +370,15 @@ print(len(ordbog), "ord")
 
 ```{pyodide}
 #| autorun: false
-def rens(t):
-    t = str(t).lower()
-    for tegn in [".", ",", "!", "?", ":", ";", '"', "(", ")"]:
-        t = t.replace(tegn, " ")
-    return t.split()
+# ét ord per række. Indekset husker, hvilket dokument ordet kom fra
+ord = (korpus["tekst"].astype(str)
+       .str.lower()
+       .str.replace(r"[^\wæøå ]", " ", regex=True)
+       .str.split().explode())
 
-def score(tekst):
-    return sum(ordbog.get(o, 0) for o in rens(tekst))
-
-print(score("Det er en god beslutning for vores frihed"))
+print(ord.head(8))
+print()
+print("tokens:", len(ord), "| typer:", ord.nunique())
 ```
 
 <br>
@@ -410,9 +389,10 @@ print(score("Det er en god beslutning for vores frihed"))
 
 ```{pyodide}
 #| autorun: false
-korpus["score"] = korpus["tekst"].apply(score)
+# slå hvert ord op i ordbogen og læg sammen per dokument
+korpus["score"] = ord.map(ordbog).groupby(level=0).sum()
 
-print(korpus.groupby("kilde")["score"].mean())
+print(korpus.groupby("kilde")["score"].mean().round(2))
 print()
 print("Dokumenter med score præcis 0:", (korpus["score"] == 0).sum(), "af", len(korpus))
 ```
@@ -439,10 +419,14 @@ Det er ordbogsmodellers første og største problem, og det er usynligt, hvis ma
 
 ```{pyodide}
 #| autorun: false
-for s in ["Det er en god beslutning",
-          "Det er ikke en god beslutning",
-          "Ingen tryghed og ingen frihed"]:
-    print(f"{s:32} {score(s):+d}")
+proever = pd.Series(["Det er en god beslutning",
+                     "Det er ikke en god beslutning",
+                     "Ingen tryghed og ingen frihed"])
+
+scorer = (proever.str.lower().str.split().explode()
+          .map(ordbog).groupby(level=0).sum())
+
+print(pd.DataFrame({"tekst": proever, "score": scorer}))
 ```
 
 <br>
@@ -460,7 +444,7 @@ from afinn import Afinn
 
 afinn = Afinn(language="da")
 
-korpus["afinn"] = korpus["tekst"].apply(afinn.score)
+korpus["afinn"] = korpus["tekst"].map(afinn.score)
 ```
 
 <br>
@@ -488,9 +472,139 @@ Et tal fra en ordbogsmodel er ikke et resultat. Det er et **udgangspunkt for en 
 
 :::
 
-## Analyser med ordbøger
+# Analyser med ordbøger
 
-[ET EKSEMPEL PÅ EN "FULD" ANALYSE MED ORDBØGER]
+## Fremgang
+
+Vi har et tal per dokument. Nu skal det blive til en analyse.
+
+Fire skridt, og tre af dem handler om at finde ud af, om tallet betyder noget:
+
+1. **Normalisér** for dokumentlængde
+2. **Sammenlign** kilderne
+3. **Tjek dækningen** ... rammer ordbogen overhovedet?
+4. **Læs teksterne** bag de yderste scorer
+
+## 1. Normalisér
+
+```{pyodide}
+#| autorun: false
+korpus["antal_ord"] = ord.groupby(level=0).size()
+korpus["pr_1000"] = korpus["score"] / korpus["antal_ord"] * 1000
+
+print(korpus.groupby("kilde")[["score", "pr_1000"]].mean().round(2))
+```
+
+<br>
+
+`ord.groupby(level=0)` grupperer på **indekset**, altså på dokumentet. Det er samme greb som da vi lagde scoren sammen.
+
+En rå sum favoriserer lange tekster: jo flere ord, jo flere chancer for at ramme ordbogen. Trykkefrihed skriver 718 ord per indlæg, Dansk Samling 183.
+
+## 2. Rangordenen vender
+
+|  | Rå sum | Per 1000 ord |
+|---|---|---|
+| SIAD | **0,79** | 2,26 |
+| Nordfront | **0,64** | 1,26 |
+| Uriasposten | 0,47 | **2,98** |
+| Dansk Samling | 0,45 | **2,50** |
+| Frihedens Stemme | −0,36 | −1,06 |
+| Trykkefrihed | −0,45 | −1,08 |
+
+<br>
+
+::: {.incremental}
+
+Nordfront går fra andenplads til femteplads. Uriasposten går fra en delt tredjeplads til førstepladsen.
+
+Det er ikke data, der ændrer sig. Det er en beslutning om, hvad vi dividerer med.
+
+:::
+
+## Tegn det
+
+```{pyodide}
+#| autorun: false
+from plotnine import *
+
+pr_kilde = korpus.groupby("kilde")["pr_1000"].mean().reset_index()
+
+(ggplot(pr_kilde, aes(x="kilde", y="pr_1000"))
+ + geom_col()
+ + coord_flip()
+ + labs(title="Ordbogsscore per 1000 ord",
+        x=None, y="Gennemsnitlig score")
+ + theme_minimal()).show()
+```
+
+<br>
+
+## 3. Dækningen er ikke den samme
+
+```{pyodide}
+#| autorun: false
+korpus["ramte"] = korpus["score"] != 0
+
+print((korpus.groupby("kilde")["ramte"].mean() * 100).round(1))
+```
+
+<br>
+
+::: {.incremental}
+
+Trykkefrihed: **84 %**. Dansk Samling: **38 %**.
+
+Det er ikke en holdningsforskel. Det er en længdeforskel: Trykkefriheds indlæg er fire gange så lange, så ordbogen har fire gange så mange chancer for at ramme.
+
+For de 62 % af Dansk Samlings tekster, hvor ordbogen ikke ramte, er scoren ikke neutral. Den findes ikke.
+
+:::
+
+## 4. Læs teksterne
+
+```{pyodide}
+#| autorun: false
+yderst = korpus.sort_values("pr_1000")
+
+kolonner = ["kilde", "pr_1000"]
+
+print("MEST NEGATIVE")
+print(yderst.head(3)[kolonner].to_string())
+print()
+print("MEST POSITIVE")
+print(yderst.tail(3)[kolonner].to_string())
+print()
+print(yderst["tekst"].iloc[0][:])
+```
+
+<br>
+
+Er I enige med modellen? Hvor mange af de seks ville I have kodet anderledes?
+
+## Hvad kan vi så konkludere?
+
+- At to kilder scorer negativt og fire positivt ... men forskellene er små, og halvdelen af materialet bidrager slet ikke.
+
+- At rangordenen afhænger af, om vi normaliserer.
+
+- At dækningen varierer med en faktor to på tværs af kilder, og at den følger dokumentlængden.
+
+<br>
+
+::: {.incremental}
+
+> Ingen af de tre er et resultat om højrefløjsmedier. De er alle tre resultater om **ordbogen**.
+
+:::
+
+# Et bedre eksempel på ordbogsmetoder 
+
+## Egen ordbog, én kilde
+
+[EN ORDENTLIG MANUEL ORDBOG; BEDRE TEKST MATERIALE]
+
+## VADER, sammenligning af to kilder
 
 # Del 5: Sprogmodeller
 
@@ -588,6 +702,11 @@ Begge linjer beregner **leksikalsk diversitet**: antal unikke ord divideret med 
 
 - Kør det. Hvor stor bliver forskellen ... og hvilket af de to tal ville I skrive i en opgave?
 
+## En komplet preprocessing i SpaCy
+
+[TODO]
+
+
 ## Hvad man kan bruge det til
 
 - **Ordklasser**: analysér kun navneord, eller kun adjektiver. Retorik ligger ofte i tillægsordene.
@@ -599,22 +718,155 @@ Begge linjer beregner **leksikalsk diversitet**: antal unikke ord divideret med 
 
 ## `asent`: sentimentanalyse
 
-[ET EKSEMPEL PÅ EN "FULD" AF SENTIMENTANALYSE]
+Samme idé som vores egen ordbog, men med en pipeline under sig. `asent` er udviklet af Kenneth Enevoldsen og findes på dansk.
+
+```python
+import spacy, asent
+
+nlp = spacy.load("da_core_news_sm")
+nlp.add_pipe("sentencizer")
+nlp.add_pipe("asent_da_v1")
+
+doc = nlp("Det er en god beslutning for vores frihed.")
+print(doc._.polarity)
+```
+
+<br>
+
+`add_pipe()` lægger et nyt trin til i pipelinen. Scoren ligger derefter i `doc._.polarity`.
+
+::: {.aside}
+`sentencizer` er ikke pynt. `asent` regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I `ValueError: Sentence boundaries unset`.
+:::
+
+## Hvad den kan, som vores egen ikke kunne
+
+| Sætning | Vores ordbog | `asent` |
+|---|---|---|
+| Det er en god beslutning for vores frihed | **+5** | **+0,79** |
+| Det er **ikke** en god beslutning | **+2** | **−0,50** |
+| Fantastisk. Bare fantastisk. | 0 | 0,00 |
+
+<br>
+
+::: {.incremental}
+
+Negationen virker. Vores egen ordbog gav plus for den anden sætning, fordi den bare lagde tal sammen.
+
+Men `fantastisk` står ikke i den danske ordliste. Dækningsproblemet er ikke løst, det er flyttet.
+
+:::
+
+## Hvorfor fik den den score?
+
+```python
+doc = nlp("Det er ikke en god beslutning.")
+
+for tok in doc:
+    if tok._.polarity.polarity != 0:
+        print(tok._.polarity)
+```
+
+```
+polarity=-2.22 token=god span=ikke en god
+```
+
+<br>
+
+::: {.incremental}
+
+`asent` fortæller, **hvilket ord** der drev scoren, og **hvilket udsnit** af sætningen den læste det i.
+
+`god` er i sig selv positiv. Den bliver negativ, fordi `ikke` står foran. Det kan man slå efter.
+
+Det er forskellen på et tal og et resultat, I kan forsvare.
+
+:::
+
+## Kør den på korpusset
+
+```python
+korpus["tekst"] = korpus["tekst"].fillna("").astype(str)
+
+korpus["asent"] = [doc._.polarity.compound
+                   for doc in nlp.pipe(korpus["tekst"], batch_size=20)]
+
+print(korpus.groupby("kilde")["asent"].mean().round(3))
+```
+
+<br>
+
+`nlp.pipe()` kører mange tekster igennem ad gangen. Tomme felter skal fjernes først ... pipelinen vil ikke have `NaN`.
+
+::: {.aside}
+240 dokumenter tager cirka 7 sekunder. Hele korpusset tager nogle minutter. Kør det på et udsnit først.
+:::
+
+## To modeller, samme korpus
+
+| | Egen ordbog | `asent` |
+|---|---|---|
+| Ord i modellen | 22 | flere tusind |
+| Dokumenter uden score | **109 af 240** | **8 af 240** |
+| Håndterer negation | nej | ja |
+| Forskel mellem kilderne | −1,1 til +3,0 | −0,12 til −0,02 |
+
+<br>
+
+::: {.incremental}
+
+Dækningen går fra 55 % til 97 %. Det er den store gevinst.
+
+Men forskellene mellem kilderne bliver **mindre**, ikke større. Med den bedre model ligner de seks medier hinanden.
+
+:::
+
+## Og de er uenige
+
+::: {.incremental}
+
+De to modeller er enige om fortegnet i **66 %** af dokumenterne. Korrelationen er **0,31**.
+
+En tredjedel af materialet får altså modsat fortegn, alt efter hvilken model man vælger.
+
+:::
+
+<br>
+
+::: {.incremental}
+
+> Hvilken af dem har ret?
+
+Det kan man ikke afgøre ud fra tallene. Det kræver, at nogen læser et udsnit af teksterne og koder dem i hånden ... og at man så måler modellerne op mod den kodning.
+
+Det er den validering, Bonikowski & Nelson efterlyser. Og den er ikke lavet her.
+
+:::
+
+## Minimumsvalidering
+
+```python
+stikproeve = korpus.sample(20, random_state=42)
+
+print(stikproeve[["kilde", "asent"]].to_string())
+```
+
+<br>
+
+Tyve dokumenter. Læs dem, og skriv for hvert enkelt, om I er enige med modellen.
+
+::: {.incremental}
+
+Er I uenige i under fem, kan tallet bruges med forbehold. Er I uenige i over ti, måler modellen noget andet, end I tror.
+
+Det tager tyve minutter, og det er forskellen på en metodesektion, der holder, og en der ikke gør.
+
+:::
+
+# Del 6: PCA og k-means 
 
 # Del 6: Øvelser
 
 ## Øvelser
-
-I får de seks rå datasæt, ikke det samlede korpus.
-
-1. **Byg korpusset.** Seks filer, seks formater. Saml dem til én tabel med de samme kolonner.
-
-2. **Datoerne.** Få så mange som muligt konverteret til rigtige datoer. Hvor mange lykkes det med?
-
-3. **Kør ordbogsmodellen.** Udvid listen, og se hvad der sker med dækningen.
-
-4. **Prøv spaCy.** Kør koden fra slidesene, og skriv ned, hvad I faktisk får.
-
-5. **Lav en simpel sentimentanalyse med ascent**.
 
 **Dokumentation:** [spaCy 101](https://spacy.io/usage/spacy-101) | [asent](https://kennethenevoldsen.github.io/asent/index.html)
