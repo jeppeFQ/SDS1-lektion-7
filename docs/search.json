@@ -4,7 +4,7 @@
     "href": "index.html#dagens-program",
     "title": "Lektion 7",
     "section": "Dagens program",
-    "text": "Dagens program\n\nTekst som data\nKorpus\nLandskabet (hvad kan man med computationel tekstanalyse?)\nOrdbogsmodeller\nSprogmodeller\nKlyngemodeller: PCA og k-means\nØvelser/Portfolio\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativt i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer."
+    "text": "Dagens program\n\nTekst som data\nKorpus\nLandskabet (hvad kan man med computationel tekstanalyse?)\nOrdbogsmodeller … og en analyse af den politiske dagsorden\nSprogmodeller … og en analyse af tonen i Folketinget\nKlyngemodeller: PCA og k-means\nØvelser/Portfolio\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativt i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer."
   },
   {
     "objectID": "index.html#web-scraping",
@@ -109,14 +109,14 @@
     "href": "index.html#dagens-data",
     "title": "Lektion 7",
     "section": "Dagens data",
-    "text": "Dagens data\nIndlæg og nyheder fra seks danske højrefløjsmedier og -foreninger, indsamlet i 2022-2023.\n\nDansk Samling, Frihedens Stemme, Nordfront, SIAD, Trykkefrihed, Uriasposten\nNogle af siderne findes ikke længere.\nHvert datasæt er lavet med sin egen scraper. Formater og kolonner varierer."
+    "text": "Dagens data\nReferater af møderne i Folketinget fra oktober 2007 til november 2022.\n\n1.711 møder, hentet fra ft.dk i december 2022\nHvert møde er delt op i dagsordenspunkter, og hvert punkt har hele debatten som én tekst\nVi bruger 1. behandlingen af lovforslag: dér foregår den politiske debat om et forslag\n\n\n3.070 debatter og cirka 22 millioner ord. Ét datasæt, én kilde, samme format hele vejen."
   },
   {
     "objectID": "index.html#korpusset",
     "href": "index.html#korpusset",
     "title": "Lektion 7",
     "section": "Korpusset",
-    "text": "Korpusset\n\n\n\n\n\n\n\n\n\nEt udsnit på ca. 10% af det fulde materiale. Det fulde korpus er på 6.939 dokumenter og cirka 2,4 millioner ord."
+    "text": "Korpusset\n\n\n\n\n\n\n\n\n\nEt tilfældigt udsnit på 900 debatter. Hver tekst er afkortet til de første 5.000 tegn.\n\n\nAfkortningen gør, at hver debat vejer lige meget. Det fjerner det længde-problem, vi har set før: lange tekster har flere chancer for at ramme en ordbog."
   },
   {
     "objectID": "index.html#tekst",
@@ -179,7 +179,7 @@
     "href": "index.html#hunston-2002-korpusset-er-bygget",
     "title": "Lektion 7",
     "section": "Hunston (2002): korpusset er bygget",
-    "text": "Hunston (2002): korpusset er bygget\n\nEt korpus er et konstrueret objekt, ikke en objektiv repræsentation af sprog.\n\n\nDesignbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen, de er en del af analysen.\n\n\nI dag er 1 million ord et lille korpus.\n\nVores fulde materiale er 2,4 millioner ord … Det er stadig lille."
+    "text": "Hunston (2002): korpusset er bygget\n\nEt korpus er et konstrueret objekt, ikke en objektiv repræsentation af sprog.\n\n\nDesignbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen, de er en del af analysen.\n\n\nI dag er 1 million ord et lille korpus.\n\nDe fulde debatter er 22 millioner ord. Det er et mellemstort korpus … og i dag bruger vi kun et udsnit af det."
   },
   {
     "objectID": "index.html#fire-spørgsmål-til-ethvert-korpus",
@@ -193,7 +193,7 @@
     "href": "index.html#diskussion",
     "title": "Lektion 7",
     "section": "Diskussion",
-    "text": "Diskussion\n\n\nKan folk efterprøve jeres analyse?\nMaterialet er indsamlet på fire forskellige tidspunkter i 2022 og 2023. Hvad gør det ved en sammenligning mellem kilderne?\nHvilket spørgsmål kan dette korpus ikke svare på, uanset hvor god metoden er?"
+    "text": "Diskussion\n\n\nReferaterne er redigeret af Folketingets referenter. Er det det talte sprog, vi analyserer?\nVi har valgt 1. behandlinger. Hvilke politiske debatter er dermed ikke med?\nHvilket spørgsmål kan dette korpus ikke svare på, uanset hvor god metoden er?"
   },
   {
     "objectID": "index.html#etik",
@@ -207,7 +207,7 @@
     "href": "index.html#annotering",
     "title": "Lektion 7",
     "section": "Annotering",
-    "text": "Annotering\nRå tekst kan man tælle ord i. Alt andet kræver, at nogen har tilføjet information.\n\nManuel kodning: mennesker læser og “mærker”/“tagger”. Dyrt, men stadig målestokken.\nAutomatisk annotering: en model tilføjer ordklasser, navne, sentiment. Hurtigt, men modellen har selv lært det et sted fra.\n\n\nSpørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er systematiske, for det flytter resultatet i én bestemt retning."
+    "text": "Annotering\nRå tekst kan man tælle ord i. Alt andet kræver, at nogen har tilføjet information.\n\nManuel kodning: mennesker læser og “mærker”/“tagger”. Dyrt, men stadig målestokken.\nAutomatisk annotering: en model tilføjer ordklasser, navne, sentiment. Hurtigt, men modellen har selv lært det et sted fra.\n\n\nSpørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er systematiske, for det flytter resultatet i én bestemt retning.\n\n\nVores politikområde er en tredje slags: en regel, vi selv har skrevet. Den er gennemsigtig, men den er stadig en beslutning."
   },
   {
     "objectID": "index.html#fem-metodefamilier",
@@ -277,7 +277,7 @@
     "href": "index.html#hvordan-den-scorer",
     "title": "Lektion 7",
     "section": "Hvordan den scorer",
-    "text": "Hvordan den scorer\n\n\n\n\n\n\n\n\n\nordbog.get(o, 0) er .get()-mønstret fra lektion 3. Findes ordet ikke, bidrager det med nul."
+    "text": "Hvordan den scorer\n\n\n\n\n\n\n\n\n\n.map(ordbog) slår hvert ord op. Findes ordet ikke i ordbogen, bliver det NaN … og NaN tæller ikke med, når vi lægger sammen."
   },
   {
     "objectID": "index.html#kør-den-på-korpusset",
@@ -291,7 +291,7 @@
     "href": "index.html#dækning",
     "title": "Lektion 7",
     "section": "Dækning",
-    "text": "Dækning\n\nOver halvdelen af dokumenterne rammer ingen af de 22 ord.\nFor dem er scoren ikke “neutral”. Den er fraværende … og de to ting ligner hinanden i en tabel.\n\n\nDet er ordbogsmodellers første og største problem, og det er usynligt, hvis man kun kigger på gennemsnittet.\n\nHvor mange ord skulle der til, før I ville stole på tallet?"
+    "text": "Dækning\n\nKun 90 af 900 debatter scorer nul. Med ~800 ord per debat er der mange chancer for at ramme.\nMen en høj dækning er ikke det samme som en god måling. Den kommer her af, at ét almindeligt ord rammer overalt.\n\n\n\nHvor mange ord skulle der til, før I ville stole på tallet? Og hvilke ord skulle ud af listen?"
   },
   {
     "objectID": "index.html#negation",
@@ -312,7 +312,7 @@
     "href": "index.html#hvad-måler-vi-egentlig",
     "title": "Lektion 7",
     "section": "Hvad måler vi egentlig?",
-    "text": "Hvad måler vi egentlig?\nHvis Nordfront scorer mere negativt end Dansk Samling, hvad har vi så vist?\n\nAt de skriver om andre emner?\nAt de skriver længere tekster?\nAt ordlisten passer bedre til den enes ordforråd end den andens?\nEller noget om holdninger?\n\n\nEt tal fra en ordbogsmodel er ikke et resultat. Det er et udgangspunkt for en diskussion, som skal føres i metodeafsnittet."
+    "text": "Hvad måler vi egentlig?\nHvis Retsvæsen scorer lavere end Beskæftigelse, hvad har vi så vist?\n\nAt debatterne handler om noget negativt, som vold og straf?\nAt ordførerne er mere kritiske?\nAt ordlisten passer bedre til det ene områdes ordforråd end det andets?\nEller at man siger godt sjældnere, når man taler om kriminalitet?\n\n\nEt tal fra en ordbogsmodel er ikke et resultat. Det er et udgangspunkt for en diskussion, som skal føres i metodeafsnittet."
   },
   {
     "objectID": "index.html#fra-ordliste-til-sprogmodel",
@@ -354,7 +354,7 @@
     "href": "index.html#hvorfor-det-betyder-noget-for-tallene",
     "title": "Lektion 7",
     "section": "Hvorfor det betyder noget for tallene",
-    "text": "Hvorfor det betyder noget for tallene\nnaive = [o for t in korpus[\"tekst\"] for o in str(t).lower().split()]\nlemmaer = [tok.lemma_.lower() for doc in nlp.pipe(korpus[\"tekst\"].astype(str))\n           for tok in doc if not tok.is_punct]\n\nprint(len(set(naive)) / len(naive))\nprint(len(set(lemmaer)) / len(lemmaer))\n\nBegge linjer beregner leksikalsk diversitet: antal unikke ord divideret med antal ord i alt. Samme mål, samme korpus, to forbehandlinger.\n\nDen naive version tæller god, God, god! og gode som fire forskellige ord.\nKør det. Hvor stor bliver forskellen … og hvilket af de to tal ville I skrive i en opgave?"
+    "text": "Hvorfor det betyder noget for tallene\n# naivt: split på mellemrum\nnaiv = korpus[\"tekst\"].str.lower().str.split().explode()\n\n# spaCy: grundformer, uden tegnsætning\nlemmaer = pd.Series([[t.lemma_.lower() for t in doc if not t.is_punct]\n                     for doc in nlp.pipe(korpus[\"tekst\"])]).explode()\n\nprint(naiv.nunique() / len(naiv))\nprint(lemmaer.nunique() / len(lemmaer))\n\nBegge linjer beregner leksikalsk diversitet: antal unikke ord divideret med antal ord i alt. Samme mål, samme korpus, to forbehandlinger.\n\nDen naive version tæller god, God, god! og gode som fire forskellige ord.\nKør det. Hvor stor bliver forskellen … og hvilket af de to tal ville I skrive i en opgave?"
   },
   {
     "objectID": "index.html#hvad-man-kan-bruge-det-til",
@@ -368,14 +368,14 @@
     "href": "index.html#øvelser",
     "title": "Lektion 7",
     "section": "Øvelser",
-    "text": "Øvelser\nDokumentation: spaCy 101 | asent"
+    "text": "Øvelser\n\nI øvelserne arbejder I med det fulde datasæt: alle 3.070 1. behandlinger.\n\nByg jeres egen temaordbog. Vælg et tema, som ikke er med i dag (sundhed, forsvar, EU, landbrug …). Validér den mod politikområderne, og følg den over tid.\nNormalisér. Sammenlign forekomster per 1.000 ord med rå optællinger. Ændrer det konklusionen?\nSentiment. Kør asent på et udsnit. Find de fem mest negative og fem mest positive debatter, og læs dem. Er det emnet eller holdningen, der drev scoren?\nAntal klynger. Kør k-means med 4, 6, 8 og 10 klynger. Hvornår begynder klyngerne at give mening … og hvornår holder de op?\nFjern navnene. Find talernes navne i teksten, og fjern dem før klyngeanalysen. Ændrer det klyngerne?\nPortfolio. Svar på Hunstons fire spørgsmål om det korpus, I vil bruge."
   },
   {
     "objectID": "index.html#litteratur",
     "href": "index.html#litteratur",
-    "title": "Lektion 6",
+    "title": "Lektion 7",
     "section": "Litteratur",
-    "text": "Litteratur\nBonikowski, B. & Nelson, L. K. (2022). From Ends to Means: The Promise of Computational Text Analysis for Theoretically Driven Sociological Research. Sociological Methods & Research, 51(4), 1469-1483.\nMacanovic, A. (2022). Text mining for social science — The state and the future of computational text analysis in sociology. Social Science Research, 108, 102784.\nHunston, S. (2002). The corpus as object: Design and purpose. I: Corpora in Applied Linguistics, s. 25-37. Cambridge University Press.\n\nSupplerende: Thelwall, M. (2023). Sentiment Analysis. I: The SAGE Handbook of Social Media Research Methods.\nDokumentation: spaCy 101 · asent"
+    "text": "Litteratur\nBonikowski, B. & Nelson, L. K. (2022). From Ends to Means: The Promise of Computational Text Analysis for Theoretically Driven Sociological Research. Sociological Methods & Research, 51(4), 1469-1483.\nMacanovic, A. (2022). Text mining for social science — The state and the future of computational text analysis in sociology. Social Science Research, 108, 102784.\nHunston, S. (2002). The corpus as object: Design and purpose. I: Corpora in Applied Linguistics, s. 25-37. Cambridge University Press.\n\nSupplerende: Thelwall, M. (2023). Sentiment Analysis. I: The SAGE Handbook of Social Media Research Methods.\nDokumentation: spaCy 101 | asent | scikit-learn: PCA | scikit-learn: k-means"
   },
   {
     "objectID": "index.html#asent-sentimentanalyse",
@@ -410,7 +410,7 @@
     "href": "index.html#tegn-det",
     "title": "Lektion 7",
     "section": "Tegn det",
-    "text": "Tegn det"
+    "text": "Tegn det\n\n\n\n\n\n\n\n\n\n.melt() fra lektion 3: fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have."
   },
   {
     "objectID": "index.html#dækningen-er-ikke-den-samme",
@@ -431,7 +431,7 @@
     "href": "index.html#hvad-kan-vi-så-konkludere",
     "title": "Lektion 7",
     "section": "Hvad kan vi så konkludere?",
-    "text": "Hvad kan vi så konkludere?\n\nAt to kilder scorer negativt og fire positivt … men forskellene er små, og halvdelen af materialet bidrager slet ikke.\nAt rangordenen afhænger af, om vi normaliserer.\nAt dækningen varierer med en faktor to på tværs af kilder, og at den følger dokumentlængden.\n\n\n\nIngen af de tre er et resultat om højrefløjsmedier. De er alle tre resultater om ordbogen."
+    "text": "Hvad kan vi så konkludere?\n\nAt tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er ydre validitet: resultatet passer med noget, vi ved fra andre kilder.\nAt ordbøgerne måler opmærksomhed, ikke holdning. At klima fylder mere i 2021, siger intet om, hvem der var for eller imod.\nAt udsnittet på 900 debatter giver et mere støjfyldt billede år for år end det fulde materiale. Trends skal have data nok bag sig.\n\n\n\nOg at vi ikke kan vide, om de ord, vi ikke tog med, ville have ændret billedet."
   },
   {
     "objectID": "index.html#hvad-den-kan-som-vores-egen-ikke-kunne",
@@ -452,28 +452,28 @@
     "href": "index.html#kør-den-på-korpusset-1",
     "title": "Lektion 7",
     "section": "Kør den på korpusset",
-    "text": "Kør den på korpusset\nkorpus[\"tekst\"] = korpus[\"tekst\"].fillna(\"\").astype(str)\n\nkorpus[\"asent\"] = [doc._.polarity.compound\n                   for doc in nlp.pipe(korpus[\"tekst\"], batch_size=20)]\n\nprint(korpus.groupby(\"kilde\")[\"asent\"].mean().round(3))\n\nnlp.pipe() kører mange tekster igennem ad gangen. Tomme felter skal fjernes først … pipelinen vil ikke have NaN.\n\n\n240 dokumenter tager cirka 7 sekunder. Hele korpusset tager nogle minutter. Kør det på et udsnit først."
+    "text": "Kør den på korpusset\nkorpus[\"sentiment\"] = [doc._.polarity.compound\n                       for doc in nlp.pipe(korpus[\"tekst\"], batch_size=20)]\n\nprint(korpus[\"sentiment\"].describe())\nprint(korpus.groupby(\"omraade\")[\"sentiment\"].mean().sort_values())\n\nnlp.pipe() kører mange tekster igennem ad gangen. Resultatet lægges direkte tilbage som en kolonne i tabellen.\n\n\n900 debatter á 5.000 tegn tager cirka 50 sekunder. Kør det på et udsnit først."
   },
   {
     "objectID": "index.html#to-modeller-samme-korpus",
     "href": "index.html#to-modeller-samme-korpus",
     "title": "Lektion 7",
     "section": "To modeller, samme korpus",
-    "text": "To modeller, samme korpus\n\n\n\n\nEgen ordbog\nasent\n\n\n\n\nOrd i modellen\n22\nflere tusind\n\n\nDokumenter uden score\n109 af 240\n8 af 240\n\n\nHåndterer negation\nnej\nja\n\n\nForskel mellem kilderne\n−1,1 til +3,0\n−0,12 til −0,02\n\n\n\n\nDækningen går fra 55 % til 97 %. Det er den store gevinst.\nMen forskellene mellem kilderne bliver mindre, ikke større. Med den bedre model ligner de seks medier hinanden."
+    "text": "To modeller, samme korpus\n\n\n\n\nEgen ordbog\nasent\n\n\n\n\nOrd i modellen\n22\nflere tusind\n\n\nDebatter uden score\n90 af 900\n0 af 900\n\n\nHåndterer negation\nnej\nja\n\n\nLavest scorende område\nRetsvæsen\nRetsvæsen\n\n\nHøjest scorende område\nBeskæftigelse\nUddannelse\n\n\n\n\nBegge modeller er enige om, at Retsvæsen ligger lavest. Men de er uenige om rækkefølgen af resten."
   },
   {
     "objectID": "index.html#og-de-er-uenige",
     "href": "index.html#og-de-er-uenige",
     "title": "Lektion 7",
     "section": "Og de er uenige",
-    "text": "Og de er uenige\nDe to modeller er enige om fortegnet i 66 % af dokumenterne. Korrelationen er 0,31.\nEn tredjedel af materialet får altså modsat fortegn, alt efter hvilken model man vælger.\n\n\nHvilken af dem har ret?\n\nDet kan man ikke afgøre ud fra tallene. Det kræver, at nogen læser et udsnit af teksterne og koder dem i hånden … og at man så måler modellerne op mod den kodning.\nDet er den validering, Bonikowski & Nelson efterlyser. Og den er ikke lavet her."
+    "text": "Og de er uenige\nDe to modeller er enige om fortegnet i 85 % af debatterne. Korrelationen mellem scorerne er 0,42.\nOg de to rangordener af politikområder har en rangkorrelation på 0,46.\n\n\nHvilken af dem har ret?\n\nDet kan man ikke afgøre ud fra tallene. Det kræver, at nogen læser et udsnit af teksterne og koder dem i hånden … og at man så måler modellerne op mod den kodning.\nDet er den validering, Bonikowski & Nelson efterlyser. Og den er ikke lavet her."
   },
   {
     "objectID": "index.html#minimumsvalidering",
     "href": "index.html#minimumsvalidering",
     "title": "Lektion 7",
     "section": "Minimumsvalidering",
-    "text": "Minimumsvalidering\nstikproeve = korpus.sample(20, random_state=42)\n\nprint(stikproeve[[\"kilde\", \"asent\"]].to_string())\n\nTyve dokumenter. Læs dem, og skriv for hvert enkelt, om I er enige med modellen.\nEr I uenige i under fem, kan tallet bruges med forbehold. Er I uenige i over ti, måler modellen noget andet, end I tror.\nDet tager tyve minutter, og det er forskellen på en metodesektion, der holder, og en der ikke gør."
+    "text": "Minimumsvalidering\nstikproeve = korpus.sample(20, random_state=42)\n\nprint(stikproeve[[\"aar\", \"omraade\", \"lovnr\", \"sentiment\"]].to_string())\n\nTyve debatter. Læs dem, og skriv for hvert enkelt, om I er enige med modellen.\nEr I uenige i under fem, kan tallet bruges med forbehold. Er I uenige i over ti, måler modellen noget andet, end I tror.\nDet tager tyve minutter, og det er forskellen på en metodesektion, der holder, og en der ikke gør."
   },
   {
     "objectID": "index.html#fremgang",
@@ -500,7 +500,238 @@
     "objectID": "index.html#en-komplet-preprocessing-i-spacy",
     "href": "index.html#en-komplet-preprocessing-i-spacy",
     "title": "Lektion 7",
-    "section": "En komplet preprocessing i SpaCy",
-    "text": "En komplet preprocessing i SpaCy\n[TODO]"
+    "section": "En komplet preprocessing i spaCy",
+    "text": "En komplet preprocessing i spaCy\nHele kæden fra lektion 6, men hvor en model træffer beslutningerne i stedet for vores regler:\nnlp = spacy.load(\"da_core_news_sm\", disable=[\"ner\", \"parser\"])\n\nrenset = []\nfor doc in nlp.pipe(korpus[\"tekst\"], batch_size=20):\n    renset.append([t.lemma_.lower() for t in doc\n                   if not t.is_stop              # stopord\n                   and not t.is_punct            # tegnsætning\n                   and not t.like_num            # tal\n                   and t.pos_ in (\"NOUN\", \"ADJ\", \"PROPN\")])   # kun indholdsord\n\nkorpus[\"lemmaer\"] = renset\nlemmaer = korpus[\"lemmaer\"].explode()\n\n\ndisable=[\"ner\", \"parser\"] slår det fra, vi ikke skal bruge. Det sparer tid og hukommelse\nDe fire betingelser er Denny & Spirlings P, N og W … plus et filter på ordklasse, som ingen af de syv operationer dækker\n.explode() giver samme lange format som i lektion 6: én række per ord, indekset husker debatten"
+  },
+  {
+    "objectID": "index.html#fra-referat-til-korpus",
+    "href": "index.html#fra-referat-til-korpus",
+    "title": "Lektion 7",
+    "section": "Fra referat til korpus",
+    "text": "Fra referat til korpus\nDet rå materiale er ikke et korpus. Det bliver det, fordi vi træffer valg.\n\n\n\nTrin\nAntal\n\n\n\n\nMøder i Folketinget\n1.711\n\n\nDagsordenspunkter\n27.106\n\n\n… heraf 1. behandling af lovforslag\n3.143\n\n\n… uden punkter, der er udgået\n3.070\n\n\n\n\nHvert trin er en beslutning om, hvad der tæller som “en politisk debat”. Ingen af dem stod i data."
+  },
+  {
+    "objectID": "index.html#ikke-alle-punkter-er-debatter",
+    "href": "index.html#ikke-alle-punkter-er-debatter",
+    "title": "Lektion 7",
+    "section": "Ikke alle punkter er debatter",
+    "text": "Ikke alle punkter er debatter\n\n\n\n\n\n\n\n\n\nI det fulde materiale er 2. og 3. behandlinger typisk 800 tegn lange: en afstemning og et par formalia. 1. behandlingerne er typisk 29.000 tegn.\nOg 73 af 1. behandlingerne var under 2.000 tegn. 31 af dem bestod af én sætning:\n\n(Som tidligere meddelt er punktet udgået af dagsordenen).\n\nHavde vi ikke fjernet dem, ville de have endt som ekstreme punkter i en klyngeanalyse. Vi kommer tilbage til det."
+  },
+  {
+    "objectID": "index.html#hvad-er-en-tekst-her",
+    "href": "index.html#hvad-er-en-tekst-her",
+    "title": "Lektion 7",
+    "section": "Hvad er “en tekst” her?",
+    "text": "Hvad er “en tekst” her?\n\n\n\n\n\n\n\n\n\n\nÉn tekst er hele debatten om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar\nDer står ikke, hvem der siger hvad. Talerne introduceres kun af formanden i løbende tekst\n\nVi kan altså sammenligne lovforslag … men ikke partier eller politikere. Det er en designbegrænsning, ikke en detalje."
+  },
+  {
+    "objectID": "index.html#vores-annotering-politikområde",
+    "href": "index.html#vores-annotering-politikområde",
+    "title": "Lektion 7",
+    "section": "Vores annotering: politikområde",
+    "text": "Vores annotering: politikområde\nDatasættet har ingen emnevariabel. Vi har lavet den selv.\n\n\n\n\n\n\n\n\n\nHvert lovforslag er fremsat af en minister. Vi har samlet ministertitlerne i seks politikområder og et “Andet”.\nklima-, energi- og forsyningsministeren og miljøministeren blev begge til Miljø og klima. Ministerierne skifter navn med hver regering. Det gør vores kategorier ikke."
+  },
+  {
+    "objectID": "index.html#hvad-fylder-i-scoren",
+    "href": "index.html#hvad-fylder-i-scoren",
+    "title": "Lektion 7",
+    "section": "Hvad fylder i scoren?",
+    "text": "Hvad fylder i scoren?\n\n\n\n\n\n\n\n\n\nDet suverænt hyppigste ord er godt: 1.381 gange. Mere end dobbelt så ofte som det næste.\nMen i Folketinget betyder godt sjældent, at noget er godt. Det er “det er godt, at ministeren …” og “godt, så går vi videre”.\nScoren er i vid udstrækning en optælling af ét høflighedsord."
+  },
+  {
+    "objectID": "index.html#spørgsmålet",
+    "href": "index.html#spørgsmålet",
+    "title": "Lektion 7",
+    "section": "Spørgsmålet",
+    "text": "Spørgsmålet\n\nHvor meget fylder klima, udlændinge og økonomi i Folketingets debatter … og ændrer det sig over tid?\n\n\nNu bruger vi ordbøger til det, de er bedst til: at måle et tema, ikke en stemning.\n\nTre korte temaordbøger, som vi selv definerer\nEt mål: forekomster per 1.000 ord\nOg så validering, før vi tolker noget"
+  },
+  {
+    "objectID": "index.html#tre-temaordbøger",
+    "href": "index.html#tre-temaordbøger",
+    "title": "Lektion 7",
+    "section": "Tre temaordbøger",
+    "text": "Tre temaordbøger\n\n\n\n\n\n\n\n\n\n.isin() giver True for hvert ord, der står på listen. Gennemsnittet af en boolean er en andel, ligesom i lektion 4."
+  },
+  {
+    "objectID": "index.html#validering-først-måler-ordbøgerne-det-vi-tror",
+    "href": "index.html#validering-først-måler-ordbøgerne-det-vi-tror",
+    "title": "Lektion 7",
+    "section": "Validering først: måler ordbøgerne det, vi tror?",
+    "text": "Validering først: måler ordbøgerne det, vi tror?\n\n\n\n\n\n\n\n\n\n\nKlima-ordbogen rammer 2,48 per 1.000 ord i Miljø og klima … og 0,03 i Beskæftigelse.\nUdlændinge-ordbogen rammer 7,40 i Udlændinge. Ingen andre områder kommer over 0,61.\nØkonomi-ordbogen er spredt ud over alle områder. Man taler om økonomi overalt.\n\n\n\nDet er en test af konstruktvaliditet: vi har en uafhængig variabel (ministeriet), som ordbogen burde hænge sammen med. Klima og udlændinge består testen. Økonomi måler noget mere diffust."
+  },
+  {
+    "objectID": "index.html#og-dækningen",
+    "href": "index.html#og-dækningen",
+    "title": "Lektion 7",
+    "section": "Og dækningen",
+    "text": "Og dækningen\n\n\n\n\n\n\n\n\n\nOver halvdelen af debatterne nævner ingen af ordene. Det er ikke en fejl: de handler om noget fjerde.\nMen det betyder, at “0 per 1.000 ord” hverken er lav interesse eller neutralitet. Det er et andet emne."
+  },
+  {
+    "objectID": "index.html#over-tid",
+    "href": "index.html#over-tid",
+    "title": "Lektion 7",
+    "section": "Over tid",
+    "text": "Over tid"
+  },
+  {
+    "objectID": "index.html#tre-kriser-i-ét-datasæt",
+    "href": "index.html#tre-kriser-i-ét-datasæt",
+    "title": "Lektion 7",
+    "section": "Tre kriser i ét datasæt",
+    "text": "Tre kriser i ét datasæt\nDet fulde materiale, 3.070 debatter:\n\n\n\nÅr\nKlima\nUdlændinge\nØkonomi\n\n\n\n\n2009\n0,90\n0,40\n0,96\n\n\n2010\n0,46\n0,29\n1,15\n\n\n2015\n0,36\n0,82\n0,61\n\n\n2017\n0,32\n0,88\n0,46\n\n\n2020\n1,05\n0,52\n0,59\n\n\n2021\n1,54\n0,37\n0,40\n\n\n\n\n\nØkonomi topper i 2009-2011: finanskrisen\nUdlændinge topper i 2015-2017: flygtningekrisen\nKlima har en første top i 2009 (COP15 i København) og stiger derefter kraftigt fra 2019: klimavalget og klimaloven"
+  },
+  {
+    "objectID": "index.html#og-så-er-vi-tilbage-i-pandas",
+    "href": "index.html#og-så-er-vi-tilbage-i-pandas",
+    "title": "Lektion 7",
+    "section": "Og så er vi tilbage i pandas",
+    "text": "Og så er vi tilbage i pandas\nprint(lemmaer.value_counts().head(20))\n\npr_omraade = (lemmaer.to_frame(\"lemma\")\n              .join(korpus[\"omraade\"])\n              .groupby(\"omraade\")[\"lemma\"]\n              .value_counts()\n              .groupby(level=0).head(5))\nprint(pr_omraade)\n\nEfter spaCy er det præcis de samme greb som før: value_counts(), groupby(), join().\nDet er pointen: sprogmodellen erstatter reglerne i forbehandlingen. Den erstatter ikke analysen."
+  },
+  {
+    "objectID": "index.html#spørgsmålet-1",
+    "href": "index.html#spørgsmålet-1",
+    "title": "Lektion 7",
+    "section": "Spørgsmålet",
+    "text": "Spørgsmålet\n\nEr der forskel på tonen, når Folketinget debatterer forskellige politikområder?\n\n\n\ncompound går fra −1 (meget negativ) til +1 (meget positiv)\nVi har kørt asent på alle 900 debatter i udsnittet\nTallene herunder er de faktiske resultater"
+  },
+  {
+    "objectID": "index.html#folketinget-er-høfligt",
+    "href": "index.html#folketinget-er-høfligt",
+    "title": "Lektion 7",
+    "section": "Folketinget er høfligt",
+    "text": "Folketinget er høfligt\n\n\n\nGennemsnitlig compound\n+0,148\n\n\nAndel negative debatter\n5,9 %\n\n\nDebatter med score præcis 0\n0\n\n\n\n\nOver 94 % af debatterne er positive. Det siger mindre om politik end om genren.\nEn 1. behandling er fuld af “tak for det”, “jeg vil gerne kvittere for” og “det er godt, at vi er enige om”. Parlamentarisk sprog har faste høflighedsformler, og en sentimentmodel læser dem som positiv tone."
+  },
+  {
+    "objectID": "index.html#per-politikområde",
+    "href": "index.html#per-politikområde",
+    "title": "Lektion 7",
+    "section": "Per politikområde",
+    "text": "Per politikområde\n\n\n\nOmråde\ncompound\n\n\n\n\nRetsvæsen\n0,080\n\n\nSkat\n0,138\n\n\nBeskæftigelse\n0,139\n\n\nUdlændinge\n0,154\n\n\nMiljø og klima\n0,163\n\n\nUddannelse\n0,193\n\n\n\n\nRetsvæsen er lavest, Uddannelse højest. Det giver intuitivt mening: straf og kriminalitet mod unge og uddannelse.\nMen se på størrelsen af forskellene, før I tolker på dem."
+  },
+  {
+    "objectID": "index.html#forskellene-er-små",
+    "href": "index.html#forskellene-er-små",
+    "title": "Lektion 7",
+    "section": "Forskellene er små",
+    "text": "Forskellene er små\n\nSpredningen mellem områdernes gennemsnit: standardafvigelse 0,035\nSpredningen inden for hvert område: standardafvigelse 0,091\n\n\nDebatterne inden for ét område varierer mere end to og en halv gang så meget som forskellen mellem områderne.\nRetsvæsen og Uddannelse skiller sig ud. De fire i midten er reelt ikke til at skelne fra hinanden."
+  },
+  {
+    "objectID": "index.html#emne-eller-holdning",
+    "href": "index.html#emne-eller-holdning",
+    "title": "Lektion 7",
+    "section": "Emne eller holdning?",
+    "text": "Emne eller holdning?\nDe mest negative debatter i udsnittet:\n\n\n\nÅr\nLovforslag\ncompound\n\n\n\n\n2008\nStrafskærpelse for seksuelt misbrug af børn\n−0,33\n\n\n2014\nNyt personnummer i særlige tilfælde\n−0,20\n\n\n2008\nMiljøbeskyttelse\n−0,19\n\n\n2008\nStraf for ulovlig tvang ved indgåelse af ægteskab\n−0,18\n\n\n\n\nDen mest negative debat er om at straffe seksuelt misbrug af børn hårdere. Et forslag, som stort set alle partier støtter.\nModellen måler ikke, om talerne er imod noget. Den måler, at de taler om noget negativt: misbrug, vold, tvang.\n\nSentiment er ikke holdning. Det er ofte bare emnet, der smitter af."
+  },
+  {
+    "objectID": "index.html#spørgsmålet-2",
+    "href": "index.html#spørgsmålet-2",
+    "title": "Lektion 7",
+    "section": "Spørgsmålet",
+    "text": "Spørgsmålet\n\nKan en algoritme finde politikområderne i teksten … uden at få at vide, hvad de er?\n\n\nVi har en facitliste: ministeriet bag hvert lovforslag. Det har man sjældent. Her kan vi bruge den til at se, hvad de usuperviserede metoder faktisk finder.\n\nPCA: dimensionalitetsreduktion. Fra tusindvis af ord til få akser, vi kan se på\nk-means: klyngeanalyse. Del debatterne i grupper, der ligner hinanden\n\n\n\nVi bruger kun de seks navngivne områder. “Andet” er en restkategori uden et fælles emne at finde."
+  },
+  {
+    "objectID": "index.html#fra-tekst-til-tabel",
+    "href": "index.html#fra-tekst-til-tabel",
+    "title": "Lektion 7",
+    "section": "Fra tekst til tabel",
+    "text": "Fra tekst til tabel\n\n\n\n\n\n\n\n\n\nPræcis kæden fra lektion 6. Stopordslisten har fået nogle ord, der er særlige for Folketinget: ordfører, lovforslag, værsgo, tak."
+  },
+  {
+    "objectID": "index.html#document-term-matrix",
+    "href": "index.html#document-term-matrix",
+    "title": "Lektion 7",
+    "section": "Document-term matrix",
+    "text": "Document-term matrix\n\n\n\n\n\n\n\n\n\nDen øvre grænse er ny: ord, der står i over halvdelen af debatterne, skiller dem ikke ad. Det er Denny & Spirlings I, bare i begge ender."
+  },
+  {
+    "objectID": "index.html#tf-idf-vægt-ordene",
+    "href": "index.html#tf-idf-vægt-ordene",
+    "title": "Lektion 7",
+    "section": "TF-IDF: vægt ordene",
+    "text": "TF-IDF: vægt ordene\nEn rå optælling giver hyppige ord stor vægt. TF-IDF vægter dem op, hvis de er hyppige her og sjældne andre steder.\n\n\n\n\n\n\n\n\n\nTre linjer pandas-regning. Den sidste linje er vigtig: uden normaliseringen ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse."
+  },
+  {
+    "objectID": "index.html#pca-fra-tusindvis-af-dimensioner-til-to",
+    "href": "index.html#pca-fra-tusindvis-af-dimensioner-til-to",
+    "title": "Lektion 7",
+    "section": "PCA: fra tusindvis af dimensioner til to",
+    "text": "PCA: fra tusindvis af dimensioner til to\n\n\n\n\n\n\n\n\n\nPCA finder de retninger i rummet, hvor debatterne er mest forskellige, og projicerer alle punkter ned på dem.\nfit_transform() er den eneste linje, der ikke er pandas. Resten er at lægge resultatet tilbage i tabellen."
+  },
+  {
+    "objectID": "index.html#kortet",
+    "href": "index.html#kortet",
+    "title": "Lektion 7",
+    "section": "Kortet",
+    "text": "Kortet\n\n\n\n\n\n\n\n\n\nHvert punkt er en debat. Farven er ministeriet … som PCA ikke har set."
+  },
+  {
+    "objectID": "index.html#hvad-betyder-akserne",
+    "href": "index.html#hvad-betyder-akserne",
+    "title": "Lektion 7",
+    "section": "Hvad betyder akserne?",
+    "text": "Hvad betyder akserne?\n\n\n\n\n\n\n\n\n\n\nPC1 går fra unge, uddannelse, elever (+) til virksomheder, skat, afgift, selskaber (−). Mennesker over for markeder.\nPC2 går fra Grønland, udlændinge, statsborgerskab, kriminalitet, politiet (+) til virksomheder, kommunerne, grøn omstilling (−). Kontrol og ret over for økonomi og forvaltning.\nUddannelse ligger længst ude på PC1. Udlændinge og Retsvæsen ligger længst oppe på PC2."
+  },
+  {
+    "objectID": "index.html#hvor-meget-er-med-på-kortet",
+    "href": "index.html#hvor-meget-er-med-på-kortet",
+    "title": "Lektion 7",
+    "section": "Hvor meget er med på kortet?",
+    "text": "Hvor meget er med på kortet?\n\n\n\nKomponenter\nForklaret varians\n\n\n\n\n2\n1,9 %\n\n\n10\n7,5 %\n\n\n50\n23,8 %\n\n\n\n\nKortet viser under 2 % af variationen i data. Det er ikke en fejl. Tekst er højdimensionelt: hver debat bruger sit eget lille udsnit af tusindvis af ord.\nKortet er en skygge af data, ikke data. Det er godt til at få øje på mønstre, og dårligt til at konkludere på."
+  },
+  {
+    "objectID": "index.html#k-means-find-grupperne",
+    "href": "index.html#k-means-find-grupperne",
+    "title": "Lektion 7",
+    "section": "k-means: find grupperne",
+    "text": "k-means: find grupperne\n\n\n\n\n\n\n\n\n\nn_clusters=6 er vores valg: vi ved, der er seks områder. I en rigtig analyse ved man det ikke.\nn_init=10 kører algoritmen fra ti tilfældige startpunkter og beholder den bedste."
+  },
+  {
+    "objectID": "index.html#klynger-mod-politikområder",
+    "href": "index.html#klynger-mod-politikområder",
+    "title": "Lektion 7",
+    "section": "Klynger mod politikområder",
+    "text": "Klynger mod politikområder\n\nSkat: 82 af 104 i én klynge\nUddannelse: 69 af 83 i én klynge\nBeskæftigelse: 59 af 77 i én klynge\nMiljø og klima: 66 af 114 i én klynge … men den deler den med 27 retsvæsensdebatter\nUdlændinge: 32 af 41 i én klynge … sammen med 28 retsvæsensdebatter\nRetsvæsen: fordelt på tre klynger\n\n\nSamlet havner 66 % af debatterne i en klynge, hvor deres eget område er det største. Uden at algoritmen har fået at vide, at områderne findes."
+  },
+  {
+    "objectID": "index.html#hvad-handler-klyngerne-om",
+    "href": "index.html#hvad-handler-klyngerne-om",
+    "title": "Lektion 7",
+    "section": "Hvad handler klyngerne om?",
+    "text": "Hvad handler klyngerne om?\n\n\n\n\n\n\n\n\n\nEt klyngecenter er gennemsnittet af klyngens debatter. De ord, der vægter mest i centret, beskriver klyngen."
+  },
+  {
+    "objectID": "index.html#hvad-fandt-algoritmen",
+    "href": "index.html#hvad-fandt-algoritmen",
+    "title": "Lektion 7",
+    "section": "Hvad fandt algoritmen?",
+    "text": "Hvad fandt algoritmen?\nDen genfandt fire områder. Skat, uddannelse, beskæftigelse og miljø har hver deres ordforråd.\nDen delte Retsvæsen i tre. Kriminalitet og straf for sig. Udlændinge og kriminalitet for sig. Og Grønland og EU-direktiver for sig, sammen med en stor del af miljødebatterne. Justitsministeriet har et meget blandet ansvarsområde, og teksten viser det.\nDen lagde udlændinge og kriminalitet sammen. Ordforrådet i de to typer debat overlapper: opholdstilladelse, udvisning, kriminalitet, politiet.\n\nDet er det, klyngeanalyse er god til: at vise, hvor vores kategorier ikke passer med teksten."
+  },
+  {
+    "objectID": "index.html#en-fejlkilde-i-toppen",
+    "href": "index.html#en-fejlkilde-i-toppen",
+    "title": "Lektion 7",
+    "section": "En fejlkilde i toppen",
+    "text": "En fejlkilde i toppen\nSe efter i ordlisterne: nonbo, karsten, bonnesen, andersen.\nDet er navne. Formanden introducerer hver taler: “Hr. Karsten Nonbo, Venstre. Værsgo.”\nOg ordførerne er faste for hvert område. Karsten Nonbo (V) er ordfører i 14 af udsnittets retsvæsensdebatter. Erling Bonnesen (V) optræder i 22 miljødebatter. Klyngen om kriminalitet kender altså delvist retsvæsenet, fordi den kender ordføreren.\n\n\nAlgoritmen klynger delvist på hvem der taler, ikke kun på hvad der bliver sagt.\n\nDet kan man rette ved at fjerne navne i forbehandlingen. Men man skal først opdage det, og det gør man kun ved at læse ordlisterne."
+  },
+  {
+    "objectID": "index.html#k-means-afhænger-af-startpunktet",
+    "href": "index.html#k-means-afhænger-af-startpunktet",
+    "title": "Lektion 7",
+    "section": "k-means afhænger af startpunktet",
+    "text": "k-means afhænger af startpunktet\n\n\n\n\n\n\n\n\n\nSamme data, samme antal klynger, forskellige tilfældige startpunkter: renheden går fra 0,55 til 0,73.\nVi har vist resultatet for startpunkt 0. Et andet startpunkt ville have givet andre klynger … og en anden fortælling. Den variation hører med i metodeafsnittet."
+  },
+  {
+    "objectID": "index.html#pca-før-k-means",
+    "href": "index.html#pca-før-k-means",
+    "title": "Lektion 7",
+    "section": "PCA før k-means",
+    "text": "PCA før k-means\nEt almindeligt greb: reducér først med PCA, og kør så k-means på de få komponenter.\n\n\n\n\n\n\n\n\n\n\n\n\nInput til k-means\nGns. renhed\nSpænd over 8 startpunkter\n\n\n\n\nAlle 4.042 ord\n0,63\n0,55-0,73\n\n\n50 komponenter\n0,60\n0,50-0,79\n\n\n10 komponenter\n0,62\n0,53-0,75\n\n\n2 komponenter\n0,53\n0,51-0,54\n\n\n\n\nMed to komponenter bliver klyngerne næsten ens hver gang … men dårligere. Det, PCA smider væk, er ikke kun støj.\nMed 10 og 50 komponenter er klyngerne lige så gode som uden PCA … og lige så ustabile.\nDimensionalitetsreduktion er en afvejning mellem stabilitet og information, ikke en gratis forbedring."
+  },
+  {
+    "objectID": "index.html#hvad-kan-vi-så-konkludere-1",
+    "href": "index.html#hvad-kan-vi-så-konkludere-1",
+    "title": "Lektion 7",
+    "section": "Hvad kan vi så konkludere?",
+    "text": "Hvad kan vi så konkludere?\n\nAt teksten i Folketingets debatter bærer nok information til at genfinde de fleste politikområder, uden at algoritmen kender dem.\nAt PCA’s kort er letlæseligt men fattigt: 2 % af variationen, fortolket gennem de ord, der vægter mest.\nAt k-means finder strukturer, vores kategorier ikke har: Justitsministeriets blandede portefølje, overlappet mellem udlændinge og kriminalitet.\nAt resultatet afhænger af startpunktet, af antallet af klynger og af forbehandlingen … herunder om navnene er fjernet.\n\n\n\nEt topic model finder altid emner. Også i støj. Det samme gælder k-means. Det er jer, der afgør, om de betyder noget."
   }
 ]
