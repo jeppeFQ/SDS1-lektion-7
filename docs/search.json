@@ -109,14 +109,14 @@
     "href": "index.html#dagens-data",
     "title": "Lektion 7",
     "section": "Dagens data",
-    "text": "Dagens data\nReferater af møderne i Folketinget fra oktober 2007 til november 2022.\n\n1.711 møder, hentet fra ft.dk i december 2022\nHvert møde er delt op i dagsordenspunkter, og hvert punkt har hele debatten som én tekst\nVi bruger 1. behandlingen af lovforslag: dér foregår den politiske debat om et forslag\n\n\n3.070 debatter og cirka 22 millioner ord. Ét datasæt, én kilde, samme format hele vejen."
+    "text": "Dagens data\nReferater af møderne i Folketinget fra oktober 2007 til november 2022.\n\n1.711 møder, hentet fra ft.dk i december 2022\nHvert møde er delt op i dagsordenspunkter, og hvert punkt har hele debatten som én tekst\nVi bruger 1. behandlingen af lovforslag, der foregår den politiske debat om et forslag\n\n\n3.070 debatter og cirka 22 millioner ord."
   },
   {
     "objectID": "index.html#korpusset",
     "href": "index.html#korpusset",
     "title": "Lektion 7",
     "section": "Korpusset",
-    "text": "Korpusset\n\n\n\n\n\n\n\n\n\nEt tilfældigt udsnit på 900 debatter. Hver tekst er afkortet til de første 5.000 tegn.\n\n\nAfkortningen gør, at hver debat vejer lige meget. Det fjerner det længde-problem, vi har set før: lange tekster har flere chancer for at ramme en ordbog."
+    "text": "Korpusset\n\n\n\n\n\n\n\n\n\nEt tilfældigt udsnit på 900 debatter. Hver tekst er afkortet til de første 5.000 tegn."
   },
   {
     "objectID": "index.html#tekst",
@@ -137,7 +137,7 @@
     "href": "index.html#det-i-allerede-kan",
     "title": "Lektion 7",
     "section": "Det I allerede kan",
-    "text": "Det I allerede kan\nI lektion 2, 3 og 6 byggede I små tekstanalyse:\n\nGør teksten til små bogstaver\nFjern tegnsætning\nDel op i ord\nTæl ordene i en dictionary\nFind de hyppigste\n\n\nDet er en bag-of-words-model. Rækkefølgen smides væk, og tilbage står en optælling.\nDet er fundamentet under det meste af i dag."
+    "text": "Det I allerede kan\n\nGør teksten til små bogstaver\nFjern tegnsætning\nDel op i ord\nTæl ordene i en dictionary\nFind de hyppigste\n\n\nDet er en bag-of-words-model. Rækkefølgen smides væk, og tilbage står en optælling. Det er fundamentet under det meste af i dag."
   },
   {
     "objectID": "index.html#og-hvad-den-ikke-kan",
@@ -508,7 +508,7 @@
     "href": "index.html#fra-referat-til-korpus",
     "title": "Lektion 7",
     "section": "Fra referat til korpus",
-    "text": "Fra referat til korpus\nDet rå materiale er ikke et korpus. Det bliver det, fordi vi træffer valg.\n\n\n\nTrin\nAntal\n\n\n\n\nMøder i Folketinget\n1.711\n\n\nDagsordenspunkter\n27.106\n\n\n… heraf 1. behandling af lovforslag\n3.143\n\n\n… uden punkter, der er udgået\n3.070\n\n\n\n\nHvert trin er en beslutning om, hvad der tæller som “en politisk debat”. Ingen af dem stod i data."
+    "text": "Fra referat til korpus\nDet rå materiale er ikke et korpus. Det bliver det, fordi vi træffer valg.\n\n\n\nTrin\nAntal\n\n\n\n\nMøder i Folketinget\n1.711\n\n\nDagsordenspunkter\n27.106\n\n\n… heraf 1. behandling af lovforslag\n3.143\n\n\n… uden punkter, der er udgået\n3.070\n\n\n\n\nHvert trin er en beslutning om, hvad der tæller som “en politisk debat”."
   },
   {
     "objectID": "index.html#ikke-alle-punkter-er-debatter",

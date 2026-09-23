@@ -12,7 +12,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Jeppe Fjeldgaard Qvist">
-  <meta name="dcterms.date" content="2026-09-22">
+  <meta name="dcterms.date" content="2026-09-23">
   <title>Interactive Python Slides – Lektion 7</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -211,7 +211,7 @@ Jeppe Fjeldgaard Qvist
 </div>
 </div>
 
-  <p class="date">2026-09-22</p>
+  <p class="date">2026-09-23</p>
 </section>
 <section class="slide level2">
 
@@ -244,10 +244,10 @@ mkdir -p .qmd-pause && mv *.qmd .qmd-pause/ && \
 <ul>
 <li><p><strong>1.711 møder</strong>, hentet fra ft.dk i december 2022</p></li>
 <li><p>Hvert møde er delt op i <strong>dagsordenspunkter</strong>, og hvert punkt har hele debatten som én tekst</p></li>
-<li><p>Vi bruger <strong>1. behandlingen af lovforslag</strong>: dér foregår den politiske debat om et forslag</p></li>
+<li><p>Vi bruger <strong>1. behandlingen af lovforslag</strong>, der foregår den politiske debat om et forslag</p></li>
 </ul>
 <p><br></p>
-<p><strong>3.070 debatter</strong> og cirka <strong>22 millioner ord</strong>. Ét datasæt, én kilde, samme format hele vejen.</p>
+<p><strong>3.070 debatter</strong> og cirka <strong>22 millioner ord</strong>.</p>
 </section>
 <section id="korpusset" class="slide level2">
 <h2>Korpusset</h2>
@@ -263,10 +263,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1w
 </div>
 <p><br></p>
 <p>Et tilfældigt udsnit på <strong>900 debatter</strong>. Hver tekst er afkortet til de første 5.000 tegn.</p>
-
-<aside><div>
-<p>Afkortningen gør, at hver debat vejer lige meget. Det fjerner det længde-problem, vi har set før: lange tekster har flere chancer for at ramme en ordbog.</p>
-</div></aside></section>
+</section>
 <section>
 <section id="del-1-tekst-som-data" class="title-slide slide level1 center">
 <h1>Del 1: Tekst som data</h1>
@@ -296,7 +293,6 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1w
 </section>
 <section id="det-i-allerede-kan" class="slide level2 scrollable">
 <h2>Det I allerede kan</h2>
-<p>I lektion 2, 3 og 6 byggede I små tekstanalyse:</p>
 <ol type="1">
 <li>Gør teksten til små bogstaver</li>
 <li>Fjern tegnsætning</li>
@@ -305,8 +301,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1w
 <li>Find de hyppigste</li>
 </ol>
 <p><br></p>
-<p>Det er en <strong>bag-of-words</strong>-model. Rækkefølgen smides væk, og tilbage står en optælling.</p>
-<p>Det er fundamentet under det meste af i dag.</p>
+<p>Det er en <strong>bag-of-words</strong>-model. Rækkefølgen smides væk, og tilbage står en optælling. Det er fundamentet under det meste af i dag.</p>
 </section></section>
 <section>
 <section id="del-2-korpus" class="title-slide slide level1 center">
@@ -343,7 +338,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1w
 </tbody>
 </table>
 <p><br></p>
-<p>Hvert trin er en beslutning om, hvad der tæller som “en politisk debat”. Ingen af dem stod i data.</p>
+<p>Hvert trin er en beslutning om, hvad der tæller som “en politisk debat”.</p>
 </section>
 <section id="ikke-alle-punkter-er-debatter" class="slide level2">
 <h2>Ikke alle punkter er debatter</h2>
@@ -468,16 +463,6 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBy
 <p><strong>Deduktivt</strong>: I ved, hvad I leder efter. <strong>Ordbøger</strong> og <strong>superviseret</strong> klassifikatorer. Kategorierne er bestemt på forhånd.</p>
 <p><strong>Induktivt</strong>: I ved det ikke. Topic models og word embeddings “opdager” struktur, som I derefter skal fortolke.</p>
 </section>
-<section id="tre-eksempler" class="slide level2">
-<h2>Tre eksempler</h2>
-<p><strong>Spörlein &amp; Schlueter (2021)</strong>: en tilpasset tysk hadtale-ordbog på 5.152 YouTube-kommentarer. Tidligere hadefulde kommentarer øger sandsynligheden for nye.</p>
-<p><strong>Törnberg &amp; Törnberg (2016)</strong>: topic models på 50 millioner svenske forumindlæg. Muslimer blev oftere forbundet med konflikt og vold online end i traditionelle medier.</p>
-<p><strong>Kozlowski et al.&nbsp;(2019)</strong>: word embeddings på millioner af bøger over et århundrede. Sporede hvordan uddannelse gik fra at være forbundet med velstand <em>gennem</em> sofistikation til at være forbundet direkte.</p>
-<p><br></p>
-
-<aside><div>
-<p>De to første ligger tæt på vores materiale. Læg mærke til korpusstørrelserne: 5.152 og 50.000.000.</p>
-</div></aside></section>
 <section id="theory-in-theory-out" class="slide level2">
 <h2>Theory in, theory out</h2>
 <p>Bonikowski &amp; Nelson (2022): større datamængder kræver <strong>mere</strong> teori, ikke mindre.</p>

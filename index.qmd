@@ -89,11 +89,6 @@ print(korpus[["aar", "lovnr", "omraade"]].head())
 
 Et tilfældigt udsnit på **900 debatter**. Hver tekst er afkortet til de første 5.000 tegn.
 
-::: {.aside}
-Afkortningen gør, at hver debat vejer lige meget. Det fjerner det længde-problem, vi har set før: lange tekster har flere chancer for at ramme en ordbog.
-:::
-
-
 # Del 1: Tekst som data
 
 ## Tekst?!
@@ -130,8 +125,6 @@ Vi forstår øjeblikkeligt: det er en hilsen, det er på dansk, det er venligt.
 
 ## Det I allerede kan
 
-I lektion 2, 3 og 6 byggede I små tekstanalyse:
-
 1. Gør teksten til små bogstaver
 2. Fjern tegnsætning
 3. Del op i ord
@@ -140,11 +133,7 @@ I lektion 2, 3 og 6 byggede I små tekstanalyse:
 
 <br>
 
-Det er en **bag-of-words**-model. Rækkefølgen smides væk, og tilbage står en optælling.
-
-Det er fundamentet under det meste af i dag.
-
-
+Det er en **bag-of-words**-model. Rækkefølgen smides væk, og tilbage står en optælling. Det er fundamentet under det meste af i dag.
 
 # Del 2: Korpus
 
@@ -163,7 +152,7 @@ Det rå materiale er ikke et korpus. Det bliver det, fordi vi træffer valg.
 
 ::: {.incremental}
 
-Hvert trin er en beslutning om, hvad der tæller som "en politisk debat". Ingen af dem stod i data.
+Hvert trin er en beslutning om, hvad der tæller som "en politisk debat". 
 
 :::
 
@@ -315,20 +304,6 @@ I dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i foku
 
 **Induktivt**: I ved det ikke. Topic models og word embeddings "opdager" struktur, som I derefter skal fortolke.
 
-:::
-
-## Tre eksempler
-
-**Spörlein & Schlueter (2021)**: en tilpasset tysk hadtale-ordbog på 5.152 YouTube-kommentarer. Tidligere hadefulde kommentarer øger sandsynligheden for nye.
-
-**Törnberg & Törnberg (2016)**: topic models på 50 millioner svenske forumindlæg. Muslimer blev oftere forbundet med konflikt og vold online end i traditionelle medier.
-
-**Kozlowski et al. (2019)**: word embeddings på millioner af bøger over et århundrede. Sporede hvordan uddannelse gik fra at være forbundet med velstand *gennem* sofistikation til at være forbundet direkte.
-
-<br>
-
-::: {.aside}
-De to første ligger tæt på vores materiale. Læg mærke til korpusstørrelserne: 5.152 og 50.000.000.
 :::
 
 ## Theory in, theory out
