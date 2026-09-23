@@ -43,25 +43,25 @@ mkdir -p .qmd-pause && mv *.qmd .qmd-pause/ && \
 
 - **Sprogmodeller** ... og en analyse af tonen i Folketinget
 
-- **Klyngemodeller: PCA og k-means**
+- **Klyngemodeller** ... små PCA og k-means analyser
 
 - Øvelser/**Portfolio** 
 
 <br>
 
 ::: {.aside}
-Ingen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativt i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer. 
+Ingen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativ i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer. 
 :::
 
 ## Dagens data
 
 Referater af møderne i Folketinget fra oktober 2007 til november 2022.
 
-- **1.711 møder**, hentet fra ft.dk i december 2022
+- **1.711 møder**, hentet fra ft.dk i december 2022.
 
-- Hvert møde er delt op i **dagsordenspunkter**, og hvert punkt har hele debatten som én tekst
+- Hvert møde er delt op i dagsordenspunkter, og hvert punkt har hele debatten som én tekst.
 
-- Vi bruger **1. behandlingen af lovforslag**, der foregår den politiske debat om et forslag
+- Vi bruger **1. behandlingen af lovforslag**.
 
 <br>
 
@@ -84,6 +84,20 @@ korpus = pd.read_csv(url)
 print(korpus.shape)
 print(korpus[["aar", "lovnr", "omraade"]].head())
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+Læs det oppefra og ned:
+
+1. `import pandas as pd` og `import numpy as np`: Hent de to biblioteker, og giv dem de korte navne `pd` og `np`.
+2. `url = ...`: Adressen på filen på GitHub. `raw.githubusercontent.com` giver selve filen og ikke GitHubs webside om filen.
+3. `pd.read_csv(url)`: Læs CSV-filen direkte fra nettet ind i en DataFrame.
+4. `korpus.shape`: Antal rækker og kolonner, som `(rækker, kolonner)`.
+5. `korpus[["aar", "lovnr", "omraade"]]`: Vælg tre kolonner. De dobbelte klammer betyder, at vi giver en **liste** af kolonnenavne.
+6. `.head()`: Vis de første fem rækker.
+
+</details>
 
 <br>
 
@@ -156,33 +170,20 @@ Hvert trin er en beslutning om, hvad der tæller som "en politisk debat".
 
 :::
 
-## Ikke alle punkter er debatter
-
-```{pyodide}
-#| autorun: false
-print(korpus["tekst"].str.len().describe().round(0))
-```
-
-<br>
-
-I det fulde materiale er 2. og 3. behandlinger typisk **800 tegn** lange: en afstemning og et par formalia. 1. behandlingerne er typisk **29.000 tegn**.
-
-::: {.incremental}
-
-Og 73 af 1. behandlingerne var under 2.000 tegn. 31 af dem bestod af én sætning:
-
-> *(Som tidligere meddelt er punktet udgået af dagsordenen).*
-
-Havde vi ikke fjernet dem, ville de have endt som ekstreme punkter i en klyngeanalyse. Vi kommer tilbage til det.
-
-:::
-
 ## Hvad er "en tekst" her?
 
 ```{pyodide}
 #| autorun: false
 print(korpus.loc[0, "tekst"][:600])
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+1. `korpus.loc[0, "tekst"]`: Vælg rækken med indeks `0` og kolonnen `tekst`. Det er én celle, altså én debat.
+2. `[:600]`: De første 600 tegn. En tekststreng kan skæres over på samme måde som en liste.
+
+</details>
 
 <br>
 
@@ -192,50 +193,7 @@ print(korpus.loc[0, "tekst"][:600])
 
 ::: {.incremental}
 
-Vi kan altså sammenligne **lovforslag** ... men ikke partier eller politikere. Det er en designbegrænsning, ikke en detalje.
-
-:::
-
-## Vores annotering: politikområde
-
-Datasættet har ingen emnevariabel. Vi har lavet den selv.
-
-```{pyodide}
-#| autorun: false
-print(korpus["minister"].value_counts().head(8))
-print()
-print(korpus["omraade"].value_counts())
-```
-
-<br>
-
-Hvert lovforslag er fremsat af en minister. Vi har samlet ministertitlerne i **seks politikområder** og et "Andet".
-
-::: {.incremental}
-
-`klima-, energi- og forsyningsministeren` og `miljøministeren` blev begge til **Miljø og klima**. Ministerierne skifter navn med hver regering. Det gør vores kategorier ikke.
-
-:::
-
-## Hunston (2002): korpusset er bygget
-
-> Et korpus er et **konstrueret objekt**, ikke en objektiv repræsentation af sprog.
-
-<br>
-
-::: {.incremental}
-
-Designbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen, de **er** en del af analysen.
-
-:::
-
-<br>
-
-::: {.incremental}
-
-> I dag er 1 million ord et **lille** korpus.
-
-De fulde debatter er 22 millioner ord. Det er et mellemstort korpus ... og i dag bruger vi kun et udsnit af det.
+Vi kan altså sammenligne **lovforslag** ... men ikke partier eller politikere. Det er en **designbegrænsning**.
 
 :::
 
@@ -245,36 +203,9 @@ De fulde debatter er 22 millioner ord. Det er et mellemstort korpus ... og i dag
 
 2. **Hvem har skrevet dem?** Redigeret eller spontant? Én forfatter eller mange?
 
-3. **Hvilke teksttyper er med — og hvilke er ikke?**
+3. **Hvilke teksttyper er med og hvilke er evt. ikke?**
 
 4. **Hvad skete der under indsamlingen?** Hvad blev der af formatering, billedtekster, kommentarer?
-
-## Diskussion
-
-<span class="timer" data-time="420"></span>
-
-- Referaterne er **redigeret** af Folketingets referenter. Er det det talte sprog, vi analyserer?
-
-- Vi har valgt 1. behandlinger. Hvilke politiske debatter er dermed ikke med?
-
-- Hvilket spørgsmål kan dette korpus **ikke** svare på, uanset hvor god metoden er?
-
-## Annotering
-
-Rå tekst kan man tælle ord i. Alt andet kræver, at nogen har **tilføjet information**.
-
-- **Manuel kodning**: mennesker læser og "mærker"/"tagger". Dyrt, men stadig målestokken.
-
-- **Automatisk annotering**: en model tilføjer ordklasser, navne, sentiment. Hurtigt, men modellen har selv lært det et sted fra.
-
-<br>
-
-Spørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er **systematiske**, for det flytter resultatet i én bestemt retning.
-
-::: {.aside}
-Vores politikområde er en tredje slags: en regel, vi selv har skrevet. Den er gennemsigtig, men den er stadig en beslutning.
-:::
-
 
 # Del 3: Hvad kan man?
 
@@ -296,28 +227,6 @@ I dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i foku
 
 :::
 
-## Induktivt og deduktivt
-
-::: {.incremental}
-
-**Deduktivt**: I ved, hvad I leder efter. **Ordbøger** og **superviseret** klassifikatorer. Kategorierne er bestemt på forhånd.
-
-**Induktivt**: I ved det ikke. Topic models og word embeddings "opdager" struktur, som I derefter skal fortolke.
-
-:::
-
-## Theory in, theory out
-
-Bonikowski & Nelson (2022): større datamængder kræver **mere** teori, ikke mindre.
-
-- En metodes værdi måles på de teoretiske indsigter, den frembringer ... ikke på hvor stort datasættet var.
-
-- Computationel tekstanalyse kan ikke bare *bruge* teori, men også hjælpe med at *bygge* den.
-
-<br>
-
-> Et topic model finder altid emner. Også i støj. Det er jer, der afgør, om de betyder noget.
-
 ## Validering
 
 - **Korpusvalidering**: repræsenterer materialet det, I tror?
@@ -332,18 +241,6 @@ Når statistisk fit og fortolkelighed trækker i hver sin retning, skal der træ
 
 :::
 
-## Den ontologiske debat
-
-> Indeholder tekster overhovedet målbare sociale fænomener?
-
-<br>
-
-- Eller måler vi bare, hvordan folk **skriver**?
-
-- Det er ikke et spørgsmål, der bliver løst af et større datasæt.
-
-
-
 # Del 4: Ordbogsmodeller
 
 ## Hvad er en ordbogsmodel?
@@ -356,14 +253,12 @@ En liste af ord, hver med en værdi. Man slår hvert ord op og lægger sammen.
 
 <br>
 
-Det er den mest **gennemsigtige** metodefamilie. I kan altid slå op, hvorfor en tekst fik sin score.
-
-Det er også den mest **restriktive**. Modellen ved kun det, listen siger.
+Det er den mest **gennemsigtige** metodefamilie. I kan altid slå op, hvorfor en tekst fik sin score, men det er også den mest **restriktive**. Modellen ved kun det, listen siger.
 
 ## Vi bygger én
 
 ```{pyodide}
-#| autorun: false
+#| autorun: true
 ordbog = {
     "god": 2, "godt": 2, "bedre": 2, "bedst": 3, "stærk": 2,
     "sand": 2, "sandhed": 2, "frihed": 3, "tryghed": 2, "stolt": 2,
@@ -375,9 +270,19 @@ ordbog = {
 print(len(ordbog), "ord")
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+- `ordbog` er navnet på vores variabel.      
+- `{ }` fortæller Python, at vi laver en **dictionary** (ordbog).      
+- En ordbog består af nøgler og værdier: `"god"   →  2`       
+    `god` er nøgle; `2` er værdi. 
+
+</details>
+
 <br>
 
-22 ord. Det er hele modellen. 
+22 ord. Det er hele "modellen". 
 
 ## Hvordan den scorer
 
@@ -389,14 +294,22 @@ ord = (korpus["tekst"].astype(str)
        .str.replace(r"[^\wæøå ]", " ", regex=True)
        .str.split().explode())
 
-print(ord.head(8))
-print()
 print("tokens:", len(ord), "| typer:", ord.nunique())
 ```
 
-<br>
+<details>
+<summary>Noter til koden</summary>
 
-`.map(ordbog)` slår hvert ord op. Findes ordet ikke i ordbogen, bliver det `NaN` ... og `NaN` tæller ikke med, når vi lægger sammen.
+Læs det oppefra og ned:
+
+1. `korpus["tekst"]`: Hent kolonnen `tekst` fra DataFrame'en `korpus`.       
+2. `.astype(str)`: Sørg for, at alt er tekst.     
+3. `.str.lower()`: Lav alle bogstaver om til små bogstaver.       
+4. `.str.replace(...)`: Erstatter tegn, der **ikke** er bogstaver, tal eller mellemrum, med et mellemrum.     
+5. `.str.split()`: Del teksten op ved mellemrum.        
+6. `.explode()`: Tager en liste og laver én række for hvert element i listen.     
+
+</details>
 
 ## Kør den på korpusset
 
@@ -410,6 +323,24 @@ print()
 print("Debatter med score præcis 0:", (korpus["score"] == 0).sum(), "af", len(korpus))
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+Læs det oppefra og ned:
+
+1. `ord.map(ordbog)`: Slå hvert ord op i ordbog.      
+2. `.groupby(level=0)`: `level=0` betyder, at gruppering er efter det første indeksniveau, altså debatten.
+3. `.sum()`: Læg tallene sammen.       
+4. `korpus["score"] =`: Til sidst gemmer vi resultatet i vores oprindelige DataFrame.         
+5. `korpus.groupby("omraade")["score"].mean()`: Gennemsnitlig score for hvert politikområde, afrundet og sorteret.
+6. `(korpus["score"] == 0).sum()`: `True` for hver debat med score 0. `.sum()` tæller dem, fordi `True` tæller som 1.
+
+</details>
+
+<br>
+
+`.map(ordbog)` slår hvert ord op. Findes ordet ikke i ordbogen, bliver det `NaN` ... og `NaN` tæller ikke med, når vi lægger sammen.
+
 ## Hvad fylder i scoren?
 
 ```{pyodide}
@@ -417,29 +348,26 @@ print("Debatter med score præcis 0:", (korpus["score"] == 0).sum(), "af", len(k
 print(ord[ord.isin(ordbog.keys())].value_counts().head(8))
 ```
 
-<br>
+<details>
+<summary>Noter til koden</summary>
 
-::: {.incremental}
+Læs det indefra og ud:
 
-Det suverænt hyppigste ord er **`godt`**: 1.381 gange. Mere end dobbelt så ofte som det næste.
+1. `ordbog.keys()`: Nøglerne i ordbogen, altså de 22 ord.
+2. `ord.isin(...)`: `True` for hvert token, der står i ordbogen.
+3. `ord[...]`: Behold kun de tokens, hvor det er `True`.
+4. `.value_counts()`: Tæl, hvor mange gange hvert ord forekommer, sorteret med det hyppigste først.
+5. `.head(8)`: De otte hyppigste.
 
-Men i Folketinget betyder `godt` sjældent, at noget er godt. Det er *"det er godt, at ministeren ..."* og *"godt, så går vi videre"*.
-
-Scoren er i vid udstrækning en optælling af ét høflighedsord.
-
-:::
-
-## Dækning
-
-- Kun **90 af 900** debatter scorer nul. Med ~800 ord per debat er der mange chancer for at ramme.
-
-- Men en høj dækning er ikke det samme som en god måling. Den kommer her af, at ét almindeligt ord rammer overalt.
+</details>
 
 <br>
 
 ::: {.incremental}
 
-> Hvor mange ord skulle der til, før I ville stole på tallet? Og hvilke ord skulle *ud* af listen?
+Det mest hyppige ord er **`godt`**: 1.381 gange. Mere end dobbelt så ofte som det næste.
+
+Men i Folketinget betyder `godt` sjældent, at noget er godt. Det er *"det er godt, at ministeren ..."* og *"godt, så går vi videre"*. **Scoren er i vid udstrækning en optælling af et høflighedsord.**
 
 :::
 
@@ -447,21 +375,31 @@ Scoren er i vid udstrækning en optælling af ét høflighedsord.
 
 ```{pyodide}
 #| autorun: false
-proever = pd.Series(["Det er en god beslutning",
+test = pd.Series(["Det er en god beslutning",
                      "Det er ikke en god beslutning",
                      "Ingen tryghed og ingen frihed"])
 
-scorer = (proever.str.lower().str.split().explode()
+scorer = (test.str.lower().str.split().explode()
           .map(ordbog).groupby(level=0).sum())
 
-print(pd.DataFrame({"tekst": proever, "score": scorer}))
+print(pd.DataFrame({"tekst": test, "score": scorer}))
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+1. `pd.Series([...])`: Tre testsætninger som en Series. Indekset `0`, `1`, `2` er sætningens nummer.
+2. `.str.lower().str.split().explode()`: Samme opskrift som på korpusset: små bogstaver, del op i ord, ét ord per række.
+3. `.map(ordbog)`: Slå hvert ord op. Ord, der ikke er i ordbogen, bliver `NaN`.
+4. `.groupby(level=0).sum()`: Læg sammen per sætning.
+5. `pd.DataFrame({"tekst": test, "score": scorer})`: Sæt teksten og scoren side om side. Rækkerne passer sammen, fordi de har samme indeks.
+
+</details>
 
 <br>
 
-- Den anden får samme score som den første. Den tredje bliver **stærkt positiv**.
+En ordbogsmodel lægger tal sammen. **Den læser ikke.**
 
-- En ordbogsmodel lægger tal sammen. Den læser ikke.
 
 ## AFINN
 
@@ -475,9 +413,19 @@ afinn = Afinn(language="da")
 korpus["afinn"] = korpus["tekst"].map(afinn.score)
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+1. `from afinn import Afinn`: Hent `Afinn` fra pakken `afinn`.
+2. `Afinn(language="da")`: Lav et objekt med den danske ordliste og gem det som `afinn`.
+3. `korpus["tekst"].map(afinn.score)`: Kør `.score()` på hver tekst, og gem resultatet i en ny kolonne.
+4. Bemærk: `afinn.score` står **uden** parenteser. Vi giver funktionen til `.map()`, som selv kalder den én gang for hver tekst.
+
+</details>
+
 <br>
 
-`Afinn(language="da")` indlæser den danske ordliste. `.score()` gør præcis det samme som vores egen funktion: slår hvert ord op og lægger værdierne for ordrene sammen.
+`.score()` gør præcis det samme som vores egen funktion. Den slår hvert ord op og lægger værdierne for ordene sammen.
 
 ::: {.aside}
 Kan ikke installeres i browseren. Kør den i UCloud eller lokalt.
@@ -490,31 +438,164 @@ Hvis Retsvæsen scorer lavere end Beskæftigelse, hvad har vi så vist?
 - At debatterne handler om noget negativt, som vold og straf?
 - At ordførerne er mere kritiske?
 - At ordlisten passer bedre til det ene områdes ordforråd end det andets?
-- Eller at man siger `godt` sjældnere, når man taler om kriminalitet?
+- ... eller at man siger `godt` sjældnere, når man taler om kriminalitet?
 
 <br>
 
-::: {.incremental}
+# Analyse: "Kriser" i Folketingssalen
 
-Et tal fra en ordbogsmodel er ikke et resultat. Det er et **udgangspunkt for en diskussion**, som skal føres i metodeafsnittet.
+> Fyldte italesættelsen af "kriser" mere i Folketingets lovgivningsdebatter under **finanskrisen** og **coronakrisen**?
 
-:::
+<br>
 
+Vi bruger her en ordbog til det, den er god til: at måle **et tema** snarere end en stemning.
 
+## Ordbogen
+
+```{pyodide}
+#| autorun: false
+kriseord = ["krise", "krisen", "kriser", "kriserne",
+            "finanskrise", "finanskrisen", "coronakrise", "coronakrisen",
+            "pandemi", "pandemien", "epidemi", "epidemien",
+            "nedlukning", "nedlukningen",
+            "hjælpepakke", "hjælpepakken", "hjælpepakker", "hjælpepakkerne"]
+
+print(len(kriseord), "ord")
+```
+
+<details>
+<summary>Noter til koden</summary>
+
+- Denne gang er ordbogen en **liste** og ikke en dictionary. Ordene har ingen værdi. Vi tæller bare, om de er der.
+- Hvert ord står i alle sine bøjninger: *krise*, *krisen*, *kriser*, *kriserne*. Vi har ikke lemmatiseret, så `krisen` og `krise` er to forskellige ord. Med spaCy kunne vi nøjes med grundformen.
+
+</details>
+
+## Mål: per 1.000 ord
+
+```{pyodide}
+#| autorun: false
+# ét ord per række, med året ved siden af
+lang = ord.rename("ord").to_frame().join(korpus[["aar"]])
+lang["krise"] = lang["ord"].isin(kriseord)
+
+pr_aar = pd.DataFrame({
+    "debatter": korpus.groupby("aar").size(),
+    "pr_1000_ord": (lang.groupby("aar")["krise"].mean() * 1000).round(2),
+})
+
+print(pr_aar)
+```
+
+<details>
+<summary>Noter til koden</summary>
+
+1. `ord.rename("ord").to_frame()`: gør `ord` til en tabel med én kolonne.
+2. `.join(korpus[["aar"]])`: sætter året på hvert ord. Det virker, fordi indekset i `ord` stadig husker, hvilken debat ordet kom fra.
+3. `.isin(kriseord)`: `True` for hvert ord, der står på listen.
+4. `.mean()` på `True`/`False` giver en **andel**. Gange 1.000 giver forekomster per 1.000 ord.
+
+</details>
+
+<br>
+
+Hvorfor per 1.000 ord og ikke bare antal? Fordi der ikke er lige mange debatter hvert år, og debatterne er ikke lige lange.
+
+## Tilbage til teksten
+
+Et tal fra en ordbog er ikke et resultat, før vi har set, hvilken kontekst ordene står i.
+
+```{pyodide}
+#| autorun: false
+eksempler = (korpus["tekst"]
+             .str.findall(r"(?i).{0,60}\b\w*krise\w*.{0,60}")
+             .explode()
+             .dropna())
+
+for linje in eksempler.sample(8, random_state=1):
+    print("...", linje, "...")
+```
+
+<details>
+<summary>Noter til koden</summary>
+
+- `.str.findall()` finder **alle** steder i hver debat, hvor mønsteret passer, og giver en liste per debat.
+- `(?i)`: ligegyldigt om det er store eller små bogstaver.
+- `.{0,60}`: op til 60 tegn før og efter, så vi kan se sammenhængen.
+- `\b\w*krise\w*`: et ord, der indeholder *krise*, fx *krisen*, *finanskrisen* og *krisehjælp*.
+- `.explode()`: ét fund per række. `.dropna()` fjerner debatter uden fund.
+- `.sample(8, random_state=1)`: otte tilfældige eksempler, de samme hver gang.
+
+</details>
+
+<br>
+
+Handler det om en akut krise? Eller om *boligkrisen*, *tillidskrisen*, *en krise i folkeskolen*?
+
+## Rammer data forudsigelsen?
+
+```{pyodide}
+#| autorun: false
+from plotnine import (ggplot, aes, annotate, geom_line, geom_point,
+                      scale_y_continuous, labs, theme_minimal)
+
+data = pr_aar.reset_index()
+
+figur = (ggplot(data, aes(x="aar", y="pr_1000_ord"))
+         # forudsigelsen: de år, hvor vi forventer en top
+         + annotate("rect", xmin=2007.5, xmax=2010.5,
+                    ymin=-float("inf"), ymax=float("inf"), alpha=0.2)
+         + annotate("rect", xmin=2019.5, xmax=2021.5,
+                    ymin=-float("inf"), ymax=float("inf"), alpha=0.2)
+         # data
+         + geom_line()
+         + geom_point(aes(size="debatter"))
+         + scale_y_continuous(limits=(0, None))
+         + labs(x="År", y="Kriseord per 1.000 ord", size="Debatter",
+                title="Kriseord i 1. behandling af lovforslag")
+         + theme_minimal())
+
+figur.show()
+```
+
+<details>
+<summary>Noter til koden</summary>
+
+- Samme opbygning som `ggplot2` i R: data, `aes()` og lag, der lægges sammen med `+`.
+- Forskellen fra R: kolonnenavne står i **anførselstegn**, `aes(x="aar")`, og hele udtrykket står i en parentes, så det kan brydes over flere linjer.
+- `pr_aar.reset_index()` gør årene fra indekset til en almindelig kolonne, `aar`, som `aes()` kan bruge.
+- `annotate("rect", ...)` tegner de grå bånd. `-float("inf")` og `float("inf")` betyder: fra bunden til toppen af figuren, ligesom `-Inf` og `Inf` i R.
+- `geom_point(aes(size="debatter"))` gør punkterne større, jo flere debatter året bygger på.
+- `limits=(0, None)` lader y-aksen starte i 0. `None` betyder: find selv toppen.
+
+</details>
+
+<br>
+
+Det grå er det, vi forventede. Den sorte linje er det, vi fandt. Små punkter bygger på få debatter.
+
+## Hvad har vi vist, og hvad har vi ikke?
+
+- Vi har **vist**, hvor meget kriseordene fylder i 1. behandlingen af lovforslag, år for år. Vi har **ikke vist**, hvor alvorlige kriserne var, eller hvad partierne mente om dem. Ordbogen tæller forekomster. Den læser ikke.
+
+- **Korpusset bestemmer svaret.** Vi har kun lovforslag. En krise, der blev håndteret med forespørgsler eller aftaler uden for salen, er næsten usynlig her.
+
+- **Ordbogen bestemmer svaret.** Tag `klimakrise` med, og kurven ændrer sig. Det er et valg, der hører i metodeafsnittet.
+
+<br>
+
+> Ordbogsmodellen er stærkest, når spørgsmålet er smalt.
 
 # Analyse: den politiske dagsorden 2007-2022
 
 ## Spørgsmålet
 
-> Hvor meget fylder klima, udlændinge og økonomi i Folketingets debatter ... og ændrer det sig over tid?
+> Hvor meget fylder klima, udlændinge og økonomi i Folketingets debatter, og har det ændret sig over tid?
 
 <br>
 
-Nu bruger vi ordbøger til det, de er bedst til: **at måle et tema**, ikke en stemning.
-
 - Tre korte **temaordbøger**, som vi selv definerer
-- Et mål: forekomster **per 1.000 ord**
-- Og så validering, før vi tolker noget
+- Det, vi vil måle: forekomster af tema **per 1.000 ord**
 
 ## Tre temaordbøger
 
@@ -529,31 +610,59 @@ temaer = {
                 "besparelser", "finansiering", "konkurrenceevne"],
 }
 
-# ét ord per række, med år og område ved siden af
-lang = ord.rename("ord").to_frame().join(korpus[["aar", "omraade"]])
+# ord til tema som én Series
+ord_til_tema = pd.Series(temaer).explode()
+ord_til_tema = pd.Series(ord_til_tema.index, index=ord_til_tema.values)
 
-for tema, ordliste in temaer.items():
-    lang[tema] = lang["ord"].isin(ordliste)
+lang = ord.rename("ord").to_frame().join(korpus[["aar", "omraade"]])
+lang["tema"] = lang["ord"].map(ord_til_tema)   # NaN hvis ordet ikke er i et tema
 
 print(lang.head())
 ```
 
-<br>
+<details>
+<summary>Noter til koden</summary>
 
-`.isin()` giver `True` for hvert ord, der står på listen. Gennemsnittet af en boolean er en andel, ligesom i lektion 4.
+Læs det oppefra og ned:
+
+1. `temaer`: en nøgle og en liste, fx `klima       → [klima, klimaet, co2, ...]`.         
+2. `pd.Series(temaer)`: laver dictionary'en om til en Pandas Series.       
+3. `.explode()`: én række per ord, med temaet i indekset.
+4. `pd.Series(ord_til_tema.index, index=ord_til_tema.values)`: vender den om, så ordet er indekset og temaet værdien. Så kan `.map()` slå hvert ord op.
+5. `ord.rename("ord")`: Vi giver vores Series navnet "ord".      
+6. `.to_frame()`: laver Series'en om til en DataFrame.        
+7. `.join(korpus[["aar", "omraade"]])`: tilføjer `aar` og `omraade` fra den oprindelige `korpus`.         
+8. `lang["ord"].map(ord_til_tema)`: slår hvert ord op og giver dets tema, eller `NaN`.
+
+</details>
+
+<br>
 
 ## Validering først: måler ordbøgerne det, vi tror?
 
 ```{pyodide}
 #| autorun: false
-pr_omraade = lang.groupby("omraade")[list(temaer)].mean() * 1000
+pr_omraade = (
+    pd.crosstab(lang["omraade"], lang["tema"])
+      .div(lang.groupby("omraade").size(), axis=0)
+      .reindex(columns=list(temaer), fill_value=0)
+    * 1000
+)
 
 print(pr_omraade.round(2))
 ```
 
-<br>
+<details>
+<summary>Noter til koden</summary>
 
-::: {.incremental}
+1. `pd.crosstab(lang["omraade"], lang["tema"])`: tæller, hvor mange ord fra hvert tema der står i hvert politikområde. Ord uden tema (`NaN`) tælles ikke med.
+2. `.div(lang.groupby("omraade").size(), axis=0)`: dividerer hver række med det samlede antal ord i området.
+3. `.reindex(columns=list(temaer), fill_value=0)`: sikrer, at alle tre temaer er med, i samme rækkefølge som i ordbogen.
+4. `* 1000`: forekomster per 1.000 ord.
+
+</details>
+
+<br>
 
 - **Klima**-ordbogen rammer 2,48 per 1.000 ord i Miljø og klima ... og 0,03 i Beskæftigelse.
 
@@ -561,39 +670,65 @@ print(pr_omraade.round(2))
 
 - **Økonomi**-ordbogen er spredt ud over alle områder. Man taler om økonomi overalt.
 
-:::
-
 ::: {.aside}
-Det er en test af *konstruktvaliditet*: vi har en uafhængig variabel (ministeriet), som ordbogen burde hænge sammen med. Klima og udlændinge består testen. Økonomi måler noget mere diffust.
+Det er en test af *konstruktvaliditet*. Vi har en uafhængig variabel (ministeriet), som ordbogen **burde** hænge sammen med. Klima og udlændinge består testen. Økonomi måler noget mere diffust.
 :::
 
 ## Og dækningen
 
 ```{pyodide}
 #| autorun: false
-ramt = lang[list(temaer)].any(axis=1).groupby(level=0).any()
+ramt = (
+    lang["tema"].notna()
+    .groupby(level=0)
+    .any()
+)
 
-print("Debatter der ikke rammer nogen af de tre:", (~ramt).sum(), "af", len(ramt))
+print("Debatter der ikke rammer nogen af de tre:",
+      (~ramt).sum(), "af", len(ramt))
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+1. `lang["tema"].notna()`: `True` for hvert ord, der hører til et tema.
+2. `.groupby(level=0)`: grupper efter indekset, altså debatten.
+3. `.any()`: `True`, hvis mindst ét ord i debatten hører til et tema.
+4. `~ramt`: `~` vender det om, så vi får debatterne **uden** træf. `.sum()` tæller dem.
+
+</details>
 
 <br>
 
-::: {.incremental}
-
-Over halvdelen af debatterne nævner ingen af ordene. Det er ikke en fejl: de handler om noget fjerde.
-
-Men det betyder, at "0 per 1.000 ord" hverken er lav interesse eller neutralitet. Det er et **andet emne**.
-
-:::
+Over halvdelen af debatterne nævner ingen af ordene. Det er ikke en fejl, de handler bare om noget fjerde.
 
 ## Over tid
 
 ```{pyodide}
 #| autorun: false
-pr_aar = lang.groupby("aar")[list(temaer)].mean() * 1000
+pr_aar = (
+    pd.crosstab(lang["aar"], lang["tema"])
+      .div(lang.groupby("aar").size(), axis=0)
+      .reindex(columns=list(temaer), fill_value=0)
+    * 1000
+)
 
 print(pr_aar.round(2))
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+Samme opskrift som på valideringsslidet, nu med år i stedet for område:
+
+1. `pd.crosstab(lang["aar"], lang["tema"])`: tæller, hvor mange ord fra hvert tema der står i hvert år. Ord uden tema (`NaN`) tælles ikke med.
+2. `.div(lang.groupby("aar").size(), axis=0)`: dividerer hver række med det samlede antal ord i året.
+3. `.reindex(columns=list(temaer), fill_value=0)`: sikrer, at alle tre temaer er med, i samme rækkefølge som i ordbogen.
+4. `* 1000`: forekomster per 1.000 ord.
+
+</details>
+
+<br>
 
 ## Tegn det
 
@@ -611,6 +746,19 @@ til_figur = (pr_aar.reset_index()
         x=None, y="Forekomster per 1.000 ord", color=None)
  + theme_minimal()).show()
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+1. `from plotnine import *`: Hent alle funktioner fra plotnine på én gang: `ggplot`, `aes`, `geom_line` osv.
+2. `pr_aar.reset_index()`: gør årene fra indekset til en almindelig kolonne, `aar`.
+3. `.melt(...)`: fra bredt til langt format, ligesom `pivot_longer()` i R. `id_vars="aar"` bliver stående, og de tre temakolonner stables til én række per tema og år.
+4. `aes(..., color="tema")`: én farve og én linje per tema.
+5. `geom_line(size=1)`: linjer med tykkelse 1. `geom_point()`: et punkt for hvert år.
+6. `x=None` og `color=None`: ingen titel på x-aksen og på forklaringen.
+7. `(...).show()`: tegn figuren.
+
+</details>
 
 <br>
 
@@ -631,27 +779,19 @@ Det fulde materiale, 3.070 debatter:
 
 <br>
 
-::: {.incremental}
+- **Økonomi** topper i 2009-2011: *finanskrisen*
 
-- **Økonomi** topper i 2009-2011: finanskrisen
+- **Udlændinge** topper i 2015-2017: *flygtningekrisen*
 
-- **Udlændinge** topper i 2015-2017: flygtningekrisen
-
-- **Klima** har en første top i 2009 (COP15 i København) og stiger derefter kraftigt fra 2019: klimavalget og klimaloven
-
-:::
+- **Klima** har en første top i 2009 (COP15 i København) og stiger derefter kraftigt fra 2019: *klimavalget og klimaloven*
 
 ## Hvad kan vi så konkludere?
 
-::: {.incremental}
-
-- At tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er **ydre validitet**: resultatet passer med noget, vi ved fra andre kilder.
+- At tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er **ekstern validitet**, da resultatet passer med noget, vi ved fra andre kilder.
 
 - At ordbøgerne måler **opmærksomhed**, ikke holdning. At klima fylder mere i 2021, siger intet om, hvem der var for eller imod.
 
 - At udsnittet på 900 debatter giver et mere støjfyldt billede år for år end det fulde materiale. Trends skal have data nok bag sig.
-
-:::
 
 <br>
 
@@ -668,10 +808,6 @@ Det fulde materiale, 3.070 debatter:
 
 En ordbog kender kun de ord, den har på listen. En sprogmodel er trænet på store mængder tekst og kan **generalisere** til ord, den ikke har set før.
 
-- `spaCy` er et bibliotek til *natural language processing* — krydsfeltet mellem datalogi og korpuslingvistik.
-
-- Det giver tokenisering, lemmatisering, ordklasser, navngivne entiteter og grammatiske relationer. Også på dansk.
-
 <br>
 
 ::: {.aside}
@@ -687,136 +823,29 @@ nlp = spacy.load("da_core_news_sm")
 doc = nlp("Regeringen fremlagde et nyt udspil om indvandring i København.")
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+1. `import spacy`: Hent spaCy.
+2. `spacy.load("da_core_news_sm")`: Indlæs den danske model. Den skal være hentet én gang i forvejen, i terminalen: `python -m spacy download da_core_news_sm`.
+3. `nlp`: Pipelinen. Det er den, vi sender tekster igennem.
+4. `nlp("...")`: Send én tekst gennem hele pipelinen. Resultatet, `doc`, er en række **tokens**, hvor hvert token har egenskaber som `tok.lemma_` (grundform), `tok.pos_` (ordklasse) og `tok.ent_type_` (navngiven enhed).
+
+</details>
+
+<br>
+
 `spacy.load()` henter en **model**, ikke bare en funktion. `da_core_news_sm` er trænet på dansk nyhedstekst.
 
 Teksten løber gennem en række trin, som hver tilføjer information:
 
 ![](resources/pipeline-design.svg){fig-align="center"}
 
-## Hvad man får ud
-
-```python
-for tok in doc:
-    print(tok.text, tok.lemma_, tok.pos_, tok.is_stop)
-```
-
-<br>
-
-Information per ord:
-
-- **`.text`**: ordet, som det står
-- **`.lemma_`**: grundformen. `fremlagde` bliver til `fremlægge`
-- **`.pos_`**: ordklassen. `NOUN`, `VERB`, `ADJ`, `PROPN` og så videre
-- **`.is_stop`**: er det et stopord?
-
-## Navngivne entiteter
-
-```python
-for ent in doc.ents:
-    print(ent.text, ent.label_)
-```
-
-<br>
-
-- **`.ents`** er de **navngivne entiteter**: personer (`PER`), steder (`LOC`), organisationer (`ORG`).
-
-- Det åbner en anden slags spørgsmål end ordoptælling: *hvem* bliver nævnt, hvor ofte, og sammen med hvad.
-
-- Det er indgangen til semantisk og netværksanalyse.
-
-## Tokenisering er ikke `split()`
-
-```python
-tekst = "Regeringens plan — den såkaldte 'løsning' — virker ikke!"
-
-print(tekst.lower().split())
-
-doc = nlp(tekst)
-print([tok.text for tok in doc])
-```
-
-<br>
-
-Kør de to linjer og sammenlign. Hvad sker der med tankestregerne, anførselstegnene og udråbstegnet i hver af dem?
-
-
-
-## Hvorfor det betyder noget for tallene
-
-```python
-# naivt: split på mellemrum
-naiv = korpus["tekst"].str.lower().str.split().explode()
-
-# spaCy: grundformer, uden tegnsætning
-lemmaer = pd.Series([[t.lemma_.lower() for t in doc if not t.is_punct]
-                     for doc in nlp.pipe(korpus["tekst"])]).explode()
-
-print(naiv.nunique() / len(naiv))
-print(lemmaer.nunique() / len(lemmaer))
-```
-
-<br>
-
-Begge linjer beregner **leksikalsk diversitet**: antal unikke ord divideret med antal ord i alt. Samme mål, samme korpus, to forbehandlinger.
-
-- Den naive version tæller `god`, `God`, `god!` og `gode` som fire forskellige ord.
-
-- Kør det. Hvor stor bliver forskellen ... og hvilket af de to tal ville I skrive i en opgave?
-
-## En komplet preprocessing i spaCy
-
-Hele kæden fra lektion 6, men hvor en model træffer beslutningerne i stedet for vores regler:
-
-```python
-nlp = spacy.load("da_core_news_sm", disable=["ner", "parser"])
-
-renset = []
-for doc in nlp.pipe(korpus["tekst"], batch_size=20):
-    renset.append([t.lemma_.lower() for t in doc
-                   if not t.is_stop              # stopord
-                   and not t.is_punct            # tegnsætning
-                   and not t.like_num            # tal
-                   and t.pos_ in ("NOUN", "ADJ", "PROPN")])   # kun indholdsord
-
-korpus["lemmaer"] = renset
-lemmaer = korpus["lemmaer"].explode()
-```
-
-<br>
-
-- `disable=["ner", "parser"]` slår det fra, vi ikke skal bruge. Det sparer tid og hukommelse
-- De fire betingelser er Denny & Spirlings P, N og W ... plus et filter på ordklasse, som ingen af de syv operationer dækker
-- `.explode()` giver samme lange format som i lektion 6: én række per ord, indekset husker debatten
-
-## Og så er vi tilbage i pandas
-
-```python
-print(lemmaer.value_counts().head(20))
-
-pr_omraade = (lemmaer.to_frame("lemma")
-              .join(korpus["omraade"])
-              .groupby("omraade")["lemma"]
-              .value_counts()
-              .groupby(level=0).head(5))
-print(pr_omraade)
-```
-
-<br>
-
-Efter spaCy er det præcis de samme greb som før: `value_counts()`, `groupby()`, `join()`.
-
-::: {.incremental}
-
-Det er pointen: sprogmodellen erstatter **reglerne** i forbehandlingen. Den erstatter ikke analysen.
-
-:::
-
-
 ## Hvad man kan bruge det til
 
 - **Ordklasser**: analysér kun navneord, eller kun adjektiver. Retorik ligger ofte i tillægsordene.
 - **Lemmatisering**: bøjningsformer bliver til ét ord, før I tæller.
-- **Entiteter**: hvilke personer, steder og organisationer optræder — og hos hvilke kilder?
+- **Entiteter**: hvilke personer, steder og organisationer optræder og hos hvilke kilder?
 - **Afhængighedsrelationer**: hvem gør hvad ved hvem.
 
 <br>
@@ -835,6 +864,16 @@ nlp.add_pipe("asent_da_v1")
 doc = nlp("Det er en god beslutning for vores frihed.")
 print(doc._.polarity)
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+1. `import spacy, asent`: Hent begge biblioteker på én linje. `asent` skal importeres, for at spaCy kan finde dens trin, selv om navnet ikke bruges direkte bagefter.
+2. `nlp.add_pipe("sentencizer")`: Tilføj et trin, der finder ud af, hvor sætningerne slutter.
+3. `nlp.add_pipe("asent_da_v1")`: Tilføj den danske sentimentmodel som sidste trin.
+4. `doc._.polarity`: `._` er den plads på et `Doc`, hvor andre pakker end spaCy lægger deres resultater.
+
+</details>
 
 <br>
 
@@ -856,9 +895,7 @@ print(doc._.polarity)
 
 ::: {.incremental}
 
-Negationen virker. Vores egen ordbog gav plus for den anden sætning, fordi den bare lagde tal sammen.
-
-Men `fantastisk` står ikke i den danske ordliste. Dækningsproblemet er ikke løst, det er flyttet.
+Negationen virker. Vores egen ordbog gav plus for den anden sætning, fordi den bare lagde tal sammen. Men `fantastisk` står ikke i den danske ordliste. Dækningsproblemet er ikke løst, det er flyttet.
 
 :::
 
@@ -872,6 +909,16 @@ for tok in doc:
         print(tok._.polarity)
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+1. `for tok in doc:`: Løb gennem sætningen ét token ad gangen.
+2. `tok._.polarity`: `asent` har også givet hvert enkelt token en score.
+3. `if ... != 0:`: Vis kun de tokens, der faktisk trækker scoren op eller ned.
+4. `print(tok._.polarity)`: Viser tokenets score, selve ordet og det udsnit af sætningen (`span`), som `asent` læste det i.
+
+</details>
+
 ```
 polarity=-2.22 token=god span=ikke en god
 ```
@@ -882,9 +929,7 @@ polarity=-2.22 token=god span=ikke en god
 
 `asent` fortæller, **hvilket ord** der drev scoren, og **hvilket udsnit** af sætningen den læste det i.
 
-`god` er i sig selv positiv. Den bliver negativ, fordi `ikke` står foran. Det kan man slå efter.
-
-Det er forskellen på et tal og et resultat, I kan forsvare.
+Fx er `god` i sig selv positiv. Den bliver negativ, fordi `ikke` står foran. Det kan man slå op efter.
 
 :::
 
@@ -899,13 +944,22 @@ print(korpus["sentiment"].describe())
 print(korpus.groupby("omraade")["sentiment"].mean().sort_values())
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+Læs det indefra og ud:
+
+1. `nlp.pipe(korpus["tekst"], batch_size=20)`: Kør alle teksterne gennem pipelinen, 20 ad gangen.
+2. `[doc._.polarity.compound for doc in ...]`: En **list comprehension**: for hver debat, hent den samlede score, `compound`. Resultatet er en liste i samme rækkefølge som `korpus`.
+3. `korpus["sentiment"] = ...`: Listen bliver en ny kolonne. Det virker, fordi den har præcis én værdi per række.
+4. `.describe()`: Antal, gennemsnit, standardafvigelse, minimum, kvartiler og maksimum.
+5. `korpus.groupby("omraade")["sentiment"].mean()`: Gennemsnitlig score per politikområde, sorteret.
+
+</details>
+
 <br>
 
 `nlp.pipe()` kører mange tekster igennem ad gangen. Resultatet lægges direkte tilbage som en kolonne i tabellen.
-
-::: {.aside}
-900 debatter á 5.000 tegn tager cirka 50 sekunder. Kør det på et udsnit først.
-:::
 
 # Analyse: tonen i Folketinget
 
@@ -916,8 +970,6 @@ print(korpus.groupby("omraade")["sentiment"].mean().sort_values())
 <br>
 
 - `compound` går fra −1 (meget negativ) til +1 (meget positiv)
-- Vi har kørt `asent` på alle 900 debatter i udsnittet
-- Tallene herunder er de faktiske resultater
 
 ## Folketinget er høfligt
 
@@ -929,13 +981,9 @@ print(korpus.groupby("omraade")["sentiment"].mean().sort_values())
 
 <br>
 
-::: {.incremental}
-
 Over 94 % af debatterne er positive. Det siger mindre om politik end om **genren**.
 
 En 1. behandling er fuld af *"tak for det"*, *"jeg vil gerne kvittere for"* og *"det er godt, at vi er enige om"*. Parlamentarisk sprog har faste høflighedsformler, og en sentimentmodel læser dem som positiv tone.
-
-:::
 
 ## Per politikområde
 
@@ -950,96 +998,21 @@ En 1. behandling er fuld af *"tak for det"*, *"jeg vil gerne kvittere for"* og *
 
 <br>
 
-::: {.incremental}
-
-Retsvæsen er lavest, Uddannelse højest. Det giver intuitivt mening: straf og kriminalitet mod unge og uddannelse.
+Retsvæsen er lavest, Uddannelse højest. Det giver intuitivt mening: straf og kriminalitet over for unge og uddannelse.
 
 Men se på størrelsen af forskellene, før I tolker på dem.
 
-:::
-
 ## Forskellene er små
-
-::: {.incremental}
 
 - Spredningen **mellem** områdernes gennemsnit: standardafvigelse **0,035**
 
 - Spredningen **inden for** hvert område: standardafvigelse **0,091**
 
-:::
-
 <br>
-
-::: {.incremental}
 
 Debatterne inden for ét område varierer mere end to og en halv gang så meget som forskellen mellem områderne.
 
 Retsvæsen og Uddannelse skiller sig ud. De fire i midten er reelt ikke til at skelne fra hinanden.
-
-:::
-
-## Emne eller holdning?
-
-De mest negative debatter i udsnittet:
-
-| År | Lovforslag | `compound` |
-|---|---|---:|
-| 2008 | Strafskærpelse for seksuelt misbrug af børn | **−0,33** |
-| 2014 | Nyt personnummer i særlige tilfælde | −0,20 |
-| 2008 | Miljøbeskyttelse | −0,19 |
-| 2008 | Straf for ulovlig tvang ved indgåelse af ægteskab | −0,18 |
-
-<br>
-
-::: {.incremental}
-
-Den mest negative debat er om at straffe seksuelt misbrug af børn hårdere. Et forslag, som stort set alle partier støtter.
-
-Modellen måler ikke, om talerne er **imod** noget. Den måler, at de taler om **noget negativt**: misbrug, vold, tvang.
-
-> Sentiment er ikke holdning. Det er ofte bare emnet, der smitter af.
-
-:::
-
-## To modeller, samme korpus
-
-| | Egen ordbog | `asent` |
-|---|---|---|
-| Ord i modellen | 22 | flere tusind |
-| Debatter uden score | **90 af 900** | **0 af 900** |
-| Håndterer negation | nej | ja |
-| Lavest scorende område | Retsvæsen | Retsvæsen |
-| Højest scorende område | Beskæftigelse | Uddannelse |
-
-<br>
-
-::: {.incremental}
-
-Begge modeller er enige om, at Retsvæsen ligger lavest. Men de er uenige om rækkefølgen af resten.
-
-:::
-
-## Og de er uenige
-
-::: {.incremental}
-
-De to modeller er enige om fortegnet i **85 %** af debatterne. Korrelationen mellem scorerne er **0,42**.
-
-Og de to rangordener af politikområder har en rangkorrelation på **0,46**.
-
-:::
-
-<br>
-
-::: {.incremental}
-
-> Hvilken af dem har ret?
-
-Det kan man ikke afgøre ud fra tallene. Det kræver, at nogen læser et udsnit af teksterne og koder dem i hånden ... og at man så måler modellerne op mod den kodning.
-
-Det er den validering, Bonikowski & Nelson efterlyser. Og den er ikke lavet her.
-
-:::
 
 ## Minimumsvalidering
 
@@ -1047,34 +1020,37 @@ Det er den validering, Bonikowski & Nelson efterlyser. Og den er ikke lavet her.
 stikproeve = korpus.sample(20, random_state=42)
 
 print(stikproeve[["aar", "omraade", "lovnr", "sentiment"]].to_string())
+
+# læs én debat ad gangen: skift 0 ud med 1, 2, ... 19
+print(stikproeve["tekst"].iloc[0][:1500])
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+1. `korpus.sample(20, random_state=42)`: 20 tilfældige debatter. `random_state=42` gør, at vi alle får de samme.
+2. `.to_string()`: Udskriv hele tabellen, uden at pandas forkorter den med `...`.
+3. `stikproeve["tekst"].iloc[0]`: Teksten i første række af stikprøven. `.iloc` vælger efter placering, ikke efter indeks.
+4. `[:1500]`: De første 1.500 tegn.
+
+</details>
 
 <br>
 
-Tyve debatter. Læs dem, og skriv for hvert enkelt, om I er enige med modellen.
-
-::: {.incremental}
-
-Er I uenige i under fem, kan tallet bruges med forbehold. Er I uenige i over ti, måler modellen noget andet, end I tror.
-
-Det tager tyve minutter, og det er forskellen på en metodesektion, der holder, og en der ikke gør.
-
-:::
-
-
+Tyve debatter. Læs dem, og vurder for hver enkelt, om I er enige med modellen.
 
 # Del 6: PCA og k-means
 
 ## Spørgsmålet
 
-> Kan en algoritme finde politikområderne i teksten ... uden at få at vide, hvad de er?
+> Kan en algoritme finde politikområderne i teksten?
 
 <br>
 
-Vi har en facitliste: ministeriet bag hvert lovforslag. Det har man sjældent. Her kan vi bruge den til at se, hvad de usuperviserede metoder faktisk finder.
+I disse data har vi en "facitliste" i form af ministeriet bag hvert lovforslag. Det har man sjældent. Her kan vi bruge den til at se, hvad de usuperviserede metoder faktisk finder.
 
-- **PCA**: dimensionalitetsreduktion. Fra tusindvis af ord til få akser, vi kan se på
-- **k-means**: klyngeanalyse. Del debatterne i grupper, der ligner hinanden
+- **PCA**: *dimensionalitetsreduktion*. Fra tusindvis af ord til få akser, vi kan se på
+- **k-means**: *klyngeanalyse*. Del debatterne i grupper, der ligner hinanden
 
 ::: {.aside}
 Vi bruger kun de seks navngivne områder. "Andet" er en restkategori uden et fælles emne at finde.
@@ -1084,7 +1060,7 @@ Vi bruger kun de seks navngivne områder. "Andet" er en restkategori uden et fæ
 
 ```{pyodide}
 #| autorun: false
-seks = korpus[korpus["omraade"] != "Andet"].copy()
+tek = korpus[korpus["omraade"] != "Andet"].copy()
 
 stopord = set("""og i jeg det at en den til er som på de med han af for ikke
 der var mig sig men et har om vi min havde ham hun nu over da fra du ud sin dem
@@ -1094,17 +1070,32 @@ sådan andre nogle bliver blive kan så ved mod meget rigtig tak hr fru ordføre
 ordføreren forslag lovforslag lovforslaget minister ministeren værsgo altså godt
 synes mener bare lige hele netop sige siger""".split())
 
-ord = (seks["tekst"].str.lower()
+ord = (tek["tekst"].str.lower()
        .str.replace(r"[^a-zæøå ]", " ", regex=True)
        .str.split().explode())
 ord = ord[(ord.str.len() > 2) & ~ord.isin(stopord)]
 
-print(len(seks), "debatter |", len(ord), "tokens |", ord.nunique(), "typer")
+print(len(tek), "debatter |", len(ord), "tokens |", ord.nunique(), "typer")
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+Læs det oppefra og ned:
+
+1. `korpus[korpus["omraade"] != "Andet"].copy()`: Behold kun de seks navngivne områder. `.copy()` giver en selvstændig tabel.
+2. `"""..."""`: En tekststreng, der må fylde flere linjer.
+3. `.split()`: Del strengen ved mellemrum og linjeskift, så vi får en liste af ord.
+4. `set(...)`: Gør listen til en **mængde**. Hvert ord står der kun én gang, og det går hurtigt at slå op i den.
+5. `.str.replace(r"[^a-zæøå ]", " ", regex=True)`: Alt, der ikke er små bogstaver eller mellemrum, bliver til mellemrum. Det fjerner både tegnsætning og tal.
+6. `.str.split().explode()`: Ét ord per række.
+7. `ord.str.len() > 2`: Kun ord på mere end to bogstaver. `&` betyder *og*, `~ord.isin(stopord)` betyder *ikke på stopordslisten*.
+
+</details>
 
 <br>
 
-Præcis kæden fra lektion 6. Stopordslisten har fået nogle ord, der er særlige for Folketinget: `ordfører`, `lovforslag`, `værsgo`, `tak`.
+Processen fra lektion 6. Stopordslisten har fået nogle ord, der er særlige for Folketinget: `ordfører`, `lovforslag`, `værsgo`, `tak`.
 
 ## Document-term matrix
 
@@ -1114,7 +1105,7 @@ Præcis kæden fra lektion 6. Stopordslisten har fået nogle ord, der er særlig
 df = ord.rename("ord").reset_index().drop_duplicates()["ord"].value_counts()
 
 # behold ord i mindst 5 debatter og højst halvdelen af dem
-behold = df[(df >= 5) & (df <= 0.5 * len(seks))].index
+behold = df[(df >= 5) & (df <= 0.5 * len(tek))].index
 ord = ord[ord.isin(behold)]
 
 dtm = pd.crosstab(ord.index, ord)
@@ -1123,9 +1114,24 @@ print("DTM:", dtm.shape)
 print("Sparsity:", round((dtm == 0).to_numpy().mean() * 100, 1), "%")
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+Læs det oppefra og ned:
+
+1. `ord.rename("ord").reset_index()`: Gør indekset (debatten) til en kolonne, så vi har en tabel med debat og ord.
+2. `.drop_duplicates()`: Hvert ord tæller kun én gang per debat.
+3. `["ord"].value_counts()`: I hvor mange debatter står hvert ord? Det er **dokumentfrekvensen**. Bemærk, at `df` her står for *document frequency* og ikke er en DataFrame.
+4. `df[(df >= 5) & (df <= 0.5 * len(tek))].index`: Ordene, der står i mindst 5 og højst halvdelen af debatterne. `.index` giver selve ordene, ikke tallene.
+5. `ord[ord.isin(behold)]`: Behold kun de ord.
+6. `pd.crosstab(ord.index, ord)`: Krydstabellen mellem debat og ord er vores DTM: én række per debat, én kolonne per ord.
+7. `(dtm == 0).to_numpy().mean()`: Andelen af celler, der er 0.
+
+</details>
+
 <br>
 
-Den øvre grænse er ny: ord, der står i over halvdelen af debatterne, skiller dem ikke ad. Det er Denny & Spirlings **I**, bare i begge ender.
+Den øvre grænse er ny: ord, der står i over halvdelen af debatterne, skiller dem ikke ad.
 
 ## TF-IDF: vægt ordene
 
@@ -1145,9 +1151,22 @@ print(idf.sort_values().head(5).round(2))
 print(idf.sort_values().tail(5).round(2))
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+Læs det oppefra og ned:
+
+1. `dtm.sum(axis=1)`: Antal ord i hver debat (summen hen ad rækken). `dtm.div(..., axis=0)` dividerer hver række med sin sum. Det er **TF**: hvor stor en andel af debattens ord er dette ord?
+2. `(dtm > 0).sum()`: I hvor mange debatter står hvert ord (summen ned ad kolonnen)? `len(dtm)` er antallet af debatter. `np.log(...)` giver **IDF**: høj for sjældne ord, lav for ord i mange debatter.
+3. `tf * idf`: Pandas ganger hver kolonne med ordets IDF og matcher på kolonnenavnet.
+4. `np.sqrt((tfidf ** 2).sum(axis=1))`: Længden af hver række (Pythagoras). Når vi dividerer med den, får hver debat længden 1.
+5. `idf.sort_values().head(5)` og `.tail(5)`: De fem mest udbredte og de fem sjældneste ord.
+
+</details>
+
 <br>
 
-Tre linjer pandas-regning. Den sidste linje er vigtig: uden normaliseringen ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse.
+**Det sidste er vigtig**, uden *normaliseringen* ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse.
 
 ## PCA: fra tusindvis af dimensioner til to
 
@@ -1158,33 +1177,55 @@ from sklearn.decomposition import PCA
 pca = PCA(n_components=2, random_state=1)
 akser = pca.fit_transform(tfidf)
 
-seks.loc[dtm.index, "pc1"] = akser[:, 0]
-seks.loc[dtm.index, "pc2"] = akser[:, 1]
+tek.loc[dtm.index, "pc1"] = akser[:, 0]
+tek.loc[dtm.index, "pc2"] = akser[:, 1]
 
 print("Forklaret varians:", pca.explained_variance_ratio_.round(4))
-print(seks.groupby("omraade")[["pc1", "pc2"]].mean().round(3))
+print(tek.groupby("omraade")[["pc1", "pc2"]].mean().round(3))
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+Læs det oppefra og ned:
+
+1. `from sklearn.decomposition import PCA`: Hent PCA fra scikit-learn.
+2. `PCA(n_components=2, random_state=1)`: Vi beder om to akser. `random_state` gør resultatet det samme hver gang.
+3. `pca.fit_transform(tfidf)`: Find akserne (`fit`), og placér hver debat på dem (`transform`). Resultatet er en NumPy-tabel med én række per debat og to kolonner.
+4. `akser[:, 0]`: Alle rækker, første kolonne. `akser[:, 1]` er den anden.
+5. `tek.loc[dtm.index, "pc1"] = ...`: Læg værdierne tilbage på de rigtige debatter. `dtm.index` er debatterne i samme rækkefølge som i `akser`.
+6. `pca.explained_variance_ratio_`: Hvor stor en andel af forskellene mellem debatterne hver akse fanger.
+7. `tek.groupby("omraade")[["pc1", "pc2"]].mean()`: Hvert områdes gennemsnitlige placering på de to akser.
+
+</details>
 
 <br>
 
 PCA finder de retninger i rummet, hvor debatterne er **mest forskellige**, og projicerer alle punkter ned på dem.
 
-`fit_transform()` er den eneste linje, der ikke er pandas. Resten er at lægge resultatet tilbage i tabellen.
-
 ## Kortet
 
 ```{pyodide}
 #| autorun: false
-(ggplot(seks, aes(x="pc1", y="pc2", color="omraade"))
+(ggplot(tek, aes(x="pc1", y="pc2", color="omraade"))
  + geom_point(alpha=0.6)
  + labs(title="Folketingets debatter, projiceret ned på to dimensioner",
         x="PC1", y="PC2", color=None)
  + theme_minimal()).show()
 ```
 
+<details>
+<summary>Noter til koden</summary>
+
+1. `ggplot(tek, aes(x="pc1", y="pc2", color="omraade"))`: Hver debat placeres efter sine to PCA-værdier og farves efter politikområde.
+2. `geom_point(alpha=0.6)`: Et punkt per debat. `alpha=0.6` gør punkterne delvist gennemsigtige, så man kan se, hvor de ligger oven på hinanden.
+3. `labs(...)` og `theme_minimal()`: Titler og et enkelt udseende, som på de tidligere figurer.
+
+</details>
+
 <br>
 
-Hvert punkt er en debat. Farven er ministeriet ... som PCA ikke har set.
+Hvert punkt er en debat. Farven er ministeriet, **som PCA ikke har set**. Det er en ekstra oplysning, vi har i netop disse data.
 
 ## Hvad betyder akserne?
 
@@ -1198,35 +1239,22 @@ for akse in ["pc1", "pc2"]:
     print(akse, "-", vaegte[akse].nsmallest(6).index.tolist())
 ```
 
-<br>
+<details>
+<summary>Noter til koden</summary>
 
-::: {.incremental}
+1. `pca.components_`: Hvert ords vægt på hver akse, med én række per akse. `.T` vender tabellen, så ordene bliver rækker.
+2. `pd.DataFrame(..., index=tfidf.columns, columns=["pc1", "pc2"])`: Giv rækkerne ordenes navne og kolonnerne aksernes.
+3. `for akse in ["pc1", "pc2"]:`: Gør det samme for begge akser.
+4. `.nlargest(6)` og `.nsmallest(6)`: De seks ord med den største positive og den største negative vægt, altså de to ender af aksen.
+5. `.index.tolist()`: Kun ordene, som en liste.
+
+</details>
+
+<br>
 
 - **PC1** går fra *unge, uddannelse, elever* (+) til *virksomheder, skat, afgift, selskaber* (−). Mennesker over for markeder.
 
 - **PC2** går fra *Grønland, udlændinge, statsborgerskab, kriminalitet, politiet* (+) til *virksomheder, kommunerne, grøn omstilling* (−). Kontrol og ret over for økonomi og forvaltning.
-
-- Uddannelse ligger længst ude på PC1. Udlændinge og Retsvæsen ligger længst oppe på PC2.
-
-:::
-
-## Hvor meget er med på kortet?
-
-| Komponenter | Forklaret varians |
-|---|---:|
-| 2 | **1,9 %** |
-| 10 | 7,5 % |
-| 50 | 23,8 % |
-
-<br>
-
-::: {.incremental}
-
-Kortet viser under 2 % af variationen i data. Det er ikke en fejl. Tekst er **højdimensionelt**: hver debat bruger sit eget lille udsnit af tusindvis af ord.
-
-Kortet er en skygge af data, ikke data. Det er godt til at få øje på mønstre, og dårligt til at konkludere på.
-
-:::
 
 ## k-means: find grupperne
 
@@ -1235,20 +1263,29 @@ Kortet er en skygge af data, ikke data. Det er godt til at få øje på mønstre
 from sklearn.cluster import KMeans
 
 km = KMeans(n_clusters=6, n_init=10, random_state=0)
-seks.loc[dtm.index, "klynge"] = km.fit_predict(tfidf)
+tek.loc[dtm.index, "klynge"] = km.fit_predict(tfidf)
 
-print(pd.crosstab(seks["omraade"], seks["klynge"]))
+print(pd.crosstab(tek["omraade"], tek["klynge"]))
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+1. `from sklearn.cluster import KMeans`: Hent k-means fra scikit-learn.
+2. `KMeans(...)`: Opsæt algoritmen. `random_state=0` gør resultatet det samme hver gang.
+3. `km.fit_predict(tfidf)`: Find klyngerne (`fit`), og giv hver debat et klyngenummer fra 0 til 5 (`predict`).
+4. `tek.loc[dtm.index, "klynge"] = ...`: Læg klyngenumrene tilbage på de rigtige debatter, som med PCA.
+5. `pd.crosstab(tek["omraade"], tek["klynge"])`: Hvor mange debatter fra hvert område der er havnet i hver klynge.
+
+</details>
 
 <br>
 
-`n_clusters=6` er **vores** valg: vi ved, der er seks områder. I en rigtig analyse ved man det ikke.
+`n_clusters=6` er **vores** valg: vi ved, der er seks områder. **I en "rigtig" analyse ved man det ikke.**
 
 `n_init=10` kører algoritmen fra ti tilfældige startpunkter og beholder den bedste.
 
 ## Klynger mod politikområder
-
-::: {.incremental}
 
 - **Skat**: 82 af 104 i én klynge
 - **Uddannelse**: 69 af 83 i én klynge
@@ -1256,8 +1293,6 @@ print(pd.crosstab(seks["omraade"], seks["klynge"]))
 - **Miljø og klima**: 66 af 114 i én klynge ... men den deler den med 27 retsvæsensdebatter
 - **Udlændinge**: 32 af 41 i én klynge ... sammen med 28 retsvæsensdebatter
 - **Retsvæsen**: fordelt på tre klynger
-
-:::
 
 <br>
 
@@ -1273,13 +1308,35 @@ Samlet havner **66 %** af debatterne i en klynge, hvor deres eget område er det
 #| autorun: false
 centre = pd.DataFrame(km.cluster_centers_, columns=tfidf.columns)
 
-for k in range(6):
-    print(k, centre.loc[k].nlargest(8).index.tolist())
+top = (centre
+       .rename_axis(index="klynge", columns="ord")
+       .stack()
+       .rename("vaegt")
+       .reset_index()
+       .sort_values("vaegt", ascending=False)
+       .groupby("klynge")
+       .head(8))
+
+print(top.groupby("klynge")["ord"].agg(list))
 ```
+
+<details>
+<summary>Noter til koden</summary>
+
+Læs det oppefra og ned:
+
+1. `pd.DataFrame(km.cluster_centers_, columns=tfidf.columns)`: Klyngecentrene som en tabel med én række per klynge og én kolonne per ord.
+2. `.rename_axis(index="klynge", columns="ord")`: Giv rækkerne og kolonnerne navne, så de får de navne i næste trin.
+3. `.stack().rename("vaegt").reset_index()`: Fra bred til lang: én række per klynge og ord, med kolonnerne `klynge`, `ord` og `vaegt`. Som `pivot_longer()` i R.
+4. `.sort_values("vaegt", ascending=False)`: Største vægt først. Som `arrange(desc(vaegt))`.
+5. `.groupby("klynge").head(8)`: De første otte rækker i hver klynge. Som `group_by(klynge) |> slice_head(n = 8)`.
+6. `top.groupby("klynge")["ord"].agg(list)`: Saml ordene i én liste per klynge, så de kan læses på én linje.
+
+</details>
 
 <br>
 
-Et klyngecenter er gennemsnittet af klyngens debatter. De ord, der vægter mest i centret, beskriver klyngen.
+Et **klyngecenter** er gennemsnittet af klyngens debatter. De ord, der vægter mest i centret, beskriver klyngen.
 
 ## Hvad fandt algoritmen?
 
@@ -1297,145 +1354,20 @@ Et klyngecenter er gennemsnittet af klyngens debatter. De ord, der vægter mest 
 
 ::: {.incremental}
 
-Det er det, klyngeanalyse er god til: at vise, hvor vores kategorier **ikke** passer med teksten.
-
-:::
-
-## En fejlkilde i toppen
-
-Se efter i ordlisterne: `nonbo`, `karsten`, `bonnesen`, `andersen`.
-
-::: {.incremental}
-
-Det er **navne**. Formanden introducerer hver taler: *"Hr. Karsten Nonbo, Venstre. Værsgo."*
-
-Og ordførerne er faste for hvert område. Karsten Nonbo (V) er ordfører i 14 af udsnittets retsvæsensdebatter. Erling Bonnesen (V) optræder i 22 miljødebatter. Klyngen om kriminalitet kender altså delvist retsvæsenet, fordi den kender ordføreren.
-
-:::
-
-<br>
-
-::: {.incremental}
-
-> Algoritmen klynger delvist på **hvem der taler**, ikke kun på **hvad der bliver sagt**.
-
-Det kan man rette ved at fjerne navne i forbehandlingen. Men man skal først opdage det, og det gør man kun ved at læse ordlisterne.
-
-:::
-
-## k-means afhænger af startpunktet
-
-```{pyodide}
-#| autorun: false
-def renhed(etiketter):
-    tabel = pd.crosstab(etiketter, seks.loc[dtm.index, "omraade"].to_numpy())
-    return tabel.max(axis=1).sum() / tabel.to_numpy().sum()
-
-for start in range(8):
-    etiketter = KMeans(n_clusters=6, n_init=10,
-                       random_state=start).fit_predict(tfidf)
-    print(f"startpunkt {start}: renhed {renhed(etiketter):.3f}")
-```
-
-<br>
-
-::: {.incremental}
-
-Samme data, samme antal klynger, forskellige tilfældige startpunkter: renheden går fra **0,55 til 0,73**.
-
-Vi har vist resultatet for startpunkt 0. Et andet startpunkt ville have givet andre klynger ... og en anden fortælling. Den variation hører med i metodeafsnittet.
-
-:::
-
-## PCA før k-means
-
-Et almindeligt greb: reducér først med PCA, og kør så k-means på de få komponenter.
-
-```{pyodide}
-#| autorun: false
-for n in [2, 10, 50]:
-    faa = PCA(n_components=n, random_state=1).fit_transform(tfidf)
-    r = [renhed(KMeans(n_clusters=6, n_init=10, random_state=s).fit_predict(faa))
-         for s in range(8)]
-    print(f"{n:>3} komponenter: renhed {np.mean(r):.3f}  "
-          f"(spænd {min(r):.3f}-{max(r):.3f})")
-```
-
-<br>
-
-| Input til k-means | Gns. renhed | Spænd over 8 startpunkter |
-|---|---:|---:|
-| Alle 4.042 ord | 0,63 | 0,55-0,73 |
-| 50 komponenter | 0,60 | 0,50-0,79 |
-| 10 komponenter | 0,62 | 0,53-0,75 |
-| 2 komponenter | **0,53** | **0,51-0,54** |
-
-<br>
-
-::: {.incremental}
-
-Med **to** komponenter bliver klyngerne næsten ens hver gang ... men dårligere. Det, PCA smider væk, er ikke kun støj.
-
-Med 10 og 50 komponenter er klyngerne lige så gode som uden PCA ... og lige så ustabile.
-
-Dimensionalitetsreduktion er en afvejning mellem stabilitet og information, ikke en gratis forbedring.
+Klyngeanalyse er også god til at vise, hvor vores kategorier **ikke** passer med teksten.
 
 :::
 
 ## Hvad kan vi så konkludere?
 
-::: {.incremental}
-
 - At teksten i Folketingets debatter bærer **nok information** til at genfinde de fleste politikområder, uden at algoritmen kender dem.
 
-- At PCA's kort er **letlæseligt men fattigt**: 2 % af variationen, fortolket gennem de ord, der vægter mest.
-
-- At k-means finder strukturer, vores kategorier ikke har: Justitsministeriets blandede portefølje, overlappet mellem udlændinge og kriminalitet.
-
-- At resultatet afhænger af **startpunktet**, af **antallet af klynger** og af **forbehandlingen** ... herunder om navnene er fjernet.
-
-:::
+- At k-means finder strukturer, vores kategorier ikke har, såsom Justitsministeriets blandede portefølje og overlappet mellem udlændinge og kriminalitet i debatterne.
 
 <br>
 
-::: {.incremental}
-
-> Et topic model finder altid emner. Også i støj. Det samme gælder k-means. Det er jer, der afgør, om de betyder noget.
-
-:::
-
-
-
-# Del 7: Øvelser
+> En topic model finder altid emner, selv i ren støj. Det samme gælder k-means. Det er jer, der afgør, om de betyder noget.
 
 ## Øvelser
-
-<span class="timer" data-time="1200"></span>
-
-I øvelserne arbejder I med det **fulde** datasæt: alle 3.070 1. behandlinger.
-
-1. **Byg jeres egen temaordbog.** Vælg et tema, som ikke er med i dag (sundhed, forsvar, EU, landbrug ...). Validér den mod politikområderne, og følg den over tid.
-
-2. **Normalisér.** Sammenlign forekomster per 1.000 ord med rå optællinger. Ændrer det konklusionen?
-
-3. **Sentiment.** Kør `asent` på et udsnit. Find de fem mest negative og fem mest positive debatter, og læs dem. Er det emnet eller holdningen, der drev scoren?
-
-4. **Antal klynger.** Kør k-means med 4, 6, 8 og 10 klynger. Hvornår begynder klyngerne at give mening ... og hvornår holder de op?
-
-5. **Fjern navnene.** Find talernes navne i teksten, og fjern dem før klyngeanalysen. Ændrer det klyngerne?
-
-6. **Portfolio.** Svar på Hunstons fire spørgsmål om det korpus, I vil bruge.
-
-## Litteratur
-
-**Bonikowski, B. & Nelson, L. K.** (2022). From Ends to Means: The Promise of Computational Text Analysis for Theoretically Driven Sociological Research. *Sociological Methods & Research*, 51(4), 1469-1483.
-
-**Macanovic, A.** (2022). Text mining for social science — The state and the future of computational text analysis in sociology. *Social Science Research*, 108, 102784.
-
-**Hunston, S.** (2002). The corpus as object: Design and purpose. I: *Corpora in Applied Linguistics*, s. 25-37. Cambridge University Press.
-
-<br>
-
-**Supplerende:** Thelwall, M. (2023). Sentiment Analysis. I: *The SAGE Handbook of Social Media Research Methods*.
 
 **Dokumentation:** [spaCy 101](https://spacy.io/usage/spacy-101) | [asent](https://kennethenevoldsen.github.io/asent/index.html) | [scikit-learn: PCA](https://scikit-learn.org/stable/modules/decomposition.html#pca) | [scikit-learn: k-means](https://scikit-learn.org/stable/modules/clustering.html#k-means)

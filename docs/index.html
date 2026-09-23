@@ -236,7 +236,7 @@ mkdir -p .qmd-pause && mv *.qmd .qmd-pause/ && \
 <p><br></p>
 
 <aside><div>
-<p>Ingen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativt i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer.</p>
+<p>Ingen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativ i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer.</p>
 </div></aside></section>
 <section id="dagens-data" class="slide level2">
 <h2>Dagens data</h2>
@@ -249,7 +249,7 @@ mkdir -p .qmd-pause && mv *.qmd .qmd-pause/ && \
 <p><br></p>
 <p><strong>3.070 debatter</strong> og cirka <strong>22 millioner ord</strong>.</p>
 </section>
-<section id="korpusset" class="slide level2">
+<section id="korpusset" class="slide level2 scrollable">
 <h2>Korpusset</h2>
 <div class="cell" data-autorun="true">
 <div>
@@ -261,6 +261,20 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1w
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>import pandas as pd</code> og <code>import numpy as np</code>: Hent de to biblioteker, og giv dem de korte navne <code>pd</code> og <code>np</code>.</li>
+<li><code>url = ...</code>: Adressen på filen på GitHub. <code>raw.githubusercontent.com</code> giver selve filen og ikke GitHubs webside om filen.</li>
+<li><code>pd.read_csv(url)</code>: Læs CSV-filen direkte fra nettet ind i en DataFrame.</li>
+<li><code>korpus.shape</code>: Antal rækker og kolonner, som <code>(rækker, kolonner)</code>.</li>
+<li><code>korpus[["aar", "lovnr", "omraade"]]</code>: Vælg tre kolonner. De dobbelte klammer betyder, at vi giver en <strong>liste</strong> af kolonnenavne.</li>
+<li><code>.head()</code>: Vis de første fem rækker.</li>
+</ol>
+</details>
 <p><br></p>
 <p>Et tilfældigt udsnit på <strong>900 debatter</strong>. Hver tekst er afkortet til de første 5.000 tegn.</p>
 </section>
@@ -340,106 +354,43 @@ eyJhdHRyIjp7ImF1dG9ydW4iOnRydWUsImVkaXQiOnRydWUsImV2YWwiOnRydWV9LCJjb2RlIjoiaW1w
 <p><br></p>
 <p>Hvert trin er en beslutning om, hvad der tæller som “en politisk debat”.</p>
 </section>
-<section id="ikke-alle-punkter-er-debatter" class="slide level2">
-<h2>Ikke alle punkter er debatter</h2>
+<section id="hvad-er-en-tekst-her" class="slide level2 scrollable">
+<h2>Hvad er “en tekst” her?</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-2" class="exercise-cell">
 
 </div>
 <script type="pyodide-2-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByaW50KGtvcnB1c1tcInRla3N0XCJdLnN0ci5sZW4oKS5kZXNjcmliZSgpLnJvdW5kKDApKSJ9
-</script>
-</div>
-</div>
-<p><br></p>
-<p>I det fulde materiale er 2. og 3. behandlinger typisk <strong>800 tegn</strong> lange: en afstemning og et par formalia. 1. behandlingerne er typisk <strong>29.000 tegn</strong>.</p>
-<p>Og 73 af 1. behandlingerne var under 2.000 tegn. 31 af dem bestod af én sætning:</p>
-<blockquote>
-<p><em>(Som tidligere meddelt er punktet udgået af dagsordenen).</em></p>
-</blockquote>
-<p>Havde vi ikke fjernet dem, ville de have endt som ekstreme punkter i en klyngeanalyse. Vi kommer tilbage til det.</p>
-</section>
-<section id="hvad-er-en-tekst-her" class="slide level2">
-<h2>Hvad er “en tekst” her?</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-3" class="exercise-cell">
-
-</div>
-<script type="pyodide-3-contents">
 eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByaW50KGtvcnB1cy5sb2NbMCwgXCJ0ZWtzdFwiXVs6NjAwXSkifQ==
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>korpus.loc[0, "tekst"]</code>: Vælg rækken med indeks <code>0</code> og kolonnen <code>tekst</code>. Det er én celle, altså én debat.</li>
+<li><code>[:600]</code>: De første 600 tegn. En tekststreng kan skæres over på samme måde som en liste.</li>
+</ol>
+</details>
 <p><br></p>
 <ul>
 <li><p>Én tekst er <strong>hele debatten</strong> om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar</p></li>
 <li><p>Der står <strong>ikke</strong>, hvem der siger hvad. Talerne introduceres kun af formanden i løbende tekst</p></li>
 </ul>
-<p>Vi kan altså sammenligne <strong>lovforslag</strong> … men ikke partier eller politikere. Det er en designbegrænsning, ikke en detalje.</p>
-</section>
-<section id="vores-annotering-politikområde" class="slide level2">
-<h2>Vores annotering: politikområde</h2>
-<p>Datasættet har ingen emnevariabel. Vi har lavet den selv.</p>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-4" class="exercise-cell">
-
-</div>
-<script type="pyodide-4-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByaW50KGtvcnB1c1tcIm1pbmlzdGVyXCJdLnZhbHVlX2NvdW50cygpLmhlYWQoOCkpXG5wcmludCgpXG5wcmludChrb3JwdXNbXCJvbXJhYWRlXCJdLnZhbHVlX2NvdW50cygpKSJ9
-</script>
-</div>
-</div>
-<p><br></p>
-<p>Hvert lovforslag er fremsat af en minister. Vi har samlet ministertitlerne i <strong>seks politikområder</strong> og et “Andet”.</p>
-<p><code>klima-, energi- og forsyningsministeren</code> og <code>miljøministeren</code> blev begge til <strong>Miljø og klima</strong>. Ministerierne skifter navn med hver regering. Det gør vores kategorier ikke.</p>
-</section>
-<section id="hunston-2002-korpusset-er-bygget" class="slide level2">
-<h2>Hunston (2002): korpusset er bygget</h2>
-<blockquote>
-<p>Et korpus er et <strong>konstrueret objekt</strong>, ikke en objektiv repræsentation af sprog.</p>
-</blockquote>
-<p><br></p>
-<p>Designbeslutningerne afgør, hvilke spørgsmål der overhovedet kan besvares. De er ikke tekniske detaljer, der kommer før analysen, de <strong>er</strong> en del af analysen.</p>
-<p><br></p>
-<blockquote>
-<p>I dag er 1 million ord et <strong>lille</strong> korpus.</p>
-</blockquote>
-<p>De fulde debatter er 22 millioner ord. Det er et mellemstort korpus … og i dag bruger vi kun et udsnit af det.</p>
+<p>Vi kan altså sammenligne <strong>lovforslag</strong> … men ikke partier eller politikere. Det er en <strong>designbegrænsning</strong>.</p>
 </section>
 <section id="fire-spørgsmål-til-ethvert-korpus" class="slide level2 scrollable">
 <h2>Fire spørgsmål til ethvert korpus</h2>
 <ol type="1">
 <li><p><strong>Hvor kommer teksterne fra?</strong> Ét medie eller flere? Hvem har valgt netop dem?</p></li>
 <li><p><strong>Hvem har skrevet dem?</strong> Redigeret eller spontant? Én forfatter eller mange?</p></li>
-<li><p><strong>Hvilke teksttyper er med — og hvilke er ikke?</strong></p></li>
+<li><p><strong>Hvilke teksttyper er med og hvilke er evt. ikke?</strong></p></li>
 <li><p><strong>Hvad skete der under indsamlingen?</strong> Hvad blev der af formatering, billedtekster, kommentarer?</p></li>
 </ol>
-</section>
-<section id="diskussion" class="slide level2">
-<h2>Diskussion</h2>
-<p><span class="timer" data-time="420"></span></p>
-<ul>
-<li><p>Referaterne er <strong>redigeret</strong> af Folketingets referenter. Er det det talte sprog, vi analyserer?</p></li>
-<li><p>Vi har valgt 1. behandlinger. Hvilke politiske debatter er dermed ikke med?</p></li>
-<li><p>Hvilket spørgsmål kan dette korpus <strong>ikke</strong> svare på, uanset hvor god metoden er?</p></li>
-</ul>
-</section>
-<section id="annotering" class="slide level2">
-<h2>Annotering</h2>
-<p>Rå tekst kan man tælle ord i. Alt andet kræver, at nogen har <strong>tilføjet information</strong>.</p>
-<ul>
-<li><p><strong>Manuel kodning</strong>: mennesker læser og “mærker”/“tagger”. Dyrt, men stadig målestokken.</p></li>
-<li><p><strong>Automatisk annotering</strong>: en model tilføjer ordklasser, navne, sentiment. Hurtigt, men modellen har selv lært det et sted fra.</p></li>
-</ul>
-<p><br></p>
-<p>Spørgsmålet er aldrig, om annoteringen er perfekt. Det er, om fejlene er <strong>systematiske</strong>, for det flytter resultatet i én bestemt retning.</p>
-
-<aside><div>
-<p>Vores politikområde er en tredje slags: en regel, vi selv har skrevet. Den er gennemsigtig, men den er stadig en beslutning.</p>
-</div></aside></section></section>
+</section></section>
 <section>
 <section id="del-3-hvad-kan-man" class="title-slide slide level1 center">
 <h1>Del 3: Hvad kan man?</h1>
@@ -458,23 +409,6 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBy
 <p><br></p>
 <p>I dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i fokus på SDS2.</p>
 </section>
-<section id="induktivt-og-deduktivt" class="slide level2">
-<h2>Induktivt og deduktivt</h2>
-<p><strong>Deduktivt</strong>: I ved, hvad I leder efter. <strong>Ordbøger</strong> og <strong>superviseret</strong> klassifikatorer. Kategorierne er bestemt på forhånd.</p>
-<p><strong>Induktivt</strong>: I ved det ikke. Topic models og word embeddings “opdager” struktur, som I derefter skal fortolke.</p>
-</section>
-<section id="theory-in-theory-out" class="slide level2">
-<h2>Theory in, theory out</h2>
-<p>Bonikowski &amp; Nelson (2022): større datamængder kræver <strong>mere</strong> teori, ikke mindre.</p>
-<ul>
-<li><p>En metodes værdi måles på de teoretiske indsigter, den frembringer … ikke på hvor stort datasættet var.</p></li>
-<li><p>Computationel tekstanalyse kan ikke bare <em>bruge</em> teori, men også hjælpe med at <em>bygge</em> den.</p></li>
-</ul>
-<p><br></p>
-<blockquote>
-<p>Et topic model finder altid emner. Også i støj. Det er jer, der afgør, om de betyder noget.</p>
-</blockquote>
-</section>
 <section id="validering" class="slide level2">
 <h2>Validering</h2>
 <ul>
@@ -483,17 +417,6 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBy
 </ul>
 <p><br></p>
 <p>Når statistisk fit og fortolkelighed trækker i hver sin retning, skal der træffes et valg. Det valg hører i metodeafsnittet.</p>
-</section>
-<section id="den-ontologiske-debat" class="slide level2">
-<h2>Den ontologiske debat</h2>
-<blockquote>
-<p>Indeholder tekster overhovedet målbare sociale fænomener?</p>
-</blockquote>
-<p><br></p>
-<ul>
-<li><p>Eller måler vi bare, hvordan folk <strong>skriver</strong>?</p></li>
-<li><p>Det er ikke et spørgsmål, der bliver løst af et større datasæt.</p></li>
-</ul>
 </section></section>
 <section>
 <section id="del-4-ordbogsmodeller" class="title-slide slide level1 center">
@@ -509,99 +432,157 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBy
 <li><strong>Jeres egen</strong>: en liste, I selv definerer til ét bestemt spørgsmål</li>
 </ul>
 <p><br></p>
-<p>Det er den mest <strong>gennemsigtige</strong> metodefamilie. I kan altid slå op, hvorfor en tekst fik sin score.</p>
-<p>Det er også den mest <strong>restriktive</strong>. Modellen ved kun det, listen siger.</p>
+<p>Det er den mest <strong>gennemsigtige</strong> metodefamilie. I kan altid slå op, hvorfor en tekst fik sin score, men det er også den mest <strong>restriktive</strong>. Modellen ved kun det, listen siger.</p>
 </section>
 <section id="vi-bygger-én" class="slide level2">
 <h2>Vi bygger én</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-3" class="exercise-cell">
+
+</div>
+<script type="pyodide-3-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Im9yZGJvZyA9IHtcbiAgICBcImdvZFwiOiAyLCBcImdvZHRcIjogMiwgXCJiZWRyZVwiOiAyLCBcImJlZHN0XCI6IDMsIFwic3TDpnJrXCI6IDIsXG4gICAgXCJzYW5kXCI6IDIsIFwic2FuZGhlZFwiOiAyLCBcImZyaWhlZFwiOiAzLCBcInRyeWdoZWRcIjogMiwgXCJzdG9sdFwiOiAyLFxuICAgIFwiZMOlcmxpZ1wiOiAtMiwgXCJ2w6ZycmVcIjogLTIsIFwidsOmcnN0XCI6IC0zLCBcImthdGFzdHJvZmVcIjogLTMsXG4gICAgXCJsw7hnblwiOiAtMywgXCJzdmlndFwiOiAtMiwgXCJ0cnVzc2VsXCI6IC0yLCBcImZhcmxpZ1wiOiAtMixcbiAgICBcImtyaXNlXCI6IC0yLCBcInZvbGRcIjogLTMsIFwiZnJ5Z3RcIjogLTIsIFwic3ZhZ1wiOiAtMlxufVxuXG5wcmludChsZW4ob3JkYm9nKSwgXCJvcmRcIikifQ==
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ul>
+<li><code>ordbog</code> er navnet på vores variabel.<br>
+</li>
+<li><code>{ }</code> fortæller Python, at vi laver en <strong>dictionary</strong> (ordbog).<br>
+</li>
+<li>En ordbog består af nøgler og værdier: <code>"god"   →  2</code><br>
+<code>god</code> er nøgle; <code>2</code> er værdi.</li>
+</ul>
+</details>
+<p><br></p>
+<p>22 ord. Det er hele modellen.</p>
+</section>
+<section id="hvordan-den-scorer" class="slide level2 scrollable">
+<h2>Hvordan den scorer</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-4" class="exercise-cell">
+
+</div>
+<script type="pyodide-4-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgw6l0IG9yZCBwZXIgcsOma2tlLiBJbmRla3NldCBodXNrZXIsIGh2aWxrZW4gZGViYXQgb3JkZXQga29tIGZyYVxub3JkID0gKGtvcnB1c1tcInRla3N0XCJdLmFzdHlwZShzdHIpXG4gICAgICAgLnN0ci5sb3dlcigpXG4gICAgICAgLnN0ci5yZXBsYWNlKHJcIlteXFx3w6bDuMOlIF1cIiwgXCIgXCIsIHJlZ2V4PVRydWUpXG4gICAgICAgLnN0ci5zcGxpdCgpLmV4cGxvZGUoKSlcblxucHJpbnQoXCJ0b2tlbnM6XCIsIGxlbihvcmQpLCBcInwgdHlwZXI6XCIsIG9yZC5udW5pcXVlKCkpIn0=
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>korpus["tekst"]</code>: Hent kolonnen <code>tekst</code> fra DataFrame’en <code>korpus</code>.<br>
+</li>
+<li><code>.astype(str)</code>: Sørg for, at alt er tekst.<br>
+</li>
+<li><code>.str.lower()</code>: Lav alle bogstaver om til små bogstaver.<br>
+</li>
+<li><code>.str.replace(...)</code>: Erstatter tegn, der <strong>ikke</strong> er bogstaver, tal eller mellemrum, med et mellemrum.<br>
+</li>
+<li><code>.str.split()</code>: Del teksten op ved mellemrum.<br>
+</li>
+<li><code>.explode()</code>: Tager en liste og laver én række for hvert element i listen.</li>
+</ol>
+</details>
+</section>
+<section id="kør-den-på-korpusset" class="slide level2 scrollable">
+<h2>Kør den på korpusset</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-5" class="exercise-cell">
 
 </div>
 <script type="pyodide-5-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6Im9yZGJvZyA9IHtcbiAgICBcImdvZFwiOiAyLCBcImdvZHRcIjogMiwgXCJiZWRyZVwiOiAyLCBcImJlZHN0XCI6IDMsIFwic3TDpnJrXCI6IDIsXG4gICAgXCJzYW5kXCI6IDIsIFwic2FuZGhlZFwiOiAyLCBcImZyaWhlZFwiOiAzLCBcInRyeWdoZWRcIjogMiwgXCJzdG9sdFwiOiAyLFxuICAgIFwiZMOlcmxpZ1wiOiAtMiwgXCJ2w6ZycmVcIjogLTIsIFwidsOmcnN0XCI6IC0zLCBcImthdGFzdHJvZmVcIjogLTMsXG4gICAgXCJsw7hnblwiOiAtMywgXCJzdmlndFwiOiAtMiwgXCJ0cnVzc2VsXCI6IC0yLCBcImZhcmxpZ1wiOiAtMixcbiAgICBcImtyaXNlXCI6IC0yLCBcInZvbGRcIjogLTMsIFwiZnJ5Z3RcIjogLTIsIFwic3ZhZ1wiOiAtMlxufVxuXG5wcmludChsZW4ob3JkYm9nKSwgXCJvcmRcIikifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgc2zDpSBodmVydCBvcmQgb3AgaSBvcmRib2dlbiBvZyBsw6ZnIHNhbW1lbiBwZXIgZGViYXRcbmtvcnB1c1tcInNjb3JlXCJdID0gb3JkLm1hcChvcmRib2cpLmdyb3VwYnkobGV2ZWw9MCkuc3VtKClcblxucHJpbnQoa29ycHVzLmdyb3VwYnkoXCJvbXJhYWRlXCIpW1wic2NvcmVcIl0ubWVhbigpLnJvdW5kKDIpLnNvcnRfdmFsdWVzKCkpXG5wcmludCgpXG5wcmludChcIkRlYmF0dGVyIG1lZCBzY29yZSBwcsOmY2lzIDA6XCIsIChrb3JwdXNbXCJzY29yZVwiXSA9PSAwKS5zdW0oKSwgXCJhZlwiLCBsZW4oa29ycHVzKSkifQ==
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>ord.map(ordbog)</code>: Slå hvert ord op i ordbog.<br>
+</li>
+<li><code>.groupby(level=0)</code>: <code>level=0</code> betyder, at gruppering er efter det første indeksniveau, altså debatten.</li>
+<li><code>.sum()</code>: Læg tallene sammen.<br>
+</li>
+<li><code>korpus["score"] =</code>: Til sidst gemmer vi resultatet i vores oprindelige DataFrame.<br>
+</li>
+<li><code>korpus.groupby("omraade")["score"].mean()</code>: Gennemsnitlig score for hvert politikområde, afrundet og sorteret.</li>
+<li><code>(korpus["score"] == 0).sum()</code>: <code>True</code> for hver debat med score 0. <code>.sum()</code> tæller dem, fordi <code>True</code> tæller som 1.</li>
+</ol>
+</details>
 <p><br></p>
-<p>22 ord. Det er hele modellen.</p>
+<p><code>.map(ordbog)</code> slår hvert ord op. Findes ordet ikke i ordbogen, bliver det <code>NaN</code> … og <code>NaN</code> tæller ikke med, når vi lægger sammen.</p>
 </section>
-<section id="hvordan-den-scorer" class="slide level2">
-<h2>Hvordan den scorer</h2>
+<section id="hvad-fylder-i-scoren" class="slide level2 scrollable">
+<h2>Hvad fylder i scoren?</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-6" class="exercise-cell">
 
 </div>
 <script type="pyodide-6-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgw6l0IG9yZCBwZXIgcsOma2tlLiBJbmRla3NldCBodXNrZXIsIGh2aWxrZW4gZGViYXQgb3JkZXQga29tIGZyYVxub3JkID0gKGtvcnB1c1tcInRla3N0XCJdLmFzdHlwZShzdHIpXG4gICAgICAgLnN0ci5sb3dlcigpXG4gICAgICAgLnN0ci5yZXBsYWNlKHJcIlteXFx3w6bDuMOlIF1cIiwgXCIgXCIsIHJlZ2V4PVRydWUpXG4gICAgICAgLnN0ci5zcGxpdCgpLmV4cGxvZGUoKSlcblxucHJpbnQob3JkLmhlYWQoOCkpXG5wcmludCgpXG5wcmludChcInRva2VuczpcIiwgbGVuKG9yZCksIFwifCB0eXBlcjpcIiwgb3JkLm51bmlxdWUoKSkifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByaW50KG9yZFtvcmQuaXNpbihvcmRib2cua2V5cygpKV0udmFsdWVfY291bnRzKCkuaGVhZCg4KSkifQ==
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det indefra og ud:</p>
+<ol type="1">
+<li><code>ordbog.keys()</code>: Nøglerne i ordbogen, altså de 22 ord.</li>
+<li><code>ord.isin(...)</code>: <code>True</code> for hvert token, der står i ordbogen.</li>
+<li><code>ord[...]</code>: Behold kun de tokens, hvor det er <code>True</code>.</li>
+<li><code>.value_counts()</code>: Tæl, hvor mange gange hvert ord forekommer, sorteret med det hyppigste først.</li>
+<li><code>.head(8)</code>: De otte hyppigste.</li>
+</ol>
+</details>
 <p><br></p>
-<p><code>.map(ordbog)</code> slår hvert ord op. Findes ordet ikke i ordbogen, bliver det <code>NaN</code> … og <code>NaN</code> tæller ikke med, når vi lægger sammen.</p>
+<p>Det suverænt hyppigste ord er <strong><code>godt</code></strong>: 1.381 gange. Mere end dobbelt så ofte som det næste.</p>
+<p>Men i Folketinget betyder <code>godt</code> sjældent, at noget er godt. Det er <em>“det er godt, at ministeren …”</em> og <em>“godt, så går vi videre”</em>. <strong>Scoren er i vid udstrækning en optælling af et høflighedsord.</strong></p>
 </section>
-<section id="kør-den-på-korpusset" class="slide level2">
-<h2>Kør den på korpusset</h2>
+<section id="negation" class="slide level2 scrollable">
+<h2>Negation</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-7" class="exercise-cell">
 
 </div>
 <script type="pyodide-7-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgc2zDpSBodmVydCBvcmQgb3AgaSBvcmRib2dlbiBvZyBsw6ZnIHNhbW1lbiBwZXIgZGViYXRcbmtvcnB1c1tcInNjb3JlXCJdID0gb3JkLm1hcChvcmRib2cpLmdyb3VwYnkobGV2ZWw9MCkuc3VtKClcblxucHJpbnQoa29ycHVzLmdyb3VwYnkoXCJvbXJhYWRlXCIpW1wic2NvcmVcIl0ubWVhbigpLnJvdW5kKDIpLnNvcnRfdmFsdWVzKCkpXG5wcmludCgpXG5wcmludChcIkRlYmF0dGVyIG1lZCBzY29yZSBwcsOmY2lzIDA6XCIsIChrb3JwdXNbXCJzY29yZVwiXSA9PSAwKS5zdW0oKSwgXCJhZlwiLCBsZW4oa29ycHVzKSkifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRlc3QgPSBwZC5TZXJpZXMoW1wiRGV0IGVyIGVuIGdvZCBiZXNsdXRuaW5nXCIsXG4gICAgICAgICAgICAgICAgICAgICBcIkRldCBlciBpa2tlIGVuIGdvZCBiZXNsdXRuaW5nXCIsXG4gICAgICAgICAgICAgICAgICAgICBcIkluZ2VuIHRyeWdoZWQgb2cgaW5nZW4gZnJpaGVkXCJdKVxuXG5zY29yZXIgPSAodGVzdC5zdHIubG93ZXIoKS5zdHIuc3BsaXQoKS5leHBsb2RlKClcbiAgICAgICAgICAubWFwKG9yZGJvZykuZ3JvdXBieShsZXZlbD0wKS5zdW0oKSlcblxucHJpbnQocGQuRGF0YUZyYW1lKHtcInRla3N0XCI6IHRlc3QsIFwic2NvcmVcIjogc2NvcmVyfSkpIn0=
 </script>
 </div>
 </div>
-</section>
-<section id="hvad-fylder-i-scoren" class="slide level2">
-<h2>Hvad fylder i scoren?</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-8" class="exercise-cell">
-
-</div>
-<script type="pyodide-8-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByaW50KG9yZFtvcmQuaXNpbihvcmRib2cua2V5cygpKV0udmFsdWVfY291bnRzKCkuaGVhZCg4KSkifQ==
-</script>
-</div>
-</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>pd.Series([...])</code>: Tre testsætninger som en Series. Indekset <code>0</code>, <code>1</code>, <code>2</code> er sætningens nummer.</li>
+<li><code>.str.lower().str.split().explode()</code>: Samme opskrift som på korpusset: små bogstaver, del op i ord, ét ord per række.</li>
+<li><code>.map(ordbog)</code>: Slå hvert ord op. Ord, der ikke er i ordbogen, bliver <code>NaN</code>.</li>
+<li><code>.groupby(level=0).sum()</code>: Læg sammen per sætning.</li>
+<li><code>pd.DataFrame({"tekst": test, "score": scorer})</code>: Sæt teksten og scoren side om side. Rækkerne passer sammen, fordi de har samme indeks.</li>
+</ol>
+</details>
 <p><br></p>
-<p>Det suverænt hyppigste ord er <strong><code>godt</code></strong>: 1.381 gange. Mere end dobbelt så ofte som det næste.</p>
-<p>Men i Folketinget betyder <code>godt</code> sjældent, at noget er godt. Det er <em>“det er godt, at ministeren …”</em> og <em>“godt, så går vi videre”</em>.</p>
-<p>Scoren er i vid udstrækning en optælling af ét høflighedsord.</p>
+<p>En ordbogsmodel lægger tal sammen. Den læser ikke.</p>
 </section>
-<section id="dækning" class="slide level2">
-<h2>Dækning</h2>
-<ul>
-<li><p>Kun <strong>90 af 900</strong> debatter scorer nul. Med ~800 ord per debat er der mange chancer for at ramme.</p></li>
-<li><p>Men en høj dækning er ikke det samme som en god måling. Den kommer her af, at ét almindeligt ord rammer overalt.</p></li>
-</ul>
-<p><br></p>
-<blockquote>
-<p>Hvor mange ord skulle der til, før I ville stole på tallet? Og hvilke ord skulle <em>ud</em> af listen?</p>
-</blockquote>
-</section>
-<section id="negation" class="slide level2">
-<h2>Negation</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-9" class="exercise-cell">
-
-</div>
-<script type="pyodide-9-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByb2V2ZXIgPSBwZC5TZXJpZXMoW1wiRGV0IGVyIGVuIGdvZCBiZXNsdXRuaW5nXCIsXG4gICAgICAgICAgICAgICAgICAgICBcIkRldCBlciBpa2tlIGVuIGdvZCBiZXNsdXRuaW5nXCIsXG4gICAgICAgICAgICAgICAgICAgICBcIkluZ2VuIHRyeWdoZWQgb2cgaW5nZW4gZnJpaGVkXCJdKVxuXG5zY29yZXIgPSAocHJvZXZlci5zdHIubG93ZXIoKS5zdHIuc3BsaXQoKS5leHBsb2RlKClcbiAgICAgICAgICAubWFwKG9yZGJvZykuZ3JvdXBieShsZXZlbD0wKS5zdW0oKSlcblxucHJpbnQocGQuRGF0YUZyYW1lKHtcInRla3N0XCI6IHByb2V2ZXIsIFwic2NvcmVcIjogc2NvcmVyfSkpIn0=
-</script>
-</div>
-</div>
-<p><br></p>
-<ul>
-<li><p>Den anden får samme score som den første. Den tredje bliver <strong>stærkt positiv</strong>.</p></li>
-<li><p>En ordbogsmodel lægger tal sammen. Den læser ikke.</p></li>
-</ul>
-</section>
-<section id="afinn" class="slide level2">
+<section id="afinn" class="slide level2 scrollable">
 <h2>AFINN</h2>
 <p>Den samme idé, professionelt lavet. <code>afinn</code> er et Python-bibliotek med en dansk ordliste på cirka 3.500 ord, udviklet af Finn Årup Nielsen.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a></a><span class="im">from</span> afinn <span class="im">import</span> Afinn</span>
@@ -609,8 +590,19 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBy
 <span id="cb2-3"><a></a>afinn <span class="op">=</span> Afinn(language<span class="op">=</span><span class="st">"da"</span>)</span>
 <span id="cb2-4"><a></a></span>
 <span id="cb2-5"><a></a>korpus[<span class="st">"afinn"</span>] <span class="op">=</span> korpus[<span class="st">"tekst"</span>].<span class="bu">map</span>(afinn.score)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>from afinn import Afinn</code>: Hent <code>Afinn</code> fra pakken <code>afinn</code>.</li>
+<li><code>Afinn(language="da")</code>: Lav et objekt med den danske ordliste og gem det som <code>afinn</code>.</li>
+<li><code>korpus["tekst"].map(afinn.score)</code>: Kør <code>.score()</code> på hver tekst, og gem resultatet i en ny kolonne.</li>
+<li>Bemærk: <code>afinn.score</code> står <strong>uden</strong> parenteser. Vi giver funktionen til <code>.map()</code>, som selv kalder den én gang for hver tekst.</li>
+</ol>
+</details>
 <p><br></p>
-<p><code>Afinn(language="da")</code> indlæser den danske ordliste. <code>.score()</code> gør præcis det samme som vores egen funktion: slår hvert ord op og lægger værdierne for ordrene sammen.</p>
+<p><code>.score()</code> gør præcis det samme som vores egen funktion. Den slår hvert ord op og lægger værdierne for ordene sammen.</p>
 
 <aside><div>
 <p>Kan ikke installeres i browseren. Kør den i UCloud eller lokalt.</p>
@@ -622,10 +614,167 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBy
 <li>At debatterne handler om noget negativt, som vold og straf?</li>
 <li>At ordførerne er mere kritiske?</li>
 <li>At ordlisten passer bedre til det ene områdes ordforråd end det andets?</li>
-<li>Eller at man siger <code>godt</code> sjældnere, når man taler om kriminalitet?</li>
+<li>… eller at man siger <code>godt</code> sjældnere, når man taler om kriminalitet?</li>
 </ul>
 <p><br></p>
-<p>Et tal fra en ordbogsmodel er ikke et resultat. Det er et <strong>udgangspunkt for en diskussion</strong>, som skal føres i metodeafsnittet.</p>
+</section></section>
+<section>
+<section id="analyse-kriser-i-folketingssalen" class="title-slide slide level1 center">
+<h1>Analyse: “Kriser” i Folketingssalen</h1>
+<blockquote>
+<p>Fyldte italesættelsen af “kriser” mere i Folketingets lovgivningsdebatter under <strong>finanskrisen</strong> og <strong>coronakrisen</strong>?</p>
+</blockquote>
+<p><br></p>
+<p>Vi bruger her en ordbog til det, den er bedst til: at måle <strong>et tema</strong> snarere end en stemning.</p>
+</section>
+<section id="ordbogen" class="slide level2">
+<h2>Ordbogen</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-8" class="exercise-cell">
+
+</div>
+<script type="pyodide-8-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImtyaXNlb3JkID0gW1wia3Jpc2VcIiwgXCJrcmlzZW5cIiwgXCJrcmlzZXJcIiwgXCJrcmlzZXJuZVwiLFxuICAgICAgICAgICAgXCJmaW5hbnNrcmlzZVwiLCBcImZpbmFuc2tyaXNlblwiLCBcImNvcm9uYWtyaXNlXCIsIFwiY29yb25ha3Jpc2VuXCIsXG4gICAgICAgICAgICBcInBhbmRlbWlcIiwgXCJwYW5kZW1pZW5cIiwgXCJlcGlkZW1pXCIsIFwiZXBpZGVtaWVuXCIsXG4gICAgICAgICAgICBcIm5lZGx1a25pbmdcIiwgXCJuZWRsdWtuaW5nZW5cIixcbiAgICAgICAgICAgIFwiaGrDpmxwZXBha2tlXCIsIFwiaGrDpmxwZXBha2tlblwiLCBcImhqw6ZscGVwYWtrZXJcIiwgXCJoasOmbHBlcGFra2VybmVcIl1cblxucHJpbnQobGVuKGtyaXNlb3JkKSwgXCJvcmRcIikifQ==
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ul>
+<li>Denne gang er ordbogen en <strong>liste</strong> og ikke en dictionary. Ordene har ingen værdi. Vi tæller bare, om de er der.</li>
+<li>Hvert ord står i alle sine bøjninger: <em>krise</em>, <em>krisen</em>, <em>kriser</em>, <em>kriserne</em>. Vi har ikke lemmatiseret, så <code>krisen</code> og <code>krise</code> er to forskellige ord. Med spaCy kunne vi nøjes med grundformen.</li>
+</ul>
+</details>
+<p><br></p>
+<p><em>Beslutning:</em> <code>klimakrise</code> er <strong>ikke</strong> med. Den handler om noget andet end en akut krise, og den ville trække resultatet mod de senere år.</p>
+</section>
+<section id="mål-per-1.000-ord" class="slide level2 scrollable">
+<h2>Mål: per 1.000 ord</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-9" class="exercise-cell">
+
+</div>
+<script type="pyodide-9-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgw6l0IG9yZCBwZXIgcsOma2tlLCBtZWQgw6VyZXQgdmVkIHNpZGVuIGFmXG5sYW5nID0gb3JkLnJlbmFtZShcIm9yZFwiKS50b19mcmFtZSgpLmpvaW4oa29ycHVzW1tcImFhclwiXV0pXG5sYW5nW1wia3Jpc2VcIl0gPSBsYW5nW1wib3JkXCJdLmlzaW4oa3Jpc2VvcmQpXG5cbnByX2FhciA9IHBkLkRhdGFGcmFtZSh7XG4gICAgXCJkZWJhdHRlclwiOiBrb3JwdXMuZ3JvdXBieShcImFhclwiKS5zaXplKCksXG4gICAgXCJwcl8xMDAwX29yZFwiOiAobGFuZy5ncm91cGJ5KFwiYWFyXCIpW1wia3Jpc2VcIl0ubWVhbigpICogMTAwMCkucm91bmQoMiksXG59KVxuXG5wcmludChwcl9hYXIpIn0=
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>ord.rename("ord").to_frame()</code>: gør <code>ord</code> til en tabel med én kolonne.</li>
+<li><code>.join(korpus[["aar"]])</code>: sætter året på hvert ord. Det virker, fordi indekset i <code>ord</code> stadig husker, hvilken debat ordet kom fra.</li>
+<li><code>.isin(kriseord)</code>: <code>True</code> for hvert ord, der står på listen.</li>
+<li><code>.mean()</code> på <code>True</code>/<code>False</code> giver en <strong>andel</strong>. Gange 1.000 giver forekomster per 1.000 ord.</li>
+</ol>
+</details>
+<p><br></p>
+<p>Hvorfor per 1.000 ord og ikke bare antal? Fordi der ikke er lige mange debatter hvert år, og debatterne er ikke lige lange.</p>
+</section>
+<section id="hvad-viser-det" class="slide level2 scrollable">
+<h2>Hvad viser det?</h2>
+<ul>
+<li><p>Topper tallene, hvor vi forudsagde? Eller et andet sted?</p></li>
+<li><p>Se på kolonnen <code>debatter</code>. Med få debatter per år kan én enkelt lang debat om en hjælpepakke flytte et helt år.</p></li>
+<li><p>Og hvilke ord er det egentlig, der tæller?</p></li>
+</ul>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-10" class="exercise-cell">
+
+</div>
+<script type="pyodide-10-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByaW50KGxhbmcubG9jW2xhbmdbXCJrcmlzZVwiXSwgXCJvcmRcIl0udmFsdWVfY291bnRzKCkpIn0=
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>lang["krise"]</code>: <code>True</code>/<code>False</code>-kolonnen fra forrige slide.</li>
+<li><code>lang.loc[lang["krise"], "ord"]</code>: Vælg de rækker, hvor den er <code>True</code>, og kolonnen <code>ord</code>. Altså kun kriseordene.</li>
+<li><code>.value_counts()</code>: Tæl, hvor mange gange hvert kriseord forekommer.</li>
+</ol>
+</details>
+<p><br></p>
+<p>Dominerer ét ord, måler ordbogen i praksis det ene ord. Det var præcis problemet med <code>godt</code>.</p>
+</section>
+<section id="tilbage-til-teksten" class="slide level2">
+<h2>Tilbage til teksten</h2>
+<p>Et tal fra en ordbog er ikke et resultat, før vi har set, hvilken kontekst ordene står i.</p>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-11" class="exercise-cell">
+
+</div>
+<script type="pyodide-11-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImVrc2VtcGxlciA9IChrb3JwdXNbXCJ0ZWtzdFwiXVxuICAgICAgICAgICAgIC5zdHIuZmluZGFsbChyXCIoP2kpLnswLDYwfVxcYlxcdyprcmlzZVxcdyouezAsNjB9XCIpXG4gICAgICAgICAgICAgLmV4cGxvZGUoKVxuICAgICAgICAgICAgIC5kcm9wbmEoKSlcblxuZm9yIGxpbmplIGluIGVrc2VtcGxlci5zYW1wbGUoOCwgcmFuZG9tX3N0YXRlPTEpOlxuICAgIHByaW50KFwiLi4uXCIsIGxpbmplLCBcIi4uLlwiKSJ9
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ul>
+<li><code>.str.findall()</code> finder <strong>alle</strong> steder i hver debat, hvor mønsteret passer, og giver en liste per debat.</li>
+<li><code>(?i)</code>: ligegyldigt om det er store eller små bogstaver.</li>
+<li><code>.{0,60}</code>: op til 60 tegn før og efter, så vi kan se sammenhængen.</li>
+<li><code>\b\w*krise\w*</code>: et ord, der indeholder <em>krise</em>, fx <em>krisen</em>, <em>finanskrisen</em> og <em>krisehjælp</em>.</li>
+<li><code>.explode()</code>: ét fund per række. <code>.dropna()</code> fjerner debatter uden fund.</li>
+<li><code>.sample(8, random_state=1)</code>: otte tilfældige eksempler, de samme hver gang.</li>
+</ul>
+</details>
+<p><br></p>
+<p>Handler det om en akut krise? Eller om <em>boligkrisen</em>, <em>tillidskrisen</em>, <em>en krise i folkeskolen</em>?</p>
+</section>
+<section id="rammer-data-forudsigelsen" class="slide level2">
+<h2>Rammer data forudsigelsen?</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-12" class="exercise-cell">
+
+</div>
+<script type="pyodide-12-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gcGxvdG5pbmUgaW1wb3J0IChnZ3Bsb3QsIGFlcywgYW5ub3RhdGUsIGdlb21fbGluZSwgZ2VvbV9wb2ludCxcbiAgICAgICAgICAgICAgICAgICAgICBzY2FsZV95X2NvbnRpbnVvdXMsIGxhYnMsIHRoZW1lX21pbmltYWwpXG5cbmRhdGEgPSBwcl9hYXIucmVzZXRfaW5kZXgoKVxuXG5maWd1ciA9IChnZ3Bsb3QoZGF0YSwgYWVzKHg9XCJhYXJcIiwgeT1cInByXzEwMDBfb3JkXCIpKVxuICAgICAgICAgIyBmb3J1ZHNpZ2Vsc2VuOiBkZSDDpXIsIGh2b3IgdmkgZm9ydmVudGVyIGVuIHRvcFxuICAgICAgICAgKyBhbm5vdGF0ZShcInJlY3RcIiwgeG1pbj0yMDA3LjUsIHhtYXg9MjAxMC41LFxuICAgICAgICAgICAgICAgICAgICB5bWluPS1mbG9hdChcImluZlwiKSwgeW1heD1mbG9hdChcImluZlwiKSwgYWxwaGE9MC4yKVxuICAgICAgICAgKyBhbm5vdGF0ZShcInJlY3RcIiwgeG1pbj0yMDE5LjUsIHhtYXg9MjAyMS41LFxuICAgICAgICAgICAgICAgICAgICB5bWluPS1mbG9hdChcImluZlwiKSwgeW1heD1mbG9hdChcImluZlwiKSwgYWxwaGE9MC4yKVxuICAgICAgICAgIyBkYXRhXG4gICAgICAgICArIGdlb21fbGluZSgpXG4gICAgICAgICArIGdlb21fcG9pbnQoYWVzKHNpemU9XCJkZWJhdHRlclwiKSlcbiAgICAgICAgICsgc2NhbGVfeV9jb250aW51b3VzKGxpbWl0cz0oMCwgTm9uZSkpXG4gICAgICAgICArIGxhYnMoeD1cIsOFclwiLCB5PVwiS3Jpc2VvcmQgcGVyIDEuMDAwIG9yZFwiLCBzaXplPVwiRGViYXR0ZXJcIixcbiAgICAgICAgICAgICAgICB0aXRsZT1cIktyaXNlb3JkIGkgMS4gYmVoYW5kbGluZyBhZiBsb3Zmb3JzbGFnXCIpXG4gICAgICAgICArIHRoZW1lX21pbmltYWwoKSlcblxuZmlndXIuc2hvdygpIn0=
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ul>
+<li>Samme opbygning som <code>ggplot2</code> i R: data, <code>aes()</code> og lag, der lægges sammen med <code>+</code>.</li>
+<li>Forskellen fra R: kolonnenavne står i <strong>anførselstegn</strong>, <code>aes(x="aar")</code>, og hele udtrykket står i en parentes, så det kan brydes over flere linjer.</li>
+<li><code>pr_aar.reset_index()</code> gør årene fra indekset til en almindelig kolonne, <code>aar</code>, som <code>aes()</code> kan bruge.</li>
+<li><code>annotate("rect", ...)</code> tegner de grå bånd. <code>-float("inf")</code> og <code>float("inf")</code> betyder: fra bunden til toppen af figuren, ligesom <code>-Inf</code> og <code>Inf</code> i R.</li>
+<li><code>geom_point(aes(size="debatter"))</code> gør punkterne større, jo flere debatter året bygger på.</li>
+<li><code>limits=(0, None)</code> lader y-aksen starte i 0. <code>None</code> betyder: find selv toppen.</li>
+</ul>
+</details>
+<p><br></p>
+<p>Det grå er det, vi forventede. Den sorte linje er det, vi fandt. Små punkter bygger på få debatter.</p>
+</section>
+<section id="hvad-har-vi-vist-og-hvad-har-vi-ikke" class="slide level2">
+<h2>Hvad har vi vist, og hvad har vi ikke?</h2>
+<ul>
+<li><p>Vi har <strong>vist</strong>, hvor meget kriseordene fylder i 1. behandlingen af lovforslag, år for år. Vi har <strong>ikke vist</strong>, hvor alvorlige kriserne var, eller hvad partierne mente om dem. Ordbogen tæller forekomster. Den læser ikke.</p></li>
+<li><p><strong>Korpusset bestemmer svaret.</strong> Vi har kun lovforslag. En krise, der blev håndteret med forespørgsler eller aftaler uden for salen, er næsten usynlig her.</p></li>
+<li><p><strong>Ordbogen bestemmer svaret.</strong> Tag <code>klimakrise</code> med, og kurven ændrer sig. Det er et valg, der hører i metodeafsnittet.</p></li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>Ordbogsmodellen er stærkest, når spørgsmålet er smalt.</p>
+</blockquote>
 </section></section>
 <section>
 <section id="analyse-den-politiske-dagsorden-2007-2022" class="title-slide slide level1 center">
@@ -635,94 +784,162 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InBy
 <section id="spørgsmålet" class="slide level2">
 <h2>Spørgsmålet</h2>
 <blockquote>
-<p>Hvor meget fylder klima, udlændinge og økonomi i Folketingets debatter … og ændrer det sig over tid?</p>
+<p>Hvor meget fylder klima, udlændinge og økonomi i Folketingets debatter, og har det ændret sig over tid?</p>
 </blockquote>
 <p><br></p>
 <p>Nu bruger vi ordbøger til det, de er bedst til: <strong>at måle et tema</strong>, ikke en stemning.</p>
 <ul>
 <li>Tre korte <strong>temaordbøger</strong>, som vi selv definerer</li>
-<li>Et mål: forekomster <strong>per 1.000 ord</strong></li>
-<li>Og så validering, før vi tolker noget</li>
+<li>Det, vi vil måle: forekomster af tema <strong>per 1.000 ord</strong></li>
 </ul>
 </section>
-<section id="tre-temaordbøger" class="slide level2">
+<section id="tre-temaordbøger" class="slide level2 scrollable">
 <h2>Tre temaordbøger</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-10" class="exercise-cell">
-
-</div>
-<script type="pyodide-10-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRlbWFlciA9IHtcbiAgICBcImtsaW1hXCI6IFtcImtsaW1hXCIsIFwia2xpbWFldFwiLCBcImNvMlwiLCBcImRyaXZodXNnYXNzZXJcIiwgXCJ2ZWR2YXJlbmRlXCIsXG4gICAgICAgICAgICAgIFwib21zdGlsbGluZ1wiLCBcImdyw7huXCIsIFwiZ3LDuG5uZVwiLCBcInVkbGVkbmluZ1wiLCBcImtsaW1hbmV1dHJhbFwiXSxcbiAgICBcInVkbMOmbmRpbmdlXCI6IFtcInVkbMOmbmRpbmdlXCIsIFwiZmx5Z3RuaW5nZVwiLCBcImFzeWxcIiwgXCJhc3lsYW5zw7hnZXJlXCIsXG4gICAgICAgICAgICAgICAgICAgXCJpbmR2YW5kcmVyZVwiLCBcImludGVncmF0aW9uXCIsIFwib3Bob2xkc3RpbGxhZGVsc2VcIiwgXCJ1ZHZpc25pbmdcIl0sXG4gICAgXCLDuGtvbm9taVwiOiBbXCLDuGtvbm9taVwiLCBcIsO4a29ub21pZW5cIiwgXCJ2w6Zrc3RcIiwgXCJidWRnZXRcIiwgXCJ1bmRlcnNrdWRcIixcbiAgICAgICAgICAgICAgICBcImJlc3BhcmVsc2VyXCIsIFwiZmluYW5zaWVyaW5nXCIsIFwia29ua3VycmVuY2Vldm5lXCJdLFxufVxuXG4jIMOpdCBvcmQgcGVyIHLDpmtrZSwgbWVkIMOlciBvZyBvbXLDpWRlIHZlZCBzaWRlbiBhZlxubGFuZyA9IG9yZC5yZW5hbWUoXCJvcmRcIikudG9fZnJhbWUoKS5qb2luKGtvcnB1c1tbXCJhYXJcIiwgXCJvbXJhYWRlXCJdXSlcblxuZm9yIHRlbWEsIG9yZGxpc3RlIGluIHRlbWFlci5pdGVtcygpOlxuICAgIGxhbmdbdGVtYV0gPSBsYW5nW1wib3JkXCJdLmlzaW4ob3JkbGlzdGUpXG5cbnByaW50KGxhbmcuaGVhZCgpKSJ9
-</script>
-</div>
-</div>
-<p><br></p>
-<p><code>.isin()</code> giver <code>True</code> for hvert ord, der står på listen. Gennemsnittet af en boolean er en andel, ligesom i lektion 4.</p>
-</section>
-<section id="validering-først-måler-ordbøgerne-det-vi-tror" class="slide level2">
-<h2>Validering først: måler ordbøgerne det, vi tror?</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-11" class="exercise-cell">
-
-</div>
-<script type="pyodide-11-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByX29tcmFhZGUgPSBsYW5nLmdyb3VwYnkoXCJvbXJhYWRlXCIpW2xpc3QodGVtYWVyKV0ubWVhbigpICogMTAwMFxuXG5wcmludChwcl9vbXJhYWRlLnJvdW5kKDIpKSJ9
-</script>
-</div>
-</div>
-<p><br></p>
-<ul>
-<li class="fragment"><p><strong>Klima</strong>-ordbogen rammer 2,48 per 1.000 ord i Miljø og klima … og 0,03 i Beskæftigelse.</p></li>
-<li class="fragment"><p><strong>Udlændinge</strong>-ordbogen rammer 7,40 i Udlændinge. Ingen andre områder kommer over 0,61.</p></li>
-<li class="fragment"><p><strong>Økonomi</strong>-ordbogen er spredt ud over alle områder. Man taler om økonomi overalt.</p></li>
-</ul>
-
-<aside><div>
-<p>Det er en test af <em>konstruktvaliditet</em>: vi har en uafhængig variabel (ministeriet), som ordbogen burde hænge sammen med. Klima og udlændinge består testen. Økonomi måler noget mere diffust.</p>
-</div></aside></section>
-<section id="og-dækningen" class="slide level2">
-<h2>Og dækningen</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-12" class="exercise-cell">
-
-</div>
-<script type="pyodide-12-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InJhbXQgPSBsYW5nW2xpc3QodGVtYWVyKV0uYW55KGF4aXM9MSkuZ3JvdXBieShsZXZlbD0wKS5hbnkoKVxuXG5wcmludChcIkRlYmF0dGVyIGRlciBpa2tlIHJhbW1lciBub2dlbiBhZiBkZSB0cmU6XCIsICh+cmFtdCkuc3VtKCksIFwiYWZcIiwgbGVuKHJhbXQpKSJ9
-</script>
-</div>
-</div>
-<p><br></p>
-<p>Over halvdelen af debatterne nævner ingen af ordene. Det er ikke en fejl: de handler om noget fjerde.</p>
-<p>Men det betyder, at “0 per 1.000 ord” hverken er lav interesse eller neutralitet. Det er et <strong>andet emne</strong>.</p>
-</section>
-<section id="over-tid" class="slide level2">
-<h2>Over tid</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-13" class="exercise-cell">
 
 </div>
 <script type="pyodide-13-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByX2FhciA9IGxhbmcuZ3JvdXBieShcImFhclwiKVtsaXN0KHRlbWFlcildLm1lYW4oKSAqIDEwMDBcblxucHJpbnQocHJfYWFyLnJvdW5kKDIpKSJ9
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRlbWFlciA9IHtcbiAgICBcImtsaW1hXCI6IFtcImtsaW1hXCIsIFwia2xpbWFldFwiLCBcImNvMlwiLCBcImRyaXZodXNnYXNzZXJcIiwgXCJ2ZWR2YXJlbmRlXCIsXG4gICAgICAgICAgICAgIFwib21zdGlsbGluZ1wiLCBcImdyw7huXCIsIFwiZ3LDuG5uZVwiLCBcInVkbGVkbmluZ1wiLCBcImtsaW1hbmV1dHJhbFwiXSxcbiAgICBcInVkbMOmbmRpbmdlXCI6IFtcInVkbMOmbmRpbmdlXCIsIFwiZmx5Z3RuaW5nZVwiLCBcImFzeWxcIiwgXCJhc3lsYW5zw7hnZXJlXCIsXG4gICAgICAgICAgICAgICAgICAgXCJpbmR2YW5kcmVyZVwiLCBcImludGVncmF0aW9uXCIsIFwib3Bob2xkc3RpbGxhZGVsc2VcIiwgXCJ1ZHZpc25pbmdcIl0sXG4gICAgXCLDuGtvbm9taVwiOiBbXCLDuGtvbm9taVwiLCBcIsO4a29ub21pZW5cIiwgXCJ2w6Zrc3RcIiwgXCJidWRnZXRcIiwgXCJ1bmRlcnNrdWRcIixcbiAgICAgICAgICAgICAgICBcImJlc3BhcmVsc2VyXCIsIFwiZmluYW5zaWVyaW5nXCIsIFwia29ua3VycmVuY2Vldm5lXCJdLFxufVxuXG4jIG9yZCB0aWwgdGVtYSBzb20gw6luIFNlcmllc1xub3JkX3RpbF90ZW1hID0gcGQuU2VyaWVzKHRlbWFlcikuZXhwbG9kZSgpXG5vcmRfdGlsX3RlbWEgPSBwZC5TZXJpZXMob3JkX3RpbF90ZW1hLmluZGV4LCBpbmRleD1vcmRfdGlsX3RlbWEudmFsdWVzKVxuXG5sYW5nID0gb3JkLnJlbmFtZShcIm9yZFwiKS50b19mcmFtZSgpLmpvaW4oa29ycHVzW1tcImFhclwiLCBcIm9tcmFhZGVcIl1dKVxubGFuZ1tcInRlbWFcIl0gPSBsYW5nW1wib3JkXCJdLm1hcChvcmRfdGlsX3RlbWEpICAgIyBOYU4gaHZpcyBvcmRldCBpa2tlIGVyIGkgZXQgdGVtYVxuXG5wcmludChsYW5nLmhlYWQoKSkifQ==
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>temaer</code>: en nøgle og en liste, fx <code>klima       → [klima, klimaet, co2, ...]</code>.<br>
+</li>
+<li><code>pd.Series(temaer)</code>: laver dictionary’en om til en Pandas Series.<br>
+</li>
+<li><code>.explode()</code>: én række per ord, med temaet i indekset.</li>
+<li><code>pd.Series(ord_til_tema.index, index=ord_til_tema.values)</code>: vender den om, så ordet er indekset og temaet værdien. Så kan <code>.map()</code> slå hvert ord op.</li>
+<li><code>ord.rename("ord")</code>: Vi giver vores Series navnet “ord”.<br>
+</li>
+<li><code>.to_frame()</code>: laver Series’en om til en DataFrame.<br>
+</li>
+<li><code>.join(korpus[["aar", "omraade"]])</code>: tilføjer <code>aar</code> og <code>omraade</code> fra den oprindelige <code>korpus</code>.<br>
+</li>
+<li><code>lang["ord"].map(ord_til_tema)</code>: slår hvert ord op og giver dets tema, eller <code>NaN</code>.</li>
+</ol>
+</details>
+<p><br></p>
 </section>
-<section id="tegn-det" class="slide level2">
-<h2>Tegn det</h2>
+<section id="validering-først-måler-ordbøgerne-det-vi-tror" class="slide level2 scrollable">
+<h2>Validering først: måler ordbøgerne det, vi tror?</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-14" class="exercise-cell">
 
 </div>
 <script type="pyodide-14-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByX29tcmFhZGUgPSAoXG4gICAgcGQuY3Jvc3N0YWIobGFuZ1tcIm9tcmFhZGVcIl0sIGxhbmdbXCJ0ZW1hXCJdKVxuICAgICAgLmRpdihsYW5nLmdyb3VwYnkoXCJvbXJhYWRlXCIpLnNpemUoKSwgYXhpcz0wKVxuICAgICAgLnJlaW5kZXgoY29sdW1ucz1saXN0KHRlbWFlciksIGZpbGxfdmFsdWU9MClcbiAgICAqIDEwMDBcbilcblxucHJpbnQocHJfb21yYWFkZS5yb3VuZCgyKSkifQ==
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>pd.crosstab(lang["omraade"], lang["tema"])</code>: tæller, hvor mange ord fra hvert tema der står i hvert politikområde. Ord uden tema (<code>NaN</code>) tælles ikke med.</li>
+<li><code>.div(lang.groupby("omraade").size(), axis=0)</code>: dividerer hver række med det samlede antal ord i området.</li>
+<li><code>.reindex(columns=list(temaer), fill_value=0)</code>: sikrer, at alle tre temaer er med, i samme rækkefølge som i ordbogen.</li>
+<li><code>* 1000</code>: forekomster per 1.000 ord.</li>
+</ol>
+</details>
+<p><br></p>
+<ul>
+<li><p><strong>Klima</strong>-ordbogen rammer 2,48 per 1.000 ord i Miljø og klima … og 0,03 i Beskæftigelse.</p></li>
+<li><p><strong>Udlændinge</strong>-ordbogen rammer 7,40 i Udlændinge. Ingen andre områder kommer over 0,61.</p></li>
+<li><p><strong>Økonomi</strong>-ordbogen er spredt ud over alle områder. Man taler om økonomi overalt.</p></li>
+</ul>
+
+<aside><div>
+<p>Det er en test af <em>konstruktvaliditet</em>. Vi har en uafhængig variabel (ministeriet), som ordbogen <strong>burde</strong> hænge sammen med. Klima og udlændinge består testen. Økonomi måler noget mere diffust.</p>
+</div></aside></section>
+<section id="og-dækningen" class="slide level2 scrollable">
+<h2>Og dækningen</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-15" class="exercise-cell">
+
+</div>
+<script type="pyodide-15-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InJhbXQgPSAoXG4gICAgbGFuZ1tcInRlbWFcIl0ubm90bmEoKVxuICAgIC5ncm91cGJ5KGxldmVsPTApXG4gICAgLmFueSgpXG4pXG5cbnByaW50KFwiRGViYXR0ZXIgZGVyIGlra2UgcmFtbWVyIG5vZ2VuIGFmIGRlIHRyZTpcIixcbiAgICAgICh+cmFtdCkuc3VtKCksIFwiYWZcIiwgbGVuKHJhbXQpKSJ9
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>lang["tema"].notna()</code>: <code>True</code> for hvert ord, der hører til et tema.</li>
+<li><code>.groupby(level=0)</code>: grupper efter indekset, altså debatten.</li>
+<li><code>.any()</code>: <code>True</code>, hvis mindst ét ord i debatten hører til et tema.</li>
+<li><code>~ramt</code>: <code>~</code> vender det om, så vi får debatterne <strong>uden</strong> træf. <code>.sum()</code> tæller dem.</li>
+</ol>
+</details>
+<p><br></p>
+<p>Over halvdelen af debatterne nævner ingen af ordene. Det er ikke en fejl, de handler bare om noget fjerde.</p>
+</section>
+<section id="over-tid" class="slide level2 scrollable">
+<h2>Over tid</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-16" class="exercise-cell">
+
+</div>
+<script type="pyodide-16-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InByX2FhciA9IChcbiAgICBwZC5jcm9zc3RhYihsYW5nW1wiYWFyXCJdLCBsYW5nW1widGVtYVwiXSlcbiAgICAgIC5kaXYobGFuZy5ncm91cGJ5KFwiYWFyXCIpLnNpemUoKSwgYXhpcz0wKVxuICAgICAgLnJlaW5kZXgoY29sdW1ucz1saXN0KHRlbWFlciksIGZpbGxfdmFsdWU9MClcbiAgICAqIDEwMDBcbilcblxucHJpbnQocHJfYWFyLnJvdW5kKDIpKSJ9
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Samme opskrift som på valideringsslidet, nu med år i stedet for område:</p>
+<ol type="1">
+<li><code>pd.crosstab(lang["aar"], lang["tema"])</code>: tæller, hvor mange ord fra hvert tema der står i hvert år. Ord uden tema (<code>NaN</code>) tælles ikke med.</li>
+<li><code>.div(lang.groupby("aar").size(), axis=0)</code>: dividerer hver række med det samlede antal ord i året.</li>
+<li><code>.reindex(columns=list(temaer), fill_value=0)</code>: sikrer, at alle tre temaer er med, i samme rækkefølge som i ordbogen.</li>
+<li><code>* 1000</code>: forekomster per 1.000 ord.</li>
+</ol>
+</details>
+<p><br></p>
+<p>Én kolonne per tema, én række per år. Det er det, figuren skal bruge.</p>
+</section>
+<section id="tegn-det" class="slide level2 scrollable">
+<h2>Tegn det</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-17" class="exercise-cell">
+
+</div>
+<script type="pyodide-17-contents">
 eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gcGxvdG5pbmUgaW1wb3J0ICpcblxudGlsX2ZpZ3VyID0gKHByX2Fhci5yZXNldF9pbmRleCgpXG4gICAgICAgICAgICAgLm1lbHQoaWRfdmFycz1cImFhclwiLCB2YXJfbmFtZT1cInRlbWFcIiwgdmFsdWVfbmFtZT1cInByXzEwMDBcIikpXG5cbihnZ3Bsb3QodGlsX2ZpZ3VyLCBhZXMoeD1cImFhclwiLCB5PVwicHJfMTAwMFwiLCBjb2xvcj1cInRlbWFcIikpXG4gKyBnZW9tX2xpbmUoc2l6ZT0xKVxuICsgZ2VvbV9wb2ludCgpXG4gKyBsYWJzKHRpdGxlPVwiVGVtYWVyIGkgRm9sa2V0aW5nZXRzIDEuIGJlaGFuZGxpbmdlclwiLFxuICAgICAgICB4PU5vbmUsIHk9XCJGb3Jla29tc3RlciBwZXIgMS4wMDAgb3JkXCIsIGNvbG9yPU5vbmUpXG4gKyB0aGVtZV9taW5pbWFsKCkpLnNob3coKSJ9
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>from plotnine import *</code>: Hent alle funktioner fra plotnine på én gang: <code>ggplot</code>, <code>aes</code>, <code>geom_line</code> osv.</li>
+<li><code>pr_aar.reset_index()</code>: gør årene fra indekset til en almindelig kolonne, <code>aar</code>.</li>
+<li><code>.melt(...)</code>: fra bredt til langt format, ligesom <code>pivot_longer()</code> i R. <code>id_vars="aar"</code> bliver stående, og de tre temakolonner stables til én række per tema og år.</li>
+<li><code>aes(..., color="tema")</code>: én farve og én linje per tema.</li>
+<li><code>geom_line(size=1)</code>: linjer med tykkelse 1. <code>geom_point()</code>: et punkt for hvert år.</li>
+<li><code>x=None</code> og <code>color=None</code>: ingen titel på x-aksen og på forklaringen.</li>
+<li><code>(...).show()</code>: tegn figuren.</li>
+</ol>
+</details>
 <p><br></p>
 <p><code>.melt()</code> fra lektion 3: fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have.</p>
 </section>
@@ -779,17 +996,17 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZy
 </table>
 <p><br></p>
 <ul>
-<li class="fragment"><p><strong>Økonomi</strong> topper i 2009-2011: finanskrisen</p></li>
-<li class="fragment"><p><strong>Udlændinge</strong> topper i 2015-2017: flygtningekrisen</p></li>
-<li class="fragment"><p><strong>Klima</strong> har en første top i 2009 (COP15 i København) og stiger derefter kraftigt fra 2019: klimavalget og klimaloven</p></li>
+<li><p><strong>Økonomi</strong> topper i 2009-2011: finanskrisen</p></li>
+<li><p><strong>Udlændinge</strong> topper i 2015-2017: flygtningekrisen</p></li>
+<li><p><strong>Klima</strong> har en første top i 2009 (COP15 i København) og stiger derefter kraftigt fra 2019: klimavalget og klimaloven</p></li>
 </ul>
 </section>
 <section id="hvad-kan-vi-så-konkludere" class="slide level2">
 <h2>Hvad kan vi så konkludere?</h2>
 <ul>
-<li class="fragment"><p>At tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er <strong>ydre validitet</strong>: resultatet passer med noget, vi ved fra andre kilder.</p></li>
-<li class="fragment"><p>At ordbøgerne måler <strong>opmærksomhed</strong>, ikke holdning. At klima fylder mere i 2021, siger intet om, hvem der var for eller imod.</p></li>
-<li class="fragment"><p>At udsnittet på 900 debatter giver et mere støjfyldt billede år for år end det fulde materiale. Trends skal have data nok bag sig.</p></li>
+<li><p>At tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er <strong>ekstern validitet</strong>: resultatet passer med noget, vi ved fra andre kilder.</p></li>
+<li><p>At ordbøgerne måler <strong>opmærksomhed</strong>, ikke holdning. At klima fylder mere i 2021, siger intet om, hvem der var for eller imod.</p></li>
+<li><p>At udsnittet på 900 debatter giver et mere støjfyldt billede år for år end det fulde materiale. Trends skal have data nok bag sig.</p></li>
 </ul>
 <p><br></p>
 <blockquote>
@@ -804,135 +1021,65 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZy
 <section id="fra-ordliste-til-sprogmodel" class="slide level2">
 <h2>Fra ordliste til sprogmodel</h2>
 <p>En ordbog kender kun de ord, den har på listen. En sprogmodel er trænet på store mængder tekst og kan <strong>generalisere</strong> til ord, den ikke har set før.</p>
-<ul>
-<li><p><code>spaCy</code> er et bibliotek til <em>natural language processing</em> — krydsfeltet mellem datalogi og korpuslingvistik.</p></li>
-<li><p>Det giver tokenisering, lemmatisering, ordklasser, navngivne entiteter og grammatiske relationer. Også på dansk.</p></li>
-</ul>
 <p><br></p>
 
 <aside><div>
 <p>spaCy kan ikke køre i browseren. Koden på de næste slides skal køres i UCloud eller lokalt.</p>
 </div></aside></section>
-<section id="en-pipeline" class="slide level2">
+<section id="en-pipeline" class="slide level2 scrollable">
 <h2>En pipeline</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a></a><span class="im">import</span> spacy</span>
 <span id="cb3-2"><a></a></span>
 <span id="cb3-3"><a></a>nlp <span class="op">=</span> spacy.load(<span class="st">"da_core_news_sm"</span>)</span>
 <span id="cb3-4"><a></a>doc <span class="op">=</span> nlp(<span class="st">"Regeringen fremlagde et nyt udspil om indvandring i København."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>import spacy</code>: Hent spaCy.</li>
+<li><code>spacy.load("da_core_news_sm")</code>: Indlæs den danske model. Den skal være hentet én gang i forvejen, i terminalen: <code>python -m spacy download da_core_news_sm</code>.</li>
+<li><code>nlp</code>: Pipelinen. Det er den, vi sender tekster igennem.</li>
+<li><code>nlp("...")</code>: Send én tekst gennem hele pipelinen. Resultatet, <code>doc</code>, er en række <strong>tokens</strong>, hvor hvert token har egenskaber som <code>tok.lemma_</code> (grundform), <code>tok.pos_</code> (ordklasse) og <code>tok.ent_type_</code> (navngiven enhed).</li>
+</ol>
+</details>
+<p><br></p>
 <p><code>spacy.load()</code> henter en <strong>model</strong>, ikke bare en funktion. <code>da_core_news_sm</code> er trænet på dansk nyhedstekst.</p>
 <p>Teksten løber gennem en række trin, som hver tilføjer information:</p>
 
 <img data-src="resources/pipeline-design.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
-<section id="hvad-man-får-ud" class="slide level2">
-<h2>Hvad man får ud</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="cf">for</span> tok <span class="kw">in</span> doc:</span>
-<span id="cb4-2"><a></a>    <span class="bu">print</span>(tok.text, tok.lemma_, tok.pos_, tok.is_stop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<p>Information per ord:</p>
-<ul>
-<li><strong><code>.text</code></strong>: ordet, som det står</li>
-<li><strong><code>.lemma_</code></strong>: grundformen. <code>fremlagde</code> bliver til <code>fremlægge</code></li>
-<li><strong><code>.pos_</code></strong>: ordklassen. <code>NOUN</code>, <code>VERB</code>, <code>ADJ</code>, <code>PROPN</code> og så videre</li>
-<li><strong><code>.is_stop</code></strong>: er det et stopord?</li>
-</ul>
-</section>
-<section id="navngivne-entiteter" class="slide level2">
-<h2>Navngivne entiteter</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a><span class="cf">for</span> ent <span class="kw">in</span> doc.ents:</span>
-<span id="cb5-2"><a></a>    <span class="bu">print</span>(ent.text, ent.label_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<ul>
-<li><p><strong><code>.ents</code></strong> er de <strong>navngivne entiteter</strong>: personer (<code>PER</code>), steder (<code>LOC</code>), organisationer (<code>ORG</code>).</p></li>
-<li><p>Det åbner en anden slags spørgsmål end ordoptælling: <em>hvem</em> bliver nævnt, hvor ofte, og sammen med hvad.</p></li>
-<li><p>Det er indgangen til semantisk og netværksanalyse.</p></li>
-</ul>
-</section>
-<section id="tokenisering-er-ikke-split" class="slide level2">
-<h2>Tokenisering er ikke <code>split()</code></h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a></a>tekst <span class="op">=</span> <span class="st">"Regeringens plan — den såkaldte 'løsning' — virker ikke!"</span></span>
-<span id="cb6-2"><a></a></span>
-<span id="cb6-3"><a></a><span class="bu">print</span>(tekst.lower().split())</span>
-<span id="cb6-4"><a></a></span>
-<span id="cb6-5"><a></a>doc <span class="op">=</span> nlp(tekst)</span>
-<span id="cb6-6"><a></a><span class="bu">print</span>([tok.text <span class="cf">for</span> tok <span class="kw">in</span> doc])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<p>Kør de to linjer og sammenlign. Hvad sker der med tankestregerne, anførselstegnene og udråbstegnet i hver af dem?</p>
-</section>
-<section id="hvorfor-det-betyder-noget-for-tallene" class="slide level2">
-<h2>Hvorfor det betyder noget for tallene</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a><span class="co"># naivt: split på mellemrum</span></span>
-<span id="cb7-2"><a></a>naiv <span class="op">=</span> korpus[<span class="st">"tekst"</span>].<span class="bu">str</span>.lower().<span class="bu">str</span>.split().explode()</span>
-<span id="cb7-3"><a></a></span>
-<span id="cb7-4"><a></a><span class="co"># spaCy: grundformer, uden tegnsætning</span></span>
-<span id="cb7-5"><a></a>lemmaer <span class="op">=</span> pd.Series([[t.lemma_.lower() <span class="cf">for</span> t <span class="kw">in</span> doc <span class="cf">if</span> <span class="kw">not</span> t.is_punct]</span>
-<span id="cb7-6"><a></a>                     <span class="cf">for</span> doc <span class="kw">in</span> nlp.pipe(korpus[<span class="st">"tekst"</span>])]).explode()</span>
-<span id="cb7-7"><a></a></span>
-<span id="cb7-8"><a></a><span class="bu">print</span>(naiv.nunique() <span class="op">/</span> <span class="bu">len</span>(naiv))</span>
-<span id="cb7-9"><a></a><span class="bu">print</span>(lemmaer.nunique() <span class="op">/</span> <span class="bu">len</span>(lemmaer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<p>Begge linjer beregner <strong>leksikalsk diversitet</strong>: antal unikke ord divideret med antal ord i alt. Samme mål, samme korpus, to forbehandlinger.</p>
-<ul>
-<li><p>Den naive version tæller <code>god</code>, <code>God</code>, <code>god!</code> og <code>gode</code> som fire forskellige ord.</p></li>
-<li><p>Kør det. Hvor stor bliver forskellen … og hvilket af de to tal ville I skrive i en opgave?</p></li>
-</ul>
-</section>
-<section id="en-komplet-preprocessing-i-spacy" class="slide level2">
-<h2>En komplet preprocessing i spaCy</h2>
-<p>Hele kæden fra lektion 6, men hvor en model træffer beslutningerne i stedet for vores regler:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>nlp <span class="op">=</span> spacy.load(<span class="st">"da_core_news_sm"</span>, disable<span class="op">=</span>[<span class="st">"ner"</span>, <span class="st">"parser"</span>])</span>
-<span id="cb8-2"><a></a></span>
-<span id="cb8-3"><a></a>renset <span class="op">=</span> []</span>
-<span id="cb8-4"><a></a><span class="cf">for</span> doc <span class="kw">in</span> nlp.pipe(korpus[<span class="st">"tekst"</span>], batch_size<span class="op">=</span><span class="dv">20</span>):</span>
-<span id="cb8-5"><a></a>    renset.append([t.lemma_.lower() <span class="cf">for</span> t <span class="kw">in</span> doc</span>
-<span id="cb8-6"><a></a>                   <span class="cf">if</span> <span class="kw">not</span> t.is_stop              <span class="co"># stopord</span></span>
-<span id="cb8-7"><a></a>                   <span class="kw">and</span> <span class="kw">not</span> t.is_punct            <span class="co"># tegnsætning</span></span>
-<span id="cb8-8"><a></a>                   <span class="kw">and</span> <span class="kw">not</span> t.like_num            <span class="co"># tal</span></span>
-<span id="cb8-9"><a></a>                   <span class="kw">and</span> t.pos_ <span class="kw">in</span> (<span class="st">"NOUN"</span>, <span class="st">"ADJ"</span>, <span class="st">"PROPN"</span>)])   <span class="co"># kun indholdsord</span></span>
-<span id="cb8-10"><a></a></span>
-<span id="cb8-11"><a></a>korpus[<span class="st">"lemmaer"</span>] <span class="op">=</span> renset</span>
-<span id="cb8-12"><a></a>lemmaer <span class="op">=</span> korpus[<span class="st">"lemmaer"</span>].explode()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<ul>
-<li><code>disable=["ner", "parser"]</code> slår det fra, vi ikke skal bruge. Det sparer tid og hukommelse</li>
-<li>De fire betingelser er Denny &amp; Spirlings P, N og W … plus et filter på ordklasse, som ingen af de syv operationer dækker</li>
-<li><code>.explode()</code> giver samme lange format som i lektion 6: én række per ord, indekset husker debatten</li>
-</ul>
-</section>
-<section id="og-så-er-vi-tilbage-i-pandas" class="slide level2">
-<h2>Og så er vi tilbage i pandas</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a></a><span class="bu">print</span>(lemmaer.value_counts().head(<span class="dv">20</span>))</span>
-<span id="cb9-2"><a></a></span>
-<span id="cb9-3"><a></a>pr_omraade <span class="op">=</span> (lemmaer.to_frame(<span class="st">"lemma"</span>)</span>
-<span id="cb9-4"><a></a>              .join(korpus[<span class="st">"omraade"</span>])</span>
-<span id="cb9-5"><a></a>              .groupby(<span class="st">"omraade"</span>)[<span class="st">"lemma"</span>]</span>
-<span id="cb9-6"><a></a>              .value_counts()</span>
-<span id="cb9-7"><a></a>              .groupby(level<span class="op">=</span><span class="dv">0</span>).head(<span class="dv">5</span>))</span>
-<span id="cb9-8"><a></a><span class="bu">print</span>(pr_omraade)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><br></p>
-<p>Efter spaCy er det præcis de samme greb som før: <code>value_counts()</code>, <code>groupby()</code>, <code>join()</code>.</p>
-<p>Det er pointen: sprogmodellen erstatter <strong>reglerne</strong> i forbehandlingen. Den erstatter ikke analysen.</p>
-</section>
 <section id="hvad-man-kan-bruge-det-til" class="slide level2">
 <h2>Hvad man kan bruge det til</h2>
 <ul>
 <li><strong>Ordklasser</strong>: analysér kun navneord, eller kun adjektiver. Retorik ligger ofte i tillægsordene.</li>
 <li><strong>Lemmatisering</strong>: bøjningsformer bliver til ét ord, før I tæller.</li>
-<li><strong>Entiteter</strong>: hvilke personer, steder og organisationer optræder — og hos hvilke kilder?</li>
+<li><strong>Entiteter</strong>: hvilke personer, steder og organisationer optræder og hos hvilke kilder?</li>
 <li><strong>Afhængighedsrelationer</strong>: hvem gør hvad ved hvem.</li>
 </ul>
 <p><br></p>
 </section>
-<section id="asent-sentimentanalyse" class="slide level2">
+<section id="asent-sentimentanalyse" class="slide level2 scrollable">
 <h2><code>asent</code>: sentimentanalyse</h2>
 <p>Samme idé som vores egen ordbog, men med en pipeline under sig. <code>asent</code> er udviklet af Kenneth Enevoldsen og findes på dansk.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a></a><span class="im">import</span> spacy, asent</span>
-<span id="cb10-2"><a></a></span>
-<span id="cb10-3"><a></a>nlp <span class="op">=</span> spacy.load(<span class="st">"da_core_news_sm"</span>)</span>
-<span id="cb10-4"><a></a>nlp.add_pipe(<span class="st">"sentencizer"</span>)</span>
-<span id="cb10-5"><a></a>nlp.add_pipe(<span class="st">"asent_da_v1"</span>)</span>
-<span id="cb10-6"><a></a></span>
-<span id="cb10-7"><a></a>doc <span class="op">=</span> nlp(<span class="st">"Det er en god beslutning for vores frihed."</span>)</span>
-<span id="cb10-8"><a></a><span class="bu">print</span>(doc._.polarity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> spacy, asent</span>
+<span id="cb4-2"><a></a></span>
+<span id="cb4-3"><a></a>nlp <span class="op">=</span> spacy.load(<span class="st">"da_core_news_sm"</span>)</span>
+<span id="cb4-4"><a></a>nlp.add_pipe(<span class="st">"sentencizer"</span>)</span>
+<span id="cb4-5"><a></a>nlp.add_pipe(<span class="st">"asent_da_v1"</span>)</span>
+<span id="cb4-6"><a></a></span>
+<span id="cb4-7"><a></a>doc <span class="op">=</span> nlp(<span class="st">"Det er en god beslutning for vores frihed."</span>)</span>
+<span id="cb4-8"><a></a><span class="bu">print</span>(doc._.polarity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>import spacy, asent</code>: Hent begge biblioteker på én linje. <code>asent</code> skal importeres, for at spaCy kan finde dens trin, selv om navnet ikke bruges direkte bagefter.</li>
+<li><code>nlp.add_pipe("sentencizer")</code>: Tilføj et trin, der finder ud af, hvor sætningerne slutter.</li>
+<li><code>nlp.add_pipe("asent_da_v1")</code>: Tilføj den danske sentimentmodel som sidste trin.</li>
+<li><code>doc._.polarity</code>: <code>._</code> er den plads på et <code>Doc</code>, hvor andre pakker end spaCy lægger deres resultater.</li>
+</ol>
+</details>
 <p><br></p>
 <p><code>add_pipe()</code> lægger et nyt trin til i pipelinen. Scoren ligger derefter i <code>doc._.polarity</code>.</p>
 
@@ -968,35 +1115,54 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZy
 </tbody>
 </table>
 <p><br></p>
-<p>Negationen virker. Vores egen ordbog gav plus for den anden sætning, fordi den bare lagde tal sammen.</p>
-<p>Men <code>fantastisk</code> står ikke i den danske ordliste. Dækningsproblemet er ikke løst, det er flyttet.</p>
+<p>Negationen virker. Vores egen ordbog gav plus for den anden sætning, fordi den bare lagde tal sammen. Men <code>fantastisk</code> står ikke i den danske ordliste. Dækningsproblemet er ikke løst, det er flyttet.</p>
 </section>
-<section id="hvorfor-fik-den-den-score" class="slide level2">
+<section id="hvorfor-fik-den-den-score" class="slide level2 scrollable">
 <h2>Hvorfor fik den den score?</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a></a>doc <span class="op">=</span> nlp(<span class="st">"Det er ikke en god beslutning."</span>)</span>
-<span id="cb11-2"><a></a></span>
-<span id="cb11-3"><a></a><span class="cf">for</span> tok <span class="kw">in</span> doc:</span>
-<span id="cb11-4"><a></a>    <span class="cf">if</span> tok._.polarity.polarity <span class="op">!=</span> <span class="dv">0</span>:</span>
-<span id="cb11-5"><a></a>        <span class="bu">print</span>(tok._.polarity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a></a>doc <span class="op">=</span> nlp(<span class="st">"Det er ikke en god beslutning."</span>)</span>
+<span id="cb5-2"><a></a></span>
+<span id="cb5-3"><a></a><span class="cf">for</span> tok <span class="kw">in</span> doc:</span>
+<span id="cb5-4"><a></a>    <span class="cf">if</span> tok._.polarity.polarity <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb5-5"><a></a>        <span class="bu">print</span>(tok._.polarity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>for tok in doc:</code>: Løb gennem sætningen ét token ad gangen.</li>
+<li><code>tok._.polarity</code>: <code>asent</code> har også givet hvert enkelt token en score.</li>
+<li><code>if ... != 0:</code>: Vis kun de tokens, der faktisk trækker scoren op eller ned.</li>
+<li><code>print(tok._.polarity)</code>: Viser tokenets score, selve ordet og det udsnit af sætningen (<code>span</code>), som <code>asent</code> læste det i.</li>
+</ol>
+</details>
 <pre><code>polarity=-2.22 token=god span=ikke en god</code></pre>
 <p><br></p>
 <p><code>asent</code> fortæller, <strong>hvilket ord</strong> der drev scoren, og <strong>hvilket udsnit</strong> af sætningen den læste det i.</p>
-<p><code>god</code> er i sig selv positiv. Den bliver negativ, fordi <code>ikke</code> står foran. Det kan man slå efter.</p>
-<p>Det er forskellen på et tal og et resultat, I kan forsvare.</p>
+<p>Fx er <code>god</code> i sig selv positiv. Den bliver negativ, fordi <code>ikke</code> står foran. Det kan man slå op efter.</p>
 </section>
-<section id="kør-den-på-korpusset-1" class="slide level2">
+<section id="kør-den-på-korpusset-1" class="slide level2 scrollable">
 <h2>Kør den på korpusset</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a></a>korpus[<span class="st">"sentiment"</span>] <span class="op">=</span> [doc._.polarity.compound</span>
-<span id="cb13-2"><a></a>                       <span class="cf">for</span> doc <span class="kw">in</span> nlp.pipe(korpus[<span class="st">"tekst"</span>], batch_size<span class="op">=</span><span class="dv">20</span>)]</span>
-<span id="cb13-3"><a></a></span>
-<span id="cb13-4"><a></a><span class="bu">print</span>(korpus[<span class="st">"sentiment"</span>].describe())</span>
-<span id="cb13-5"><a></a><span class="bu">print</span>(korpus.groupby(<span class="st">"omraade"</span>)[<span class="st">"sentiment"</span>].mean().sort_values())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a></a>korpus[<span class="st">"sentiment"</span>] <span class="op">=</span> [doc._.polarity.compound</span>
+<span id="cb7-2"><a></a>                       <span class="cf">for</span> doc <span class="kw">in</span> nlp.pipe(korpus[<span class="st">"tekst"</span>], batch_size<span class="op">=</span><span class="dv">20</span>)]</span>
+<span id="cb7-3"><a></a></span>
+<span id="cb7-4"><a></a><span class="bu">print</span>(korpus[<span class="st">"sentiment"</span>].describe())</span>
+<span id="cb7-5"><a></a><span class="bu">print</span>(korpus.groupby(<span class="st">"omraade"</span>)[<span class="st">"sentiment"</span>].mean().sort_values())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det indefra og ud:</p>
+<ol type="1">
+<li><code>nlp.pipe(korpus["tekst"], batch_size=20)</code>: Kør alle teksterne gennem pipelinen, 20 ad gangen.</li>
+<li><code>[doc._.polarity.compound for doc in ...]</code>: En <strong>list comprehension</strong>: for hver debat, hent den samlede score, <code>compound</code>. Resultatet er en liste i samme rækkefølge som <code>korpus</code>.</li>
+<li><code>korpus["sentiment"] = ...</code>: Listen bliver en ny kolonne. Det virker, fordi den har præcis én værdi per række.</li>
+<li><code>.describe()</code>: Antal, gennemsnit, standardafvigelse, minimum, kvartiler og maksimum.</li>
+<li><code>korpus.groupby("omraade")["sentiment"].mean()</code>: Gennemsnitlig score per politikområde, sorteret.</li>
+</ol>
+</details>
 <p><br></p>
 <p><code>nlp.pipe()</code> kører mange tekster igennem ad gangen. Resultatet lægges direkte tilbage som en kolonne i tabellen.</p>
-
-<aside><div>
-<p>900 debatter á 5.000 tegn tager cirka 50 sekunder. Kør det på et udsnit først.</p>
-</div></aside></section></section>
+</section></section>
 <section>
 <section id="analyse-tonen-i-folketinget" class="title-slide slide level1 center">
 <h1>Analyse: tonen i Folketinget</h1>
@@ -1010,8 +1176,6 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZy
 <p><br></p>
 <ul>
 <li><code>compound</code> går fra −1 (meget negativ) til +1 (meget positiv)</li>
-<li>Vi har kørt <code>asent</code> på alle 900 debatter i udsnittet</li>
-<li>Tallene herunder er de faktiske resultater</li>
 </ul>
 </section>
 <section id="folketinget-er-høfligt" class="slide level2">
@@ -1073,121 +1237,40 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZy
 </tbody>
 </table>
 <p><br></p>
-<p>Retsvæsen er lavest, Uddannelse højest. Det giver intuitivt mening: straf og kriminalitet mod unge og uddannelse.</p>
+<p>Retsvæsen er lavest, Uddannelse højest. Det giver intuitivt mening: straf og kriminalitet over for unge og uddannelse.</p>
 <p>Men se på størrelsen af forskellene, før I tolker på dem.</p>
 </section>
 <section id="forskellene-er-små" class="slide level2">
 <h2>Forskellene er små</h2>
 <ul>
-<li class="fragment"><p>Spredningen <strong>mellem</strong> områdernes gennemsnit: standardafvigelse <strong>0,035</strong></p></li>
-<li class="fragment"><p>Spredningen <strong>inden for</strong> hvert område: standardafvigelse <strong>0,091</strong></p></li>
+<li><p>Spredningen <strong>mellem</strong> områdernes gennemsnit: standardafvigelse <strong>0,035</strong></p></li>
+<li><p>Spredningen <strong>inden for</strong> hvert område: standardafvigelse <strong>0,091</strong></p></li>
 </ul>
 <p><br></p>
 <p>Debatterne inden for ét område varierer mere end to og en halv gang så meget som forskellen mellem områderne.</p>
 <p>Retsvæsen og Uddannelse skiller sig ud. De fire i midten er reelt ikke til at skelne fra hinanden.</p>
 </section>
-<section id="emne-eller-holdning" class="slide level2">
-<h2>Emne eller holdning?</h2>
-<p>De mest negative debatter i udsnittet:</p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>År</th>
-<th>Lovforslag</th>
-<th style="text-align: right;"><code>compound</code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2008</td>
-<td>Strafskærpelse for seksuelt misbrug af børn</td>
-<td style="text-align: right;"><strong>−0,33</strong></td>
-</tr>
-<tr class="even">
-<td>2014</td>
-<td>Nyt personnummer i særlige tilfælde</td>
-<td style="text-align: right;">−0,20</td>
-</tr>
-<tr class="odd">
-<td>2008</td>
-<td>Miljøbeskyttelse</td>
-<td style="text-align: right;">−0,19</td>
-</tr>
-<tr class="even">
-<td>2008</td>
-<td>Straf for ulovlig tvang ved indgåelse af ægteskab</td>
-<td style="text-align: right;">−0,18</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<p>Den mest negative debat er om at straffe seksuelt misbrug af børn hårdere. Et forslag, som stort set alle partier støtter.</p>
-<p>Modellen måler ikke, om talerne er <strong>imod</strong> noget. Den måler, at de taler om <strong>noget negativt</strong>: misbrug, vold, tvang.</p>
-<blockquote>
-<p>Sentiment er ikke holdning. Det er ofte bare emnet, der smitter af.</p>
-</blockquote>
-</section>
-<section id="to-modeller-samme-korpus" class="slide level2">
-<h2>To modeller, samme korpus</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th></th>
-<th>Egen ordbog</th>
-<th><code>asent</code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Ord i modellen</td>
-<td>22</td>
-<td>flere tusind</td>
-</tr>
-<tr class="even">
-<td>Debatter uden score</td>
-<td><strong>90 af 900</strong></td>
-<td><strong>0 af 900</strong></td>
-</tr>
-<tr class="odd">
-<td>Håndterer negation</td>
-<td>nej</td>
-<td>ja</td>
-</tr>
-<tr class="even">
-<td>Lavest scorende område</td>
-<td>Retsvæsen</td>
-<td>Retsvæsen</td>
-</tr>
-<tr class="odd">
-<td>Højest scorende område</td>
-<td>Beskæftigelse</td>
-<td>Uddannelse</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<p>Begge modeller er enige om, at Retsvæsen ligger lavest. Men de er uenige om rækkefølgen af resten.</p>
-</section>
-<section id="og-de-er-uenige" class="slide level2">
-<h2>Og de er uenige</h2>
-<p>De to modeller er enige om fortegnet i <strong>85 %</strong> af debatterne. Korrelationen mellem scorerne er <strong>0,42</strong>.</p>
-<p>Og de to rangordener af politikområder har en rangkorrelation på <strong>0,46</strong>.</p>
-<p><br></p>
-<blockquote>
-<p>Hvilken af dem har ret?</p>
-</blockquote>
-<p>Det kan man ikke afgøre ud fra tallene. Det kræver, at nogen læser et udsnit af teksterne og koder dem i hånden … og at man så måler modellerne op mod den kodning.</p>
-<p>Det er den validering, Bonikowski &amp; Nelson efterlyser. Og den er ikke lavet her.</p>
-</section>
-<section id="minimumsvalidering" class="slide level2">
+<section id="minimumsvalidering" class="slide level2 scrollable">
 <h2>Minimumsvalidering</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a></a>stikproeve <span class="op">=</span> korpus.sample(<span class="dv">20</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb14-2"><a></a></span>
-<span id="cb14-3"><a></a><span class="bu">print</span>(stikproeve[[<span class="st">"aar"</span>, <span class="st">"omraade"</span>, <span class="st">"lovnr"</span>, <span class="st">"sentiment"</span>]].to_string())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a></a>stikproeve <span class="op">=</span> korpus.sample(<span class="dv">20</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb8-2"><a></a></span>
+<span id="cb8-3"><a></a><span class="bu">print</span>(stikproeve[[<span class="st">"aar"</span>, <span class="st">"omraade"</span>, <span class="st">"lovnr"</span>, <span class="st">"sentiment"</span>]].to_string())</span>
+<span id="cb8-4"><a></a></span>
+<span id="cb8-5"><a></a><span class="co"># læs én debat ad gangen: skift 0 ud med 1, 2, ... 19</span></span>
+<span id="cb8-6"><a></a><span class="bu">print</span>(stikproeve[<span class="st">"tekst"</span>].iloc[<span class="dv">0</span>][:<span class="dv">1500</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>korpus.sample(20, random_state=42)</code>: 20 tilfældige debatter. <code>random_state=42</code> gør, at vi alle får de samme.</li>
+<li><code>.to_string()</code>: Udskriv hele tabellen, uden at pandas forkorter den med <code>...</code>.</li>
+<li><code>stikproeve["tekst"].iloc[0]</code>: Teksten i første række af stikprøven. <code>.iloc</code> vælger efter placering, ikke efter indeks.</li>
+<li><code>[:1500]</code>: De første 1.500 tegn.</li>
+</ol>
+</details>
 <p><br></p>
-<p>Tyve debatter. Læs dem, og skriv for hvert enkelt, om I er enige med modellen.</p>
-<p>Er I uenige i under fem, kan tallet bruges med forbehold. Er I uenige i over ti, måler modellen noget andet, end I tror.</p>
-<p>Det tager tyve minutter, og det er forskellen på en metodesektion, der holder, og en der ikke gør.</p>
+<p>Tyve debatter. Læs dem, og vurder for hver enkelt, om I er enige med modellen.</p>
 </section></section>
 <section>
 <section id="del-6-pca-og-k-means" class="title-slide slide level1 center">
@@ -1197,185 +1280,262 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZy
 <section id="spørgsmålet-2" class="slide level2">
 <h2>Spørgsmålet</h2>
 <blockquote>
-<p>Kan en algoritme finde politikområderne i teksten … uden at få at vide, hvad de er?</p>
+<p>Kan en algoritme finde politikområderne i teksten?</p>
 </blockquote>
 <p><br></p>
-<p>Vi har en facitliste: ministeriet bag hvert lovforslag. Det har man sjældent. Her kan vi bruge den til at se, hvad de usuperviserede metoder faktisk finder.</p>
+<p>I disse data har vi en “facitliste” i form af ministeriet bag hvert lovforslag. Det har man sjældent. Her kan vi bruge den til at se, hvad de usuperviserede metoder faktisk finder.</p>
 <ul>
-<li><strong>PCA</strong>: dimensionalitetsreduktion. Fra tusindvis af ord til få akser, vi kan se på</li>
-<li><strong>k-means</strong>: klyngeanalyse. Del debatterne i grupper, der ligner hinanden</li>
+<li><strong>PCA</strong>: <em>dimensionalitetsreduktion</em>. Fra tusindvis af ord til få akser, vi kan se på</li>
+<li><strong>k-means</strong>: <em>klyngeanalyse</em>. Del debatterne i grupper, der ligner hinanden</li>
 </ul>
 
 <aside><div>
 <p>Vi bruger kun de seks navngivne områder. “Andet” er en restkategori uden et fælles emne at finde.</p>
 </div></aside></section>
-<section id="fra-tekst-til-tabel" class="slide level2">
+<section id="fra-tekst-til-tabel" class="slide level2 scrollable">
 <h2>Fra tekst til tabel</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-15" class="exercise-cell">
-
-</div>
-<script type="pyodide-15-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InNla3MgPSBrb3JwdXNba29ycHVzW1wib21yYWFkZVwiXSAhPSBcIkFuZGV0XCJdLmNvcHkoKVxuXG5zdG9wb3JkID0gc2V0KFwiXCJcIm9nIGkgamVnIGRldCBhdCBlbiBkZW4gdGlsIGVyIHNvbSBww6UgZGUgbWVkIGhhbiBhZiBmb3IgaWtrZVxuZGVyIHZhciBtaWcgc2lnIG1lbiBldCBoYXIgb20gdmkgbWluIGhhdmRlIGhhbSBodW4gbnUgb3ZlciBkYSBmcmEgZHUgdWQgc2luIGRlbVxub3Mgb3AgbWFuIGhhbnMgaHZvciBlbGxlciBodmFkIHNrYWwgc2VsdiBoZXIgYWxsZSB2aWwgYmxldiBrdW5uZSBpbmQgbsOlciB2w6ZyZSBkb2dcbmpvIGRldHRlIGRpZyBkZXJlcyBlbmQgbWl0IG9nc8OlIHVuZGVyIGhhdmUgZGVucyBodmlzIGRpbmUgZGlzc2UgaHZlbSB2b3JlcyBqZXJcbnPDpWRhbiBhbmRyZSBub2dsZSBibGl2ZXIgYmxpdmUga2FuIHPDpSB2ZWQgbW9kIG1lZ2V0IHJpZ3RpZyB0YWsgaHIgZnJ1IG9yZGbDuHJlclxub3JkZsO4cmVyZW4gZm9yc2xhZyBsb3Zmb3JzbGFnIGxvdmZvcnNsYWdldCBtaW5pc3RlciBtaW5pc3RlcmVuIHbDpnJzZ28gYWx0c8OlIGdvZHRcbnN5bmVzIG1lbmVyIGJhcmUgbGlnZSBoZWxlIG5ldG9wIHNpZ2Ugc2lnZXJcIlwiXCIuc3BsaXQoKSlcblxub3JkID0gKHNla3NbXCJ0ZWtzdFwiXS5zdHIubG93ZXIoKVxuICAgICAgIC5zdHIucmVwbGFjZShyXCJbXmEtesOmw7jDpSBdXCIsIFwiIFwiLCByZWdleD1UcnVlKVxuICAgICAgIC5zdHIuc3BsaXQoKS5leHBsb2RlKCkpXG5vcmQgPSBvcmRbKG9yZC5zdHIubGVuKCkgPiAyKSAmIH5vcmQuaXNpbihzdG9wb3JkKV1cblxucHJpbnQobGVuKHNla3MpLCBcImRlYmF0dGVyIHxcIiwgbGVuKG9yZCksIFwidG9rZW5zIHxcIiwgb3JkLm51bmlxdWUoKSwgXCJ0eXBlclwiKSJ9
-</script>
-</div>
-</div>
-<p><br></p>
-<p>Præcis kæden fra lektion 6. Stopordslisten har fået nogle ord, der er særlige for Folketinget: <code>ordfører</code>, <code>lovforslag</code>, <code>værsgo</code>, <code>tak</code>.</p>
-</section>
-<section id="document-term-matrix" class="slide level2">
-<h2>Document-term matrix</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-16" class="exercise-cell">
-
-</div>
-<script type="pyodide-16-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgZG9rdW1lbnRmcmVrdmVuczogaSBodm9yIG1hbmdlIGRlYmF0dGVyIHN0w6VyIG9yZGV0P1xuZGYgPSBvcmQucmVuYW1lKFwib3JkXCIpLnJlc2V0X2luZGV4KCkuZHJvcF9kdXBsaWNhdGVzKClbXCJvcmRcIl0udmFsdWVfY291bnRzKClcblxuIyBiZWhvbGQgb3JkIGkgbWluZHN0IDUgZGViYXR0ZXIgb2cgaMO4anN0IGhhbHZkZWxlbiBhZiBkZW1cbmJlaG9sZCA9IGRmWyhkZiA+PSA1KSAmIChkZiA8PSAwLjUgKiBsZW4oc2VrcykpXS5pbmRleFxub3JkID0gb3JkW29yZC5pc2luKGJlaG9sZCldXG5cbmR0bSA9IHBkLmNyb3NzdGFiKG9yZC5pbmRleCwgb3JkKVxuXG5wcmludChcIkRUTTpcIiwgZHRtLnNoYXBlKVxucHJpbnQoXCJTcGFyc2l0eTpcIiwgcm91bmQoKGR0bSA9PSAwKS50b19udW1weSgpLm1lYW4oKSAqIDEwMCwgMSksIFwiJVwiKSJ9
-</script>
-</div>
-</div>
-<p><br></p>
-<p>Den øvre grænse er ny: ord, der står i over halvdelen af debatterne, skiller dem ikke ad. Det er Denny &amp; Spirlings <strong>I</strong>, bare i begge ender.</p>
-</section>
-<section id="tf-idf-vægt-ordene" class="slide level2">
-<h2>TF-IDF: vægt ordene</h2>
-<p>En rå optælling giver hyppige ord stor vægt. TF-IDF vægter dem op, hvis de er hyppige <strong>her</strong> og sjældne <strong>andre steder</strong>.</p>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-17" class="exercise-cell">
-
-</div>
-<script type="pyodide-17-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRmID0gZHRtLmRpdihkdG0uc3VtKGF4aXM9MSksIGF4aXM9MCkgICAgICAgICAgIyBhbmRlbCBhZiBkZWJhdHRlbnMgb3JkXG5pZGYgPSBucC5sb2cobGVuKGR0bSkgLyAoZHRtID4gMCkuc3VtKCkpICAgICAgICMgaHZvciBzasOmbGRlbnQgZXIgb3JkZXQ/XG50ZmlkZiA9IHRmICogaWRmXG5cbiMgbm9ybWFsaXPDqXIgaHZlciBkZWJhdCB0aWwgbMOmbmdkZSAxXG50ZmlkZiA9IHRmaWRmLmRpdihucC5zcXJ0KCh0ZmlkZiAqKiAyKS5zdW0oYXhpcz0xKSksIGF4aXM9MClcblxucHJpbnQodGZpZGYuc2hhcGUpXG5wcmludChpZGYuc29ydF92YWx1ZXMoKS5oZWFkKDUpLnJvdW5kKDIpKVxucHJpbnQoaWRmLnNvcnRfdmFsdWVzKCkudGFpbCg1KS5yb3VuZCgyKSkifQ==
-</script>
-</div>
-</div>
-<p><br></p>
-<p>Tre linjer pandas-regning. Den sidste linje er vigtig: uden normaliseringen ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse.</p>
-</section>
-<section id="pca-fra-tusindvis-af-dimensioner-til-to" class="slide level2">
-<h2>PCA: fra tusindvis af dimensioner til to</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-18" class="exercise-cell">
 
 </div>
 <script type="pyodide-18-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2tsZWFybi5kZWNvbXBvc2l0aW9uIGltcG9ydCBQQ0FcblxucGNhID0gUENBKG5fY29tcG9uZW50cz0yLCByYW5kb21fc3RhdGU9MSlcbmFrc2VyID0gcGNhLmZpdF90cmFuc2Zvcm0odGZpZGYpXG5cbnNla3MubG9jW2R0bS5pbmRleCwgXCJwYzFcIl0gPSBha3Nlcls6LCAwXVxuc2Vrcy5sb2NbZHRtLmluZGV4LCBcInBjMlwiXSA9IGFrc2VyWzosIDFdXG5cbnByaW50KFwiRm9ya2xhcmV0IHZhcmlhbnM6XCIsIHBjYS5leHBsYWluZWRfdmFyaWFuY2VfcmF0aW9fLnJvdW5kKDQpKVxucHJpbnQoc2Vrcy5ncm91cGJ5KFwib21yYWFkZVwiKVtbXCJwYzFcIiwgXCJwYzJcIl1dLm1lYW4oKS5yb3VuZCgzKSkifQ==
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRlayA9IGtvcnB1c1trb3JwdXNbXCJvbXJhYWRlXCJdICE9IFwiQW5kZXRcIl0uY29weSgpXG5cbnN0b3BvcmQgPSBzZXQoXCJcIlwib2cgaSBqZWcgZGV0IGF0IGVuIGRlbiB0aWwgZXIgc29tIHDDpSBkZSBtZWQgaGFuIGFmIGZvciBpa2tlXG5kZXIgdmFyIG1pZyBzaWcgbWVuIGV0IGhhciBvbSB2aSBtaW4gaGF2ZGUgaGFtIGh1biBudSBvdmVyIGRhIGZyYSBkdSB1ZCBzaW4gZGVtXG5vcyBvcCBtYW4gaGFucyBodm9yIGVsbGVyIGh2YWQgc2thbCBzZWx2IGhlciBhbGxlIHZpbCBibGV2IGt1bm5lIGluZCBuw6VyIHbDpnJlIGRvZ1xuam8gZGV0dGUgZGlnIGRlcmVzIGVuZCBtaXQgb2dzw6UgdW5kZXIgaGF2ZSBkZW5zIGh2aXMgZGluZSBkaXNzZSBodmVtIHZvcmVzIGplclxuc8OlZGFuIGFuZHJlIG5vZ2xlIGJsaXZlciBibGl2ZSBrYW4gc8OlIHZlZCBtb2QgbWVnZXQgcmlndGlnIHRhayBociBmcnUgb3JkZsO4cmVyXG5vcmRmw7hyZXJlbiBmb3JzbGFnIGxvdmZvcnNsYWcgbG92Zm9yc2xhZ2V0IG1pbmlzdGVyIG1pbmlzdGVyZW4gdsOmcnNnbyBhbHRzw6UgZ29kdFxuc3luZXMgbWVuZXIgYmFyZSBsaWdlIGhlbGUgbmV0b3Agc2lnZSBzaWdlclwiXCJcIi5zcGxpdCgpKVxuXG5vcmQgPSAodGVrW1widGVrc3RcIl0uc3RyLmxvd2VyKClcbiAgICAgICAuc3RyLnJlcGxhY2UoclwiW15hLXrDpsO4w6UgXVwiLCBcIiBcIiwgcmVnZXg9VHJ1ZSlcbiAgICAgICAuc3RyLnNwbGl0KCkuZXhwbG9kZSgpKVxub3JkID0gb3JkWyhvcmQuc3RyLmxlbigpID4gMikgJiB+b3JkLmlzaW4oc3RvcG9yZCldXG5cbnByaW50KGxlbih0ZWspLCBcImRlYmF0dGVyIHxcIiwgbGVuKG9yZCksIFwidG9rZW5zIHxcIiwgb3JkLm51bmlxdWUoKSwgXCJ0eXBlclwiKSJ9
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>korpus[korpus["omraade"] != "Andet"].copy()</code>: Behold kun de seks navngivne områder. <code>.copy()</code> giver en selvstændig tabel.</li>
+<li><code>"""..."""</code>: En tekststreng, der må fylde flere linjer.</li>
+<li><code>.split()</code>: Del strengen ved mellemrum og linjeskift, så vi får en liste af ord.</li>
+<li><code>set(...)</code>: Gør listen til en <strong>mængde</strong>. Hvert ord står der kun én gang, og det går hurtigt at slå op i den.</li>
+<li><code>.str.replace(r"[^a-zæøå ]", " ", regex=True)</code>: Alt, der ikke er små bogstaver eller mellemrum, bliver til mellemrum. Det fjerner både tegnsætning og tal.</li>
+<li><code>.str.split().explode()</code>: Ét ord per række.</li>
+<li><code>ord.str.len() &gt; 2</code>: Kun ord på mere end to bogstaver. <code>&amp;</code> betyder <em>og</em>, <code>~ord.isin(stopord)</code> betyder <em>ikke på stopordslisten</em>.</li>
+</ol>
+</details>
 <p><br></p>
-<p>PCA finder de retninger i rummet, hvor debatterne er <strong>mest forskellige</strong>, og projicerer alle punkter ned på dem.</p>
-<p><code>fit_transform()</code> er den eneste linje, der ikke er pandas. Resten er at lægge resultatet tilbage i tabellen.</p>
+<p>Processen fra lektion 6. Stopordslisten har fået nogle ord, der er særlige for Folketinget: <code>ordfører</code>, <code>lovforslag</code>, <code>værsgo</code>, <code>tak</code>.</p>
 </section>
-<section id="kortet" class="slide level2">
-<h2>Kortet</h2>
+<section id="document-term-matrix" class="slide level2 scrollable">
+<h2>Document-term matrix</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-19" class="exercise-cell">
 
 </div>
 <script type="pyodide-19-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IihnZ3Bsb3Qoc2VrcywgYWVzKHg9XCJwYzFcIiwgeT1cInBjMlwiLCBjb2xvcj1cIm9tcmFhZGVcIikpXG4gKyBnZW9tX3BvaW50KGFscGhhPTAuNilcbiArIGxhYnModGl0bGU9XCJGb2xrZXRpbmdldHMgZGViYXR0ZXIsIHByb2ppY2VyZXQgbmVkIHDDpSB0byBkaW1lbnNpb25lclwiLFxuICAgICAgICB4PVwiUEMxXCIsIHk9XCJQQzJcIiwgY29sb3I9Tm9uZSlcbiArIHRoZW1lX21pbmltYWwoKSkuc2hvdygpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IiMgZG9rdW1lbnRmcmVrdmVuczogaSBodm9yIG1hbmdlIGRlYmF0dGVyIHN0w6VyIG9yZGV0P1xuZGYgPSBvcmQucmVuYW1lKFwib3JkXCIpLnJlc2V0X2luZGV4KCkuZHJvcF9kdXBsaWNhdGVzKClbXCJvcmRcIl0udmFsdWVfY291bnRzKClcblxuIyBiZWhvbGQgb3JkIGkgbWluZHN0IDUgZGViYXR0ZXIgb2cgaMO4anN0IGhhbHZkZWxlbiBhZiBkZW1cbmJlaG9sZCA9IGRmWyhkZiA+PSA1KSAmIChkZiA8PSAwLjUgKiBsZW4odGVrKSldLmluZGV4XG5vcmQgPSBvcmRbb3JkLmlzaW4oYmVob2xkKV1cblxuZHRtID0gcGQuY3Jvc3N0YWIob3JkLmluZGV4LCBvcmQpXG5cbnByaW50KFwiRFRNOlwiLCBkdG0uc2hhcGUpXG5wcmludChcIlNwYXJzaXR5OlwiLCByb3VuZCgoZHRtID09IDApLnRvX251bXB5KCkubWVhbigpICogMTAwLCAxKSwgXCIlXCIpIn0=
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>ord.rename("ord").reset_index()</code>: Gør indekset (debatten) til en kolonne, så vi har en tabel med debat og ord.</li>
+<li><code>.drop_duplicates()</code>: Hvert ord tæller kun én gang per debat.</li>
+<li><code>["ord"].value_counts()</code>: I hvor mange debatter står hvert ord? Det er <strong>dokumentfrekvensen</strong>. Bemærk, at <code>df</code> her står for <em>document frequency</em> og ikke er en DataFrame.</li>
+<li><code>df[(df &gt;= 5) &amp; (df &lt;= 0.5 * len(tek))].index</code>: Ordene, der står i mindst 5 og højst halvdelen af debatterne. <code>.index</code> giver selve ordene, ikke tallene.</li>
+<li><code>ord[ord.isin(behold)]</code>: Behold kun de ord.</li>
+<li><code>pd.crosstab(ord.index, ord)</code>: Krydstabellen mellem debat og ord er vores DTM: én række per debat, én kolonne per ord.</li>
+<li><code>(dtm == 0).to_numpy().mean()</code>: Andelen af celler, der er 0.</li>
+</ol>
+</details>
 <p><br></p>
-<p>Hvert punkt er en debat. Farven er ministeriet … som PCA ikke har set.</p>
+<p>Den øvre grænse er ny: ord, der står i over halvdelen af debatterne, skiller dem ikke ad.</p>
 </section>
-<section id="hvad-betyder-akserne" class="slide level2">
-<h2>Hvad betyder akserne?</h2>
+<section id="tf-idf-vægt-ordene" class="slide level2 scrollable">
+<h2>TF-IDF: vægt ordene</h2>
+<p>En rå optælling giver hyppige ord stor vægt. TF-IDF vægter dem op, hvis de er hyppige <strong>her</strong> og sjældne <strong>andre steder</strong>.</p>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-20" class="exercise-cell">
 
 </div>
 <script type="pyodide-20-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InZhZWd0ZSA9IHBkLkRhdGFGcmFtZShwY2EuY29tcG9uZW50c18uVCwgaW5kZXg9dGZpZGYuY29sdW1ucyxcbiAgICAgICAgICAgICAgICAgICAgICBjb2x1bW5zPVtcInBjMVwiLCBcInBjMlwiXSlcblxuZm9yIGFrc2UgaW4gW1wicGMxXCIsIFwicGMyXCJdOlxuICAgIHByaW50KGFrc2UsIFwiK1wiLCB2YWVndGVbYWtzZV0ubmxhcmdlc3QoNikuaW5kZXgudG9saXN0KCkpXG4gICAgcHJpbnQoYWtzZSwgXCItXCIsIHZhZWd0ZVtha3NlXS5uc21hbGxlc3QoNikuaW5kZXgudG9saXN0KCkpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InRmID0gZHRtLmRpdihkdG0uc3VtKGF4aXM9MSksIGF4aXM9MCkgICAgICAgICAgIyBhbmRlbCBhZiBkZWJhdHRlbnMgb3JkXG5pZGYgPSBucC5sb2cobGVuKGR0bSkgLyAoZHRtID4gMCkuc3VtKCkpICAgICAgICMgaHZvciBzasOmbGRlbnQgZXIgb3JkZXQ/XG50ZmlkZiA9IHRmICogaWRmXG5cbiMgbm9ybWFsaXPDqXIgaHZlciBkZWJhdCB0aWwgbMOmbmdkZSAxXG50ZmlkZiA9IHRmaWRmLmRpdihucC5zcXJ0KCh0ZmlkZiAqKiAyKS5zdW0oYXhpcz0xKSksIGF4aXM9MClcblxucHJpbnQodGZpZGYuc2hhcGUpXG5wcmludChpZGYuc29ydF92YWx1ZXMoKS5oZWFkKDUpLnJvdW5kKDIpKVxucHJpbnQoaWRmLnNvcnRfdmFsdWVzKCkudGFpbCg1KS5yb3VuZCgyKSkifQ==
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>dtm.sum(axis=1)</code>: Antal ord i hver debat (summen hen ad rækken). <code>dtm.div(..., axis=0)</code> dividerer hver række med sin sum. Det er <strong>TF</strong>: hvor stor en andel af debattens ord er dette ord?</li>
+<li><code>(dtm &gt; 0).sum()</code>: I hvor mange debatter står hvert ord (summen ned ad kolonnen)? <code>len(dtm)</code> er antallet af debatter. <code>np.log(...)</code> giver <strong>IDF</strong>: høj for sjældne ord, lav for ord i mange debatter.</li>
+<li><code>tf * idf</code>: Pandas ganger hver kolonne med ordets IDF og matcher på kolonnenavnet.</li>
+<li><code>np.sqrt((tfidf ** 2).sum(axis=1))</code>: Længden af hver række (Pythagoras). Når vi dividerer med den, får hver debat længden 1.</li>
+<li><code>idf.sort_values().head(5)</code> og <code>.tail(5)</code>: De fem mest udbredte og de fem sjældneste ord.</li>
+</ol>
+</details>
 <p><br></p>
-<ul>
-<li class="fragment"><p><strong>PC1</strong> går fra <em>unge, uddannelse, elever</em> (+) til <em>virksomheder, skat, afgift, selskaber</em> (−). Mennesker over for markeder.</p></li>
-<li class="fragment"><p><strong>PC2</strong> går fra <em>Grønland, udlændinge, statsborgerskab, kriminalitet, politiet</em> (+) til <em>virksomheder, kommunerne, grøn omstilling</em> (−). Kontrol og ret over for økonomi og forvaltning.</p></li>
-<li class="fragment"><p>Uddannelse ligger længst ude på PC1. Udlændinge og Retsvæsen ligger længst oppe på PC2.</p></li>
-</ul>
+<p>Fire linjer pandas-regning. Den sidste er vigtig: uden normaliseringen ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse.</p>
 </section>
-<section id="hvor-meget-er-med-på-kortet" class="slide level2">
-<h2>Hvor meget er med på kortet?</h2>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Komponenter</th>
-<th style="text-align: right;">Forklaret varians</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2</td>
-<td style="text-align: right;"><strong>1,9 %</strong></td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td style="text-align: right;">7,5 %</td>
-</tr>
-<tr class="odd">
-<td>50</td>
-<td style="text-align: right;">23,8 %</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<p>Kortet viser under 2 % af variationen i data. Det er ikke en fejl. Tekst er <strong>højdimensionelt</strong>: hver debat bruger sit eget lille udsnit af tusindvis af ord.</p>
-<p>Kortet er en skygge af data, ikke data. Det er godt til at få øje på mønstre, og dårligt til at konkludere på.</p>
-</section>
-<section id="k-means-find-grupperne" class="slide level2">
-<h2>k-means: find grupperne</h2>
+<section id="pca-fra-tusindvis-af-dimensioner-til-to" class="slide level2 scrollable">
+<h2>PCA: fra tusindvis af dimensioner til to</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-21" class="exercise-cell">
 
 </div>
 <script type="pyodide-21-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2tsZWFybi5jbHVzdGVyIGltcG9ydCBLTWVhbnNcblxua20gPSBLTWVhbnMobl9jbHVzdGVycz02LCBuX2luaXQ9MTAsIHJhbmRvbV9zdGF0ZT0wKVxuc2Vrcy5sb2NbZHRtLmluZGV4LCBcImtseW5nZVwiXSA9IGttLmZpdF9wcmVkaWN0KHRmaWRmKVxuXG5wcmludChwZC5jcm9zc3RhYihzZWtzW1wib21yYWFkZVwiXSwgc2Vrc1tcImtseW5nZVwiXSkpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2tsZWFybi5kZWNvbXBvc2l0aW9uIGltcG9ydCBQQ0FcblxucGNhID0gUENBKG5fY29tcG9uZW50cz0yLCByYW5kb21fc3RhdGU9MSlcbmFrc2VyID0gcGNhLmZpdF90cmFuc2Zvcm0odGZpZGYpXG5cbnRlay5sb2NbZHRtLmluZGV4LCBcInBjMVwiXSA9IGFrc2VyWzosIDBdXG50ZWsubG9jW2R0bS5pbmRleCwgXCJwYzJcIl0gPSBha3Nlcls6LCAxXVxuXG5wcmludChcIkZvcmtsYXJldCB2YXJpYW5zOlwiLCBwY2EuZXhwbGFpbmVkX3ZhcmlhbmNlX3JhdGlvXy5yb3VuZCg0KSlcbnByaW50KHRlay5ncm91cGJ5KFwib21yYWFkZVwiKVtbXCJwYzFcIiwgXCJwYzJcIl1dLm1lYW4oKS5yb3VuZCgzKSkifQ==
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>from sklearn.decomposition import PCA</code>: Hent PCA fra scikit-learn.</li>
+<li><code>PCA(n_components=2, random_state=1)</code>: Vi beder om to akser. <code>random_state</code> gør resultatet det samme hver gang.</li>
+<li><code>pca.fit_transform(tfidf)</code>: Find akserne (<code>fit</code>), og placér hver debat på dem (<code>transform</code>). Resultatet er en NumPy-tabel med én række per debat og to kolonner.</li>
+<li><code>akser[:, 0]</code>: Alle rækker, første kolonne. <code>akser[:, 1]</code> er den anden.</li>
+<li><code>tek.loc[dtm.index, "pc1"] = ...</code>: Læg værdierne tilbage på de rigtige debatter. <code>dtm.index</code> er debatterne i samme rækkefølge som i <code>akser</code>.</li>
+<li><code>pca.explained_variance_ratio_</code>: Hvor stor en andel af forskellene mellem debatterne hver akse fanger.</li>
+<li><code>tek.groupby("omraade")[["pc1", "pc2"]].mean()</code>: Hvert områdes gennemsnitlige placering på de to akser.</li>
+</ol>
+</details>
 <p><br></p>
-<p><code>n_clusters=6</code> er <strong>vores</strong> valg: vi ved, der er seks områder. I en rigtig analyse ved man det ikke.</p>
-<p><code>n_init=10</code> kører algoritmen fra ti tilfældige startpunkter og beholder den bedste.</p>
+<p>PCA finder de retninger i rummet, hvor debatterne er <strong>mest forskellige</strong>, og projicerer alle punkter ned på dem.</p>
+<p><code>fit_transform()</code> er den eneste linje, der ikke er pandas. Resten er at lægge resultatet tilbage i tabellen.</p>
 </section>
-<section id="klynger-mod-politikområder" class="slide level2">
-<h2>Klynger mod politikområder</h2>
-<ul>
-<li class="fragment"><strong>Skat</strong>: 82 af 104 i én klynge</li>
-<li class="fragment"><strong>Uddannelse</strong>: 69 af 83 i én klynge</li>
-<li class="fragment"><strong>Beskæftigelse</strong>: 59 af 77 i én klynge</li>
-<li class="fragment"><strong>Miljø og klima</strong>: 66 af 114 i én klynge … men den deler den med 27 retsvæsensdebatter</li>
-<li class="fragment"><strong>Udlændinge</strong>: 32 af 41 i én klynge … sammen med 28 retsvæsensdebatter</li>
-<li class="fragment"><strong>Retsvæsen</strong>: fordelt på tre klynger</li>
-</ul>
-<p><br></p>
-<p>Samlet havner <strong>66 %</strong> af debatterne i en klynge, hvor deres eget område er det største. Uden at algoritmen har fået at vide, at områderne findes.</p>
-</section>
-<section id="hvad-handler-klyngerne-om" class="slide level2">
-<h2>Hvad handler klyngerne om?</h2>
+<section id="kortet" class="slide level2 scrollable">
+<h2>Kortet</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-22" class="exercise-cell">
 
 </div>
 <script type="pyodide-22-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImNlbnRyZSA9IHBkLkRhdGFGcmFtZShrbS5jbHVzdGVyX2NlbnRlcnNfLCBjb2x1bW5zPXRmaWRmLmNvbHVtbnMpXG5cbmZvciBrIGluIHJhbmdlKDYpOlxuICAgIHByaW50KGssIGNlbnRyZS5sb2Nba10ubmxhcmdlc3QoOCkuaW5kZXgudG9saXN0KCkpIn0=
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6IihnZ3Bsb3QodGVrLCBhZXMoeD1cInBjMVwiLCB5PVwicGMyXCIsIGNvbG9yPVwib21yYWFkZVwiKSlcbiArIGdlb21fcG9pbnQoYWxwaGE9MC42KVxuICsgbGFicyh0aXRsZT1cIkZvbGtldGluZ2V0cyBkZWJhdHRlciwgcHJvamljZXJldCBuZWQgcMOlIHRvIGRpbWVuc2lvbmVyXCIsXG4gICAgICAgIHg9XCJQQzFcIiwgeT1cIlBDMlwiLCBjb2xvcj1Ob25lKVxuICsgdGhlbWVfbWluaW1hbCgpKS5zaG93KCkifQ==
 </script>
 </div>
 </div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>ggplot(tek, aes(x="pc1", y="pc2", color="omraade"))</code>: Hver debat placeres efter sine to PCA-værdier og farves efter politikområde.</li>
+<li><code>geom_point(alpha=0.6)</code>: Et punkt per debat. <code>alpha=0.6</code> gør punkterne delvist gennemsigtige, så man kan se, hvor de ligger oven på hinanden.</li>
+<li><code>labs(...)</code> og <code>theme_minimal()</code>: Titler og et enkelt udseende, som på de tidligere figurer.</li>
+</ol>
+</details>
 <p><br></p>
-<p>Et klyngecenter er gennemsnittet af klyngens debatter. De ord, der vægter mest i centret, beskriver klyngen.</p>
+<p>Hvert punkt er en debat. Farven er ministeriet, <strong>som PCA ikke har set</strong>. Det er en ekstra oplysning, vi har i netop disse data.</p>
+</section>
+<section id="hvad-betyder-akserne" class="slide level2 scrollable">
+<h2>Hvad betyder akserne?</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-23" class="exercise-cell">
+
+</div>
+<script type="pyodide-23-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6InZhZWd0ZSA9IHBkLkRhdGFGcmFtZShwY2EuY29tcG9uZW50c18uVCwgaW5kZXg9dGZpZGYuY29sdW1ucyxcbiAgICAgICAgICAgICAgICAgICAgICBjb2x1bW5zPVtcInBjMVwiLCBcInBjMlwiXSlcblxuZm9yIGFrc2UgaW4gW1wicGMxXCIsIFwicGMyXCJdOlxuICAgIHByaW50KGFrc2UsIFwiK1wiLCB2YWVndGVbYWtzZV0ubmxhcmdlc3QoNikuaW5kZXgudG9saXN0KCkpXG4gICAgcHJpbnQoYWtzZSwgXCItXCIsIHZhZWd0ZVtha3NlXS5uc21hbGxlc3QoNikuaW5kZXgudG9saXN0KCkpIn0=
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>pca.components_</code>: Hvert ords vægt på hver akse, med én række per akse. <code>.T</code> vender tabellen, så ordene bliver rækker.</li>
+<li><code>pd.DataFrame(..., index=tfidf.columns, columns=["pc1", "pc2"])</code>: Giv rækkerne ordenes navne og kolonnerne aksernes.</li>
+<li><code>for akse in ["pc1", "pc2"]:</code>: Gør det samme for begge akser.</li>
+<li><code>.nlargest(6)</code> og <code>.nsmallest(6)</code>: De seks ord med den største positive og den største negative vægt, altså de to ender af aksen.</li>
+<li><code>.index.tolist()</code>: Kun ordene, som en liste.</li>
+</ol>
+</details>
+<p><br></p>
+<ul>
+<li><p><strong>PC1</strong> går fra <em>unge, uddannelse, elever</em> (+) til <em>virksomheder, skat, afgift, selskaber</em> (−). Mennesker over for markeder.</p></li>
+<li><p><strong>PC2</strong> går fra <em>Grønland, udlændinge, statsborgerskab, kriminalitet, politiet</em> (+) til <em>virksomheder, kommunerne, grøn omstilling</em> (−). Kontrol og ret over for økonomi og forvaltning.</p></li>
+</ul>
+</section>
+<section id="k-means-find-grupperne" class="slide level2 scrollable">
+<h2>k-means: find grupperne</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-24" class="exercise-cell">
+
+</div>
+<script type="pyodide-24-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZyb20gc2tsZWFybi5jbHVzdGVyIGltcG9ydCBLTWVhbnNcblxua20gPSBLTWVhbnMobl9jbHVzdGVycz02LCBuX2luaXQ9MTAsIHJhbmRvbV9zdGF0ZT0wKVxudGVrLmxvY1tkdG0uaW5kZXgsIFwia2x5bmdlXCJdID0ga20uZml0X3ByZWRpY3QodGZpZGYpXG5cbnByaW50KHBkLmNyb3NzdGFiKHRla1tcIm9tcmFhZGVcIl0sIHRla1tcImtseW5nZVwiXSkpIn0=
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<ol type="1">
+<li><code>from sklearn.cluster import KMeans</code>: Hent k-means fra scikit-learn.</li>
+<li><code>KMeans(...)</code>: Opsæt algoritmen. <code>random_state=0</code> gør resultatet det samme hver gang.</li>
+<li><code>km.fit_predict(tfidf)</code>: Find klyngerne (<code>fit</code>), og giv hver debat et klyngenummer fra 0 til 5 (<code>predict</code>).</li>
+<li><code>tek.loc[dtm.index, "klynge"] = ...</code>: Læg klyngenumrene tilbage på de rigtige debatter, som med PCA.</li>
+<li><code>pd.crosstab(tek["omraade"], tek["klynge"])</code>: Hvor mange debatter fra hvert område der er havnet i hver klynge.</li>
+</ol>
+</details>
+<p><br></p>
+<p><code>n_clusters=6</code> er <strong>vores</strong> valg: vi ved, der er seks områder. <strong>I en “rigtig” analyse ved man det ikke.</strong></p>
+<p><code>n_init=10</code> kører algoritmen fra ti tilfældige startpunkter og beholder den bedste.</p>
+</section>
+<section id="klynger-mod-politikområder" class="slide level2">
+<h2>Klynger mod politikområder</h2>
+<ul>
+<li><strong>Skat</strong>: 82 af 104 i én klynge</li>
+<li><strong>Uddannelse</strong>: 69 af 83 i én klynge</li>
+<li><strong>Beskæftigelse</strong>: 59 af 77 i én klynge</li>
+<li><strong>Miljø og klima</strong>: 66 af 114 i én klynge … men den deler den med 27 retsvæsensdebatter</li>
+<li><strong>Udlændinge</strong>: 32 af 41 i én klynge … sammen med 28 retsvæsensdebatter</li>
+<li><strong>Retsvæsen</strong>: fordelt på tre klynger</li>
+</ul>
+<p><br></p>
+<p>Samlet havner <strong>66 %</strong> af debatterne i en klynge, hvor deres eget område er det største. Uden at algoritmen har fået at vide, at områderne findes.</p>
+</section>
+<section id="hvad-handler-klyngerne-om" class="slide level2 scrollable">
+<h2>Hvad handler klyngerne om?</h2>
+<div class="cell" data-autorun="false">
+<div>
+<div id="pyodide-25" class="exercise-cell">
+
+</div>
+<script type="pyodide-25-contents">
+eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImNlbnRyZSA9IHBkLkRhdGFGcmFtZShrbS5jbHVzdGVyX2NlbnRlcnNfLCBjb2x1bW5zPXRmaWRmLmNvbHVtbnMpXG5cbnRvcCA9IChjZW50cmVcbiAgICAgICAucmVuYW1lX2F4aXMoaW5kZXg9XCJrbHluZ2VcIiwgY29sdW1ucz1cIm9yZFwiKVxuICAgICAgIC5zdGFjaygpXG4gICAgICAgLnJlbmFtZShcInZhZWd0XCIpXG4gICAgICAgLnJlc2V0X2luZGV4KClcbiAgICAgICAuc29ydF92YWx1ZXMoXCJ2YWVndFwiLCBhc2NlbmRpbmc9RmFsc2UpXG4gICAgICAgLmdyb3VwYnkoXCJrbHluZ2VcIilcbiAgICAgICAuaGVhZCg4KSlcblxucHJpbnQodG9wLmdyb3VwYnkoXCJrbHluZ2VcIilbXCJvcmRcIl0uYWdnKGxpc3QpKSJ9
+</script>
+</div>
+</div>
+<details>
+<summary>
+Noter til koden
+</summary>
+<p>Læs det oppefra og ned:</p>
+<ol type="1">
+<li><code>pd.DataFrame(km.cluster_centers_, columns=tfidf.columns)</code>: Klyngecentrene som en tabel med én række per klynge og én kolonne per ord.</li>
+<li><code>.rename_axis(index="klynge", columns="ord")</code>: Giv rækkerne og kolonnerne navne, så de får de navne i næste trin.</li>
+<li><code>.stack().rename("vaegt").reset_index()</code>: Fra bred til lang: én række per klynge og ord, med kolonnerne <code>klynge</code>, <code>ord</code> og <code>vaegt</code>. Som <code>pivot_longer()</code> i R.</li>
+<li><code>.sort_values("vaegt", ascending=False)</code>: Største vægt først. Som <code>arrange(desc(vaegt))</code>.</li>
+<li><code>.groupby("klynge").head(8)</code>: De første otte rækker i hver klynge. Som <code>group_by(klynge) |&gt; slice_head(n = 8)</code>.</li>
+<li><code>top.groupby("klynge")["ord"].agg(list)</code>: Saml ordene i én liste per klynge, så de kan læses på én linje.</li>
+</ol>
+</details>
+<p><br></p>
+<p>Et <strong>klyngecenter</strong> er gennemsnittet af klyngens debatter. De ord, der vægter mest i centret, beskriver klyngen.</p>
 </section>
 <section id="hvad-fandt-algoritmen" class="slide level2">
 <h2>Hvad fandt algoritmen?</h2>
@@ -1383,123 +1543,21 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImNl
 <p><strong>Den delte Retsvæsen i tre.</strong> Kriminalitet og straf for sig. Udlændinge og kriminalitet for sig. Og Grønland og EU-direktiver for sig, sammen med en stor del af miljødebatterne. Justitsministeriet har et meget blandet ansvarsområde, og teksten viser det.</p>
 <p><strong>Den lagde udlændinge og kriminalitet sammen.</strong> Ordforrådet i de to typer debat overlapper: <em>opholdstilladelse</em>, <em>udvisning</em>, <em>kriminalitet</em>, <em>politiet</em>.</p>
 <p><br></p>
-<p>Det er det, klyngeanalyse er god til: at vise, hvor vores kategorier <strong>ikke</strong> passer med teksten.</p>
-</section>
-<section id="en-fejlkilde-i-toppen" class="slide level2">
-<h2>En fejlkilde i toppen</h2>
-<p>Se efter i ordlisterne: <code>nonbo</code>, <code>karsten</code>, <code>bonnesen</code>, <code>andersen</code>.</p>
-<p>Det er <strong>navne</strong>. Formanden introducerer hver taler: <em>“Hr. Karsten Nonbo, Venstre. Værsgo.”</em></p>
-<p>Og ordførerne er faste for hvert område. Karsten Nonbo (V) er ordfører i 14 af udsnittets retsvæsensdebatter. Erling Bonnesen (V) optræder i 22 miljødebatter. Klyngen om kriminalitet kender altså delvist retsvæsenet, fordi den kender ordføreren.</p>
-<p><br></p>
-<blockquote>
-<p>Algoritmen klynger delvist på <strong>hvem der taler</strong>, ikke kun på <strong>hvad der bliver sagt</strong>.</p>
-</blockquote>
-<p>Det kan man rette ved at fjerne navne i forbehandlingen. Men man skal først opdage det, og det gør man kun ved at læse ordlisterne.</p>
-</section>
-<section id="k-means-afhænger-af-startpunktet" class="slide level2">
-<h2>k-means afhænger af startpunktet</h2>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-23" class="exercise-cell">
-
-</div>
-<script type="pyodide-23-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImRlZiByZW5oZWQoZXRpa2V0dGVyKTpcbiAgICB0YWJlbCA9IHBkLmNyb3NzdGFiKGV0aWtldHRlciwgc2Vrcy5sb2NbZHRtLmluZGV4LCBcIm9tcmFhZGVcIl0udG9fbnVtcHkoKSlcbiAgICByZXR1cm4gdGFiZWwubWF4KGF4aXM9MSkuc3VtKCkgLyB0YWJlbC50b19udW1weSgpLnN1bSgpXG5cbmZvciBzdGFydCBpbiByYW5nZSg4KTpcbiAgICBldGlrZXR0ZXIgPSBLTWVhbnMobl9jbHVzdGVycz02LCBuX2luaXQ9MTAsXG4gICAgICAgICAgICAgICAgICAgICAgIHJhbmRvbV9zdGF0ZT1zdGFydCkuZml0X3ByZWRpY3QodGZpZGYpXG4gICAgcHJpbnQoZlwic3RhcnRwdW5rdCB7c3RhcnR9OiByZW5oZWQge3JlbmhlZChldGlrZXR0ZXIpOi4zZn1cIikifQ==
-</script>
-</div>
-</div>
-<p><br></p>
-<p>Samme data, samme antal klynger, forskellige tilfældige startpunkter: renheden går fra <strong>0,55 til 0,73</strong>.</p>
-<p>Vi har vist resultatet for startpunkt 0. Et andet startpunkt ville have givet andre klynger … og en anden fortælling. Den variation hører med i metodeafsnittet.</p>
-</section>
-<section id="pca-før-k-means" class="slide level2">
-<h2>PCA før k-means</h2>
-<p>Et almindeligt greb: reducér først med PCA, og kør så k-means på de få komponenter.</p>
-<div class="cell" data-autorun="false">
-<div>
-<div id="pyodide-24" class="exercise-cell">
-
-</div>
-<script type="pyodide-24-contents">
-eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZvciBuIGluIFsyLCAxMCwgNTBdOlxuICAgIGZhYSA9IFBDQShuX2NvbXBvbmVudHM9biwgcmFuZG9tX3N0YXRlPTEpLmZpdF90cmFuc2Zvcm0odGZpZGYpXG4gICAgciA9IFtyZW5oZWQoS01lYW5zKG5fY2x1c3RlcnM9Niwgbl9pbml0PTEwLCByYW5kb21fc3RhdGU9cykuZml0X3ByZWRpY3QoZmFhKSlcbiAgICAgICAgIGZvciBzIGluIHJhbmdlKDgpXVxuICAgIHByaW50KGZcIntuOj4zfSBrb21wb25lbnRlcjogcmVuaGVkIHtucC5tZWFuKHIpOi4zZn0gIFwiXG4gICAgICAgICAgZlwiKHNww6ZuZCB7bWluKHIpOi4zZn0te21heChyKTouM2Z9KVwiKSJ9
-</script>
-</div>
-</div>
-<p><br></p>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Input til k-means</th>
-<th style="text-align: right;">Gns. renhed</th>
-<th style="text-align: right;">Spænd over 8 startpunkter</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Alle 4.042 ord</td>
-<td style="text-align: right;">0,63</td>
-<td style="text-align: right;">0,55-0,73</td>
-</tr>
-<tr class="even">
-<td>50 komponenter</td>
-<td style="text-align: right;">0,60</td>
-<td style="text-align: right;">0,50-0,79</td>
-</tr>
-<tr class="odd">
-<td>10 komponenter</td>
-<td style="text-align: right;">0,62</td>
-<td style="text-align: right;">0,53-0,75</td>
-</tr>
-<tr class="even">
-<td>2 komponenter</td>
-<td style="text-align: right;"><strong>0,53</strong></td>
-<td style="text-align: right;"><strong>0,51-0,54</strong></td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<p>Med <strong>to</strong> komponenter bliver klyngerne næsten ens hver gang … men dårligere. Det, PCA smider væk, er ikke kun støj.</p>
-<p>Med 10 og 50 komponenter er klyngerne lige så gode som uden PCA … og lige så ustabile.</p>
-<p>Dimensionalitetsreduktion er en afvejning mellem stabilitet og information, ikke en gratis forbedring.</p>
+<p>Klyngeanalyse er også god til at vise, hvor vores kategorier <strong>ikke</strong> passer med teksten.</p>
 </section>
 <section id="hvad-kan-vi-så-konkludere-1" class="slide level2">
 <h2>Hvad kan vi så konkludere?</h2>
 <ul>
-<li class="fragment"><p>At teksten i Folketingets debatter bærer <strong>nok information</strong> til at genfinde de fleste politikområder, uden at algoritmen kender dem.</p></li>
-<li class="fragment"><p>At PCA’s kort er <strong>letlæseligt men fattigt</strong>: 2 % af variationen, fortolket gennem de ord, der vægter mest.</p></li>
-<li class="fragment"><p>At k-means finder strukturer, vores kategorier ikke har: Justitsministeriets blandede portefølje, overlappet mellem udlændinge og kriminalitet.</p></li>
-<li class="fragment"><p>At resultatet afhænger af <strong>startpunktet</strong>, af <strong>antallet af klynger</strong> og af <strong>forbehandlingen</strong> … herunder om navnene er fjernet.</p></li>
+<li><p>At teksten i Folketingets debatter bærer <strong>nok information</strong> til at genfinde de fleste politikområder, uden at algoritmen kender dem.</p></li>
+<li><p>At k-means finder strukturer, vores kategorier ikke har, såsom Justitsministeriets blandede portefølje og overlappet mellem udlændinge og kriminalitet i debatterne.</p></li>
 </ul>
 <p><br></p>
 <blockquote>
-<p>Et topic model finder altid emner. Også i støj. Det samme gælder k-means. Det er jer, der afgør, om de betyder noget.</p>
+<p>En topic model finder altid emner, selv i ren støj. Det samme gælder k-means. Det er jer, der afgør, om de betyder noget.</p>
 </blockquote>
-</section></section>
-<section>
-<section id="del-7-øvelser" class="title-slide slide level1 center">
-<h1>Del 7: Øvelser</h1>
-
 </section>
-<section id="øvelser" class="slide level2 scrollable">
+<section id="øvelser" class="slide level2">
 <h2>Øvelser</h2>
-<p><span class="timer" data-time="1200"></span></p>
-<p>I øvelserne arbejder I med det <strong>fulde</strong> datasæt: alle 3.070 1. behandlinger.</p>
-<ol type="1">
-<li><p><strong>Byg jeres egen temaordbog.</strong> Vælg et tema, som ikke er med i dag (sundhed, forsvar, EU, landbrug …). Validér den mod politikområderne, og følg den over tid.</p></li>
-<li><p><strong>Normalisér.</strong> Sammenlign forekomster per 1.000 ord med rå optællinger. Ændrer det konklusionen?</p></li>
-<li><p><strong>Sentiment.</strong> Kør <code>asent</code> på et udsnit. Find de fem mest negative og fem mest positive debatter, og læs dem. Er det emnet eller holdningen, der drev scoren?</p></li>
-<li><p><strong>Antal klynger.</strong> Kør k-means med 4, 6, 8 og 10 klynger. Hvornår begynder klyngerne at give mening … og hvornår holder de op?</p></li>
-<li><p><strong>Fjern navnene.</strong> Find talernes navne i teksten, og fjern dem før klyngeanalysen. Ændrer det klyngerne?</p></li>
-<li><p><strong>Portfolio.</strong> Svar på Hunstons fire spørgsmål om det korpus, I vil bruge.</p></li>
-</ol>
-</section>
-<section id="litteratur" class="slide level2">
-<h2>Litteratur</h2>
-<p><strong>Bonikowski, B. &amp; Nelson, L. K.</strong> (2022). From Ends to Means: The Promise of Computational Text Analysis for Theoretically Driven Sociological Research. <em>Sociological Methods &amp; Research</em>, 51(4), 1469-1483.</p>
-<p><strong>Macanovic, A.</strong> (2022). Text mining for social science — The state and the future of computational text analysis in sociology. <em>Social Science Research</em>, 108, 102784.</p>
-<p><strong>Hunston, S.</strong> (2002). The corpus as object: Design and purpose. I: <em>Corpora in Applied Linguistics</em>, s. 25-37. Cambridge University Press.</p>
-<p><br></p>
-<p><strong>Supplerende:</strong> Thelwall, M. (2023). Sentiment Analysis. I: <em>The SAGE Handbook of Social Media Research Methods</em>.</p>
 <p><strong>Dokumentation:</strong> <a href="https://spacy.io/usage/spacy-101">spaCy 101</a> | <a href="https://kennethenevoldsen.github.io/asent/index.html">asent</a> | <a href="https://scikit-learn.org/stable/modules/decomposition.html#pca">scikit-learn: PCA</a> | <a href="https://scikit-learn.org/stable/modules/clustering.html#k-means">scikit-learn: k-means</a></p>
 
 
@@ -1507,7 +1565,7 @@ eyJhdHRyIjp7ImF1dG9ydW4iOmZhbHNlLCJlZGl0Ijp0cnVlLCJldmFsIjp0cnVlfSwiY29kZSI6ImZv
 eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwicGFuZGFzIiwibnVtcHkiLCJtYXRwbG90bGliIiwicGxvdG5pbmUiLCJzY2lraXQtbGVhcm4iXX19
 </script>
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTI0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTI0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIxIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIxLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE5IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE5LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTktY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE4IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTggPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE4LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xOCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE3IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE3LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTctY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTYgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE2LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTYtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE1IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE1LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTUtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTExIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTExLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl85ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTI1IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTI1LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjUtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yNSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTI0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTI0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIxIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIxLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMjAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTIwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMjAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8yMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMjAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE5IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTkgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE5LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTktY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xOSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE4IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTggPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE4LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTgtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xOCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE3IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTcgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE3LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTctY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE2IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTYgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE2LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTYtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE1IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTUgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE1LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTUtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTE0IiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTQgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTE0LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTQtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xNCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEzIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTMgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEzLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTMtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMyA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEyIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTIgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEyLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTItY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMiA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTExIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTEgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTExLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTEtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMSA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEwIiwiaW5saW5lIjpmYWxzZSwibWV0aG9kTmFtZSI6ImludGVycHJldCIsInNvdXJjZSI6InZpZXdvZiBfcHlvZGlkZV9lZGl0b3JfMTAgPSB7XG4gIGNvbnN0IHsgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yLCBiNjREZWNvZGUgfSA9IHdpbmRvdy5fZXhlcmNpc2Vfb2pzX3J1bnRpbWU7XG5cbiAgY29uc3Qgc2NyaXB0Q29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLTEwLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMTAtY29udGVudHNgIH0sIGJsb2NrLmF0dHIpO1xuICBjb25zdCBlZGl0b3IgPSBuZXcgUHlvZGlkZUV4ZXJjaXNlRWRpdG9yKFxuICAgIHB5b2RpZGVPanMucHlvZGlkZVByb21pc2UsXG4gICAgYmxvY2suY29kZSxcbiAgICBvcHRpb25zXG4gICk7XG5cbiAgcmV0dXJuIGVkaXRvci5jb250YWluZXI7XG59XG5fcHlvZGlkZV92YWx1ZV8xMCA9IHB5b2RpZGVPanMucHJvY2VzcyhfcHlvZGlkZV9lZGl0b3JfMTAsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTkiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl85ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS05LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzkgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzksIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTgiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl84ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS04LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtOC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzggPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzgsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTciLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl83ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS03LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzcgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzcsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTYiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl82ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS02LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzYgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzYsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl81ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS01LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzUgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzUsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTQiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl80ID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS00LWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtNC1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzQgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzQsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTMiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8zID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0zLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMy1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzMgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzMsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTIiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8yID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0yLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMi1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzIgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzIsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoidmlld29mIF9weW9kaWRlX2VkaXRvcl8xID0ge1xuICBjb25zdCB7IFB5b2RpZGVFeGVyY2lzZUVkaXRvciwgYjY0RGVjb2RlIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oeyBpZDogYHB5b2RpZGUtMS1jb250ZW50c2AgfSwgYmxvY2suYXR0cik7XG4gIGNvbnN0IGVkaXRvciA9IG5ldyBQeW9kaWRlRXhlcmNpc2VFZGl0b3IoXG4gICAgcHlvZGlkZU9qcy5weW9kaWRlUHJvbWlzZSxcbiAgICBibG9jay5jb2RlLFxuICAgIG9wdGlvbnNcbiAgKTtcblxuICByZXR1cm4gZWRpdG9yLmNvbnRhaW5lcjtcbn1cbl9weW9kaWRlX3ZhbHVlXzEgPSBweW9kaWRlT2pzLnByb2Nlc3MoX3B5b2RpZGVfZWRpdG9yXzEsIHt9KTtcbiJ9LHsiY2VsbE5hbWUiOiJweW9kaWRlLXByZWx1ZGUiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJweW9kaWRlT2pzID0ge1xuICBjb25zdCB7XG4gICAgUHlvZGlkZUV2YWx1YXRvcixcbiAgICBQeW9kaWRlRW52aXJvbm1lbnRNYW5hZ2VyLFxuICAgIHNldHVwUHl0aG9uLFxuICAgIHN0YXJ0UHlvZGlkZVdvcmtlcixcbiAgICBiNjREZWNvZGUsXG4gICAgY29sbGFwc2VQYXRoLFxuICB9ID0gd2luZG93Ll9leGVyY2lzZV9vanNfcnVudGltZTtcblxuICBjb25zdCBzdGF0dXNDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctc3RhdHVzXCIpO1xuICBjb25zdCBpbmRpY2F0b3JDb250YWluZXIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpbmRpY2F0b3JDb250YWluZXIuY2xhc3NMaXN0LnJlbW92ZShcImQtbm9uZVwiKTtcblxuICBsZXQgc3RhdHVzVGV4dCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIilcbiAgc3RhdHVzVGV4dC5jbGFzc0xpc3QgPSBcImV4ZXJjaXNlLWxvYWRpbmctZGV0YWlsc1wiO1xuICBzdGF0dXNUZXh0ID0gc3RhdHVzQ29udGFpbmVyLmFwcGVuZENoaWxkKHN0YXR1c1RleHQpO1xuICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYEluaXRpYWxpc2VgO1xuXG4gIC8vIEhvaXN0IGluZGljYXRvciBvdXQgZnJvbSBmaW5hbCBzbGlkZSB3aGVuIHJ1bm5pbmcgdW5kZXIgcmV2ZWFsXG4gIGNvbnN0IHJldmVhbFN0YXR1cyA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsIC5leGVyY2lzZS1sb2FkaW5nLWluZGljYXRvclwiKTtcbiAgaWYgKHJldmVhbFN0YXR1cykge1xuICAgIHJldmVhbFN0YXR1cy5yZW1vdmUoKTtcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiLnJldmVhbCA+IC5zbGlkZXNcIikuYXBwZW5kQ2hpbGQocmV2ZWFsU3RhdHVzKTtcbiAgfVxuXG4gIC8vIE1ha2UgYW55IHJldmVhbCBzbGlkZXMgd2l0aCBsaXZlIGNlbGxzIHNjcm9sbGFibGVcbiAgZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbChcIi5yZXZlYWwgLmV4ZXJjaXNlLWNlbGxcIikuZm9yRWFjaCgoZWwpID0+IHtcbiAgICBlbC5jbG9zZXN0KCdzZWN0aW9uLnNsaWRlJykuY2xhc3NMaXN0LmFkZChcInNjcm9sbGFibGVcIik7XG4gIH0pXG5cbiAgLy8gUHlvZGlkZSBzdXBwbGVtZW50YWwgZGF0YSBhbmQgb3B0aW9uc1xuICBjb25zdCBkYXRhQ29udGVudCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoYHNjcmlwdFt0eXBlPVxcXCJweW9kaWRlLWRhdGFcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBkYXRhID0gSlNPTi5wYXJzZShiNjREZWNvZGUoZGF0YUNvbnRlbnQpKTtcblxuICAvLyBHcmFiIGxpc3Qgb2YgcmVzb3VyY2VzIHRvIGJlIGRvd25sb2FkZWRcbiAgY29uc3QgZmlsZXNDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInZmcy1maWxlXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgZmlsZXMgPSBKU09OLnBhcnNlKGI2NERlY29kZShmaWxlc0NvbnRlbnQpKTtcblxuICBsZXQgcHlvZGlkZVByb21pc2UgPSAoYXN5bmMgKCkgPT4ge1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgUHlvZGlkZWA7XG4gICAgY29uc3QgcHlvZGlkZSA9IGF3YWl0IHN0YXJ0UHlvZGlkZVdvcmtlcihkYXRhLm9wdGlvbnMpO1xuXG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiBtaWNyb3BpcGA7XG4gICAgYXdhaXQgcHlvZGlkZS5sb2FkUGFja2FnZShcIm1pY3JvcGlwXCIpO1xuICAgIGNvbnN0IG1pY3JvcGlwID0gYXdhaXQgcHlvZGlkZS5weWltcG9ydChcIm1pY3JvcGlwXCIpO1xuICAgIGF3YWl0IGRhdGEucGFja2FnZXMucGtncy5tYXAoKHBrZykgPT4gKCkgPT4ge1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBwYWNrYWdlOiAke3BrZ31gO1xuICAgICAgcmV0dXJuIG1pY3JvcGlwLmluc3RhbGwocGtnKTtcbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcbiAgICBhd2FpdCBtaWNyb3BpcC5kZXN0cm95KCk7XG5cbiAgICAvLyBEb3dubG9hZCBhbmQgaW5zdGFsbCByZXNvdXJjZXNcbiAgICBhd2FpdCBmaWxlcy5tYXAoKGZpbGUpID0+IGFzeW5jICgpID0+IHtcbiAgICAgIGNvbnN0IG5hbWUgPSBmaWxlLnN1YnN0cmluZyhmaWxlLmxhc3RJbmRleE9mKCcvJykgKyAxKTtcbiAgICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgRG93bmxvYWRpbmcgcmVzb3VyY2U6ICR7bmFtZX1gO1xuICAgICAgY29uc3QgcmVzcG9uc2UgPSBhd2FpdCBmZXRjaChmaWxlKTtcbiAgICAgIGlmICghcmVzcG9uc2Uub2spIHtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBDYW4ndCBkb3dubG9hZCBcXGAke2ZpbGV9XFxgLiBFcnJvciAke3Jlc3BvbnNlLnN0YXR1c306IFwiJHtyZXNwb25zZS5zdGF0dXNUZXh0fVwiLmApO1xuICAgICAgfVxuICAgICAgY29uc3QgZGF0YSA9IGF3YWl0IHJlc3BvbnNlLmFycmF5QnVmZmVyKCk7XG5cbiAgICAgIC8vIFN0b3JlIFVSTHMgaW4gdGhlIGN3ZCB3aXRob3V0IGFueSBzdWJkaXJlY3Rvcnkgc3RydWN0dXJlXG4gICAgICBpZiAoZmlsZS5pbmNsdWRlcyhcIjovL1wiKSkge1xuICAgICAgICBmaWxlID0gbmFtZTtcbiAgICAgIH1cblxuICAgICAgLy8gQ29sbGFwc2UgaGlnaGVyIGRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGZpbGUgPSBjb2xsYXBzZVBhdGgoZmlsZSk7XG5cbiAgICAgIC8vIENyZWF0ZSBkaXJlY3RvcnkgdHJlZSwgaWdub3JpbmcgXCJkaXJlY3RvcnkgZXhpc3RzXCIgVkZTIGVycm9yc1xuICAgICAgY29uc3QgcGFydHMgPSBmaWxlLnNwbGl0KCcvJykuc2xpY2UoMCwgLTEpO1xuICAgICAgbGV0IHBhdGggPSAnJztcbiAgICAgIHdoaWxlIChwYXJ0cy5sZW5ndGggPiAwKSB7XG4gICAgICAgIHBhdGggKz0gcGFydHMuc2hpZnQoKSArICcvJztcbiAgICAgICAgdHJ5IHtcbiAgICAgICAgICBhd2FpdCBweW9kaWRlLkZTLm1rZGlyKHBhdGgpO1xuICAgICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgICAgaWYgKGUuZXJybm8gIT09IDIwKSB7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICAgICAgY29uc3QgZXJyb3JUZXh0ID0gYXdhaXQgcHlvZGlkZS5fbW9kdWxlLlVURjhUb1N0cmluZyhlcnJvclRleHRQdHIpO1xuICAgICAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgICAgICB9XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgLy8gV3JpdGUgdGhpcyBmaWxlIHRvIHRoZSBWRlNcbiAgICAgIHRyeSB7XG4gICAgICAgIHJldHVybiBhd2FpdCBweW9kaWRlLkZTLndyaXRlRmlsZShmaWxlLCBuZXcgVWludDhBcnJheShkYXRhKSk7XG4gICAgICB9IGNhdGNoIChlKSB7XG4gICAgICAgIGlmIChlLm5hbWUgIT09IFwiRXJybm9FcnJvclwiKSB0aHJvdyBlO1xuICAgICAgICBjb25zdCBlcnJvclRleHRQdHIgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuX3N0cmVycm9yKGUuZXJybm8pO1xuICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgIHRocm93IG5ldyBFcnJvcihgRmlsZXN5c3RlbSBFcnJvciAke2UuZXJybm99IFwiJHtlcnJvclRleHR9XCIuYCk7XG4gICAgICB9XG4gICAgfSkucmVkdWNlKChjdXIsIG5leHQpID0+IGN1ci50aGVuKG5leHQpLCBQcm9taXNlLnJlc29sdmUoKSk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYFB5b2RpZGUgZW52aXJvbm1lbnQgc2V0dXBgO1xuICAgIGF3YWl0IHNldHVwUHl0aG9uKHB5b2RpZGUpO1xuXG4gICAgc3RhdHVzVGV4dC5yZW1vdmUoKTtcbiAgICBpZiAoc3RhdHVzQ29udGFpbmVyLmNoaWxkcmVuLmxlbmd0aCA9PSAwKSB7XG4gICAgICBzdGF0dXNDb250YWluZXIucGFyZW50Tm9kZS5yZW1vdmUoKTtcbiAgICB9XG4gICAgcmV0dXJuIHB5b2RpZGU7XG4gIH0pKCkuY2F0Y2goKGVycikgPT4ge1xuICAgIHN0YXR1c1RleHQuc3R5bGUuY29sb3IgPSBcInZhcigtLWV4ZXJjaXNlLWVkaXRvci1obC1lciwgI0FEMDAwMClcIjtcbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gZXJyLm1lc3NhZ2U7XG4gICAgLy9pbmRpY2F0b3JDb250YWluZXIucXVlcnlTZWxlY3RvcihcIi5zcGlubmVyLWdyb3dcIikuY2xhc3NMaXN0LmFkZChcImQtbm9uZVwiKTtcbiAgICB0aHJvdyBlcnI7XG4gIH0pO1xuXG4gIC8vIEtlZXAgdHJhY2sgb2YgaW5pdGlhbCBPSlMgYmxvY2sgcmVuZGVyXG4gIGNvbnN0IHJlbmRlcmVkT2pzID0ge307XG5cbiAgY29uc3QgcHJvY2VzcyA9IGFzeW5jIChjb250ZXh0LCBpbnB1dHMpID0+IHtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgcHlvZGlkZVByb21pc2U7XG4gICAgY29uc3QgZXZhbHVhdG9yID0gbmV3IFB5b2RpZGVFdmFsdWF0b3IocHlvZGlkZSwgY29udGV4dCk7XG4gICAgYXdhaXQgZXZhbHVhdG9yLnByb2Nlc3MoaW5wdXRzKTtcbiAgICByZXR1cm4gZXZhbHVhdG9yLmNvbnRhaW5lcjtcbiAgfVxuXG4gIHJldHVybiB7XG4gICAgcHlvZGlkZVByb21pc2UsXG4gICAgcmVuZGVyZWRPanMsXG4gICAgcHJvY2VzcyxcbiAgfTtcbn1cbiJ9XX0=
 </script>
 <div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
 <div id="exercise-loading-status" class="d-flex gap-2">

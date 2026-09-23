@@ -4,7 +4,7 @@
     "href": "index.html#dagens-program",
     "title": "Lektion 7",
     "section": "Dagens program",
-    "text": "Dagens program\n\nTekst som data\nKorpus\nLandskabet (hvad kan man med computationel tekstanalyse?)\nOrdbogsmodeller … og en analyse af den politiske dagsorden\nSprogmodeller … og en analyse af tonen i Folketinget\nKlyngemodeller: PCA og k-means\nØvelser/Portfolio\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativt i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer."
+    "text": "Dagens program\n\nTekst som data\nKorpus\nLandskabet (hvad kan man med computationel tekstanalyse?)\nOrdbogsmodeller … og en analyse af den politiske dagsorden\nSprogmodeller … og en analyse af tonen i Folketinget\nKlyngemodeller: PCA og k-means\nØvelser/Portfolio\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativ i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer."
   },
   {
     "objectID": "index.html#web-scraping",
@@ -116,7 +116,7 @@
     "href": "index.html#korpusset",
     "title": "Lektion 7",
     "section": "Korpusset",
-    "text": "Korpusset\n\n\n\n\n\n\n\n\n\nEt tilfældigt udsnit på 900 debatter. Hver tekst er afkortet til de første 5.000 tegn."
+    "text": "Korpusset\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\nimport pandas as pd og import numpy as np: Hent de to biblioteker, og giv dem de korte navne pd og np.\nurl = ...: Adressen på filen på GitHub. raw.githubusercontent.com giver selve filen og ikke GitHubs webside om filen.\npd.read_csv(url): Læs CSV-filen direkte fra nettet ind i en DataFrame.\nkorpus.shape: Antal rækker og kolonner, som (rækker, kolonner).\nkorpus[[\"aar\", \"lovnr\", \"omraade\"]]: Vælg tre kolonner. De dobbelte klammer betyder, at vi giver en liste af kolonnenavne.\n.head(): Vis de første fem rækker.\n\n\n\nEt tilfældigt udsnit på 900 debatter. Hver tekst er afkortet til de første 5.000 tegn."
   },
   {
     "objectID": "index.html#tekst",
@@ -186,7 +186,7 @@
     "href": "index.html#fire-spørgsmål-til-ethvert-korpus",
     "title": "Lektion 7",
     "section": "Fire spørgsmål til ethvert korpus",
-    "text": "Fire spørgsmål til ethvert korpus\n\nHvor kommer teksterne fra? Ét medie eller flere? Hvem har valgt netop dem?\nHvem har skrevet dem? Redigeret eller spontant? Én forfatter eller mange?\nHvilke teksttyper er med — og hvilke er ikke?\nHvad skete der under indsamlingen? Hvad blev der af formatering, billedtekster, kommentarer?"
+    "text": "Fire spørgsmål til ethvert korpus\n\nHvor kommer teksterne fra? Ét medie eller flere? Hvem har valgt netop dem?\nHvem har skrevet dem? Redigeret eller spontant? Én forfatter eller mange?\nHvilke teksttyper er med og hvilke er evt. ikke?\nHvad skete der under indsamlingen? Hvad blev der af formatering, billedtekster, kommentarer?"
   },
   {
     "objectID": "index.html#diskussion",
@@ -263,28 +263,28 @@
     "href": "index.html#hvad-er-en-ordbogsmodel",
     "title": "Lektion 7",
     "section": "Hvad er en ordbogsmodel?",
-    "text": "Hvad er en ordbogsmodel?\nEn liste af ord, hver med en værdi. Man slår hvert ord op og lægger sammen.\n\nLIWC: 82 psykologiske kategorier\nAFINN: cirka 3.500 danske ord med en score fra −5 til +5\nJeres egen: en liste, I selv definerer til ét bestemt spørgsmål\n\n\nDet er den mest gennemsigtige metodefamilie. I kan altid slå op, hvorfor en tekst fik sin score.\nDet er også den mest restriktive. Modellen ved kun det, listen siger."
+    "text": "Hvad er en ordbogsmodel?\nEn liste af ord, hver med en værdi. Man slår hvert ord op og lægger sammen.\n\nLIWC: 82 psykologiske kategorier\nAFINN: cirka 3.500 danske ord med en score fra −5 til +5\nJeres egen: en liste, I selv definerer til ét bestemt spørgsmål\n\n\nDet er den mest gennemsigtige metodefamilie. I kan altid slå op, hvorfor en tekst fik sin score, men det er også den mest restriktive. Modellen ved kun det, listen siger."
   },
   {
     "objectID": "index.html#vi-bygger-én",
     "href": "index.html#vi-bygger-én",
     "title": "Lektion 7",
     "section": "Vi bygger én",
-    "text": "Vi bygger én\n\n\n\n\n\n\n\n\n\n22 ord. Det er hele modellen."
+    "text": "Vi bygger én\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nordbog er navnet på vores variabel.\n\n{ } fortæller Python, at vi laver en dictionary (ordbog).\n\nEn ordbog består af nøgler og værdier: \"god\"   →  2\ngod er nøgle; 2 er værdi.\n\n\n\n22 ord. Det er hele modellen."
   },
   {
     "objectID": "index.html#hvordan-den-scorer",
     "href": "index.html#hvordan-den-scorer",
     "title": "Lektion 7",
     "section": "Hvordan den scorer",
-    "text": "Hvordan den scorer\n\n\n\n\n\n\n\n\n\n.map(ordbog) slår hvert ord op. Findes ordet ikke i ordbogen, bliver det NaN … og NaN tæller ikke med, når vi lægger sammen."
+    "text": "Hvordan den scorer\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\nkorpus[\"tekst\"]: Hent kolonnen tekst fra DataFrame’en korpus.\n\n.astype(str): Sørg for, at alt er tekst.\n\n.str.lower(): Lav alle bogstaver om til små bogstaver.\n\n.str.replace(...): Erstatter tegn, der ikke er bogstaver, tal eller mellemrum, med et mellemrum.\n\n.str.split(): Del teksten op ved mellemrum.\n\n.explode(): Tager en liste og laver én række for hvert element i listen."
   },
   {
     "objectID": "index.html#kør-den-på-korpusset",
     "href": "index.html#kør-den-på-korpusset",
     "title": "Lektion 7",
     "section": "Kør den på korpusset",
-    "text": "Kør den på korpusset"
+    "text": "Kør den på korpusset\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\nord.map(ordbog): Slå hvert ord op i ordbog.\n\n.groupby(level=0): level=0 betyder, at gruppering er efter det første indeksniveau, altså debatten.\n.sum(): Læg tallene sammen.\n\nkorpus[\"score\"] =: Til sidst gemmer vi resultatet i vores oprindelige DataFrame.\n\nkorpus.groupby(\"omraade\")[\"score\"].mean(): Gennemsnitlig score for hvert politikområde, afrundet og sorteret.\n(korpus[\"score\"] == 0).sum(): True for hver debat med score 0. .sum() tæller dem, fordi True tæller som 1.\n\n\n\n.map(ordbog) slår hvert ord op. Findes ordet ikke i ordbogen, bliver det NaN … og NaN tæller ikke med, når vi lægger sammen."
   },
   {
     "objectID": "index.html#dækning",
@@ -298,35 +298,35 @@
     "href": "index.html#negation",
     "title": "Lektion 7",
     "section": "Negation",
-    "text": "Negation\n\n\n\n\n\n\n\n\n\n\nDen anden får samme score som den første. Den tredje bliver stærkt positiv.\nEn ordbogsmodel lægger tal sammen. Den læser ikke."
+    "text": "Negation\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\npd.Series([...]): Tre testsætninger som en Series. Indekset 0, 1, 2 er sætningens nummer.\n.str.lower().str.split().explode(): Samme opskrift som på korpusset: små bogstaver, del op i ord, ét ord per række.\n.map(ordbog): Slå hvert ord op. Ord, der ikke er i ordbogen, bliver NaN.\n.groupby(level=0).sum(): Læg sammen per sætning.\npd.DataFrame({\"tekst\": test, \"score\": scorer}): Sæt teksten og scoren side om side. Rækkerne passer sammen, fordi de har samme indeks.\n\n\n\nEn ordbogsmodel lægger tal sammen. Den læser ikke."
   },
   {
     "objectID": "index.html#afinn",
     "href": "index.html#afinn",
     "title": "Lektion 7",
     "section": "AFINN",
-    "text": "AFINN\nDen samme idé, professionelt lavet. afinn er et Python-bibliotek med en dansk ordliste på cirka 3.500 ord, udviklet af Finn Årup Nielsen.\nfrom afinn import Afinn\n\nafinn = Afinn(language=\"da\")\n\nkorpus[\"afinn\"] = korpus[\"tekst\"].map(afinn.score)\n\nAfinn(language=\"da\") indlæser den danske ordliste. .score() gør præcis det samme som vores egen funktion: slår hvert ord op og lægger værdierne for ordrene sammen.\n\n\nKan ikke installeres i browseren. Kør den i UCloud eller lokalt."
+    "text": "AFINN\nDen samme idé, professionelt lavet. afinn er et Python-bibliotek med en dansk ordliste på cirka 3.500 ord, udviklet af Finn Årup Nielsen.\nfrom afinn import Afinn\n\nafinn = Afinn(language=\"da\")\n\nkorpus[\"afinn\"] = korpus[\"tekst\"].map(afinn.score)\n\n\nNoter til koden\n\n\nfrom afinn import Afinn: Hent Afinn fra pakken afinn.\nAfinn(language=\"da\"): Lav et objekt med den danske ordliste og gem det som afinn.\nkorpus[\"tekst\"].map(afinn.score): Kør .score() på hver tekst, og gem resultatet i en ny kolonne.\nBemærk: afinn.score står uden parenteser. Vi giver funktionen til .map(), som selv kalder den én gang for hver tekst.\n\n\n\n.score() gør præcis det samme som vores egen funktion. Den slår hvert ord op og lægger værdierne for ordene sammen.\n\n\nKan ikke installeres i browseren. Kør den i UCloud eller lokalt."
   },
   {
     "objectID": "index.html#hvad-måler-vi-egentlig",
     "href": "index.html#hvad-måler-vi-egentlig",
     "title": "Lektion 7",
     "section": "Hvad måler vi egentlig?",
-    "text": "Hvad måler vi egentlig?\nHvis Retsvæsen scorer lavere end Beskæftigelse, hvad har vi så vist?\n\nAt debatterne handler om noget negativt, som vold og straf?\nAt ordførerne er mere kritiske?\nAt ordlisten passer bedre til det ene områdes ordforråd end det andets?\nEller at man siger godt sjældnere, når man taler om kriminalitet?\n\n\nEt tal fra en ordbogsmodel er ikke et resultat. Det er et udgangspunkt for en diskussion, som skal føres i metodeafsnittet."
+    "text": "Hvad måler vi egentlig?\nHvis Retsvæsen scorer lavere end Beskæftigelse, hvad har vi så vist?\n\nAt debatterne handler om noget negativt, som vold og straf?\nAt ordførerne er mere kritiske?\nAt ordlisten passer bedre til det ene områdes ordforråd end det andets?\n… eller at man siger godt sjældnere, når man taler om kriminalitet?"
   },
   {
     "objectID": "index.html#fra-ordliste-til-sprogmodel",
     "href": "index.html#fra-ordliste-til-sprogmodel",
     "title": "Lektion 7",
     "section": "Fra ordliste til sprogmodel",
-    "text": "Fra ordliste til sprogmodel\nEn ordbog kender kun de ord, den har på listen. En sprogmodel er trænet på store mængder tekst og kan generalisere til ord, den ikke har set før.\n\nspaCy er et bibliotek til natural language processing — krydsfeltet mellem datalogi og korpuslingvistik.\nDet giver tokenisering, lemmatisering, ordklasser, navngivne entiteter og grammatiske relationer. Også på dansk.\n\n\n\n\nspaCy kan ikke køre i browseren. Koden på de næste slides skal køres i UCloud eller lokalt."
+    "text": "Fra ordliste til sprogmodel\nEn ordbog kender kun de ord, den har på listen. En sprogmodel er trænet på store mængder tekst og kan generalisere til ord, den ikke har set før.\n\n\n\nspaCy kan ikke køre i browseren. Koden på de næste slides skal køres i UCloud eller lokalt."
   },
   {
     "objectID": "index.html#en-pipeline",
     "href": "index.html#en-pipeline",
     "title": "Lektion 7",
     "section": "En pipeline",
-    "text": "En pipeline\nimport spacy\n\nnlp = spacy.load(\"da_core_news_sm\")\ndoc = nlp(\"Regeringen fremlagde et nyt udspil om indvandring i København.\")\nspacy.load() henter en model, ikke bare en funktion. da_core_news_sm er trænet på dansk nyhedstekst.\nTeksten løber gennem en række trin, som hver tilføjer information:"
+    "text": "En pipeline\nimport spacy\n\nnlp = spacy.load(\"da_core_news_sm\")\ndoc = nlp(\"Regeringen fremlagde et nyt udspil om indvandring i København.\")\n\n\nNoter til koden\n\n\nimport spacy: Hent spaCy.\nspacy.load(\"da_core_news_sm\"): Indlæs den danske model. Den skal være hentet én gang i forvejen, i terminalen: python -m spacy download da_core_news_sm.\nnlp: Pipelinen. Det er den, vi sender tekster igennem.\nnlp(\"...\"): Send én tekst gennem hele pipelinen. Resultatet, doc, er en række tokens, hvor hvert token har egenskaber som tok.lemma_ (grundform), tok.pos_ (ordklasse) og tok.ent_type_ (navngiven enhed).\n\n\n\nspacy.load() henter en model, ikke bare en funktion. da_core_news_sm er trænet på dansk nyhedstekst.\nTeksten løber gennem en række trin, som hver tilføjer information:"
   },
   {
     "objectID": "index.html#hvad-man-får-ud",
@@ -361,14 +361,14 @@
     "href": "index.html#hvad-man-kan-bruge-det-til",
     "title": "Lektion 7",
     "section": "Hvad man kan bruge det til",
-    "text": "Hvad man kan bruge det til\n\nOrdklasser: analysér kun navneord, eller kun adjektiver. Retorik ligger ofte i tillægsordene.\nLemmatisering: bøjningsformer bliver til ét ord, før I tæller.\nEntiteter: hvilke personer, steder og organisationer optræder — og hos hvilke kilder?\nAfhængighedsrelationer: hvem gør hvad ved hvem."
+    "text": "Hvad man kan bruge det til\n\nOrdklasser: analysér kun navneord, eller kun adjektiver. Retorik ligger ofte i tillægsordene.\nLemmatisering: bøjningsformer bliver til ét ord, før I tæller.\nEntiteter: hvilke personer, steder og organisationer optræder og hos hvilke kilder?\nAfhængighedsrelationer: hvem gør hvad ved hvem."
   },
   {
     "objectID": "index.html#øvelser",
     "href": "index.html#øvelser",
     "title": "Lektion 7",
     "section": "Øvelser",
-    "text": "Øvelser\n\nI øvelserne arbejder I med det fulde datasæt: alle 3.070 1. behandlinger.\n\nByg jeres egen temaordbog. Vælg et tema, som ikke er med i dag (sundhed, forsvar, EU, landbrug …). Validér den mod politikområderne, og følg den over tid.\nNormalisér. Sammenlign forekomster per 1.000 ord med rå optællinger. Ændrer det konklusionen?\nSentiment. Kør asent på et udsnit. Find de fem mest negative og fem mest positive debatter, og læs dem. Er det emnet eller holdningen, der drev scoren?\nAntal klynger. Kør k-means med 4, 6, 8 og 10 klynger. Hvornår begynder klyngerne at give mening … og hvornår holder de op?\nFjern navnene. Find talernes navne i teksten, og fjern dem før klyngeanalysen. Ændrer det klyngerne?\nPortfolio. Svar på Hunstons fire spørgsmål om det korpus, I vil bruge."
+    "text": "Øvelser\nDokumentation: spaCy 101 | asent | scikit-learn: PCA | scikit-learn: k-means"
   },
   {
     "objectID": "index.html#litteratur",
@@ -382,7 +382,7 @@
     "href": "index.html#asent-sentimentanalyse",
     "title": "Lektion 7",
     "section": "asent: sentimentanalyse",
-    "text": "asent: sentimentanalyse\nSamme idé som vores egen ordbog, men med en pipeline under sig. asent er udviklet af Kenneth Enevoldsen og findes på dansk.\nimport spacy, asent\n\nnlp = spacy.load(\"da_core_news_sm\")\nnlp.add_pipe(\"sentencizer\")\nnlp.add_pipe(\"asent_da_v1\")\n\ndoc = nlp(\"Det er en god beslutning for vores frihed.\")\nprint(doc._.polarity)\n\nadd_pipe() lægger et nyt trin til i pipelinen. Scoren ligger derefter i doc._.polarity.\n\n\nsentencizer er ikke pynt. asent regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I ValueError: Sentence boundaries unset."
+    "text": "asent: sentimentanalyse\nSamme idé som vores egen ordbog, men med en pipeline under sig. asent er udviklet af Kenneth Enevoldsen og findes på dansk.\nimport spacy, asent\n\nnlp = spacy.load(\"da_core_news_sm\")\nnlp.add_pipe(\"sentencizer\")\nnlp.add_pipe(\"asent_da_v1\")\n\ndoc = nlp(\"Det er en god beslutning for vores frihed.\")\nprint(doc._.polarity)\n\n\nNoter til koden\n\n\nimport spacy, asent: Hent begge biblioteker på én linje. asent skal importeres, for at spaCy kan finde dens trin, selv om navnet ikke bruges direkte bagefter.\nnlp.add_pipe(\"sentencizer\"): Tilføj et trin, der finder ud af, hvor sætningerne slutter.\nnlp.add_pipe(\"asent_da_v1\"): Tilføj den danske sentimentmodel som sidste trin.\ndoc._.polarity: ._ er den plads på et Doc, hvor andre pakker end spaCy lægger deres resultater.\n\n\n\nadd_pipe() lægger et nyt trin til i pipelinen. Scoren ligger derefter i doc._.polarity.\n\n\nsentencizer er ikke pynt. asent regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I ValueError: Sentence boundaries unset."
   },
   {
     "objectID": "index.html#analyser-med-ordbøger",
@@ -410,7 +410,7 @@
     "href": "index.html#tegn-det",
     "title": "Lektion 7",
     "section": "Tegn det",
-    "text": "Tegn det\n\n\n\n\n\n\n\n\n\n.melt() fra lektion 3: fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have."
+    "text": "Tegn det\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nfrom plotnine import *: Hent alle funktioner fra plotnine på én gang: ggplot, aes, geom_line osv.\npr_aar.reset_index(): gør årene fra indekset til en almindelig kolonne, aar.\n.melt(...): fra bredt til langt format, ligesom pivot_longer() i R. id_vars=\"aar\" bliver stående, og de tre temakolonner stables til én række per tema og år.\naes(..., color=\"tema\"): én farve og én linje per tema.\ngeom_line(size=1): linjer med tykkelse 1. geom_point(): et punkt for hvert år.\nx=None og color=None: ingen titel på x-aksen og på forklaringen.\n(...).show(): tegn figuren.\n\n\n\n.melt() fra lektion 3: fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have."
   },
   {
     "objectID": "index.html#dækningen-er-ikke-den-samme",
@@ -431,28 +431,28 @@
     "href": "index.html#hvad-kan-vi-så-konkludere",
     "title": "Lektion 7",
     "section": "Hvad kan vi så konkludere?",
-    "text": "Hvad kan vi så konkludere?\n\nAt tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er ydre validitet: resultatet passer med noget, vi ved fra andre kilder.\nAt ordbøgerne måler opmærksomhed, ikke holdning. At klima fylder mere i 2021, siger intet om, hvem der var for eller imod.\nAt udsnittet på 900 debatter giver et mere støjfyldt billede år for år end det fulde materiale. Trends skal have data nok bag sig.\n\n\n\nOg at vi ikke kan vide, om de ord, vi ikke tog med, ville have ændret billedet."
+    "text": "Hvad kan vi så konkludere?\n\nAt tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er ekstern validitet: resultatet passer med noget, vi ved fra andre kilder.\nAt ordbøgerne måler opmærksomhed, ikke holdning. At klima fylder mere i 2021, siger intet om, hvem der var for eller imod.\nAt udsnittet på 900 debatter giver et mere støjfyldt billede år for år end det fulde materiale. Trends skal have data nok bag sig.\n\n\n\nOg at vi ikke kan vide, om de ord, vi ikke tog med, ville have ændret billedet."
   },
   {
     "objectID": "index.html#hvad-den-kan-som-vores-egen-ikke-kunne",
     "href": "index.html#hvad-den-kan-som-vores-egen-ikke-kunne",
     "title": "Lektion 7",
     "section": "Hvad den kan, som vores egen ikke kunne",
-    "text": "Hvad den kan, som vores egen ikke kunne\n\n\n\nSætning\nVores ordbog\nasent\n\n\n\n\nDet er en god beslutning for vores frihed\n+5\n+0,79\n\n\nDet er ikke en god beslutning\n+2\n−0,50\n\n\nFantastisk. Bare fantastisk.\n0\n0,00\n\n\n\n\nNegationen virker. Vores egen ordbog gav plus for den anden sætning, fordi den bare lagde tal sammen.\nMen fantastisk står ikke i den danske ordliste. Dækningsproblemet er ikke løst, det er flyttet."
+    "text": "Hvad den kan, som vores egen ikke kunne\n\n\n\nSætning\nVores ordbog\nasent\n\n\n\n\nDet er en god beslutning for vores frihed\n+5\n+0,79\n\n\nDet er ikke en god beslutning\n+2\n−0,50\n\n\nFantastisk. Bare fantastisk.\n0\n0,00\n\n\n\n\nNegationen virker. Vores egen ordbog gav plus for den anden sætning, fordi den bare lagde tal sammen. Men fantastisk står ikke i den danske ordliste. Dækningsproblemet er ikke løst, det er flyttet."
   },
   {
     "objectID": "index.html#hvorfor-fik-den-den-score",
     "href": "index.html#hvorfor-fik-den-den-score",
     "title": "Lektion 7",
     "section": "Hvorfor fik den den score?",
-    "text": "Hvorfor fik den den score?\ndoc = nlp(\"Det er ikke en god beslutning.\")\n\nfor tok in doc:\n    if tok._.polarity.polarity != 0:\n        print(tok._.polarity)\npolarity=-2.22 token=god span=ikke en god\n\nasent fortæller, hvilket ord der drev scoren, og hvilket udsnit af sætningen den læste det i.\ngod er i sig selv positiv. Den bliver negativ, fordi ikke står foran. Det kan man slå efter.\nDet er forskellen på et tal og et resultat, I kan forsvare."
+    "text": "Hvorfor fik den den score?\ndoc = nlp(\"Det er ikke en god beslutning.\")\n\nfor tok in doc:\n    if tok._.polarity.polarity != 0:\n        print(tok._.polarity)\n\n\nNoter til koden\n\n\nfor tok in doc:: Løb gennem sætningen ét token ad gangen.\ntok._.polarity: asent har også givet hvert enkelt token en score.\nif ... != 0:: Vis kun de tokens, der faktisk trækker scoren op eller ned.\nprint(tok._.polarity): Viser tokenets score, selve ordet og det udsnit af sætningen (span), som asent læste det i.\n\n\npolarity=-2.22 token=god span=ikke en god\n\nasent fortæller, hvilket ord der drev scoren, og hvilket udsnit af sætningen den læste det i.\nFx er god i sig selv positiv. Den bliver negativ, fordi ikke står foran. Det kan man slå op efter."
   },
   {
     "objectID": "index.html#kør-den-på-korpusset-1",
     "href": "index.html#kør-den-på-korpusset-1",
     "title": "Lektion 7",
     "section": "Kør den på korpusset",
-    "text": "Kør den på korpusset\nkorpus[\"sentiment\"] = [doc._.polarity.compound\n                       for doc in nlp.pipe(korpus[\"tekst\"], batch_size=20)]\n\nprint(korpus[\"sentiment\"].describe())\nprint(korpus.groupby(\"omraade\")[\"sentiment\"].mean().sort_values())\n\nnlp.pipe() kører mange tekster igennem ad gangen. Resultatet lægges direkte tilbage som en kolonne i tabellen.\n\n\n900 debatter á 5.000 tegn tager cirka 50 sekunder. Kør det på et udsnit først."
+    "text": "Kør den på korpusset\nkorpus[\"sentiment\"] = [doc._.polarity.compound\n                       for doc in nlp.pipe(korpus[\"tekst\"], batch_size=20)]\n\nprint(korpus[\"sentiment\"].describe())\nprint(korpus.groupby(\"omraade\")[\"sentiment\"].mean().sort_values())\n\n\nNoter til koden\n\nLæs det indefra og ud:\n\nnlp.pipe(korpus[\"tekst\"], batch_size=20): Kør alle teksterne gennem pipelinen, 20 ad gangen.\n[doc._.polarity.compound for doc in ...]: En list comprehension: for hver debat, hent den samlede score, compound. Resultatet er en liste i samme rækkefølge som korpus.\nkorpus[\"sentiment\"] = ...: Listen bliver en ny kolonne. Det virker, fordi den har præcis én værdi per række.\n.describe(): Antal, gennemsnit, standardafvigelse, minimum, kvartiler og maksimum.\nkorpus.groupby(\"omraade\")[\"sentiment\"].mean(): Gennemsnitlig score per politikområde, sorteret.\n\n\n\nnlp.pipe() kører mange tekster igennem ad gangen. Resultatet lægges direkte tilbage som en kolonne i tabellen."
   },
   {
     "objectID": "index.html#to-modeller-samme-korpus",
@@ -473,7 +473,7 @@
     "href": "index.html#minimumsvalidering",
     "title": "Lektion 7",
     "section": "Minimumsvalidering",
-    "text": "Minimumsvalidering\nstikproeve = korpus.sample(20, random_state=42)\n\nprint(stikproeve[[\"aar\", \"omraade\", \"lovnr\", \"sentiment\"]].to_string())\n\nTyve debatter. Læs dem, og skriv for hvert enkelt, om I er enige med modellen.\nEr I uenige i under fem, kan tallet bruges med forbehold. Er I uenige i over ti, måler modellen noget andet, end I tror.\nDet tager tyve minutter, og det er forskellen på en metodesektion, der holder, og en der ikke gør."
+    "text": "Minimumsvalidering\nstikproeve = korpus.sample(20, random_state=42)\n\nprint(stikproeve[[\"aar\", \"omraade\", \"lovnr\", \"sentiment\"]].to_string())\n\n# læs én debat ad gangen: skift 0 ud med 1, 2, ... 19\nprint(stikproeve[\"tekst\"].iloc[0][:1500])\n\n\nNoter til koden\n\n\nkorpus.sample(20, random_state=42): 20 tilfældige debatter. random_state=42 gør, at vi alle får de samme.\n.to_string(): Udskriv hele tabellen, uden at pandas forkorter den med ....\nstikproeve[\"tekst\"].iloc[0]: Teksten i første række af stikprøven. .iloc vælger efter placering, ikke efter indeks.\n[:1500]: De første 1.500 tegn.\n\n\n\nTyve debatter. Læs dem, og vurder for hver enkelt, om I er enige med modellen."
   },
   {
     "objectID": "index.html#fremgang",
@@ -522,7 +522,7 @@
     "href": "index.html#hvad-er-en-tekst-her",
     "title": "Lektion 7",
     "section": "Hvad er “en tekst” her?",
-    "text": "Hvad er “en tekst” her?\n\n\n\n\n\n\n\n\n\n\nÉn tekst er hele debatten om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar\nDer står ikke, hvem der siger hvad. Talerne introduceres kun af formanden i løbende tekst\n\nVi kan altså sammenligne lovforslag … men ikke partier eller politikere. Det er en designbegrænsning, ikke en detalje."
+    "text": "Hvad er “en tekst” her?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nkorpus.loc[0, \"tekst\"]: Vælg rækken med indeks 0 og kolonnen tekst. Det er én celle, altså én debat.\n[:600]: De første 600 tegn. En tekststreng kan skæres over på samme måde som en liste.\n\n\n\n\nÉn tekst er hele debatten om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar\nDer står ikke, hvem der siger hvad. Talerne introduceres kun af formanden i løbende tekst\n\nVi kan altså sammenligne lovforslag … men ikke partier eller politikere. Det er en designbegrænsning."
   },
   {
     "objectID": "index.html#vores-annotering-politikområde",
@@ -536,42 +536,42 @@
     "href": "index.html#hvad-fylder-i-scoren",
     "title": "Lektion 7",
     "section": "Hvad fylder i scoren?",
-    "text": "Hvad fylder i scoren?\n\n\n\n\n\n\n\n\n\nDet suverænt hyppigste ord er godt: 1.381 gange. Mere end dobbelt så ofte som det næste.\nMen i Folketinget betyder godt sjældent, at noget er godt. Det er “det er godt, at ministeren …” og “godt, så går vi videre”.\nScoren er i vid udstrækning en optælling af ét høflighedsord."
+    "text": "Hvad fylder i scoren?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det indefra og ud:\n\nordbog.keys(): Nøglerne i ordbogen, altså de 22 ord.\nord.isin(...): True for hvert token, der står i ordbogen.\nord[...]: Behold kun de tokens, hvor det er True.\n.value_counts(): Tæl, hvor mange gange hvert ord forekommer, sorteret med det hyppigste først.\n.head(8): De otte hyppigste.\n\n\n\nDet suverænt hyppigste ord er godt: 1.381 gange. Mere end dobbelt så ofte som det næste.\nMen i Folketinget betyder godt sjældent, at noget er godt. Det er “det er godt, at ministeren …” og “godt, så går vi videre”. Scoren er i vid udstrækning en optælling af et høflighedsord."
   },
   {
     "objectID": "index.html#spørgsmålet",
     "href": "index.html#spørgsmålet",
     "title": "Lektion 7",
     "section": "Spørgsmålet",
-    "text": "Spørgsmålet\n\nHvor meget fylder klima, udlændinge og økonomi i Folketingets debatter … og ændrer det sig over tid?\n\n\nNu bruger vi ordbøger til det, de er bedst til: at måle et tema, ikke en stemning.\n\nTre korte temaordbøger, som vi selv definerer\nEt mål: forekomster per 1.000 ord\nOg så validering, før vi tolker noget"
+    "text": "Spørgsmålet\n\nHvor meget fylder klima, udlændinge og økonomi i Folketingets debatter, og har det ændret sig over tid?\n\n\nNu bruger vi ordbøger til det, de er bedst til: at måle et tema, ikke en stemning.\n\nTre korte temaordbøger, som vi selv definerer\nDet, vi vil måle: forekomster af tema per 1.000 ord"
   },
   {
     "objectID": "index.html#tre-temaordbøger",
     "href": "index.html#tre-temaordbøger",
     "title": "Lektion 7",
     "section": "Tre temaordbøger",
-    "text": "Tre temaordbøger\n\n\n\n\n\n\n\n\n\n.isin() giver True for hvert ord, der står på listen. Gennemsnittet af en boolean er en andel, ligesom i lektion 4."
+    "text": "Tre temaordbøger\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\ntemaer: en nøgle og en liste, fx klima       → [klima, klimaet, co2, ...].\n\npd.Series(temaer): laver dictionary’en om til en Pandas Series.\n\n.explode(): én række per ord, med temaet i indekset.\npd.Series(ord_til_tema.index, index=ord_til_tema.values): vender den om, så ordet er indekset og temaet værdien. Så kan .map() slå hvert ord op.\nord.rename(\"ord\"): Vi giver vores Series navnet “ord”.\n\n.to_frame(): laver Series’en om til en DataFrame.\n\n.join(korpus[[\"aar\", \"omraade\"]]): tilføjer aar og omraade fra den oprindelige korpus.\n\nlang[\"ord\"].map(ord_til_tema): slår hvert ord op og giver dets tema, eller NaN."
   },
   {
     "objectID": "index.html#validering-først-måler-ordbøgerne-det-vi-tror",
     "href": "index.html#validering-først-måler-ordbøgerne-det-vi-tror",
     "title": "Lektion 7",
     "section": "Validering først: måler ordbøgerne det, vi tror?",
-    "text": "Validering først: måler ordbøgerne det, vi tror?\n\n\n\n\n\n\n\n\n\n\nKlima-ordbogen rammer 2,48 per 1.000 ord i Miljø og klima … og 0,03 i Beskæftigelse.\nUdlændinge-ordbogen rammer 7,40 i Udlændinge. Ingen andre områder kommer over 0,61.\nØkonomi-ordbogen er spredt ud over alle områder. Man taler om økonomi overalt.\n\n\n\nDet er en test af konstruktvaliditet: vi har en uafhængig variabel (ministeriet), som ordbogen burde hænge sammen med. Klima og udlændinge består testen. Økonomi måler noget mere diffust."
+    "text": "Validering først: måler ordbøgerne det, vi tror?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\npd.crosstab(lang[\"omraade\"], lang[\"tema\"]): tæller, hvor mange ord fra hvert tema der står i hvert politikområde. Ord uden tema (NaN) tælles ikke med.\n.div(lang.groupby(\"omraade\").size(), axis=0): dividerer hver række med det samlede antal ord i området.\n.reindex(columns=list(temaer), fill_value=0): sikrer, at alle tre temaer er med, i samme rækkefølge som i ordbogen.\n* 1000: forekomster per 1.000 ord.\n\n\n\n\nKlima-ordbogen rammer 2,48 per 1.000 ord i Miljø og klima … og 0,03 i Beskæftigelse.\nUdlændinge-ordbogen rammer 7,40 i Udlændinge. Ingen andre områder kommer over 0,61.\nØkonomi-ordbogen er spredt ud over alle områder. Man taler om økonomi overalt.\n\n\n\nDet er en test af konstruktvaliditet. Vi har en uafhængig variabel (ministeriet), som ordbogen burde hænge sammen med. Klima og udlændinge består testen. Økonomi måler noget mere diffust."
   },
   {
     "objectID": "index.html#og-dækningen",
     "href": "index.html#og-dækningen",
     "title": "Lektion 7",
     "section": "Og dækningen",
-    "text": "Og dækningen\n\n\n\n\n\n\n\n\n\nOver halvdelen af debatterne nævner ingen af ordene. Det er ikke en fejl: de handler om noget fjerde.\nMen det betyder, at “0 per 1.000 ord” hverken er lav interesse eller neutralitet. Det er et andet emne."
+    "text": "Og dækningen\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nlang[\"tema\"].notna(): True for hvert ord, der hører til et tema.\n.groupby(level=0): grupper efter indekset, altså debatten.\n.any(): True, hvis mindst ét ord i debatten hører til et tema.\n~ramt: ~ vender det om, så vi får debatterne uden træf. .sum() tæller dem.\n\n\n\nOver halvdelen af debatterne nævner ingen af ordene. Det er ikke en fejl, de handler bare om noget fjerde."
   },
   {
     "objectID": "index.html#over-tid",
     "href": "index.html#over-tid",
     "title": "Lektion 7",
     "section": "Over tid",
-    "text": "Over tid"
+    "text": "Over tid\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nSamme opskrift som på valideringsslidet, nu med år i stedet for område:\n\npd.crosstab(lang[\"aar\"], lang[\"tema\"]): tæller, hvor mange ord fra hvert tema der står i hvert år. Ord uden tema (NaN) tælles ikke med.\n.div(lang.groupby(\"aar\").size(), axis=0): dividerer hver række med det samlede antal ord i året.\n.reindex(columns=list(temaer), fill_value=0): sikrer, at alle tre temaer er med, i samme rækkefølge som i ordbogen.\n* 1000: forekomster per 1.000 ord.\n\n\n\nÉn kolonne per tema, én række per år. Det er det, figuren skal bruge."
   },
   {
     "objectID": "index.html#tre-kriser-i-ét-datasæt",
@@ -592,7 +592,7 @@
     "href": "index.html#spørgsmålet-1",
     "title": "Lektion 7",
     "section": "Spørgsmålet",
-    "text": "Spørgsmålet\n\nEr der forskel på tonen, når Folketinget debatterer forskellige politikområder?\n\n\n\ncompound går fra −1 (meget negativ) til +1 (meget positiv)\nVi har kørt asent på alle 900 debatter i udsnittet\nTallene herunder er de faktiske resultater"
+    "text": "Spørgsmålet\n\nEr der forskel på tonen, når Folketinget debatterer forskellige politikområder?\n\n\n\ncompound går fra −1 (meget negativ) til +1 (meget positiv)"
   },
   {
     "objectID": "index.html#folketinget-er-høfligt",
@@ -606,7 +606,7 @@
     "href": "index.html#per-politikområde",
     "title": "Lektion 7",
     "section": "Per politikområde",
-    "text": "Per politikområde\n\n\n\nOmråde\ncompound\n\n\n\n\nRetsvæsen\n0,080\n\n\nSkat\n0,138\n\n\nBeskæftigelse\n0,139\n\n\nUdlændinge\n0,154\n\n\nMiljø og klima\n0,163\n\n\nUddannelse\n0,193\n\n\n\n\nRetsvæsen er lavest, Uddannelse højest. Det giver intuitivt mening: straf og kriminalitet mod unge og uddannelse.\nMen se på størrelsen af forskellene, før I tolker på dem."
+    "text": "Per politikområde\n\n\n\nOmråde\ncompound\n\n\n\n\nRetsvæsen\n0,080\n\n\nSkat\n0,138\n\n\nBeskæftigelse\n0,139\n\n\nUdlændinge\n0,154\n\n\nMiljø og klima\n0,163\n\n\nUddannelse\n0,193\n\n\n\n\nRetsvæsen er lavest, Uddannelse højest. Det giver intuitivt mening: straf og kriminalitet over for unge og uddannelse.\nMen se på størrelsen af forskellene, før I tolker på dem."
   },
   {
     "objectID": "index.html#forskellene-er-små",
@@ -627,49 +627,49 @@
     "href": "index.html#spørgsmålet-2",
     "title": "Lektion 7",
     "section": "Spørgsmålet",
-    "text": "Spørgsmålet\n\nKan en algoritme finde politikområderne i teksten … uden at få at vide, hvad de er?\n\n\nVi har en facitliste: ministeriet bag hvert lovforslag. Det har man sjældent. Her kan vi bruge den til at se, hvad de usuperviserede metoder faktisk finder.\n\nPCA: dimensionalitetsreduktion. Fra tusindvis af ord til få akser, vi kan se på\nk-means: klyngeanalyse. Del debatterne i grupper, der ligner hinanden\n\n\n\nVi bruger kun de seks navngivne områder. “Andet” er en restkategori uden et fælles emne at finde."
+    "text": "Spørgsmålet\n\nKan en algoritme finde politikområderne i teksten?\n\n\nI disse data har vi en “facitliste” i form af ministeriet bag hvert lovforslag. Det har man sjældent. Her kan vi bruge den til at se, hvad de usuperviserede metoder faktisk finder.\n\nPCA: dimensionalitetsreduktion. Fra tusindvis af ord til få akser, vi kan se på\nk-means: klyngeanalyse. Del debatterne i grupper, der ligner hinanden\n\n\n\nVi bruger kun de seks navngivne områder. “Andet” er en restkategori uden et fælles emne at finde."
   },
   {
     "objectID": "index.html#fra-tekst-til-tabel",
     "href": "index.html#fra-tekst-til-tabel",
     "title": "Lektion 7",
     "section": "Fra tekst til tabel",
-    "text": "Fra tekst til tabel\n\n\n\n\n\n\n\n\n\nPræcis kæden fra lektion 6. Stopordslisten har fået nogle ord, der er særlige for Folketinget: ordfører, lovforslag, værsgo, tak."
+    "text": "Fra tekst til tabel\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\nkorpus[korpus[\"omraade\"] != \"Andet\"].copy(): Behold kun de seks navngivne områder. .copy() giver en selvstændig tabel.\n\"\"\"...\"\"\": En tekststreng, der må fylde flere linjer.\n.split(): Del strengen ved mellemrum og linjeskift, så vi får en liste af ord.\nset(...): Gør listen til en mængde. Hvert ord står der kun én gang, og det går hurtigt at slå op i den.\n.str.replace(r\"[^a-zæøå ]\", \" \", regex=True): Alt, der ikke er små bogstaver eller mellemrum, bliver til mellemrum. Det fjerner både tegnsætning og tal.\n.str.split().explode(): Ét ord per række.\nord.str.len() &gt; 2: Kun ord på mere end to bogstaver. & betyder og, ~ord.isin(stopord) betyder ikke på stopordslisten.\n\n\n\nProcessen fra lektion 6. Stopordslisten har fået nogle ord, der er særlige for Folketinget: ordfører, lovforslag, værsgo, tak."
   },
   {
     "objectID": "index.html#document-term-matrix",
     "href": "index.html#document-term-matrix",
     "title": "Lektion 7",
     "section": "Document-term matrix",
-    "text": "Document-term matrix\n\n\n\n\n\n\n\n\n\nDen øvre grænse er ny: ord, der står i over halvdelen af debatterne, skiller dem ikke ad. Det er Denny & Spirlings I, bare i begge ender."
+    "text": "Document-term matrix\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\nord.rename(\"ord\").reset_index(): Gør indekset (debatten) til en kolonne, så vi har en tabel med debat og ord.\n.drop_duplicates(): Hvert ord tæller kun én gang per debat.\n[\"ord\"].value_counts(): I hvor mange debatter står hvert ord? Det er dokumentfrekvensen. Bemærk, at df her står for document frequency og ikke er en DataFrame.\ndf[(df &gt;= 5) & (df &lt;= 0.5 * len(tek))].index: Ordene, der står i mindst 5 og højst halvdelen af debatterne. .index giver selve ordene, ikke tallene.\nord[ord.isin(behold)]: Behold kun de ord.\npd.crosstab(ord.index, ord): Krydstabellen mellem debat og ord er vores DTM: én række per debat, én kolonne per ord.\n(dtm == 0).to_numpy().mean(): Andelen af celler, der er 0.\n\n\n\nDen øvre grænse er ny: ord, der står i over halvdelen af debatterne, skiller dem ikke ad."
   },
   {
     "objectID": "index.html#tf-idf-vægt-ordene",
     "href": "index.html#tf-idf-vægt-ordene",
     "title": "Lektion 7",
     "section": "TF-IDF: vægt ordene",
-    "text": "TF-IDF: vægt ordene\nEn rå optælling giver hyppige ord stor vægt. TF-IDF vægter dem op, hvis de er hyppige her og sjældne andre steder.\n\n\n\n\n\n\n\n\n\nTre linjer pandas-regning. Den sidste linje er vigtig: uden normaliseringen ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse."
+    "text": "TF-IDF: vægt ordene\nEn rå optælling giver hyppige ord stor vægt. TF-IDF vægter dem op, hvis de er hyppige her og sjældne andre steder.\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\ndtm.sum(axis=1): Antal ord i hver debat (summen hen ad rækken). dtm.div(..., axis=0) dividerer hver række med sin sum. Det er TF: hvor stor en andel af debattens ord er dette ord?\n(dtm &gt; 0).sum(): I hvor mange debatter står hvert ord (summen ned ad kolonnen)? len(dtm) er antallet af debatter. np.log(...) giver IDF: høj for sjældne ord, lav for ord i mange debatter.\ntf * idf: Pandas ganger hver kolonne med ordets IDF og matcher på kolonnenavnet.\nnp.sqrt((tfidf ** 2).sum(axis=1)): Længden af hver række (Pythagoras). Når vi dividerer med den, får hver debat længden 1.\nidf.sort_values().head(5) og .tail(5): De fem mest udbredte og de fem sjældneste ord.\n\n\n\nFire linjer pandas-regning. Den sidste er vigtig: uden normaliseringen ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse."
   },
   {
     "objectID": "index.html#pca-fra-tusindvis-af-dimensioner-til-to",
     "href": "index.html#pca-fra-tusindvis-af-dimensioner-til-to",
     "title": "Lektion 7",
     "section": "PCA: fra tusindvis af dimensioner til to",
-    "text": "PCA: fra tusindvis af dimensioner til to\n\n\n\n\n\n\n\n\n\nPCA finder de retninger i rummet, hvor debatterne er mest forskellige, og projicerer alle punkter ned på dem.\nfit_transform() er den eneste linje, der ikke er pandas. Resten er at lægge resultatet tilbage i tabellen."
+    "text": "PCA: fra tusindvis af dimensioner til to\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\nfrom sklearn.decomposition import PCA: Hent PCA fra scikit-learn.\nPCA(n_components=2, random_state=1): Vi beder om to akser. random_state gør resultatet det samme hver gang.\npca.fit_transform(tfidf): Find akserne (fit), og placér hver debat på dem (transform). Resultatet er en NumPy-tabel med én række per debat og to kolonner.\nakser[:, 0]: Alle rækker, første kolonne. akser[:, 1] er den anden.\ntek.loc[dtm.index, \"pc1\"] = ...: Læg værdierne tilbage på de rigtige debatter. dtm.index er debatterne i samme rækkefølge som i akser.\npca.explained_variance_ratio_: Hvor stor en andel af forskellene mellem debatterne hver akse fanger.\ntek.groupby(\"omraade\")[[\"pc1\", \"pc2\"]].mean(): Hvert områdes gennemsnitlige placering på de to akser.\n\n\n\nPCA finder de retninger i rummet, hvor debatterne er mest forskellige, og projicerer alle punkter ned på dem.\nfit_transform() er den eneste linje, der ikke er pandas. Resten er at lægge resultatet tilbage i tabellen."
   },
   {
     "objectID": "index.html#kortet",
     "href": "index.html#kortet",
     "title": "Lektion 7",
     "section": "Kortet",
-    "text": "Kortet\n\n\n\n\n\n\n\n\n\nHvert punkt er en debat. Farven er ministeriet … som PCA ikke har set."
+    "text": "Kortet\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nggplot(tek, aes(x=\"pc1\", y=\"pc2\", color=\"omraade\")): Hver debat placeres efter sine to PCA-værdier og farves efter politikområde.\ngeom_point(alpha=0.6): Et punkt per debat. alpha=0.6 gør punkterne delvist gennemsigtige, så man kan se, hvor de ligger oven på hinanden.\nlabs(...) og theme_minimal(): Titler og et enkelt udseende, som på de tidligere figurer.\n\n\n\nHvert punkt er en debat. Farven er ministeriet, som PCA ikke har set. Det er en ekstra oplysning, vi har i netop disse data."
   },
   {
     "objectID": "index.html#hvad-betyder-akserne",
     "href": "index.html#hvad-betyder-akserne",
     "title": "Lektion 7",
     "section": "Hvad betyder akserne?",
-    "text": "Hvad betyder akserne?\n\n\n\n\n\n\n\n\n\n\nPC1 går fra unge, uddannelse, elever (+) til virksomheder, skat, afgift, selskaber (−). Mennesker over for markeder.\nPC2 går fra Grønland, udlændinge, statsborgerskab, kriminalitet, politiet (+) til virksomheder, kommunerne, grøn omstilling (−). Kontrol og ret over for økonomi og forvaltning.\nUddannelse ligger længst ude på PC1. Udlændinge og Retsvæsen ligger længst oppe på PC2."
+    "text": "Hvad betyder akserne?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\npca.components_: Hvert ords vægt på hver akse, med én række per akse. .T vender tabellen, så ordene bliver rækker.\npd.DataFrame(..., index=tfidf.columns, columns=[\"pc1\", \"pc2\"]): Giv rækkerne ordenes navne og kolonnerne aksernes.\nfor akse in [\"pc1\", \"pc2\"]:: Gør det samme for begge akser.\n.nlargest(6) og .nsmallest(6): De seks ord med den største positive og den største negative vægt, altså de to ender af aksen.\n.index.tolist(): Kun ordene, som en liste.\n\n\n\n\nPC1 går fra unge, uddannelse, elever (+) til virksomheder, skat, afgift, selskaber (−). Mennesker over for markeder.\nPC2 går fra Grønland, udlændinge, statsborgerskab, kriminalitet, politiet (+) til virksomheder, kommunerne, grøn omstilling (−). Kontrol og ret over for økonomi og forvaltning."
   },
   {
     "objectID": "index.html#hvor-meget-er-med-på-kortet",
@@ -683,7 +683,7 @@
     "href": "index.html#k-means-find-grupperne",
     "title": "Lektion 7",
     "section": "k-means: find grupperne",
-    "text": "k-means: find grupperne\n\n\n\n\n\n\n\n\n\nn_clusters=6 er vores valg: vi ved, der er seks områder. I en rigtig analyse ved man det ikke.\nn_init=10 kører algoritmen fra ti tilfældige startpunkter og beholder den bedste."
+    "text": "k-means: find grupperne\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nfrom sklearn.cluster import KMeans: Hent k-means fra scikit-learn.\nKMeans(...): Opsæt algoritmen. random_state=0 gør resultatet det samme hver gang.\nkm.fit_predict(tfidf): Find klyngerne (fit), og giv hver debat et klyngenummer fra 0 til 5 (predict).\ntek.loc[dtm.index, \"klynge\"] = ...: Læg klyngenumrene tilbage på de rigtige debatter, som med PCA.\npd.crosstab(tek[\"omraade\"], tek[\"klynge\"]): Hvor mange debatter fra hvert område der er havnet i hver klynge.\n\n\n\nn_clusters=6 er vores valg: vi ved, der er seks områder. I en “rigtig” analyse ved man det ikke.\nn_init=10 kører algoritmen fra ti tilfældige startpunkter og beholder den bedste."
   },
   {
     "objectID": "index.html#klynger-mod-politikområder",
@@ -697,14 +697,14 @@
     "href": "index.html#hvad-handler-klyngerne-om",
     "title": "Lektion 7",
     "section": "Hvad handler klyngerne om?",
-    "text": "Hvad handler klyngerne om?\n\n\n\n\n\n\n\n\n\nEt klyngecenter er gennemsnittet af klyngens debatter. De ord, der vægter mest i centret, beskriver klyngen."
+    "text": "Hvad handler klyngerne om?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\npd.DataFrame(km.cluster_centers_, columns=tfidf.columns): Klyngecentrene som en tabel med én række per klynge og én kolonne per ord.\n.rename_axis(index=\"klynge\", columns=\"ord\"): Giv rækkerne og kolonnerne navne, så de får de navne i næste trin.\n.stack().rename(\"vaegt\").reset_index(): Fra bred til lang: én række per klynge og ord, med kolonnerne klynge, ord og vaegt. Som pivot_longer() i R.\n.sort_values(\"vaegt\", ascending=False): Største vægt først. Som arrange(desc(vaegt)).\n.groupby(\"klynge\").head(8): De første otte rækker i hver klynge. Som group_by(klynge) |&gt; slice_head(n = 8).\ntop.groupby(\"klynge\")[\"ord\"].agg(list): Saml ordene i én liste per klynge, så de kan læses på én linje.\n\n\n\nEt klyngecenter er gennemsnittet af klyngens debatter. De ord, der vægter mest i centret, beskriver klyngen."
   },
   {
     "objectID": "index.html#hvad-fandt-algoritmen",
     "href": "index.html#hvad-fandt-algoritmen",
     "title": "Lektion 7",
     "section": "Hvad fandt algoritmen?",
-    "text": "Hvad fandt algoritmen?\nDen genfandt fire områder. Skat, uddannelse, beskæftigelse og miljø har hver deres ordforråd.\nDen delte Retsvæsen i tre. Kriminalitet og straf for sig. Udlændinge og kriminalitet for sig. Og Grønland og EU-direktiver for sig, sammen med en stor del af miljødebatterne. Justitsministeriet har et meget blandet ansvarsområde, og teksten viser det.\nDen lagde udlændinge og kriminalitet sammen. Ordforrådet i de to typer debat overlapper: opholdstilladelse, udvisning, kriminalitet, politiet.\n\nDet er det, klyngeanalyse er god til: at vise, hvor vores kategorier ikke passer med teksten."
+    "text": "Hvad fandt algoritmen?\nDen genfandt fire områder. Skat, uddannelse, beskæftigelse og miljø har hver deres ordforråd.\nDen delte Retsvæsen i tre. Kriminalitet og straf for sig. Udlændinge og kriminalitet for sig. Og Grønland og EU-direktiver for sig, sammen med en stor del af miljødebatterne. Justitsministeriet har et meget blandet ansvarsområde, og teksten viser det.\nDen lagde udlændinge og kriminalitet sammen. Ordforrådet i de to typer debat overlapper: opholdstilladelse, udvisning, kriminalitet, politiet.\n\nKlyngeanalyse er også god til at vise, hvor vores kategorier ikke passer med teksten."
   },
   {
     "objectID": "index.html#en-fejlkilde-i-toppen",
@@ -732,6 +732,62 @@
     "href": "index.html#hvad-kan-vi-så-konkludere-1",
     "title": "Lektion 7",
     "section": "Hvad kan vi så konkludere?",
-    "text": "Hvad kan vi så konkludere?\n\nAt teksten i Folketingets debatter bærer nok information til at genfinde de fleste politikområder, uden at algoritmen kender dem.\nAt PCA’s kort er letlæseligt men fattigt: 2 % af variationen, fortolket gennem de ord, der vægter mest.\nAt k-means finder strukturer, vores kategorier ikke har: Justitsministeriets blandede portefølje, overlappet mellem udlændinge og kriminalitet.\nAt resultatet afhænger af startpunktet, af antallet af klynger og af forbehandlingen … herunder om navnene er fjernet.\n\n\n\nEt topic model finder altid emner. Også i støj. Det samme gælder k-means. Det er jer, der afgør, om de betyder noget."
+    "text": "Hvad kan vi så konkludere?\n\nAt teksten i Folketingets debatter bærer nok information til at genfinde de fleste politikområder, uden at algoritmen kender dem.\nAt k-means finder strukturer, vores kategorier ikke har, såsom Justitsministeriets blandede portefølje og overlappet mellem udlændinge og kriminalitet i debatterne.\n\n\n\nEn topic model finder altid emner, selv i ren støj. Det samme gælder k-means. Det er jer, der afgør, om de betyder noget."
+  },
+  {
+    "objectID": "index.html#et-konkret-eksempel-spørgsmålet",
+    "href": "index.html#et-konkret-eksempel-spørgsmålet",
+    "title": "Lektion 7",
+    "section": "Et konkret eksempel: Spørgsmålet",
+    "text": "Et konkret eksempel: Spørgsmålet\n\nFyldte kriser mere i Folketingets lovgivningsdebatter under finanskrisen og coronakrisen?\n\n\nVi bruger ordbogen til det, den er bedst til: at måle et tema, ikke en stemning.\n\nForudsigelse, før vi kigger: Hvis ordbogen måler det, vi tror, bør den toppe omkring 2008-2010 og 2020-2021.\nDet er en test, ordbogen kan dumpe. Topper den et andet sted, måler den noget andet."
+  },
+  {
+    "objectID": "index.html#ordbogen",
+    "href": "index.html#ordbogen",
+    "title": "Lektion 7",
+    "section": "Ordbogen",
+    "text": "Ordbogen\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nDenne gang er ordbogen en liste og ikke en dictionary. Ordene har ingen værdi. Vi tæller bare, om de er der.\nHvert ord står i alle sine bøjninger: krise, krisen, kriser, kriserne. Vi har ikke lemmatiseret, så krisen og krise er to forskellige ord. Med spaCy kunne vi nøjes med grundformen.\n\n\n\nBeslutning: klimakrise er ikke med. Den handler om noget andet end en akut krise, og den ville trække resultatet mod de senere år."
+  },
+  {
+    "objectID": "index.html#mål-per-1.000-ord",
+    "href": "index.html#mål-per-1.000-ord",
+    "title": "Lektion 7",
+    "section": "Mål: per 1.000 ord",
+    "text": "Mål: per 1.000 ord\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nord.rename(\"ord\").to_frame(): gør ord til en tabel med én kolonne.\n.join(korpus[[\"aar\"]]): sætter året på hvert ord. Det virker, fordi indekset i ord stadig husker, hvilken debat ordet kom fra.\n.isin(kriseord): True for hvert ord, der står på listen.\n.mean() på True/False giver en andel. Gange 1.000 giver forekomster per 1.000 ord.\n\n\n\nHvorfor per 1.000 ord og ikke bare antal? Fordi der ikke er lige mange debatter hvert år, og debatterne er ikke lige lange."
+  },
+  {
+    "objectID": "index.html#hvad-viser-det",
+    "href": "index.html#hvad-viser-det",
+    "title": "Lektion 7",
+    "section": "Hvad viser det?",
+    "text": "Hvad viser det?\n\nTopper tallene, hvor vi forudsagde? Eller et andet sted?\nSe på kolonnen debatter. Med få debatter per år kan én enkelt lang debat om en hjælpepakke flytte et helt år.\nOg hvilke ord er det egentlig, der tæller?\n\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nlang[\"krise\"]: True/False-kolonnen fra forrige slide.\nlang.loc[lang[\"krise\"], \"ord\"]: Vælg de rækker, hvor den er True, og kolonnen ord. Altså kun kriseordene.\n.value_counts(): Tæl, hvor mange gange hvert kriseord forekommer.\n\n\n\nDominerer ét ord, måler ordbogen i praksis det ene ord. Det var præcis problemet med godt."
+  },
+  {
+    "objectID": "index.html#tilbage-til-teksten",
+    "href": "index.html#tilbage-til-teksten",
+    "title": "Lektion 7",
+    "section": "Tilbage til teksten",
+    "text": "Tilbage til teksten\nEt tal fra en ordbog er ikke et resultat, før vi har set, hvilken kontekst ordene står i.\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\n.str.findall() finder alle steder i hver debat, hvor mønsteret passer, og giver en liste per debat.\n(?i): ligegyldigt om det er store eller små bogstaver.\n.{0,60}: op til 60 tegn før og efter, så vi kan se sammenhængen.\n\\b\\w*krise\\w*: et ord, der indeholder krise, fx krisen, finanskrisen og krisehjælp.\n.explode(): ét fund per række. .dropna() fjerner debatter uden fund.\n.sample(8, random_state=1): otte tilfældige eksempler, de samme hver gang.\n\n\n\nHandler det om en akut krise? Eller om boligkrisen, tillidskrisen, en krise i folkeskolen?"
+  },
+  {
+    "objectID": "index.html#hvad-har-vi-vist-og-hvad-har-vi-ikke",
+    "href": "index.html#hvad-har-vi-vist-og-hvad-har-vi-ikke",
+    "title": "Lektion 7",
+    "section": "Hvad har vi vist, og hvad har vi ikke?",
+    "text": "Hvad har vi vist, og hvad har vi ikke?\n\nVi har vist, hvor meget kriseordene fylder i 1. behandlingen af lovforslag, år for år. Vi har ikke vist, hvor alvorlige kriserne var, eller hvad partierne mente om dem. Ordbogen tæller forekomster. Den læser ikke.\nKorpusset bestemmer svaret. Vi har kun lovforslag. En krise, der blev håndteret med forespørgsler eller aftaler uden for salen, er næsten usynlig her.\nOrdbogen bestemmer svaret. Tag klimakrise med, og kurven ændrer sig. Det er et valg, der hører i metodeafsnittet.\n\n\n\nOrdbogsmodellen er stærkest, når spørgsmålet er smalt."
+  },
+  {
+    "objectID": "index.html#et-konkret-eksempel",
+    "href": "index.html#et-konkret-eksempel",
+    "title": "Lektion 7",
+    "section": "Et konkret eksempel",
+    "text": "Et konkret eksempel\n\nFyldte italesættelsen af “kriser” mere i Folketingets lovgivningsdebatter under finanskrisen og coronakrisen?\n\n\nVi bruger her en ordbog til det, den er bedst til: at måle et tema, snarer end en stemning."
+  },
+  {
+    "objectID": "index.html#rammer-data-forudsigelsen",
+    "href": "index.html#rammer-data-forudsigelsen",
+    "title": "Lektion 7",
+    "section": "Rammer data forudsigelsen?",
+    "text": "Rammer data forudsigelsen?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nSamme opbygning som ggplot2 i R: data, aes() og lag, der lægges sammen med +.\nForskellen fra R: kolonnenavne står i anførselstegn, aes(x=\"aar\"), og hele udtrykket står i en parentes, så det kan brydes over flere linjer.\npr_aar.reset_index() gør årene fra indekset til en almindelig kolonne, aar, som aes() kan bruge.\nannotate(\"rect\", ...) tegner de grå bånd. -float(\"inf\") og float(\"inf\") betyder: fra bunden til toppen af figuren, ligesom -Inf og Inf i R.\ngeom_point(aes(size=\"debatter\")) gør punkterne større, jo flere debatter året bygger på.\nlimits=(0, None) lader y-aksen starte i 0. None betyder: find selv toppen.\n\n\n\nDet grå er det, vi forventede. Den sorte linje er det, vi fandt. Små punkter bygger på få debatter."
   }
 ]
