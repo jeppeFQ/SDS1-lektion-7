@@ -4,7 +4,7 @@
     "href": "index.html#dagens-program",
     "title": "Lektion 7",
     "section": "Dagens program",
-    "text": "Dagens program\n\nTekst som data\nKorpus\nLandskabet (hvad kan man med computationel tekstanalyse?)\nOrdbogsmodeller … og en analyse af den politiske dagsorden\nSprogmodeller … og en analyse af tonen i Folketinget\nKlyngemodeller: PCA og k-means\nØvelser/Portfolio\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativ i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer."
+    "text": "Dagens program\n\nTekst som data\nKorpus\nLandskabet (hvad kan man med computationel tekstanalyse?)\nOrdbogsmodeller … og en analyse af den politiske dagsorden\nSprogmodeller … og en analyse af tonen i Folketinget\nKlyngemodeller … små PCA og k-means analyser\nØvelser/Portfolio\n\n\n\n\nIngen R-kode i disse slides. Vi arbejder med værktøjer, der ikke har et meningsfuldt alternativ i R, der kan køre i browseren (mig bekendt). Dog kan alt det I ser i dag, også gennemføres i R lokalt og med andre værktøjer."
   },
   {
     "objectID": "index.html#web-scraping",
@@ -109,7 +109,7 @@
     "href": "index.html#dagens-data",
     "title": "Lektion 7",
     "section": "Dagens data",
-    "text": "Dagens data\nReferater af møderne i Folketinget fra oktober 2007 til november 2022.\n\n1.711 møder, hentet fra ft.dk i december 2022\nHvert møde er delt op i dagsordenspunkter, og hvert punkt har hele debatten som én tekst\nVi bruger 1. behandlingen af lovforslag, der foregår den politiske debat om et forslag\n\n\n3.070 debatter og cirka 22 millioner ord."
+    "text": "Dagens data\nReferater af møderne i Folketinget fra oktober 2007 til november 2022.\n\n1.711 møder, hentet fra ft.dk i december 2022.\nHvert møde er delt op i dagsordenspunkter, og hvert punkt har hele debatten som én tekst.\nVi bruger 1. behandlingen af lovforslag.\n\n\n3.070 debatter og cirka 22 millioner ord."
   },
   {
     "objectID": "index.html#korpusset",
@@ -270,7 +270,7 @@
     "href": "index.html#vi-bygger-én",
     "title": "Lektion 7",
     "section": "Vi bygger én",
-    "text": "Vi bygger én\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nordbog er navnet på vores variabel.\n\n{ } fortæller Python, at vi laver en dictionary (ordbog).\n\nEn ordbog består af nøgler og værdier: \"god\"   →  2\ngod er nøgle; 2 er værdi.\n\n\n\n22 ord. Det er hele modellen."
+    "text": "Vi bygger én\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nordbog er navnet på vores variabel.\n\n{ } fortæller Python, at vi laver en dictionary (ordbog).\n\nEn ordbog består af nøgler og værdier: \"god\"   →  2\ngod er nøgle; 2 er værdi.\n\n\n\n22 ord. Det er hele “modellen”."
   },
   {
     "objectID": "index.html#hvordan-den-scorer",
@@ -431,7 +431,7 @@
     "href": "index.html#hvad-kan-vi-så-konkludere",
     "title": "Lektion 7",
     "section": "Hvad kan vi så konkludere?",
-    "text": "Hvad kan vi så konkludere?\n\nAt tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er ekstern validitet: resultatet passer med noget, vi ved fra andre kilder.\nAt ordbøgerne måler opmærksomhed, ikke holdning. At klima fylder mere i 2021, siger intet om, hvem der var for eller imod.\nAt udsnittet på 900 debatter giver et mere støjfyldt billede år for år end det fulde materiale. Trends skal have data nok bag sig.\n\n\n\nOg at vi ikke kan vide, om de ord, vi ikke tog med, ville have ændret billedet."
+    "text": "Hvad kan vi så konkludere?\n\nAt tre ordbøger på under ti ord hver kan genfinde tre kendte politiske kriser. Det er ekstern validitet, da resultatet passer med noget, vi ved fra andre kilder.\nAt ordbøgerne måler opmærksomhed, ikke holdning. At klima fylder mere i 2021, siger intet om, hvem der var for eller imod.\nAt udsnittet på 900 debatter giver et mere støjfyldt billede år for år end det fulde materiale. Trends skal have data nok bag sig.\n\n\n\nOg at vi ikke kan vide, om de ord, vi ikke tog med, ville have ændret billedet."
   },
   {
     "objectID": "index.html#hvad-den-kan-som-vores-egen-ikke-kunne",
@@ -536,14 +536,14 @@
     "href": "index.html#hvad-fylder-i-scoren",
     "title": "Lektion 7",
     "section": "Hvad fylder i scoren?",
-    "text": "Hvad fylder i scoren?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det indefra og ud:\n\nordbog.keys(): Nøglerne i ordbogen, altså de 22 ord.\nord.isin(...): True for hvert token, der står i ordbogen.\nord[...]: Behold kun de tokens, hvor det er True.\n.value_counts(): Tæl, hvor mange gange hvert ord forekommer, sorteret med det hyppigste først.\n.head(8): De otte hyppigste.\n\n\n\nDet suverænt hyppigste ord er godt: 1.381 gange. Mere end dobbelt så ofte som det næste.\nMen i Folketinget betyder godt sjældent, at noget er godt. Det er “det er godt, at ministeren …” og “godt, så går vi videre”. Scoren er i vid udstrækning en optælling af et høflighedsord."
+    "text": "Hvad fylder i scoren?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det indefra og ud:\n\nordbog.keys(): Nøglerne i ordbogen, altså de 22 ord.\nord.isin(...): True for hvert token, der står i ordbogen.\nord[...]: Behold kun de tokens, hvor det er True.\n.value_counts(): Tæl, hvor mange gange hvert ord forekommer, sorteret med det hyppigste først.\n.head(8): De otte hyppigste.\n\n\n\nDet mest hyppige ord er godt: 1.381 gange. Mere end dobbelt så ofte som det næste.\nMen i Folketinget betyder godt sjældent, at noget er godt. Det er “det er godt, at ministeren …” og “godt, så går vi videre”. Scoren er i vid udstrækning en optælling af et høflighedsord."
   },
   {
     "objectID": "index.html#spørgsmålet",
     "href": "index.html#spørgsmålet",
     "title": "Lektion 7",
     "section": "Spørgsmålet",
-    "text": "Spørgsmålet\n\nHvor meget fylder klima, udlændinge og økonomi i Folketingets debatter, og har det ændret sig over tid?\n\n\nNu bruger vi ordbøger til det, de er bedst til: at måle et tema, ikke en stemning.\n\nTre korte temaordbøger, som vi selv definerer\nDet, vi vil måle: forekomster af tema per 1.000 ord"
+    "text": "Spørgsmålet\n\nHvor meget fylder klima, udlændinge og økonomi i Folketingets debatter, og har det ændret sig over tid?\n\n\n\nTre korte temaordbøger, som vi selv definerer\nDet, vi vil måle: forekomster af tema per 1.000 ord"
   },
   {
     "objectID": "index.html#tre-temaordbøger",
@@ -571,7 +571,7 @@
     "href": "index.html#over-tid",
     "title": "Lektion 7",
     "section": "Over tid",
-    "text": "Over tid\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nSamme opskrift som på valideringsslidet, nu med år i stedet for område:\n\npd.crosstab(lang[\"aar\"], lang[\"tema\"]): tæller, hvor mange ord fra hvert tema der står i hvert år. Ord uden tema (NaN) tælles ikke med.\n.div(lang.groupby(\"aar\").size(), axis=0): dividerer hver række med det samlede antal ord i året.\n.reindex(columns=list(temaer), fill_value=0): sikrer, at alle tre temaer er med, i samme rækkefølge som i ordbogen.\n* 1000: forekomster per 1.000 ord.\n\n\n\nÉn kolonne per tema, én række per år. Det er det, figuren skal bruge."
+    "text": "Over tid\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nSamme opskrift som på valideringsslidet, nu med år i stedet for område:\n\npd.crosstab(lang[\"aar\"], lang[\"tema\"]): tæller, hvor mange ord fra hvert tema der står i hvert år. Ord uden tema (NaN) tælles ikke med.\n.div(lang.groupby(\"aar\").size(), axis=0): dividerer hver række med det samlede antal ord i året.\n.reindex(columns=list(temaer), fill_value=0): sikrer, at alle tre temaer er med, i samme rækkefølge som i ordbogen.\n* 1000: forekomster per 1.000 ord."
   },
   {
     "objectID": "index.html#tre-kriser-i-ét-datasæt",
@@ -648,14 +648,14 @@
     "href": "index.html#tf-idf-vægt-ordene",
     "title": "Lektion 7",
     "section": "TF-IDF: vægt ordene",
-    "text": "TF-IDF: vægt ordene\nEn rå optælling giver hyppige ord stor vægt. TF-IDF vægter dem op, hvis de er hyppige her og sjældne andre steder.\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\ndtm.sum(axis=1): Antal ord i hver debat (summen hen ad rækken). dtm.div(..., axis=0) dividerer hver række med sin sum. Det er TF: hvor stor en andel af debattens ord er dette ord?\n(dtm &gt; 0).sum(): I hvor mange debatter står hvert ord (summen ned ad kolonnen)? len(dtm) er antallet af debatter. np.log(...) giver IDF: høj for sjældne ord, lav for ord i mange debatter.\ntf * idf: Pandas ganger hver kolonne med ordets IDF og matcher på kolonnenavnet.\nnp.sqrt((tfidf ** 2).sum(axis=1)): Længden af hver række (Pythagoras). Når vi dividerer med den, får hver debat længden 1.\nidf.sort_values().head(5) og .tail(5): De fem mest udbredte og de fem sjældneste ord.\n\n\n\nFire linjer pandas-regning. Den sidste er vigtig: uden normaliseringen ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse."
+    "text": "TF-IDF: vægt ordene\nEn rå optælling giver hyppige ord stor vægt. TF-IDF vægter dem op, hvis de er hyppige her og sjældne andre steder.\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\ndtm.sum(axis=1): Antal ord i hver debat (summen hen ad rækken). dtm.div(..., axis=0) dividerer hver række med sin sum. Det er TF: hvor stor en andel af debattens ord er dette ord?\n(dtm &gt; 0).sum(): I hvor mange debatter står hvert ord (summen ned ad kolonnen)? len(dtm) er antallet af debatter. np.log(...) giver IDF: høj for sjældne ord, lav for ord i mange debatter.\ntf * idf: Pandas ganger hver kolonne med ordets IDF og matcher på kolonnenavnet.\nnp.sqrt((tfidf ** 2).sum(axis=1)): Længden af hver række (Pythagoras). Når vi dividerer med den, får hver debat længden 1.\nidf.sort_values().head(5) og .tail(5): De fem mest udbredte og de fem sjældneste ord.\n\n\n\nDet sidste er vigtig, uden normaliseringen ville lange og korte debatter ligge langt fra hinanden, bare fordi de er forskellige i størrelse."
   },
   {
     "objectID": "index.html#pca-fra-tusindvis-af-dimensioner-til-to",
     "href": "index.html#pca-fra-tusindvis-af-dimensioner-til-to",
     "title": "Lektion 7",
     "section": "PCA: fra tusindvis af dimensioner til to",
-    "text": "PCA: fra tusindvis af dimensioner til to\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\nfrom sklearn.decomposition import PCA: Hent PCA fra scikit-learn.\nPCA(n_components=2, random_state=1): Vi beder om to akser. random_state gør resultatet det samme hver gang.\npca.fit_transform(tfidf): Find akserne (fit), og placér hver debat på dem (transform). Resultatet er en NumPy-tabel med én række per debat og to kolonner.\nakser[:, 0]: Alle rækker, første kolonne. akser[:, 1] er den anden.\ntek.loc[dtm.index, \"pc1\"] = ...: Læg værdierne tilbage på de rigtige debatter. dtm.index er debatterne i samme rækkefølge som i akser.\npca.explained_variance_ratio_: Hvor stor en andel af forskellene mellem debatterne hver akse fanger.\ntek.groupby(\"omraade\")[[\"pc1\", \"pc2\"]].mean(): Hvert områdes gennemsnitlige placering på de to akser.\n\n\n\nPCA finder de retninger i rummet, hvor debatterne er mest forskellige, og projicerer alle punkter ned på dem.\nfit_transform() er den eneste linje, der ikke er pandas. Resten er at lægge resultatet tilbage i tabellen."
+    "text": "PCA: fra tusindvis af dimensioner til to\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\nLæs det oppefra og ned:\n\nfrom sklearn.decomposition import PCA: Hent PCA fra scikit-learn.\nPCA(n_components=2, random_state=1): Vi beder om to akser. random_state gør resultatet det samme hver gang.\npca.fit_transform(tfidf): Find akserne (fit), og placér hver debat på dem (transform). Resultatet er en NumPy-tabel med én række per debat og to kolonner.\nakser[:, 0]: Alle rækker, første kolonne. akser[:, 1] er den anden.\ntek.loc[dtm.index, \"pc1\"] = ...: Læg værdierne tilbage på de rigtige debatter. dtm.index er debatterne i samme rækkefølge som i akser.\npca.explained_variance_ratio_: Hvor stor en andel af forskellene mellem debatterne hver akse fanger.\ntek.groupby(\"omraade\")[[\"pc1\", \"pc2\"]].mean(): Hvert områdes gennemsnitlige placering på de to akser.\n\n\n\nPCA finder de retninger i rummet, hvor debatterne er mest forskellige, og projicerer alle punkter ned på dem."
   },
   {
     "objectID": "index.html#kortet",
@@ -746,7 +746,7 @@
     "href": "index.html#ordbogen",
     "title": "Lektion 7",
     "section": "Ordbogen",
-    "text": "Ordbogen\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nDenne gang er ordbogen en liste og ikke en dictionary. Ordene har ingen værdi. Vi tæller bare, om de er der.\nHvert ord står i alle sine bøjninger: krise, krisen, kriser, kriserne. Vi har ikke lemmatiseret, så krisen og krise er to forskellige ord. Med spaCy kunne vi nøjes med grundformen.\n\n\n\nBeslutning: klimakrise er ikke med. Den handler om noget andet end en akut krise, og den ville trække resultatet mod de senere år."
+    "text": "Ordbogen\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nDenne gang er ordbogen en liste og ikke en dictionary. Ordene har ingen værdi. Vi tæller bare, om de er der.\nHvert ord står i alle sine bøjninger: krise, krisen, kriser, kriserne. Vi har ikke lemmatiseret, så krisen og krise er to forskellige ord. Med spaCy kunne vi nøjes med grundformen."
   },
   {
     "objectID": "index.html#mål-per-1.000-ord",
