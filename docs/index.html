@@ -377,10 +377,9 @@ Noter til koden
 </details>
 <p><br></p>
 <ul>
-<li><p>Én tekst er <strong>hele debatten</strong> om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar</p></li>
-<li><p>Der står <strong>ikke</strong>, hvem der siger hvad. Talerne introduceres kun af formanden i løbende tekst</p></li>
+<li>Én tekst er <strong>hele debatten</strong> om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar</li>
 </ul>
-<p>Vi kan altså sammenligne <strong>lovforslag</strong> … men ikke partier eller politikere. Det er en <strong>designbegrænsning</strong>.</p>
+<p>Vi kan altså sammenligne <strong>lovforslag</strong> … men ikke partier eller politikere, som vi har preprocesseret data indtil nu. Det er en <strong>designbegrænsning</strong>.</p>
 </section>
 <section id="fire-spørgsmål-til-ethvert-korpus" class="slide level2 scrollable">
 <h2>Fire spørgsmål til ethvert korpus</h2>
@@ -396,9 +395,8 @@ Noter til koden
 <h1>Del 3: Hvad kan man?</h1>
 
 </section>
-<section id="fem-metodefamilier" class="slide level2 scrollable">
-<h2>Fem metodefamilier</h2>
-<p>Macanovic (2022) inddeler feltet i fem:</p>
+<section id="forskellige-metodefamilier" class="slide level2 scrollable">
+<h2>Forskellige metodefamilier</h2>
 <ol type="1">
 <li><strong>Ordbogsmodeller</strong>: tæl foruddefinerede ord i kategorier</li>
 <li><strong>Semantisk og netværksanalyse</strong>: hvem gør hvad ved hvem (sprogligt, grammatisk)</li>
@@ -757,7 +755,7 @@ Noter til koden
 <p><br></p>
 <ul>
 <li>Tre korte <strong>temaordbøger</strong>, som vi selv definerer</li>
-<li>Det, vi vil måle: forekomster af tema <strong>per 1.000 ord</strong></li>
+<li>Det, vi vil måle er forekomster af tema <strong>per 1.000 ord</strong></li>
 </ul>
 </section>
 <section id="tre-temaordbøger" class="slide level2 scrollable">
@@ -880,8 +878,8 @@ Noter til koden
 </details>
 <p><br></p>
 </section>
-<section id="tegn-det" class="slide level2 scrollable">
-<h2>Tegn det</h2>
+<section id="plot-det" class="slide level2 scrollable">
+<h2>Plot det</h2>
 <div class="cell" data-autorun="false">
 <div>
 <div id="pyodide-16" class="exercise-cell">
@@ -907,7 +905,7 @@ Noter til koden
 </ol>
 </details>
 <p><br></p>
-<p><code>.melt()</code> fra lektion 3: fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have.</p>
+<p>Gense noter om <code>.melt()</code> fra lektion 3. Vi går fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have.</p>
 </section>
 <section id="tre-kriser-i-ét-datasæt" class="slide level2">
 <h2>Tre kriser i ét datasæt</h2>
@@ -1026,7 +1024,7 @@ Noter til koden
 </section>
 <section id="asent-sentimentanalyse" class="slide level2 scrollable">
 <h2><code>asent</code>: sentimentanalyse</h2>
-<p>Samme idé som vores egen ordbog, men med en pipeline under sig. <code>asent</code> er udviklet af Kenneth Enevoldsen og findes på dansk.</p>
+<p>Samme idé som vores egen ordbog, men med en pipeline under sig.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a></a><span class="im">import</span> spacy, asent</span>
 <span id="cb4-2"><a></a></span>
 <span id="cb4-3"><a></a>nlp <span class="op">=</span> spacy.load(<span class="st">"da_core_news_sm"</span>)</span>
@@ -1050,7 +1048,7 @@ Noter til koden
 <p><code>add_pipe()</code> lægger et nyt trin til i pipelinen. Scoren ligger derefter i <code>doc._.polarity</code>.</p>
 
 <aside><div>
-<p><code>sentencizer</code> er ikke pynt. <code>asent</code> regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I <code>ValueError: Sentence boundaries unset</code>.</p>
+<p><code>sentencizer</code> er nødvendig. <code>asent</code> regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I <code>ValueError: Sentence boundaries unset</code>.</p>
 </div></aside></section>
 <section id="hvad-den-kan-som-vores-egen-ikke-kunne" class="slide level2">
 <h2>Hvad den kan, som vores egen ikke kunne</h2>
@@ -1104,7 +1102,7 @@ Noter til koden
 <pre><code>polarity=-2.22 token=god span=ikke en god</code></pre>
 <p><br></p>
 <p><code>asent</code> fortæller, <strong>hvilket ord</strong> der drev scoren, og <strong>hvilket udsnit</strong> af sætningen den læste det i.</p>
-<p>Fx er <code>god</code> i sig selv positiv. Den bliver negativ, fordi <code>ikke</code> står foran. Det kan man slå op efter.</p>
+<p>Fx er <code>god</code> i sig selv positiv. Den bliver negativ, fordi <code>ikke</code> står foran. Sådanne fund kan slås op i ordbogsmodeller.</p>
 </section>
 <section id="kør-den-på-korpusset-1" class="slide level2 scrollable">
 <h2>Kør den på korpusset</h2>
@@ -1236,7 +1234,7 @@ Noter til koden
 </ol>
 </details>
 <p><br></p>
-<p>Tyve debatter. Læs dem, og vurder for hver enkelt, om I er enige med modellen.</p>
+<p>Tag <span class="math inline">\(N\)</span> debatter og læs dem, og vurder for hver enkelt, om I er enige med modellen.</p>
 </section></section>
 <section>
 <section id="del-6-pca-og-k-means" class="title-slide slide level1 center">

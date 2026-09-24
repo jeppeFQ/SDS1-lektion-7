@@ -382,7 +382,7 @@
     "href": "index.html#asent-sentimentanalyse",
     "title": "Lektion 7",
     "section": "asent: sentimentanalyse",
-    "text": "asent: sentimentanalyse\nSamme idé som vores egen ordbog, men med en pipeline under sig. asent er udviklet af Kenneth Enevoldsen og findes på dansk.\nimport spacy, asent\n\nnlp = spacy.load(\"da_core_news_sm\")\nnlp.add_pipe(\"sentencizer\")\nnlp.add_pipe(\"asent_da_v1\")\n\ndoc = nlp(\"Det er en god beslutning for vores frihed.\")\nprint(doc._.polarity)\n\n\nNoter til koden\n\n\nimport spacy, asent: Hent begge biblioteker på én linje. asent skal importeres, for at spaCy kan finde dens trin, selv om navnet ikke bruges direkte bagefter.\nnlp.add_pipe(\"sentencizer\"): Tilføj et trin, der finder ud af, hvor sætningerne slutter.\nnlp.add_pipe(\"asent_da_v1\"): Tilføj den danske sentimentmodel som sidste trin.\ndoc._.polarity: ._ er den plads på et Doc, hvor andre pakker end spaCy lægger deres resultater.\n\n\n\nadd_pipe() lægger et nyt trin til i pipelinen. Scoren ligger derefter i doc._.polarity.\n\n\nsentencizer er ikke pynt. asent regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I ValueError: Sentence boundaries unset."
+    "text": "asent: sentimentanalyse\nSamme idé som vores egen ordbog, men med en pipeline under sig.\nimport spacy, asent\n\nnlp = spacy.load(\"da_core_news_sm\")\nnlp.add_pipe(\"sentencizer\")\nnlp.add_pipe(\"asent_da_v1\")\n\ndoc = nlp(\"Det er en god beslutning for vores frihed.\")\nprint(doc._.polarity)\n\n\nNoter til koden\n\n\nimport spacy, asent: Hent begge biblioteker på én linje. asent skal importeres, for at spaCy kan finde dens trin, selv om navnet ikke bruges direkte bagefter.\nnlp.add_pipe(\"sentencizer\"): Tilføj et trin, der finder ud af, hvor sætningerne slutter.\nnlp.add_pipe(\"asent_da_v1\"): Tilføj den danske sentimentmodel som sidste trin.\ndoc._.polarity: ._ er den plads på et Doc, hvor andre pakker end spaCy lægger deres resultater.\n\n\n\nadd_pipe() lægger et nyt trin til i pipelinen. Scoren ligger derefter i doc._.polarity.\n\n\nsentencizer er nødvendig. asent regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I ValueError: Sentence boundaries unset."
   },
   {
     "objectID": "index.html#analyser-med-ordbøger",
@@ -445,7 +445,7 @@
     "href": "index.html#hvorfor-fik-den-den-score",
     "title": "Lektion 7",
     "section": "Hvorfor fik den den score?",
-    "text": "Hvorfor fik den den score?\ndoc = nlp(\"Det er ikke en god beslutning.\")\n\nfor tok in doc:\n    if tok._.polarity.polarity != 0:\n        print(tok._.polarity)\n\n\nNoter til koden\n\n\nfor tok in doc:: Løb gennem sætningen ét token ad gangen.\ntok._.polarity: asent har også givet hvert enkelt token en score.\nif ... != 0:: Vis kun de tokens, der faktisk trækker scoren op eller ned.\nprint(tok._.polarity): Viser tokenets score, selve ordet og det udsnit af sætningen (span), som asent læste det i.\n\n\npolarity=-2.22 token=god span=ikke en god\n\nasent fortæller, hvilket ord der drev scoren, og hvilket udsnit af sætningen den læste det i.\nFx er god i sig selv positiv. Den bliver negativ, fordi ikke står foran. Det kan man slå op efter."
+    "text": "Hvorfor fik den den score?\ndoc = nlp(\"Det er ikke en god beslutning.\")\n\nfor tok in doc:\n    if tok._.polarity.polarity != 0:\n        print(tok._.polarity)\n\n\nNoter til koden\n\n\nfor tok in doc:: Løb gennem sætningen ét token ad gangen.\ntok._.polarity: asent har også givet hvert enkelt token en score.\nif ... != 0:: Vis kun de tokens, der faktisk trækker scoren op eller ned.\nprint(tok._.polarity): Viser tokenets score, selve ordet og det udsnit af sætningen (span), som asent læste det i.\n\n\npolarity=-2.22 token=god span=ikke en god\n\nasent fortæller, hvilket ord der drev scoren, og hvilket udsnit af sætningen den læste det i.\nFx er god i sig selv positiv. Den bliver negativ, fordi ikke står foran. Sådanne fund kan slås op i ordbogsmodeller."
   },
   {
     "objectID": "index.html#kør-den-på-korpusset-1",
@@ -473,7 +473,7 @@
     "href": "index.html#minimumsvalidering",
     "title": "Lektion 7",
     "section": "Minimumsvalidering",
-    "text": "Minimumsvalidering\nstikproeve = korpus.sample(20, random_state=42)\n\nprint(stikproeve[[\"aar\", \"omraade\", \"lovnr\", \"sentiment\"]].to_string())\n\n# læs én debat ad gangen: skift 0 ud med 1, 2, ... 19\nprint(stikproeve[\"tekst\"].iloc[0][:1500])\n\n\nNoter til koden\n\n\nkorpus.sample(20, random_state=42): 20 tilfældige debatter. random_state=42 gør, at vi alle får de samme.\n.to_string(): Udskriv hele tabellen, uden at pandas forkorter den med ....\nstikproeve[\"tekst\"].iloc[0]: Teksten i første række af stikprøven. .iloc vælger efter placering, ikke efter indeks.\n[:1500]: De første 1.500 tegn.\n\n\n\nTyve debatter. Læs dem, og vurder for hver enkelt, om I er enige med modellen."
+    "text": "Minimumsvalidering\nstikproeve = korpus.sample(20, random_state=42)\n\nprint(stikproeve[[\"aar\", \"omraade\", \"lovnr\", \"sentiment\"]].to_string())\n\n# læs én debat ad gangen: skift 0 ud med 1, 2, ... 19\nprint(stikproeve[\"tekst\"].iloc[0][:1500])\n\n\nNoter til koden\n\n\nkorpus.sample(20, random_state=42): 20 tilfældige debatter. random_state=42 gør, at vi alle får de samme.\n.to_string(): Udskriv hele tabellen, uden at pandas forkorter den med ....\nstikproeve[\"tekst\"].iloc[0]: Teksten i første række af stikprøven. .iloc vælger efter placering, ikke efter indeks.\n[:1500]: De første 1.500 tegn.\n\n\n\nTag \\(N\\) debatter og læs dem, og vurder for hver enkelt, om I er enige med modellen."
   },
   {
     "objectID": "index.html#fremgang",
@@ -522,7 +522,7 @@
     "href": "index.html#hvad-er-en-tekst-her",
     "title": "Lektion 7",
     "section": "Hvad er “en tekst” her?",
-    "text": "Hvad er “en tekst” her?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nkorpus.loc[0, \"tekst\"]: Vælg rækken med indeks 0 og kolonnen tekst. Det er én celle, altså én debat.\n[:600]: De første 600 tegn. En tekststreng kan skæres over på samme måde som en liste.\n\n\n\n\nÉn tekst er hele debatten om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar\nDer står ikke, hvem der siger hvad. Talerne introduceres kun af formanden i løbende tekst\n\nVi kan altså sammenligne lovforslag … men ikke partier eller politikere. Det er en designbegrænsning."
+    "text": "Hvad er “en tekst” her?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nkorpus.loc[0, \"tekst\"]: Vælg rækken med indeks 0 og kolonnen tekst. Det er én celle, altså én debat.\n[:600]: De første 600 tegn. En tekststreng kan skæres over på samme måde som en liste.\n\n\n\n\nÉn tekst er hele debatten om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar\n\nVi kan altså sammenligne lovforslag … men ikke partier eller politikere, som vi har preprocesseret data indtil nu. Det er en designbegrænsning."
   },
   {
     "objectID": "index.html#vores-annotering-politikområde",
@@ -543,7 +543,7 @@
     "href": "index.html#spørgsmålet",
     "title": "Lektion 7",
     "section": "Spørgsmålet",
-    "text": "Spørgsmålet\n\nHvor meget fylder klima, udlændinge og økonomi i Folketingets debatter, og har det ændret sig over tid?\n\n\n\nTre korte temaordbøger, som vi selv definerer\nDet, vi vil måle: forekomster af tema per 1.000 ord"
+    "text": "Spørgsmålet\n\nHvor meget fylder klima, udlændinge og økonomi i Folketingets debatter, og har det ændret sig over tid?\n\n\n\nTre korte temaordbøger, som vi selv definerer\nDet, vi vil måle er forekomster af tema per 1.000 ord"
   },
   {
     "objectID": "index.html#tre-temaordbøger",
@@ -789,5 +789,19 @@
     "title": "Lektion 7",
     "section": "Rammer data forudsigelsen?",
     "text": "Rammer data forudsigelsen?\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nSamme opbygning som ggplot2 i R: data, aes() og lag, der lægges sammen med +.\nForskellen fra R: kolonnenavne står i anførselstegn, aes(x=\"aar\"), og hele udtrykket står i en parentes, så det kan brydes over flere linjer.\npr_aar.reset_index() gør årene fra indekset til en almindelig kolonne, aar, som aes() kan bruge.\nannotate(\"rect\", ...) tegner de grå bånd. -float(\"inf\") og float(\"inf\") betyder: fra bunden til toppen af figuren, ligesom -Inf og Inf i R.\ngeom_point(aes(size=\"debatter\")) gør punkterne større, jo flere debatter året bygger på.\nlimits=(0, None) lader y-aksen starte i 0. None betyder: find selv toppen.\n\n\n\nDet grå er det, vi forventede. Den sorte linje er det, vi fandt. Små punkter bygger på få debatter."
+  },
+  {
+    "objectID": "index.html#forskellige-metodefamilier",
+    "href": "index.html#forskellige-metodefamilier",
+    "title": "Lektion 7",
+    "section": "Forskellige metodefamilier",
+    "text": "Forskellige metodefamilier\n\nOrdbogsmodeller: tæl foruddefinerede ord i kategorier\nSemantisk og netværksanalyse: hvem gør hvad ved hvem (sprogligt, grammatisk)\nSprogrepræsentationer: tekst som tal (DTM, n-gram, word embeddings)\nUsuperviseret klyngedannelse: find temaer, ingen har defineret på forhånd\nSuperviseret klassifikation: udvid manuel kodning til millioner af tekster\n\n\nI dag rører vi ved nummer 1 og lidt af nummer 3 og 5. Resten kommer mere i fokus på SDS2."
+  },
+  {
+    "objectID": "index.html#plot-det",
+    "href": "index.html#plot-det",
+    "title": "Lektion 7",
+    "section": "Plot det",
+    "text": "Plot det\n\n\n\n\n\n\n\n\n\n\nNoter til koden\n\n\nfrom plotnine import *: Hent alle funktioner fra plotnine på én gang: ggplot, aes, geom_line osv.\npr_aar.reset_index(): gør årene fra indekset til en almindelig kolonne, aar.\n.melt(...): fra bredt til langt format, ligesom pivot_longer() i R. id_vars=\"aar\" bliver stående, og de tre temakolonner stables til én række per tema og år.\naes(..., color=\"tema\"): én farve og én linje per tema.\ngeom_line(size=1): linjer med tykkelse 1. geom_point(): et punkt for hvert år.\nx=None og color=None: ingen titel på x-aksen og på forklaringen.\n(...).show(): tegn figuren.\n\n\n\nGense noter om .melt() fra lektion 3. Vi går fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have."
   }
 ]

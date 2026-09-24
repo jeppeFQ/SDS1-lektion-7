@@ -189,11 +189,9 @@ print(korpus.loc[0, "tekst"][:600])
 
 - Én tekst er **hele debatten** om et lovforslag: formanden, ordførerne, ministeren, spørgsmål og svar
 
-- Der står **ikke**, hvem der siger hvad. Talerne introduceres kun af formanden i løbende tekst
-
 ::: {.incremental}
 
-Vi kan altså sammenligne **lovforslag** ... men ikke partier eller politikere. Det er en **designbegrænsning**.
+Vi kan altså sammenligne **lovforslag** ... men ikke partier eller politikere, som vi har preprocesseret data indtil nu. Det er en **designbegrænsning**.
 
 :::
 
@@ -209,9 +207,7 @@ Vi kan altså sammenligne **lovforslag** ... men ikke partier eller politikere. 
 
 # Del 3: Hvad kan man?
 
-## Fem metodefamilier
-
-Macanovic (2022) inddeler feltet i fem:
+## Forskellige metodefamilier
 
 1. **Ordbogsmodeller**: tæl foruddefinerede ord i kategorier
 2. **Semantisk og netværksanalyse**: hvem gør hvad ved hvem (sprogligt, grammatisk)
@@ -595,7 +591,7 @@ Det grå er det, vi forventede. Den sorte linje er det, vi fandt. Små punkter b
 <br>
 
 - Tre korte **temaordbøger**, som vi selv definerer
-- Det, vi vil måle: forekomster af tema **per 1.000 ord**
+- Det, vi vil måle er forekomster af tema **per 1.000 ord**
 
 ## Tre temaordbøger
 
@@ -730,7 +726,7 @@ Samme opskrift som på valideringsslidet, nu med år i stedet for område:
 
 <br>
 
-## Tegn det
+## Plot det
 
 ```{pyodide}
 #| autorun: false
@@ -762,7 +758,7 @@ til_figur = (pr_aar.reset_index()
 
 <br>
 
-`.melt()` fra lektion 3: fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have.
+Gense noter om `.melt()` fra lektion 3. Vi går fra én kolonne per tema til én række per tema og år. Det er formatet, plotnine vil have.
 
 ## Tre kriser i ét datasæt
 
@@ -852,7 +848,7 @@ Teksten løber gennem en række trin, som hver tilføjer information:
 
 ## `asent`: sentimentanalyse
 
-Samme idé som vores egen ordbog, men med en pipeline under sig. `asent` er udviklet af Kenneth Enevoldsen og findes på dansk.
+Samme idé som vores egen ordbog, men med en pipeline under sig.
 
 ```python
 import spacy, asent
@@ -880,7 +876,7 @@ print(doc._.polarity)
 `add_pipe()` lægger et nyt trin til i pipelinen. Scoren ligger derefter i `doc._.polarity`.
 
 ::: {.aside}
-`sentencizer` er ikke pynt. `asent` regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I `ValueError: Sentence boundaries unset`.
+`sentencizer` er nødvendig. `asent` regner en score per sætning og lægger dem sammen, så den skal vide, hvor sætningerne slutter. Uden den får I `ValueError: Sentence boundaries unset`.
 :::
 
 ## Hvad den kan, som vores egen ikke kunne
@@ -929,7 +925,7 @@ polarity=-2.22 token=god span=ikke en god
 
 `asent` fortæller, **hvilket ord** der drev scoren, og **hvilket udsnit** af sætningen den læste det i.
 
-Fx er `god` i sig selv positiv. Den bliver negativ, fordi `ikke` står foran. Det kan man slå op efter.
+Fx er `god` i sig selv positiv. Den bliver negativ, fordi `ikke` står foran. Sådanne fund kan slås op i ordbogsmodeller. 
 
 :::
 
@@ -1037,7 +1033,7 @@ print(stikproeve["tekst"].iloc[0][:1500])
 
 <br>
 
-Tyve debatter. Læs dem, og vurder for hver enkelt, om I er enige med modellen.
+Tag $N$ debatter og læs dem, og vurder for hver enkelt, om I er enige med modellen.
 
 # Del 6: PCA og k-means
 
@@ -1131,7 +1127,7 @@ Læs det oppefra og ned:
 
 <br>
 
-Den øvre grænse er ny: ord, der står i over halvdelen af debatterne, skiller dem ikke ad.
+Bemærk den nye øvre grænse, hvor ord, der står i over halvdelen af debatterne, fjernes. 
 
 ## TF-IDF: vægt ordene
 
@@ -1281,7 +1277,7 @@ print(pd.crosstab(tek["omraade"], tek["klynge"]))
 
 <br>
 
-`n_clusters=6` er **vores** valg: vi ved, der er seks områder. **I en "rigtig" analyse ved man det ikke.**
+`n_clusters=6` er **vores** valg, i en øvelseskontekst vi ved, der er seks områder. **I en "rigtig" analyse ved man det ikke.**
 
 `n_init=10` kører algoritmen fra ti tilfældige startpunkter og beholder den bedste.
 
